@@ -3,10 +3,14 @@
 Preserves: URL/dir structure (/slug/index.html), Rank Math SEO head, content, images, menu.
 """
 import json, base64, re, os, sys, html, urllib.request, urllib.parse
+from pathlib import Path
 from bs4 import BeautifulSoup
 
 SITE = "https://joshuaopolko.com"
-OUT  = "/home/josh/nowservingto/_joshua_migration/static"
+# Output into this project's own static/ tree. Derive from the script location
+# (matches new_page.py) so it can't drift back to the old nowservingto/_joshua_migration
+# path the project was first migrated under.
+OUT  = str(Path(__file__).resolve().parent / "static")
 PW = next(l.split("=",1)[1].strip() for l in open("/var/secrets/nowservingto.env")
           if l.startswith("joshuaopolko.com_wordpress_claudec_app_password="))
 AUTH = base64.b64encode(f"claudec:{PW}".encode()).decode()
