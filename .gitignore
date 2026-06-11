@@ -1,0 +1,7 @@
+backup/
+.indexnow-key
+*.env
+*.sql
+*.sql.gz
+__pycache__/
+*.pyc

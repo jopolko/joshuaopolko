@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A-Frame VR Warp</title>
+  <meta content="Experience an immersive A-Frame VR effect with custom GLSL shaders, FBM noise effects, and WebXR compatibility. Interactive psychedelic visualization." name="description"/>
+  <meta content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots"/>
+  <meta content="en_US" property="og:locale"/>
+  <meta content="article" property="og:type"/>
+  <meta content="A-Frame VR Warp" property="og:title"/>
+  <meta content="Experience an immersive A-Frame VR effect with custom GLSL shaders, FBM noise effects, and WebXR compatibility. Interactive psychedelic visualization." property="og:description"/>
+  <meta content="https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/" property="og:url"/>
+  <meta content="Joshua Opolko" property="og:site_name"/>
+  <meta content="2026-06-09T12:35:21+00:00" property="og:updated_time"/>
+  <meta content="2025-08-01T18:18:58+00:00" property="article:published_time"/>
+  <meta content="2026-06-09T12:35:21+00:00" property="article:modified_time"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="A-Frame VR Warp" name="twitter:title"/>
+  <meta content="Experience an immersive A-Frame VR effect with custom GLSL shaders, FBM noise effects, and WebXR compatibility. Interactive psychedelic visualization." name="twitter:description"/>
+  <meta content="Time to read" name="twitter:label1"/>
+  <meta content="1 minute" name="twitter:data1"/>
+  <link href="https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/" rel="canonical"/>
+  <script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/","name":"A-Frame VR Warp"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/#webpage","url":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/","name":"A-Frame VR Warp","datePublished":"2025-08-01T18:18:58+00:00","dateModified":"2026-06-09T12:35:21+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/#breadcrumb"}},{"@type":"Person","@id":"https://joshuaopolko.com/author/admin/","name":"admin","url":"https://joshuaopolko.com/author/admin/","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/8096f6bcbd441babbffcbc20c1ced99d784881e531bfdd670804b7be9722a9ea?s=96&amp;d=mm&amp;r=g","url":"https://secure.gravatar.com/avatar/8096f6bcbd441babbffcbc20c1ced99d784881e531bfdd670804b7be9722a9ea?s=96&amp;d=mm&amp;r=g","caption":"admin","inLanguage":"en-US"},"sameAs":["https://143.110.236.86"]},{"@type":"Article","headline":"A-Frame VR Warp","keywords":"A-Frame VR shaders WebXR effect A-Frame custom GLSL VR psychedelic demo Fractional Brownian Motion A-Frame Three.js integration WebVR visualization Real-time shader effects A-Frame 1.6.0 demo VR warp","datePublished":"2025-08-01T18:18:58+00:00","dateModified":"2026-06-09T12:35:21+00:00","author":{"@id":"https://joshuaopolko.com/author/admin/","name":"admin"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Experience an immersive A-Frame VR effect with custom GLSL shaders, FBM noise effects, and WebXR compatibility. Interactive psychedelic visualization.","name":"A-Frame VR Warp","@id":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/#webpage"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/a-frame-vr-scene-with-custom-shaders/#webpage"}}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=9">
+<script src="/assets/nav.js?v=3" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script><meta name="description" content="This A-Frame warped visual demonstration creates an immersive psychedelic environment through dynamic shader effects and VR compatibility. Built with…"><meta name="keywords" content="Frame, Warp"></head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="https://joshuaopolko.com">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="https://joshuaopolko.com/kidsevents">Kids Events</a></li><li><a href="https://joshuaopolko.com/hometurf">HomeTurf</a></li><li><a href="https://joshuaopolko.com/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/agent-zero/">Agent Zero</a></li><li><a href="https://joshuaopolko.com/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="https://joshuaopolko.com/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="https://joshuaopolko.com/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="https://joshuaopolko.com/geo-ai-citation/">GEO: Optimizing for AI Citation</a></li><li><a href="https://joshuaopolko.com/claude-seo/">GEO: 0 to 1,800 AI Citations</a></li><li><a href="https://joshuaopolko.com/claude-seo/">Claude SEO/GEO</a></li><li><a href="https://joshuaopolko.com/claude-code-specification-workflow-mcp/">claude-code-spec-workflow</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">Research <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="https://joshuaopolko.com/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivy</a></li><li><a href="https://joshuaopolko.com/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="https://joshuaopolko.com/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com/about/">About <span aria-hidden="true">▾</span></a><ul><li><a href="https://github.com/jopolko">GitHub</a></li><li><a href="https://joshuaopolko.com/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li></ul></nav>
+</header>
+<main class="article">
+  <h1>A-Frame VR Warp</h1>
+  
+  <div class="post-body">
+
+<p class="wp-block-paragraph">This <a href="https://aframe.io/" target="_blank" rel="noopener noreferrer">A-Frame</a> warped visual demonstration creates an immersive psychedelic environment through dynamic shader effects and VR compatibility. Built with A-Frame 1.6.0 and custom GLSL programming, this experience showcases how declarative HTML can create advanced <a href="https://www.w3.org/TR/webxr/" target="_blank" rel="noopener noreferrer">WebXR</a> applications with minimal code complexity while delivering professional-grade visual effects. Explore more about <a href="https://joshuaopolko.com/visual-effects-for-unity-vr-on-meta-quest-2/">advanced VR effects and optimization techniques</a>.</p>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Dynamic Shader Effects &amp; VR Integration</h2>
+
+
+
+<p class="wp-block-paragraph"><strong>Advanced Visual Systems:</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>FBM Pattern Generation</strong>: Fractional Brownian Motion algorithms creating organic, flowing patterns with real-time coordinate rotation and scaling</li>
+
+
+
+<li><strong>Psychedelic Color Palettes</strong>: Time-based color shifting with dual-layer FBM texturing for mesmerizing visual depth</li>
+
+
+
+<li><strong>Dynamic Visual Effects</strong>: Controllable animation parameters with pulsing, shimmering, and zooming transformations</li>
+
+
+
+<li><strong>Radial Distortion Effects</strong>: High-frequency pattern overlays with vignette effects and central glow focus for immersive depth perception</li>
+
+
+
+<li><strong>Real-Time Rendering</strong>: Smooth 60fps performance with responsive uniform updates and proper aspect ratio maintenance</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph"><strong>WebXR &amp; Navigation Features:</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Full VR Compatibility</strong>: A-Frame WebXR support with stereo rendering for all major VR headsets</li>
+
+
+
+<li><strong>Intuitive Controls</strong>: WASD keyboard navigation and mouse look controls with smooth VR transition features</li>
+
+
+
+<li><strong>Cross-Platform Design</strong>: Responsive rendering that adapts to desktop browsers, mobile devices, and VR displays</li>
+
+
+
+<li><strong><a href="https://threejs.org/" target="_blank" rel="noopener noreferrer">Three.js</a> Integration</strong>: Advanced 3D graphics rendering and material management through A-Frame&#8217;s Three.js foundation</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Technical Implementation &amp; Learning Resources</h2>
+
+
+
+<p class="wp-block-paragraph">This demo shows A-Frame shader components, custom GLSL programming, WebXR development patterns, and procedural noise techniques for creating immersive web-based VR experiences with declarative HTML syntax.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Experience the Demo →</strong></p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<h2 class="wp-block-heading">Technical Resources</h2>
+
+
+
+<ul class="wp-block-list">
+
+<li><strong><a href="https://aframe.io/" target="_blank" rel="noopener noreferrer">A-Frame Framework</a></strong> &#8211; Web framework for building VR experiences</li>
+
+
+<li><strong><a href="https://aframe.io/docs/" target="_blank" rel="noopener noreferrer">A-Frame Documentation</a></strong> &#8211; Complete component and API reference</li>
+
+
+<li><strong><a href="https://aframe.io/aframe-school/" target="_blank" rel="noopener noreferrer">A-Frame School</a></strong> &#8211; Interactive tutorials and examples</li>
+
+
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API" target="_blank" rel="noopener noreferrer">WebXR Device API</a></strong> &#8211; MDN reference for WebXR development</li>
+
+
+<li><strong><a href="https://threejs.org/" target="_blank" rel="noopener noreferrer">Three.js</a></strong> &#8211; Underlying 3D graphics library for A-Frame</li>
+
+</ul>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+# joshuaopolko.com
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /readme.html
+Disallow: /license.txt
+Disallow: /*?s=
+Disallow: /*/feed/
+
+# AI search crawlers — explicitly welcome
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://joshuaopolko.com/sitemap.xml

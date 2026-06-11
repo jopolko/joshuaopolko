@@ -1,0 +1,16 @@
+# Joshua Opolko
+> Builder of AI systems and Toronto data tools, plus writing on AI/GEO, psychology, and VR.
+
+## Toronto data tools (daily-updated, free)
+- [Toronto Kids Events](https://joshuaopolko.com/kidsevents/): Free and low-cost kids and family events across Toronto, aggregated daily from EarlyON drop-in centres, Toronto Public Library, City Parks & Recreation, museums, and community groups. Browse by date, age group, category, and neighbourhood.
+- [HomeTurf — Toronto Neighbourhood Guide](https://joshuaopolko.com/hometurf/): Compare all 158 Toronto neighbourhoods by share of children, median household income, schools, licensed childcare, demographics, transit use, and growth.
+- [NowServingTO](https://nowservingto.com): Daily-fresh directory of Toronto's newest restaurants by cuisine.
+
+## AI & GEO
+- [Claude Fable 5: Fixing 529 & 400 Errors](https://joshuaopolko.com/claude-fable-5-issues-fixes/): The real launch-week issues with Anthropic's Claude Fable 5 and how to fix each.
+- [GEO: 0 to 1,800 AI Citations in 120 Days](https://joshuaopolko.com/claude-seo/): Optimizing for AI citation instead of clicks.
+- [Your Site as AI Infrastructure](https://joshuaopolko.com/ai-infrastructure/): Becoming a trusted source for ChatGPT and Claude.
+- [The LLM-as-ETL Architecture](https://joshuaopolko.com/llm-etl-architecture/): Building a data pipeline around Claude.
+
+## Contact
+- GitHub: https://github.com/jopolko

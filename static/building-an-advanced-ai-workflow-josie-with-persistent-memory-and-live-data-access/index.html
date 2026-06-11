@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building JOSIE: Advanced AI Workflow with Persistent Memory</title>
+  <meta content="Build an uncensored AI assistant with persistent memory, vector databases, and privacy-focused web search. Complete technical guide for advanced AI workflows." name="description"/>
+  <meta content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots"/>
+  <meta content="en_US" property="og:locale"/>
+  <meta content="article" property="og:type"/>
+  <meta content="Building JOSIE: Advanced AI Workflow with Persistent Memory" property="og:title"/>
+  <meta content="Build an uncensored AI assistant with persistent memory, vector databases, and privacy-focused web search. Complete technical guide for advanced AI workflows." property="og:description"/>
+  <meta content="https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/" property="og:url"/>
+  <meta content="Joshua Opolko" property="og:site_name"/>
+  <meta content="Uncategorized" property="article:section"/>
+  <meta content="2026-06-09T12:35:22+00:00" property="og:updated_time"/>
+  <meta content="https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp" property="og:image"/>
+  <meta content="https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp" property="og:image:secure_url"/>
+  <meta content="1024" property="og:image:width"/>
+  <meta content="559" property="og:image:height"/>
+  <meta content="building" property="og:image:alt"/>
+  <meta content="image/png" property="og:image:type"/>
+  <meta content="2025-08-01T16:42:24+00:00" property="article:published_time"/>
+  <meta content="2026-06-09T12:35:22+00:00" property="article:modified_time"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Building JOSIE: Advanced AI Workflow with Persistent Memory" name="twitter:title"/>
+  <meta content="Build an uncensored AI assistant with persistent memory, vector databases, and privacy-focused web search. Complete technical guide for advanced AI workflows." name="twitter:description"/>
+  <meta content="https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp" name="twitter:image"/>
+  <meta content="Written by" name="twitter:label1"/>
+  <meta content="admin" name="twitter:data1"/>
+  <meta content="Time to read" name="twitter:label2"/>
+  <meta content="2 minutes" name="twitter:data2"/>
+  <link href="https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/" rel="canonical"/>
+  <script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp","url":"https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp","width":"1024","height":"559","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/","name":"Building JOSIE: Advanced AI Workflow with Persistent Memo&#8230;"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/#webpage","url":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/","name":"Building JOSIE: Advanced AI Workflow with Persistent Memory","datePublished":"2025-08-01T16:42:24+00:00","dateModified":"2026-06-09T12:35:22+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/#breadcrumb"}},{"@type":"Person","@id":"https://joshuaopolko.com/author/admin/","name":"admin","url":"https://joshuaopolko.com/author/admin/","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/8096f6bcbd441babbffcbc20c1ced99d784881e531bfdd670804b7be9722a9ea?s=96&amp;d=mm&amp;r=g","url":"https://secure.gravatar.com/avatar/8096f6bcbd441babbffcbc20c1ced99d784881e531bfdd670804b7be9722a9ea?s=96&amp;d=mm&amp;r=g","caption":"admin","inLanguage":"en-US"},"sameAs":["https://143.110.236.86"]},{"@type":"BlogPosting","headline":"Building JOSIE: Advanced AI Workflow with Persistent Memory","keywords":"building,josie,advanced","datePublished":"2025-08-01T16:42:24+00:00","dateModified":"2026-06-09T12:35:22+00:00","author":{"@id":"https://joshuaopolko.com/author/admin/","name":"admin"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Build an uncensored AI assistant with persistent memory, vector databases, and privacy-focused web search. Complete technical guide for advanced AI workflows.","name":"Building JOSIE: Advanced AI Workflow with Persistent Memory","@id":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/#webpage"},"image":{"@id":"https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/#webpage"}}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=9">
+<script src="/assets/nav.js?v=3" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script><meta name="description" content="Build an uncensored AI assistant with persistent memory using n8n automation, vector databases, and privacy-focused web search Traditional AI…"><meta name="keywords" content="Building, JOSIE, Advanced, Workflow, Persistent, Memory"></head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="https://joshuaopolko.com">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="https://joshuaopolko.com/kidsevents">Kids Events</a></li><li><a href="https://joshuaopolko.com/hometurf">HomeTurf</a></li><li><a href="https://joshuaopolko.com/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/agent-zero/">Agent Zero</a></li><li><a href="https://joshuaopolko.com/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="https://joshuaopolko.com/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="https://joshuaopolko.com/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="https://joshuaopolko.com/geo-ai-citation/">GEO: Optimizing for AI Citation</a></li><li><a href="https://joshuaopolko.com/claude-seo/">GEO: 0 to 1,800 AI Citations</a></li><li><a href="https://joshuaopolko.com/claude-seo/">Claude SEO/GEO</a></li><li><a href="https://joshuaopolko.com/claude-code-specification-workflow-mcp/">claude-code-spec-workflow</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">Research <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="https://joshuaopolko.com/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivy</a></li><li><a href="https://joshuaopolko.com/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="https://joshuaopolko.com/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com/about/">About <span aria-hidden="true">▾</span></a><ul><li><a href="https://github.com/jopolko">GitHub</a></li><li><a href="https://joshuaopolko.com/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li></ul></nav>
+</header>
+<main class="article">
+  <h1>Building JOSIE: Advanced AI Workflow with Persistent Memo&#8230;</h1>
+  <figure class="hero"><img src="https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1.webp" alt="" loading="eager"></figure>
+  <div class="post-body">
+<!-- SEO META:
+Title: Building JOSIE: Advanced AI Workflow with Persistent Memory and Live Data Access
+Meta Description: Build an uncensored AI assistant with persistent memory using n8n, Qdrant vector database, and privacy-focused SearXNG web search. Complete local AI deployment guide.
+Focus Keywords: AI workflow automation, persistent memory AI, n8n AI assistant, vector database, privacy AI, local AI deployment
+-->
+
+
+<p class="wp-block-paragraph"><em>Build an uncensored AI assistant with persistent memory using <a href="https://docs.n8n.io/" target="_blank" rel="noopener noreferrer">n8n</a> automation, vector databases, and privacy-focused web search</em></p>
+
+
+
+<p class="wp-block-paragraph">Traditional AI assistants lose memory between sessions and have limited web access. JOSIE solves both problems with a three-tier architecture using open-source tools: <a href="https://docs.n8n.io/" target="_blank" rel="noopener noreferrer">n8n</a> workflow automation, <a href="https://qdrant.tech/" target="_blank" rel="noopener noreferrer">Qdrant</a> vector database for persistent memory, and <a href="https://github.com/searxng/searxng" target="_blank" rel="noopener noreferrer">SearXNG</a> for unlimited web search—with complete data privacy.</p>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Architecture Overview</h2>
+
+
+
+<p class="wp-block-paragraph">JOSIE&#8217;s architecture demonstrates how modern autonomous AI systems combine multiple protocols and components. Similar to <a href="https://joshuaopolko.com/agent-zero/">Agent Zero&#8217;s</a> approach to multi-agent hierarchies and protocol integration, JOSIE leverages standardized interfaces for tool integration and workflow coordination.</p>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Component 1: JOSIEFIED-Qwen3:8b Language Model</h3>
+
+
+
+<p class="wp-block-paragraph">Built on <a href="https://qwenlm.github.io/" target="_blank" rel="noopener noreferrer">Alibaba&#8217;s Qwen3</a> with 8.19B parameters and 40K context window:</p>
+
+
+
+<ul class="wp-block-list">
+
+<li><strong>Advanced Intelligence</strong> – Superior reasoning on Qwen3 architecture</li>
+
+
+<li><strong>Extended Context</strong> – 40K tokens for lengthy documents and conversations</li>
+
+
+<li><strong>Tool Integration</strong> – External API support with reduced filtering</li>
+
+
+<li><strong>Local Processing</strong> – Complete privacy via <a href="https://joshuaopolko.com/ollama/">Ollama</a>, which enables running powerful AI models on your own hardware</li>
+
+</ul>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Component 2: Qdrant Vector Database for Persistent Memory</h3>
+
+
+
+<p class="wp-block-paragraph"><a href="https://qdrant.tech/" target="_blank" rel="noopener noreferrer">Qdrant</a> creates persistent memory through semantic search:</p>
+
+
+
+<ul class="wp-block-list">
+
+<li><strong>Document Processing</strong> – PDF uploads with 200-character chunks, 50-character overlap using <a href="https://ollama.com/library/mxbai-embed-large" target="_blank" rel="noopener noreferrer">mxbai-embed-large:335m</a> embeddings</li>
+
+
+<li><strong>Conversation Memory</strong> – Every interaction stored with rich metadata via <a href="https://www.langchain.com/" target="_blank" rel="noopener noreferrer">LangChain</a></li>
+
+
+<li><strong>Advanced Retrieval</strong> – Context retrieval (top-K: 3) for documents, memory retrieval (top-K: 50) for conversations</li>
+
+
+<li><strong>Optimized Storage</strong> – Vector quantization reduces RAM by 97% with sub-second searches</li>
+
+</ul>
+
+
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Component 3: SearXNG Privacy-Focused Web Search</h3>
+
+
+
+<p class="wp-block-paragraph"><a href="https://github.com/searxng/searxng" target="_blank" rel="noopener noreferrer">SearXNG</a> provides unlimited, privacy-focused web search:</p>
+
+
+
+<ul class="wp-block-list">
+
+<li><strong>Unlimited Queries</strong> – No rate limits or API costs</li>
+
+
+<li><strong>Privacy Protection</strong> – Zero tracking, no data retention</li>
+
+
+<li><strong>Multi-Engine</strong> – Aggregates Google, Bing, DuckDuckGo results</li>
+
+
+<li><strong>JSON API</strong> – Clean integration for AI workflows</li>
+
+</ul>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Key Workflow Features</h2>
+
+
+
+<ul class="wp-block-list">
+
+<li><strong>Smart Tool Selection</strong> – Automatic web search, memory retrieval, or document access based on query context using <a href="https://docs.n8n.io/workflows/components/" target="_blank" rel="noopener noreferrer">n8n conditional logic</a></li>
+
+
+<li><strong>Session Management</strong> – Persistent conversations with analytics via n8n execution data</li>
+
+
+<li><strong>Error Handling</strong> – Graceful degradation using n8n error workflows</li>
+
+</ul>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Real-World Applications</h2>
+
+
+
+<p class="wp-block-paragraph"><strong>Personal Knowledge Management:</strong> Upload PDFs, query conversationally, maintain searchable interaction history for research and learning.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Business Intelligence:</strong> Maintain project context, customer support memory, combine stored knowledge with live web data for informed decision-making.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Education &amp; Research:</strong> Track learning progress, access academic papers, combine historical knowledge with current information.</p>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Privacy &amp; Security</h2>
+
+
+
+<p class="wp-block-paragraph">JOSIE prioritizes user privacy through local processing and encrypted storage. For complete context on <a href="https://joshuaopolko.com/data-privacy/">AI data privacy challenges and best practices</a>, including GDPR compliance, consent frameworks, and privacy-preserving technologies, see our comprehensive guide on data protection in AI systems.</p>
+
+
+
+<ul class="wp-block-list">
+
+<li><strong>Complete Control</strong> – Local AI processing, no data leaves your network</li>
+
+
+<li><strong>GDPR Compliance</strong> – Air-gapped deployment options for sensitive data</li>
+
+
+<li><strong>Enterprise Security</strong> – Isolated environment with comprehensive audit logs</li>
+
+</ul>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Quick Setup Guide</h2>
+
+
+
+<p class="wp-block-paragraph"><strong>Prerequisites:</strong> <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a>, n8n, Ollama, Qdrant, SearXNG</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Installation Steps:</strong></p>
+
+
+
+<ol class="wp-block-list">
+
+<li>Deploy SearXNG via <a href="https://github.com/searxng/searxng-docker" target="_blank" rel="noopener noreferrer">Docker compose</a></li>
+
+
+<li>Install <a href="https://qdrant.tech/documentation/quickstart/" target="_blank" rel="noopener noreferrer">Qdrant</a> locally or cloud</li>
+
+
+<li>Configure JOSIEFIED-Qwen3:8b in Ollama</li>
+
+
+<li>Import <a href="https://docs.n8n.io/workflows/templates/" target="_blank" rel="noopener noreferrer">n8n workflow template</a></li>
+
+</ol>
+
+
+
+<p class="wp-block-paragraph"><strong>Performance:</strong> Local processing, optimized storage, sub-second searches, <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer">Kubernetes</a>-ready for production scaling.</p>
+
+
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Conclusion</h2>
+
+
+
+<p class="wp-block-paragraph">JOSIE delivers privacy-preserving AI that grows smarter with every interaction. Combining advanced language models, persistent memory, and unlimited web access creates autonomous assistance without vendor lock-in. Start with the <a href="https://docs.n8n.io/" target="_blank" rel="noopener noreferrer">n8n documentation</a> and explore AI workflow automation.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<h2 class="wp-block-heading">Essential Resources</h2>
+
+
+
+<ul class="wp-block-list">
+
+<li><a href="https://docs.n8n.io/" target="_blank" rel="noopener noreferrer">n8n Workflow Automation</a> &#8211; Open-source workflow automation platform</li>
+
+
+<li><a href="https://qdrant.tech/" target="_blank" rel="noopener noreferrer">Qdrant Vector Database</a> &#8211; High-performance vector similarity search</li>
+
+
+<li><a href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama Local AI</a> &#8211; Run large language models locally</li>
+
+
+<li><a href="https://github.com/searxng/searxng" target="_blank" rel="noopener noreferrer">SearXNG Metasearch</a> &#8211; Privacy-respecting search engine</li>
+
+
+<li><a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank" rel="noopener noreferrer">LangChain</a> &#8211; Framework for building LLM applications</li>
+
+
+<li><a href="https://qwenlm.github.io/" target="_blank" rel="noopener noreferrer">Qwen Models</a> &#8211; Alibaba open-source language models</li>
+
+</ul>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<p class="wp-block-paragraph"><em>Last updated: January 2025</em></p>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+</body>
+</html>

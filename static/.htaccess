@@ -1,0 +1,23 @@
+# joshuaopolko.com — static (migrated off WordPress)
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.html
+
+<IfModule mod_alias.c>
+  # Consolidate the WordPress front page
+  Redirect 301 /home/ https://joshuaopolko.com/
+
+  # Preserve the pre-existing WordPress redirect
+  Redirect 301 /claude-seo-page/ https://joshuaopolko.com/claude-seo/
+
+  # Retire the dynamic Rank Math sitemaps -> static sitemap
+  Redirect 301 /sitemap_index.xml https://joshuaopolko.com/sitemap.xml
+  Redirect 301 /post-sitemap.xml  https://joshuaopolko.com/sitemap.xml
+  Redirect 301 /page-sitemap.xml  https://joshuaopolko.com/sitemap.xml
+</IfModule>
+
+# Long cache for static assets; HTML stays fresh
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|png|jpe?g|gif|svg|webp|woff2?)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>

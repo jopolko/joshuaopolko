@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On</title>
+  <meta content="Most apps bolt LLMs onto existing pipelines. NowServingTO built the whole thing around one: Haiku classification, web_search verification, tiered self-healing re-checks, static output at $0.35/day." name="description"/>
+  <meta content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots"/>
+  <meta content="en_US" property="og:locale"/>
+  <meta content="article" property="og:type"/>
+  <meta content="The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On" property="og:title"/>
+  <meta content="Most apps bolt LLMs onto existing pipelines. NowServingTO built the whole thing around one: Haiku classification, web_search verification, tiered self-healing re-checks, static output at $0.35/day." property="og:description"/>
+  <meta content="https://joshuaopolko.com/llm-etl-architecture/" property="og:url"/>
+  <meta content="Joshua Opolko" property="og:site_name"/>
+  <meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png" property="og:image"/>
+  <meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png" property="og:image:secure_url"/>
+  <meta content="1380" property="og:image:width"/>
+  <meta content="752" property="og:image:height"/>
+  <meta content="LLM ETL architecture data pipeline Claude Haiku" property="og:image:alt"/>
+  <meta content="image/png" property="og:image:type"/>
+  <meta content="2026-06-10T23:11:06+00:00" property="article:published_time"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On" name="twitter:title"/>
+  <meta content="Most apps bolt LLMs onto existing pipelines. NowServingTO built the whole thing around one: Haiku classification, web_search verification, tiered self-healing re-checks, static output at $0.35/day." name="twitter:description"/>
+  <meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png" name="twitter:image"/>
+  <meta content="Time to read" name="twitter:label1"/>
+  <meta content="5 minutes" name="twitter:data1"/>
+  <link href="https://joshuaopolko.com/llm-etl-architecture/" rel="canonical"/>
+  <script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png","url":"https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png","width":"1380","height":"752","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/llm-etl-architecture/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/llm-etl-architecture/","name":"The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/llm-etl-architecture/#webpage","url":"https://joshuaopolko.com/llm-etl-architecture/","name":"The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On","datePublished":"2026-06-10T23:11:06+00:00","dateModified":"2026-06-10T23:11:06+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/llm-etl-architecture/#breadcrumb"}},{"@type":"Person","@id":"https://joshuaopolko.com/author/admin/","name":"admin","url":"https://joshuaopolko.com/author/admin/","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/8096f6bcbd441babbffcbc20c1ced99d784881e531bfdd670804b7be9722a9ea?s=96&amp;d=mm&amp;r=g","url":"https://secure.gravatar.com/avatar/8096f6bcbd441babbffcbc20c1ced99d784881e531bfdd670804b7be9722a9ea?s=96&amp;d=mm&amp;r=g","caption":"admin","inLanguage":"en-US"},"sameAs":["https://143.110.236.86"]},{"@type":"Article","headline":"The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On","keywords":"LLM ETL architecture data pipeline Claude Haiku","datePublished":"2026-06-10T23:11:06+00:00","dateModified":"2026-06-10T23:11:06+00:00","author":{"@id":"https://joshuaopolko.com/author/admin/","name":"admin"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Most apps bolt LLMs onto existing pipelines. NowServingTO built the whole thing around one: Haiku classification, web_search verification, tiered self-healing re-checks, static output at $0.35/day.","name":"The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On","@id":"https://joshuaopolko.com/llm-etl-architecture/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/llm-etl-architecture/#webpage"},"image":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/llm-etl-architecture/#webpage"}}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=9">
+<script src="/assets/nav.js?v=3" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script><meta name="description" content="{ &quot;@context&quot;: &quot;https://schema.org&quot;, &quot;@type&quot;: &quot;Article&quot;, &quot;@id&quot;: &quot;https://joshuaopolko.com/llm-etl-architecture/#article&quot;, &quot;headline&quot;: &quot;The LLM-as-ETL…"><meta name="keywords" content="Architecture, Building, Data, Pipeline, Around, Claude, Instead, Bolting"></head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="https://joshuaopolko.com">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="https://joshuaopolko.com/kidsevents">Kids Events</a></li><li><a href="https://joshuaopolko.com/hometurf">HomeTurf</a></li><li><a href="https://joshuaopolko.com/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/agent-zero/">Agent Zero</a></li><li><a href="https://joshuaopolko.com/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="https://joshuaopolko.com/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="https://joshuaopolko.com/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="https://joshuaopolko.com/geo-ai-citation/">GEO: Optimizing for AI Citation</a></li><li><a href="https://joshuaopolko.com/claude-seo/">GEO: 0 to 1,800 AI Citations</a></li><li><a href="https://joshuaopolko.com/claude-seo/">Claude SEO/GEO</a></li><li><a href="https://joshuaopolko.com/claude-code-specification-workflow-mcp/">claude-code-spec-workflow</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">Research <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="https://joshuaopolko.com/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivy</a></li><li><a href="https://joshuaopolko.com/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="https://joshuaopolko.com/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com/about/">About <span aria-hidden="true">▾</span></a><ul><li><a href="https://github.com/jopolko">GitHub</a></li><li><a href="https://joshuaopolko.com/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li></ul></nav>
+</header>
+<main class="article">
+  <h1>The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On</h1>
+  <figure class="hero"><img src="https://joshuaopolko.com/wp-content/uploads/2026/06/llm-etl-architecture.png" alt="" loading="eager"></figure>
+  <div class="post-body">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://joshuaopolko.com/llm-etl-architecture/#article",
+  "headline": "The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On",
+  "description": "Most apps bolt LLMs onto existing pipelines. NowServingTO built the whole thing around one: Haiku classification, web_search verification, tiered self-healing re-checks, static output at </script>
+
+
+
+<p class="post-lede wp-block-paragraph">Most people add an LLM to a pipeline they already built. I built the pipeline around the LLM, and that inversion changes everything about how the system behaves.</p>
+
+
+
+<h2 class="wp-block-heading">What Is an LLM-as-ETL Architecture?</h2>
+
+
+
+<p class="wp-block-paragraph">Traditional ETL pipelines extract structured data, run deterministic transformations, and load the result into a destination. LLM-as-ETL replaces the transformation layer with a language model call. The model does what no regex or lookup table can do cleanly: reads ambiguous inputs, reasons about them, and returns structured judgments at scale. The distinction matters because it changes where you put your trust. In a classical pipeline you trust your transformation code. In an LLM-as-ETL pipeline you trust the model&#8217;s reasoning, and you design the rest of the system to catch where that reasoning fails. Those are different engineering problems, and conflating them is why most LLM integrations feel fragile.</p>
+
+
+
+<h2 class="wp-block-heading">How Does the NowServingTO Pipeline Work?</h2>
+
+
+
+<p class="wp-block-paragraph">The pipeline runs in five stages. Input is a City of Toronto business licence CSV. Output is a static JSON file served by Apache to a vanilla HTML front end. Claude Haiku is the intelligence layer at stages two and three. No database, no backend, no build step, no React.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Stage 1 &#8211; Chain denylist (deterministic, zero LLM cost).</strong> Every business name runs through a substring match against ~140 known chains: Popeyes, KFC, Tim Hortons, Boston Pizza, and equivalents. A match returns <code>unknown</code> immediately and skips every downstream step. This is not an LLM job. Chains are chains. Deterministic rules are cheaper, faster, and more reliable for facts that do not change.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Stage 2 &#8211; Name-only Haiku classification.</strong> Entries that clear the denylist go to a name-only classification call. Haiku reads the business name and returns a cuisine tag from a fixed 44-category taxonomy. No web search, no external context. Cheap first pass, local cache so the same name is never classified twice.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Stage 3 &#8211; Web-search verification (one call, three outputs).</strong> A single Haiku call with web_search tool access reads live search results and returns all three judgments simultaneously: cuisine tag (refined or confirmed), operating status (open / unclear / closed), and website URL if found. One call for three outputs was a deliberate cost decision. It also means the cuisine and operating status judgments share the same context, which improves coherence.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Stage 4 &#8211; Google Places match gate.</strong> Every verified entry must match a Google Places record. No <code>place_id</code> means the entry does not render. A row that links nowhere is worse than no row: it wastes the user&#8217;s time and erodes trust in every correct entry on the page. The flag in the codebase: <code>ALLOW_WEB_SEARCH_ONLY = False</code>.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Stage 5 &#8211; Static output.</strong> The inject script writes a single <code>data/corridors.json</code> file. Apache serves it. The LLM did the hard work upstream. The rendering layer is trivially simple because the intelligence layer already ran.</p>
+
+
+
+<h2 class="wp-block-heading">What Makes This Self-Healing?</h2>
+
+
+
+<p class="wp-block-paragraph">Every cached entry carries a <code>verified_at</code> timestamp. The daily cron compares that timestamp against a re-check interval specific to the entry&#8217;s link type and queues stale entries for a fresh web_search call. The intervals are calibrated to how quickly each source type changes:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Own website (.com / .ca): 180 days</li>
+<li>Instagram / Facebook / TikTok: 30 days</li>
+<li>blogTO / Yelp / Google Maps / TripAdvisor: 14 days</li>
+<li>No-link yes verdicts (open confirmed, no URL found): 14 days</li>
+<li>Unclear verdicts: 7 days</li>
+<li>Confirmed closed: 60 days</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">As Google and Bing index new places, the next cron run silently upgrades entries. A restaurant with no web presence on opening day gets a confirmed-open verdict and a website link within weeks, without any manual intervention. The system heals itself as the internet catches up to the physical world.</p>
+
+
+
+<h2 class="wp-block-heading">What Is the Verified-Open Gate and Why Does It Exist?</h2>
+
+
+
+<p class="wp-block-paragraph">A City of Toronto food-service licence is not evidence that a restaurant is open. Licences get issued months before opening day. They persist for restaurants that have quietly closed. They exist for catering operations, ghost kitchens, and institutional food services that will never serve a walk-in customer. Raw licence data is a terrible restaurant directory. The verified-open gate is what turns it into a useful one.</p>
+
+
+
+<p class="wp-block-paragraph">The combined effect of the Places gate and the OPERATIONAL status check is dramatic. Of 2,016 active food licences issued in the last 365 days, 258 entries make it through to the public directory &#8211; a 12.8% yield. The other 87.2% are chains, unverifiable, status-uncertain, or lacking a Places match. Surfacing all 2,016 would make the directory useless. The gates are the product.</p>
+
+
+
+<h2 class="wp-block-heading">When Should You Build LLM-as-ETL vs Bolt an LLM Onto Existing Infrastructure?</h2>
+
+
+
+<p class="wp-block-paragraph">Build around the LLM when the transformation step is the hard problem &#8211; when your pipeline&#8217;s core challenge is making structured sense of ambiguous, unstructured, or semi-structured input at scale. Cuisine classification from business names in 30+ languages is exactly this. No lookup table handles it well. An LLM handles it cheaply and accurately. Bolt an LLM on when the transformation step is already solved and you are adding a new capability: generating summaries of structured records, drafting templated copy from database fields, classifying support tickets in an existing routing system.</p>
+
+
+
+<p class="wp-block-paragraph">The practical test: if removing the LLM would require rebuilding the pipeline from scratch, you built around it. If removing it would just turn off a feature, you bolted it on. Neither is inherently wrong. But knowing which one you are doing matters for how you design error handling, cost controls, and cache invalidation.</p>
+
+
+
+<h2 class="wp-block-heading">What Are the Failure Modes?</h2>
+
+
+
+<p class="wp-block-paragraph"><strong>LLM refusal text in live HTML.</strong> Early in the project, Haiku occasionally returned a refusal instead of a structured verdict. The output parser was not strict enough to catch these, and the raw refusal text propagated into the JSON wire file and rendered to users. The fix: explicit output validation before any response is written to cache. If the response does not parse into the expected schema, flag it as <code>unclear</code> and re-queue.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Grocery store false positives.</strong> Large grocery chains with in-store food counters hold food-service licences. Several made it through early pipeline versions tagged as restaurants. The denylist now covers major chains explicitly, and web_search verification catches the rest because a grocery store&#8217;s web presence makes its nature obvious. But new international chains the denylist does not know yet will occasionally slip through until the next cache refresh.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Silent build failures.</strong> The most frustrating failure: a three-day period where the nightly cron completed without errors but wrote a stale output file. All exit codes were zero. A logic error in the inject script was skipping the write step when the input delta fell below a threshold added as an optimization. The directory was not updating. Nothing was alerting. The fix: an explicit output file modification-time check after every cron run, with an alert if the file is older than 26 hours. Silent success is a failure mode.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph"><em>NowServingTO is running in production at <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a> &#8211; Toronto&#8217;s daily-refresh directory of newly licensed restaurants across 45 cuisine categories, verified open, chains excluded.</em></p>
+
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+</body>
+</html>
