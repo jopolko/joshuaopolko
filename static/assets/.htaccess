@@ -1,0 +1,13 @@
+# Static assets — long cache. nav.js (and any future js/css/fonts/images here)
+# are versioned via ?v=N query strings on the tag, so a content change ships a
+# new URL; "immutable" is therefore safe and stops browsers/Lighthouse from
+# flagging "no cache TTL". site.css is now inlined into pages, so the only
+# routine asset request is nav.js.
+#
+# NOTE: the standard static overlay deploy excludes .htaccess, so this file is
+# placed on prod directly (ssh) — it lives here as the version-controlled copy.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2?|ttf|otf|svg|png|jpe?g|webp|ico)$">
+    Header set Cache-Control "public, max-age=2592000, immutable"
+  </FilesMatch>
+</IfModule>

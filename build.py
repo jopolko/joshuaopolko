@@ -5,6 +5,7 @@ Preserves: URL/dir structure (/slug/index.html), Rank Math SEO head, content, im
 import json, base64, re, os, sys, html, urllib.request, urllib.parse
 from pathlib import Path
 from bs4 import BeautifulSoup
+import inline_css  # inlines site.css so fresh builds aren't render-blocking
 
 SITE = "https://joshuaopolko.com"
 # Output into this project's own static/ tree. Derive from the script location
@@ -143,6 +144,7 @@ def build_one(item, nav):
     content = item["content"]["rendered"]
     page = PAGE_TMPL.format(seo=seo, nav=nav, title=item["title"]["rendered"],
                             hero=hero, content=content)
+    page = inline_css.inline(page)  # render-blocking <link> → inline <style>
     d = os.path.join(OUT, path)
     os.makedirs(d, exist_ok=True)
     with open(os.path.join(d, "index.html"), "w") as f:
