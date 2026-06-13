@@ -3,31 +3,314 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko</title>
-  <meta content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots"/>
-  <meta content="en_US" property="og:locale"/>
+  <meta content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type"/>
+<meta content="The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko" property="og:title"/>
+<meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues" property="og:description"/>
+<meta content="https://joshuaopolko.com/claude-fable-5-issues-fixes/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
+<meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" property="og:image"/>
+<meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="The number 529 on a dark background, referencing the Claude API 529 'overloaded' error" property="og:image:alt"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="2026-06-11T01:15:21+00:00" property="article:published_time"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko" name="twitter:title"/>
+<meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues" name="twitter:description"/>
+<meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" name="twitter:image"/>
+<meta content="Time to read" name="twitter:label1"/>
+<meta content="8 minutes" name="twitter:data1"/>
+<link href="https://joshuaopolko.com/claude-fable-5-issues-fixes/" rel="canonical"/>
+<script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","url":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage","url":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-13T16:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb"}},{"@type":"Article","headline":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you'd expect when millions of people point the same firehose at a finite number of GPUs. Most of the \"is it broken?\" panic is one of about eight specific, fixable issues \u2014 not a conspiracy, not a regression. Here's the honest list, the most common ones first, with the fix for each.","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"},"image":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"}}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#b4532a; --accent-ink:#8f3f1f; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+
+/* header + nav */
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+/* top-level items get a subtle resting "tab" so they read as a menu, not plain text */
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+/* dropdown caret in accent, flips open on hover */
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+/* transparent bridge across the gap so moving the mouse down doesn't drop :hover */
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+/* article */
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:.5em}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+
+/* wordpress alignment helpers */
+.aligncenter{margin-left:auto;margin-right:auto;display:block}
+.alignright{float:right;margin:0 0 1em 1.2em}
+.alignleft{float:left;margin:0 1.2em 1em 0}
+.wp-block-image img{border-radius:8px}
+
+/* footer */
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  /* horizontal menu bar that stays a row; dropdowns drop as a panel below */
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  /* dropdown opens as a full-width panel under the menu bar (tap-triggered) */
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+
+/* ---- homepage ---- */
+.home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
+.hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
+.hero .meta a{color:var(--accent-ink);text-decoration:none}
+.sec{margin:46px 0}
+.sec > h2{font:600 13px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:block;padding:18px 20px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card .k{font:600 16px/1.3 var(--serif);color:var(--ink);margin:0 0 5px}
+.card .d{font:400 14px/1.5 var(--sans);color:var(--muted)}
+.card .ext::after{content:" ↗";color:var(--accent)}
+@media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
+
+</style>
+<script defer="" src="/assets/nav.js?v=3"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script><meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when…" name="description"/></meta></meta>
+  <meta content="en_US" property="og:locale">
+<meta content="article" property="og:type"/>
+<meta content="The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko" property="og:title"/>
+<meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues" property="og:description"/>
+<meta content="https://joshuaopolko.com/claude-fable-5-issues-fixes/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
+<meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" property="og:image"/>
+<meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="The number 529 on a dark background, referencing the Claude API 529 'overloaded' error" property="og:image:alt"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="2026-06-11T01:15:21+00:00" property="article:published_time"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko" name="twitter:title"/>
+<meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues" name="twitter:description"/>
+<meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" name="twitter:image"/>
+<meta content="Time to read" name="twitter:label1"/>
+<meta content="8 minutes" name="twitter:data1"/>
+<link href="https://joshuaopolko.com/claude-fable-5-issues-fixes/" rel="canonical"/>
+<script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","url":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage","url":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-13T16:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb"}},{"@type":"Article","headline":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you'd expect when millions of people point the same firehose at a finite number of GPUs. Most of the \"is it broken?\" panic is one of about eight specific, fixable issues \u2014 not a conspiracy, not a regression. Here's the honest list, the most common ones first, with the fix for each.","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"},"image":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"}}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#b4532a; --accent-ink:#8f3f1f; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+
+/* header + nav */
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+/* top-level items get a subtle resting "tab" so they read as a menu, not plain text */
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+/* dropdown caret in accent, flips open on hover */
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+/* transparent bridge across the gap so moving the mouse down doesn't drop :hover */
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+/* article */
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:.5em}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+
+/* wordpress alignment helpers */
+.aligncenter{margin-left:auto;margin-right:auto;display:block}
+.alignright{float:right;margin:0 0 1em 1.2em}
+.alignleft{float:left;margin:0 1.2em 1em 0}
+.wp-block-image img{border-radius:8px}
+
+/* footer */
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  /* horizontal menu bar that stays a row; dropdowns drop as a panel below */
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  /* dropdown opens as a full-width panel under the menu bar (tap-triggered) */
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+
+/* ---- homepage ---- */
+.home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
+.hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
+.hero .meta a{color:var(--accent-ink);text-decoration:none}
+.sec{margin:46px 0}
+.sec > h2{font:600 13px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:block;padding:18px 20px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card .k{font:600 16px/1.3 var(--serif);color:var(--ink);margin:0 0 5px}
+.card .d{font:400 14px/1.5 var(--sans);color:var(--muted)}
+.card .ext::after{content:" ↗";color:var(--accent)}
+@media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
+
+</style>
+<script defer="" src="/assets/nav.js?v=3"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script><meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when…" name="description"/></meta>
   <meta content="article" property="og:type"/>
   <meta content="The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko" property="og:title"/>
-  <meta content='Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues' property="og:description"/>
+  <meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues" property="og:description"/>
   <meta content="https://joshuaopolko.com/claude-fable-5-issues-fixes/" property="og:url"/>
   <meta content="Joshua Opolko" property="og:site_name"/>
-  <meta content="2026-06-11T15:30:00+00:00" property="og:updated_time"/>
+  <meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
   <meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" property="og:image"/>
   <meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" property="og:image:secure_url"/>
   <meta content="1200" property="og:image:width"/>
   <meta content="630" property="og:image:height"/>
-  <meta content="The number 529 on a dark background, referencing the Claude API 529 &#x27;overloaded&#x27; error" property="og:image:alt"/>
+  <meta content="The number 529 on a dark background, referencing the Claude API 529 'overloaded' error" property="og:image:alt"/>
   <meta content="image/png" property="og:image:type"/>
   <meta content="2026-06-11T01:15:21+00:00" property="article:published_time"/>
-  <meta content="2026-06-11T15:30:00+00:00" property="article:modified_time"/>
+  <meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
   <meta content="summary_large_image" name="twitter:card"/>
   <meta content="The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko" name="twitter:title"/>
-  <meta content='Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues' name="twitter:description"/>
+  <meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when millions of people point the same firehose at a finite number of GPUs. Most of the “is it broken?” panic is one of about eight specific, fixable issues" name="twitter:description"/>
   <meta content="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" name="twitter:image"/>
   <meta content="Time to read" name="twitter:label1"/>
   <meta content="8 minutes" name="twitter:data1"/>
+  <meta content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when…" name="description"/>
   <link href="https://joshuaopolko.com/claude-fable-5-issues-fixes/" rel="canonical"/>
-  <script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","url":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage","url":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-11T15:30:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb"}},{"@type":"Article","headline":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-11T15:30:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you'd expect when millions of people point the same firehose at a finite number of GPUs. Most of the \"is it broken?\" panic is one of about eight specific, fixable issues \u2014 not a conspiracy, not a regression. Here's the honest list, the most common ones first, with the fix for each.","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"},"image":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"}}]}</script>
+  <script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","url":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage","url":"https://joshuaopolko.com/claude-fable-5-issues-fixes/","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-13T16:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#breadcrumb"}},{"@type":"Article","headline":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","datePublished":"2026-06-11T01:15:21+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you'd expect when millions of people point the same firehose at a finite number of GPUs. Most of the \"is it broken?\" panic is one of about eight specific, fixable issues \u2014 not a conspiracy, not a regression. Here's the honest list, the most common ones first, with the fix for each.","name":"The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each) - Joshua Opolko","@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"},"image":{"@id":"https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/claude-fable-5-issues-fixes/#webpage"}}]}</script>
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
@@ -142,28 +425,59 @@ figure.hero{margin:0 0 1.8em}
 
 </style>
 <script src="/assets/nav.js?v=3" defer></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script><meta name="description" content="Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you’d expect when…"></head>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="https://joshuaopolko.com">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="https://joshuaopolko.com/kidsevents">Kids Events</a></li><li><a href="https://joshuaopolko.com/hometurf">HomeTurf</a></li><li><a href="https://joshuaopolko.com/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/agent-zero/">Agent Zero</a></li><li><a href="https://joshuaopolko.com/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="https://joshuaopolko.com/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="https://joshuaopolko.com/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="https://joshuaopolko.com/geo-ai-citation/">GEO: Optimizing for AI Citation</a></li><li><a href="https://joshuaopolko.com/claude-seo/">GEO: 0 to 1,800 AI Citations</a></li><li><a href="https://joshuaopolko.com/claude-seo/">Claude SEO/GEO</a></li><li><a href="https://joshuaopolko.com/claude-code-specification-workflow-mcp/">claude-code-spec-workflow</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com">Research <span aria-hidden="true">▾</span></a><ul><li><a href="https://joshuaopolko.com/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="https://joshuaopolko.com/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivy</a></li><li><a href="https://joshuaopolko.com/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="https://joshuaopolko.com/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li></ul></li><li class="has-sub"><a href="https://joshuaopolko.com/about/">About <span aria-hidden="true">▾</span></a><ul><li><a href="https://github.com/jopolko">GitHub</a></li><li><a href="https://joshuaopolko.com/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Perplexica</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li class="has-sub"><a href="#">Research <span aria-hidden="true">▾</span></a><ul><li><a href="/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivity</a></li><li><a href="/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li><li><a href="/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>The Real Problems People Are Hitting With Claude Fable 5 (and How to Fix Each)</h1>
-  <figure class="hero"><img src="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" alt="The number 529 on a dark background, referencing the Claude API 529 &#x27;overloaded&#x27; error" loading="eager"></figure>
+  <figure class="hero"><img src="https://joshuaopolko.com/wp-content/uploads/2026/06/claude-fable-5-issues.png" alt="" loading="eager"></figure>
   <div class="post-body">
 
-<p>Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you&#8217;d expect when millions of people point the same firehose at a finite number of GPUs. Most of the &#8220;is it broken?&#8221; panic is one of about eight specific, fixable issues — not a conspiracy, not a regression. Here&#8217;s the honest list, the most common ones first, with the fix for each.</p>
+<p class="wp-block-paragraph">Claude Fable 5 is the most capable model Anthropic has shipped to the general public, and launch week has been exactly as bumpy as you&#8217;d expect when millions of people point the same firehose at a finite number of GPUs. Most of the &#8220;is it broken?&#8221; panic is one of about eight specific, fixable issues — not a conspiracy, not a regression. Here&#8217;s the honest list, the most common ones first, with the fix for each.</p>
 
 
 
-<h2>Key takeaways</h2>
+<blockquote class="wp-block-quote"><p><strong>Update — June&nbsp;13, 2026:</strong> Fable 5 is, as of today, <strong>unavailable to everyone</strong>. On June&nbsp;12 the U.S. government issued an export-control directive barring <em>foreign nationals</em> from accessing Fable 5 (and its larger sibling, Mythos 5), and because Anthropic can&#8217;t reliably tell foreign nationals from anyone else in real time, it disabled both models for <em>all</em> customers worldwide — U.S. users included. So if your Fable requests stopped working today, that, and not anything in your code, is why. Anthropic&#8217;s other models — Opus 4.8, Sonnet, Haiku — are unaffected, so the fallbacks throughout this guide still work. <a href="#export-ban">Full details below.</a></p></blockquote>
 
 
 
-<ul>
+<h2 class="wp-block-heading" id="export-ban">The big one: the U.S. government just disabled Fable 5 worldwide</h2>
+
+
+
+<p class="wp-block-paragraph"><strong>What happened:</strong> On <strong>June&nbsp;12, 2026 at 5:21pm ET</strong>, Anthropic received a U.S. government export-control directive, citing national-security authorities, ordering it to suspend access to Fable 5 and Mythos 5 for <strong>any foreign national — whether inside or outside the United States</strong> — including Anthropic&#8217;s own foreign-national employees. The order was reported as coming from the Commerce Department under national-security export controls.</p>
+
+
+
+<p class="wp-block-paragraph">In intent, that&#8217;s a U.S.-nationals-only rule: in theory an American citizen could keep using the model. In practice, Anthropic can&#8217;t separate foreign nationals from the rest of its user base on every request in real time, so &#8220;the net effect&#8221; — Anthropic&#8217;s words — was to <strong>abruptly disable Fable 5 and Mythos 5 for every customer</strong>, in the U.S. and out. As of this update, nobody can call either model.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Why:</strong> The government says it became aware of a method of &#8220;jailbreaking&#8221; Fable 5. The specific technique reportedly involved asking the model to read a codebase and fix its software flaws. Anthropic&#8217;s own review characterizes it as a <em>narrow, non-universal</em> jailbreak that surfaces only minor findings, provides no model-specific uplift over what&#8217;s freely available, and exists in competing models such as GPT-5.5. Anthropic is complying with the order while openly disputing the rationale: &#8220;we disagree that the finding of a narrow potential jailbreak should be cause for recalling a commercial model deployed to hundreds of millions of people,&#8221; the company said, adding, &#8220;we apologize for this disruption to our customers.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph"><strong>What to do right now:</strong> there is no client-side fix for this one — the model is off at the source. If your application depends on Fable 5, fail over to <strong>Opus 4.8</strong> (or Sonnet/Haiku, all unaffected) the same way you&#8217;d handle a sustained 529 (section 1 below): swap the model string, drop any Fable-only parameters, and replay. Anthropic says it is &#8220;working to restore access as soon as possible&#8221; and promised further detail within 24 hours, so treat this as an outage to route around, not a permanent deprecation — but don&#8217;t hard-code Fable as a single point of failure. Sources: <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">Anthropic&#8217;s statement</a>, <a href="https://www.bloomberg.com/news/articles/2026-06-13/anthropic-says-us-limits-foreign-access-to-fable-5-mythos-5" target="_blank" rel="noopener">Bloomberg</a>, <a href="https://www.cnbc.com/2026/06/12/anthropic-disables-access-to-fable-5-and-mythos-5-to-comply-with-government-directive.html" target="_blank" rel="noopener">CNBC</a>, and <a href="https://fortune.com/2026/06/13/anthropic-disables-fable-mythos-export-controls-national-security-threat/" target="_blank" rel="noopener">Fortune</a>.</p>
+
+
+
+<p class="wp-block-paragraph">Everything below remains accurate for when Fable 5 comes back — and most of it (the new tokenizer, the removed parameters, the refusal behavior) is exactly the kind of thing you&#8217;ll re-hit on the first request after access is restored.</p>
+
+
+
+<h2 class="wp-block-heading">Key takeaways</h2>
+
+
+
+<ul class="wp-block-list">
+<li><strong>As of June&nbsp;13, 2026, Fable 5 is disabled for everyone</strong> — a U.S. export-control order barred foreign-national access, and Anthropic shut the model off worldwide to comply. Fail over to Opus 4.8. <a href="#export-ban">Details</a>.</li>
 <li><strong>529 errors</strong> are capacity load-shedding, not your fault — retry with backoff and fall back to Opus 4.8 in your own code.</li>
 <li><strong>Your token bill went up ~30%</strong> because Fable 5 uses a new tokenizer — same text, more tokens. Re-measure before you panic.</li>
+<li><strong>On a subscription, Fable burns your usage caps ~2x faster than Opus</strong> (Claude Code says so in the model picker) — and often faster still once thinking and subagents are counted.</li>
 <li><strong>Requests that 400 the moment you swap the model string</strong> are almost always a removed parameter (<code>budget_tokens</code>, <code>temperature</code>, prefill).</li>
 <li><strong>Every request 400s with a fine-looking payload?</strong> Check your org&#8217;s data-retention setting — Fable needs 30 days.</li>
 <li><strong>A 200 response with empty content</strong> is a safety <code>refusal</code>, not an outage.</li>
@@ -172,55 +486,55 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2>1. The 529 &#8220;Overloaded&#8221; wall</h2>
+<h2 class="wp-block-heading">1. The 529 &#8220;Overloaded&#8221; wall</h2>
 
 
 
-<p><strong>What you see:</strong> <code>529 Overloaded</code>, seemingly at random, even on a trivial request.</p>
+<p class="wp-block-paragraph"><strong>What you see:</strong> <code>529 Overloaded</code>, seemingly at random, even on a trivial request.</p>
 
 
 
-<p><strong>What it is:</strong> <code>529</code> is <code>overloaded_error</code> — Anthropic shedding load because demand outran capacity. It is <em>not</em> a rate limit on your account (that&#8217;s a 429) and not a bug in your request. It&#8217;s retryable.</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> <code>529</code> is <code>overloaded_error</code> — Anthropic shedding load because demand outran capacity. It is <em>not</em> a rate limit on your account (that&#8217;s a 429) and not a bug in your request. It&#8217;s retryable.</p>
 
 
 
-<p><strong>The fix, in order:</strong> raise the SDK&#8217;s retry count so it rides out short spikes (<code>anthropic.Anthropic(max_retries=8)</code> — the SDK already backs off on 429/5xx); add your own exponential backoff <em>with jitter</em> for longer ones; and when Fable simply won&#8217;t clear, fall back to Opus 4.8 client-side. One trap: Fable&#8217;s server-side <code>fallbacks</code> parameter only triggers on safety <em>refusals</em> — overloads are returned as-is and never fall back. So the 529 fallback has to be your code, not theirs. Interactively in Claude Code, <code>/model opus</code> gets you off the contended model in one command.</p>
+<p class="wp-block-paragraph"><strong>The fix, in order:</strong> raise the SDK&#8217;s retry count so it rides out short spikes (<code>anthropic.Anthropic(max_retries=8)</code> — the SDK already backs off on 429/5xx); add your own exponential backoff <em>with jitter</em> for longer ones; and when Fable simply won&#8217;t clear, fall back to Opus 4.8 client-side. One trap: Fable&#8217;s server-side <code>fallbacks</code> parameter only triggers on safety <em>refusals</em> — overloads are returned as-is and never fall back. So the 529 fallback has to be your code, not theirs. Interactively in Claude Code, <code>/model opus</code> gets you off the contended model in one command.</p>
 
 
 
-<p><strong>Update, mid-June 2026:</strong> in my own day-to-day Claude Code use, the 529s have stopped — capacity appears to have caught up with launch demand. 529 is a load-shedding error, so it can return whenever demand spikes; if you&#8217;re still hitting it, the retry guidance above stands.</p>
+<h2 class="wp-block-heading">2. Your token bill jumped ~30% overnight</h2>
 
 
 
-<h2>2. Your token bill jumped ~30% overnight</h2>
+<p class="wp-block-paragraph"><strong>What you see:</strong> the same prompts you ran on Opus suddenly cost more on Fable, and your context-window math is off.</p>
 
 
 
-<p><strong>What you see:</strong> the same prompts you ran on Opus suddenly cost more on Fable, and your context-window math is off.</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> this is the sleeper issue of the launch. Fable 5 uses a <strong>new tokenizer</strong> that turns the same content into roughly 30% more tokens than Opus-tier models. Billing is per token, so an unchanged workload costs more even before you account for Fable&#8217;s higher per-token price ($10 in / $50 out per million). Every token count, context budget, and <code>max_tokens</code> value you calibrated on another model is now wrong.</p>
 
 
 
-<p><strong>What it is:</strong> this is the sleeper issue of the launch. Fable 5 uses a <strong>new tokenizer</strong> that turns the same content into roughly 30% more tokens than Opus-tier models. Billing is per token, so an unchanged workload costs more even before you account for Fable&#8217;s higher per-token price ($10 in / $50 out per million). Every token count, context budget, and <code>max_tokens</code> value you calibrated on another model is now wrong.</p>
+<p class="wp-block-paragraph"><strong>The fix:</strong> don&#8217;t apply a guesswork multiplier — measure. The token-counting endpoint returns counts under <em>both</em> tokenizers when you pass <code>model: "claude-fable-5"</code>: <code>input_tokens</code> (the new one, what you&#8217;re billed) and <code>input_tokens_prior_tokenizer</code> (the old one) — so you can see the exact delta on your own prompts. Re-baseline your cost dashboards and <code>max_tokens</code> headroom against the new number before you react to the bill.</p>
 
 
 
-<p><strong>The fix:</strong> don&#8217;t apply a guesswork multiplier — measure. The token-counting endpoint returns counts under <em>both</em> tokenizers when you pass <code>model: "claude-fable-5"</code>: <code>input_tokens</code> (the new one, what you&#8217;re billed) and <code>input_tokens_prior_tokenizer</code> (the old one) — so you can see the exact delta on your own prompts. Re-baseline your cost dashboards and <code>max_tokens</code> headroom against the new number before you react to the bill.</p>
+<p class="wp-block-paragraph"><strong>On a Claude Code / Claude.ai subscription, not the API?</strong> The same dynamic shows up against your usage caps instead of a dollar bill. When you select Fable 5, Claude Code now displays the warning <em>&#8220;Fable 5 — Uses your limits ~2x faster than Opus.&#8221;</em> Model calls from Claude Code draw from the same 5-hour rolling window and weekly cap as Claude.ai, so a Fable session eats your allowance roughly twice as fast as the equivalent Opus work — and in practice often faster than 2×, because Fable&#8217;s denser output, always-on thinking, and any subagents it spawns all consume tokens on top of the headline rate. If you&#8217;re blowing through a window far quicker than you used to, this is why. Reserve Fable for the tasks that need it and drop to Opus or Sonnet for routine work.</p>
 
 
 
-<h2>3. It 400s the instant you swap the model string</h2>
+<h2 class="wp-block-heading">3. It 400s the instant you swap the model string</h2>
 
 
 
-<p><strong>What you see:</strong> code that worked perfectly on Opus or Sonnet returns <code>400 invalid_request_error</code> the moment you change the model to <code>claude-fable-5</code>.</p>
+<p class="wp-block-paragraph"><strong>What you see:</strong> code that worked perfectly on Opus or Sonnet returns <code>400 invalid_request_error</code> the moment you change the model to <code>claude-fable-5</code>.</p>
 
 
 
-<p><strong>What it is:</strong> Fable removed several parameters that older models accepted. The usual culprits:</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> Fable removed several parameters that older models accepted. The usual culprits:</p>
 
 
 
-<ul>
+<ul class="wp-block-list">
 <li><code>thinking: {type: "enabled", budget_tokens: N}</code> — gone. Thinking is always on; you don&#8217;t get a token budget.</li>
 <li><code>thinking: {type: "disabled"}</code> — also 400 on Fable specifically (it&#8217;s accepted on Opus 4.8/4.7). You can&#8217;t turn thinking off — omit the parameter entirely.</li>
 <li><code>temperature</code>, <code>top_p</code>, <code>top_k</code> — all 400. Steer behavior with prompting instead.</li>
@@ -229,7 +543,7 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<p><strong>The fix:</strong> delete those parameters and control depth with <code>output_config={"effort": "low"|"medium"|"high"|"xhigh"|"max"}</code> instead. Minimal diff:</p>
+<p class="wp-block-paragraph"><strong>The fix:</strong> delete those parameters and control depth with <code>output_config={"effort": "low"|"medium"|"high"|"xhigh"|"max"}</code> instead. Minimal diff:</p>
 
 
 
@@ -252,35 +566,35 @@ client.messages.create(
 
 
 
-<h2>4. Every request 400s and the payload looks perfect</h2>
+<h2 class="wp-block-heading">4. Every request 400s and the payload looks perfect</h2>
 
 
 
-<p><strong>What you see:</strong> <em>nothing</em> works — every Fable request 400s, even a one-line &#8220;hello,&#8221; and you&#8217;ve triple-checked the body.</p>
+<p class="wp-block-paragraph"><strong>What you see:</strong> <em>nothing</em> works — every Fable request 400s, even a one-line &#8220;hello,&#8221; and you&#8217;ve triple-checked the body.</p>
 
 
 
-<p><strong>What it is:</strong> Fable 5 requires <strong>30-day data retention</strong> and is not available under zero data retention. If your organization is configured for ZDR — or any retention shorter than 30 days — <em>every</em> Fable request returns <code>400 invalid_request_error</code> regardless of how valid the payload is. This catches enterprise and privacy-conscious orgs constantly because the error points at the request, not the account setting.</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> Fable 5 requires <strong>30-day data retention</strong> and is not available under zero data retention. If your organization is configured for ZDR — or any retention shorter than 30 days — <em>every</em> Fable request returns <code>400 invalid_request_error</code> regardless of how valid the payload is. This catches enterprise and privacy-conscious orgs constantly because the error points at the request, not the account setting.</p>
 
 
 
-<p><strong>The fix:</strong> before you debug the payload another time, check the org&#8217;s data-retention configuration. If it&#8217;s below 30 days, that&#8217;s the whole problem.</p>
+<p class="wp-block-paragraph"><strong>The fix:</strong> before you debug the payload another time, check the org&#8217;s data-retention configuration. If it&#8217;s below 30 days, that&#8217;s the whole problem.</p>
 
 
 
-<h2>5. A 200 response with no content (the refusal)</h2>
+<h2 class="wp-block-heading">5. A 200 response with no content (the refusal)</h2>
 
 
 
-<p><strong>What you see:</strong> a successful HTTP 200, but the content is empty and your code throws an index error trying to read it — or your app silently shows a blank.</p>
+<p class="wp-block-paragraph"><strong>What you see:</strong> a successful HTTP 200, but the content is empty and your code throws an index error trying to read it — or your app silently shows a blank.</p>
 
 
 
-<p><strong>What it is:</strong> Fable runs safety classifiers on incoming requests (cybersecurity, biology, and one that blocks attempts to make the model reveal its own internal reasoning in the response). When a classifier declines, you get a <strong>200</strong> with <code>stop_reason: "refusal"</code> — not a 4xx, not a 529. Benign adjacent work — security tooling, life-sciences research — occasionally trips a false positive. A pre-output refusal has empty content and isn&#8217;t billed; a mid-stream refusal bills the partial output you should then discard.</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> Fable runs safety classifiers on incoming requests (cybersecurity, biology, and one that blocks attempts to make the model reveal its own internal reasoning in the response). When a classifier declines, you get a <strong>200</strong> with <code>stop_reason: "refusal"</code> — not a 4xx, not a 529. Benign adjacent work — security tooling, life-sciences research — occasionally trips a false positive. A pre-output refusal has empty content and isn&#8217;t billed; a mid-stream refusal bills the partial output you should then discard.</p>
 
 
 
-<p><strong>The fix:</strong> check <code>stop_reason</code> before you touch <code>response.content[0]</code>.</p>
+<p class="wp-block-paragraph"><strong>The fix:</strong> check <code>stop_reason</code> before you touch <code>response.content[0]</code>.</p>
 
 
 
@@ -292,107 +606,115 @@ else:
 
 
 
-<p>To recover the request, replay the conversation on another model such as Opus 4.8 — its protected reasoning blocks are dropped automatically, so there&#8217;s nothing to strip.</p>
+<p class="wp-block-paragraph">To recover the request, replay the conversation on another model such as Opus 4.8 — its protected reasoning blocks are dropped automatically, so there&#8217;s nothing to strip.</p>
 
 
 
-<h2>6. Your &#8220;thinking&#8221; panel went blank</h2>
+<h2 class="wp-block-heading">6. Your &#8220;thinking&#8221; panel went blank</h2>
 
 
 
-<p><strong>What you see:</strong> a UI that used to stream the model&#8217;s reasoning now shows a long pause and then just the answer.</p>
+<p class="wp-block-paragraph"><strong>What you see:</strong> a UI that used to stream the model&#8217;s reasoning now shows a long pause and then just the answer.</p>
 
 
 
-<p><strong>What it is:</strong> Fable protects its raw chain of thought — it&#8217;s never returned. Responses still contain thinking blocks, but by default their text is empty (the <code>display</code> setting defaults to <code>"omitted"</code>). If you were rendering <code>block.thinking</code>, it now renders nothing.</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> Fable protects its raw chain of thought — it&#8217;s never returned. Responses still contain thinking blocks, but by default their text is empty (the <code>display</code> setting defaults to <code>"omitted"</code>). If you were rendering <code>block.thinking</code>, it now renders nothing.</p>
 
 
 
-<p><strong>The fix:</strong> opt back into a readable summary with <code>thinking={"type": "adaptive", "display": "summarized"}</code>. You&#8217;ll get a summary of the reasoning, never the raw chain of thought — that&#8217;s by design and not recoverable. One related rule if you build multi-turn loops: pass thinking blocks back <em>unchanged</em> when you continue on the same model.</p>
+<p class="wp-block-paragraph"><strong>The fix:</strong> opt back into a readable summary with <code>thinking={"type": "adaptive", "display": "summarized"}</code>. You&#8217;ll get a summary of the reasoning, never the raw chain of thought — that&#8217;s by design and not recoverable. One related rule if you build multi-turn loops: pass thinking blocks back <em>unchanged</em> when you continue on the same model.</p>
 
 
 
-<h2>7. Requests that used to take seconds now take minutes</h2>
+<h2 class="wp-block-heading">7. Requests that used to take seconds now take minutes</h2>
 
 
 
-<p><strong>What you see:</strong> a single request on a hard task hangs for what feels like forever, or your non-streaming call dies with a timeout.</p>
+<p class="wp-block-paragraph"><strong>What you see:</strong> a single request on a hard task hangs for what feels like forever, or your non-streaming call dies with a timeout.</p>
 
 
 
-<p><strong>What it is:</strong> this is mostly working as intended. Fable&#8217;s long-horizon strength comes from reasoning and acting more per request — at higher effort, a single call on a genuinely hard task can legitimately run many minutes. Separately, any non-streaming request above ~16K <code>max_tokens</code> risks an HTTP timeout that <em>looks</em> like flakiness.</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> this is mostly working as intended. Fable&#8217;s long-horizon strength comes from reasoning and acting more per request — at higher effort, a single call on a genuinely hard task can legitimately run many minutes. Separately, any non-streaming request above ~16K <code>max_tokens</code> risks an HTTP timeout that <em>looks</em> like flakiness.</p>
 
 
 
-<p><strong>The fix:</strong> stream long generations (<code>client.messages.stream(...)</code> with <code>.get_final_message()</code>) and design around minutes-long turns — timeouts, progress UI, async check-ins rather than blocking on one call. And don&#8217;t reflexively crank <code>effort</code> to <code>max</code>: <code>low</code> and <code>medium</code> on Fable often beat older models&#8217; top settings, run faster, and cost far less. Treat effort as a dial to test per task, not a fixed &#8220;always xhigh.&#8221;</p>
+<p class="wp-block-paragraph"><strong>The fix:</strong> stream long generations (<code>client.messages.stream(...)</code> with <code>.get_final_message()</code>) and design around minutes-long turns — timeouts, progress UI, async check-ins rather than blocking on one call. And don&#8217;t reflexively crank <code>effort</code> to <code>max</code>: <code>low</code> and <code>medium</code> on Fable often beat older models&#8217; top settings, run faster, and cost far less. Treat effort as a dial to test per task, not a fixed &#8220;always xhigh.&#8221;</p>
 
 
 
-<h2>8. &#8220;It got smarter but it also got chattier&#8221;</h2>
+<h2 class="wp-block-heading">8. &#8220;It got smarter but it also got chattier&#8221;</h2>
 
 
 
-<p><strong>What you see:</strong> prompts tuned for an older model land differently — more narration between steps, longer wrap-ups, the model asking permission for small decisions, or tidying code you didn&#8217;t ask it to touch.</p>
+<p class="wp-block-paragraph"><strong>What you see:</strong> prompts tuned for an older model land differently — more narration between steps, longer wrap-ups, the model asking permission for small decisions, or tidying code you didn&#8217;t ask it to touch.</p>
 
 
 
-<p><strong>What it is:</strong> not a bug — a behavior shift. Fable is more autonomous and more communicative by default, and scaffolding written to <em>push</em> older models (forced progress updates, &#8220;be thorough&#8221; nudges) now overcorrects.</p>
+<p class="wp-block-paragraph"><strong>What it is:</strong> not a bug — a behavior shift. Fable is more autonomous and more communicative by default, and scaffolding written to <em>push</em> older models (forced progress updates, &#8220;be thorough&#8221; nudges) now overcorrects.</p>
 
 
 
-<p><strong>The fix:</strong> it&#8217;s highly steerable — say what you want plainly. A few one-liners in the system prompt cover most of it: &#8220;When you have enough information to act, act — don&#8217;t survey options you won&#8217;t pursue.&#8221; &#8220;Don&#8217;t add features, refactors, or error handling beyond what the task requires.&#8221; &#8220;For minor choices, pick a reasonable option and note it rather than asking.&#8221; Re-test your old &#8220;be concise&#8221; and &#8220;be thorough&#8221; instructions before assuming they still help.</p>
+<p class="wp-block-paragraph"><strong>The fix:</strong> it&#8217;s highly steerable — say what you want plainly. A few one-liners in the system prompt cover most of it: &#8220;When you have enough information to act, act — don&#8217;t survey options you won&#8217;t pursue.&#8221; &#8220;Don&#8217;t add features, refactors, or error handling beyond what the task requires.&#8221; &#8220;For minor choices, pick a reasonable option and note it rather than asking.&#8221; Re-test your old &#8220;be concise&#8221; and &#8220;be thorough&#8221; instructions before assuming they still help.</p>
 
 
 
-<h2>What is NOT actually a problem</h2>
+<h2 class="wp-block-heading">What is NOT actually a problem</h2>
 
 
 
-<p>A few things making the rounds that aren&#8217;t real issues: the 529s are not a secret throttle to push you toward paid credits (Anthropic announced the demand crunch in the launch post, in advance), and the server-side <code>fallbacks</code> parameter is not a 529 fix (it&#8217;s for refusals only). The recurring theme of every actual problem above is the same: Fable is a genuinely new model with a new tokenizer, a stricter request surface, and stronger default behavior — not a drop-in reskin of Opus. Treat the migration as a migration and almost all of this disappears.</p>
+<p class="wp-block-paragraph">A few things making the rounds that aren&#8217;t real issues: the 529s are not a secret throttle to push you toward paid credits (Anthropic announced the demand crunch in the launch post, in advance), and the server-side <code>fallbacks</code> parameter is not a 529 fix (it&#8217;s for refusals only). The recurring theme of every actual problem above is the same: Fable is a genuinely new model with a new tokenizer, a stricter request surface, and stronger default behavior — not a drop-in reskin of Opus. Treat the migration as a migration and almost all of this disappears.</p>
 
 
 
-<h2>Frequently asked questions</h2>
+<h2 class="wp-block-heading">Frequently asked questions</h2>
 
 
 
-<h3>Is a 529 error my fault?</h3>
+<h3 class="wp-block-heading">Why did Claude Fable 5 stop working on June&nbsp;13, 2026?</h3>
 
 
 
-<p>No. <code>529 Overloaded</code> means Anthropic&#8217;s service is temporarily at capacity and shedding load. It&#8217;s unrelated to your account&#8217;s rate limits (429) or your request. Retry with exponential backoff, and fall back to a less-contended model like Opus 4.8 when it persists.</p>
+<p class="wp-block-paragraph">On June&nbsp;12, 2026 the U.S. government issued an export-control directive, citing national security, barring foreign nationals from accessing Fable 5 and Mythos 5. Because Anthropic cannot separate foreign nationals from other users in real time, it disabled both models for all customers worldwide — including in the U.S. — to comply. The directive followed a reported &#8220;jailbreak&#8221; finding that Anthropic considers narrow and non-universal. Anthropic&#8217;s other models (Opus 4.8, Sonnet, Haiku) are unaffected, and the company says it is working to restore access. Fail over to Opus 4.8 in the meantime.</p>
 
 
 
-<h3>Why did my costs go up on Fable 5 if my prompts didn&#8217;t change?</h3>
+<h3 class="wp-block-heading">Is a 529 error my fault?</h3>
 
 
 
-<p>Fable 5 uses a new tokenizer that produces roughly 30% more tokens for the same text than Opus-tier models, and its per-token price is higher. Re-measure with the token-counting endpoint (it returns counts under both tokenizers) instead of reusing old estimates.</p>
+<p class="wp-block-paragraph">No. <code>529 Overloaded</code> means Anthropic&#8217;s service is temporarily at capacity and shedding load. It&#8217;s unrelated to your account&#8217;s rate limits (429) or your request. Retry with exponential backoff, and fall back to a less-contended model like Opus 4.8 when it persists.</p>
 
 
 
-<h3>Why does every Fable 5 request return a 400 error?</h3>
+<h3 class="wp-block-heading">Why did my costs go up on Fable 5 if my prompts didn&#8217;t change?</h3>
 
 
 
-<p>Two common causes: a removed parameter in your request (<code>budget_tokens</code>, <code>temperature</code>/<code>top_p</code>/<code>top_k</code>, disabled-thinking config, or an assistant prefill), or an organization data-retention setting below the 30 days Fable requires. If a one-line request also 400s, it&#8217;s the retention setting.</p>
+<p class="wp-block-paragraph">Fable 5 uses a new tokenizer that produces roughly 30% more tokens for the same text than Opus-tier models, and its per-token price is higher. Re-measure with the token-counting endpoint (it returns counts under both tokenizers) instead of reusing old estimates.</p>
 
 
 
-<h3>Why is my response empty with a 200 status?</h3>
+<h3 class="wp-block-heading">Why does every Fable 5 request return a 400 error?</h3>
 
 
 
-<p>That&#8217;s a safety refusal: a 200 response with <code>stop_reason: "refusal"</code> and empty content. Always check <code>stop_reason</code> before reading the content array. To recover, replay the request on a different model.</p>
+<p class="wp-block-paragraph">Two common causes: a removed parameter in your request (<code>budget_tokens</code>, <code>temperature</code>/<code>top_p</code>/<code>top_k</code>, disabled-thinking config, or an assistant prefill), or an organization data-retention setting below the 30 days Fable requires. If a one-line request also 400s, it&#8217;s the retention setting.</p>
 
 
 
-<hr/>
+<h3 class="wp-block-heading">Why is my response empty with a 200 status?</h3>
 
 
 
-<p><em>Josh runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto&#8217;s newest restaurants, powered by a much smaller Claude that has never once been too busy for him.</em></p>
+<p class="wp-block-paragraph">That&#8217;s a safety refusal: a 200 response with <code>stop_reason: "refusal"</code> and empty content. Always check <code>stop_reason</code> before reading the content array. To recover, replay the request on a different model.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph"><em>Josh runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto&#8217;s newest restaurants, powered by a much smaller Claude that has never once been too busy for him.</em></p>
 
 
 
@@ -401,6 +723,14 @@ else:
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why did Claude Fable 5 stop working on June 13, 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On June 12, 2026 the U.S. government issued an export-control directive, citing national security, barring foreign nationals from accessing Fable 5 and Mythos 5. Because Anthropic cannot separate foreign nationals from other users in real time, it disabled both models for all customers worldwide, including in the U.S., to comply. Anthropic's other models such as Opus 4.8, Sonnet, and Haiku are unaffected, and the company says it is working to restore access. Fail over to Opus 4.8 in the meantime."
+      }
+    },
     {
       "@type": "Question",
       "name": "Is a Claude 529 error my fault?",
