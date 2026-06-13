@@ -33,7 +33,7 @@ NAV_ITEMS = [
         ("Ollama",                  "/ollama/"),
         ("n8n",                     "/n8n-self-hosted-guide/"),
         ("Dify",                    "/dify-self-hosted-guide/"),
-        ("Perplexica",              "/perplexica-self-hosted-guide/"),
+        ("Vane",                    "/perplexica-self-hosted-guide/"),
         ("SearXNG",                 "/searxng-self-hosted-guide/"),
         ("Claude Fable 5",          "/claude-fable-5-issues-fixes/"),
         ("Agent Zero",              "/agent-zero/"),
