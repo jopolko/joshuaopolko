@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>Dify Self-Hosted Guide (2026): Docker Setup, RAG, Alternatives</title>
+  <meta content="Self-host Dify with Docker Compose in 2026, connect your models, build RAG and agent apps, and fix the real problems: RAM and resource limits, upgrade migrations, RAG quality, and Dify vs Flowise vs Langflow vs n8n." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="Dify Self-Hosted Guide (2026): Docker Setup, RAG, Alternatives" property="og:title"/>
+<meta content="Self-host Dify with Docker Compose in 2026, connect your models, build RAG and agent apps, and fix the real problems: RAM and resource limits, upgrade migrations, RAG quality, and Dify vs Flowise vs Langflow vs n8n." property="og:description"/>
+<meta content="https://joshuaopolko.com/dify-self-hosted-guide/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
+<meta content="https://joshuaopolko.com/assets/dify-hero.jpg" property="og:image"/>
+<meta content="https://joshuaopolko.com/assets/dify-hero.jpg" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="A glowing translucent glass brain surrounded by floating modular blocks wired with amber and teal light, representing composable LLM apps in Dify" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:published_time"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Dify Self-Hosted Guide (2026): Docker Setup, RAG, Alternatives" name="twitter:title"/>
+<meta content="Self-host Dify with Docker Compose, connect models, build RAG and agent apps, and fix resource and upgrade problems." name="twitter:description"/>
+<meta content="https://joshuaopolko.com/assets/dify-hero.jpg" name="twitter:image"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="14 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/dify-self-hosted-guide/" rel="canonical"/>
+<script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/assets/dify-hero.jpg","url":"https://joshuaopolko.com/assets/dify-hero.jpg","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/dify-self-hosted-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/dify-self-hosted-guide/","name":"Dify Self-Hosted Guide (2026)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/dify-self-hosted-guide/#webpage","url":"https://joshuaopolko.com/dify-self-hosted-guide/","name":"Dify Self-Hosted Guide (2026): Docker Setup, RAG, Alternatives","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/assets/dify-hero.jpg"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/dify-self-hosted-guide/#breadcrumb"}},{"@type":"BlogPosting","headline":"Dify Self-Hosted Guide (2026): Docker Setup, RAG, Alternatives","keywords":"dify, dify self-hosted, dify docker, dify rag, dify vs flowise, dify vs langflow, llm app platform 2026","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Self-host Dify with Docker Compose in 2026, connect your models, build RAG and agent apps, and fix the real problems: RAM and resource limits, upgrade migrations, RAG quality, and Dify vs Flowise vs Langflow vs n8n.","name":"Dify Self-Hosted Guide (2026): Docker Setup, RAG, Alternatives","@id":"https://joshuaopolko.com/dify-self-hosted-guide/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/dify-self-hosted-guide/#webpage"},"image":{"@id":"https://joshuaopolko.com/assets/dify-hero.jpg"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/dify-self-hosted-guide/#webpage"}}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#b4532a; --accent-ink:#8f3f1f; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.post-body th{background:var(--code-bg);font:600 .96em var(--sans)}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script src="/assets/nav.js?v=3" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Perplexica</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li class="has-sub"><a href="#">Research <span aria-hidden="true">▾</span></a><ul><li><a href="/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivity</a></li><li><a href="/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li><li><a href="/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>Dify Self-Hosted Guide (2026): Docker Setup, RAG, and Alternatives</h1>
+  <figure class="hero"><img src="/assets/dify-hero.jpg" alt="A glowing translucent glass brain surrounded by floating modular blocks wired with amber and teal light, representing composable LLM apps in Dify" width="1200" height="630" loading="eager"></figure>
+  <div class="post-body">
+
+<p>Dify is the most complete open-source platform for building LLM applications, and at over 138,000 GitHub stars it is also one of the most popular. In one self-hosted stack you get a visual workflow editor, a production-ready RAG pipeline, agent capabilities, model management across 100-plus providers, observability, and a built-in system to publish your app as a web app or API. The current release is <strong>1.14.2 (May 19, 2026)</strong>. Docker Compose gets the whole thing running, but Dify is a multi-service platform, not a single binary, so the friction is resources, upgrades, and deciding whether you actually need this much platform versus a lighter tool. This guide walks the install, connecting models, the problems people hit, and how Dify compares to Flowise, Langflow, and n8n.</p>
+
+<h2>Key takeaways</h2>
+
+<ul>
+<li><strong>Install is Docker Compose from the repo:</strong> clone, <code>cd docker</code>, copy the env file, <code>docker compose up -d</code>, then open the web UI and create the admin account.</li>
+<li><strong>Plan for resources.</strong> The documented minimum is 2 vCPUs and 4 GB RAM; give it 8 GB and headroom for real use, because it runs several services (API, worker, web, database, Redis, and a vector store).</li>
+<li><strong>It connects to 100+ model providers</strong> including OpenAI, Anthropic, Google, and local models via <a href="/ollama/">Ollama</a>. You configure these in Settings, not in code.</li>
+<li><strong>Upgrades require database migrations</strong> and, as of the 1.x line, reorganized environment variables. Back up before upgrading and follow the migration notes.</li>
+<li><strong>RAG quality is a tuning job,</strong> not a default. Chunking, hybrid search, embeddings choice, and reranking all matter.</li>
+<li><strong>If you only need a chatbot with retrieval,</strong> Dify may be more platform than you need; Flowise runs in a fraction of the RAM.</li>
+<li><strong>Self-hosted Dify is free</strong> with no meaningful feature limits.</li>
+</ul>
+
+<h2>Install Dify with Docker Compose</h2>
+
+<p>Dify ships a ready Compose stack in its repository. You need Docker Engine 24.0 or newer and Docker Compose v2. Clone the repo, work inside the <code>docker</code> directory, copy the example environment file, and bring the stack up.</p>
+
+<pre><code># Requirements: Docker Engine 24.0+ and Docker Compose v2
+git clone https://github.com/langgenius/dify.git
+cd dify/docker
+
+# Copy the environment template and review it
+cp .env.example .env
+
+# Start the full stack (API, worker, web, db, redis, vector store)
+docker compose up -d
+
+# Check everything is healthy
+docker compose ps</code></pre>
+
+<p>Once the containers are healthy, open <code>http://localhost</code> (the web service listens on port 80 by default) and complete the one-time admin setup. For a production host, the practical minimum is 2 vCPUs, 4 GB RAM, and 40 GB of SSD, with more RAM if you expect concurrent users or large knowledge bases.</p>
+
+<h2>Connect your models</h2>
+
+<p>Dify is model-agnostic. Go to Settings, then Model Providers, and add credentials for any of 100-plus providers: OpenAI, Anthropic, Google, Azure, and many more. For private or no-cost inference, add a local model served by <a href="/ollama/">Ollama</a> by pointing Dify at the Ollama endpoint. You can mix providers across an app, for example a strong hosted model for reasoning and a local embedding model for your knowledge base.</p>
+
+<h2>Build apps: chatflow, agent, workflow, and RAG</h2>
+
+<p>Dify gives you four app types. A <strong>Chatbot</strong> or <strong>Chatflow</strong> is a conversational app, optionally grounded in a knowledge base. An <strong>Agent</strong> can call tools to complete multi-step tasks. A <strong>Workflow</strong> is a visual, node-based pipeline for deterministic multi-step logic. The <strong>Knowledge</strong> feature is the RAG pipeline: upload documents, Dify chunks and embeds them, and your apps retrieve from them at query time. Every app can be published as a hosted web app or consumed through an API, which is what saves teams the weeks of glue code that a from-scratch build would cost.</p>
+
+<h2>1. Containers crash or the host runs out of RAM</h2>
+
+<p><strong>What you see:</strong> services restart in a loop, the UI is unreachable, or <code>docker compose ps</code> shows unhealthy containers on a small VPS.</p>
+
+<p><strong>What it is:</strong> Dify is a multi-service stack. The 4 GB minimum is genuinely a minimum, and embedding large documents or serving several users pushes past it quickly.</p>
+
+<p><strong>The fix:</strong> give the host 8 GB or more, watch memory with <code>docker stats</code>, and if you do not need a feature (for example the sandbox for code execution) trim it from the Compose file. For larger deployments, move the database and vector store to managed services so the app containers are not competing for memory.</p>
+
+<h2>2. An upgrade breaks the stack</h2>
+
+<p><strong>What you see:</strong> after pulling a new version, the app will not start, the database schema is out of date, or environment variables are no longer read.</p>
+
+<p><strong>What it is:</strong> Dify releases require database migrations, and the 1.x line reorganized the Docker environment variables (they now live under <code>docker/envs/**</code>). A blind <code>git pull</code> plus <code>up -d</code> can skip a required step.</p>
+
+<p><strong>The fix:</strong> back up your database and volumes first, read the release notes for the version you are moving to, reconcile your <code>.env</code> against the new template, and run the documented migration. Pin to a known-good tag and upgrade deliberately rather than tracking the main branch.</p>
+
+<h2>3. RAG answers are vague or miss the source</h2>
+
+<p><strong>What you see:</strong> the knowledge base is loaded but answers are generic, cite the wrong passage, or miss obvious content.</p>
+
+<p><strong>What it is:</strong> retrieval quality is a function of how you ingest and search, and the defaults are a starting point, not an optimum.</p>
+
+<p><strong>The fix:</strong> tune the pipeline. Adjust chunk size and overlap to match your documents, enable hybrid search (keyword plus vector) rather than vector-only, choose an embedding model suited to your content, and turn on reranking so the best passages reach the model. Test retrieval with the built-in hit-testing before blaming the LLM.</p>
+
+<h2>4. Tool and model credentials feel exposed</h2>
+
+<p><strong>What you see:</strong> you worry about who in a workspace can see or change API keys and tool credentials.</p>
+
+<p><strong>What it is:</strong> a legitimate multi-tenant concern that Dify has been hardening. The 1.14.2 release strengthened tenant isolation for sensitive endpoints and restricted tool credential updates to workspace admins and owners.</p>
+
+<p><strong>The fix:</strong> keep current on the 1.x line for these security fixes, scope workspace roles tightly so only admins manage credentials, and run Dify behind your own network controls. Self-hosting is the strongest answer here, since data and keys never leave your infrastructure.</p>
+
+<h2>5. It is too much platform for a simple chatbot</h2>
+
+<p><strong>What you see:</strong> you wanted a document-grounded chatbot and ended up running a six-service stack.</p>
+
+<p><strong>What it is:</strong> Dify is a full application platform. That breadth is the value for real products, but overkill for a single narrow use case.</p>
+
+<p><strong>The fix:</strong> match the tool to the job. If your need is "chatbot with retrieval," Flowise is lighter and runs in around 1 GB of RAM. If your need is automation and orchestration with some AI steps, <a href="/n8n-self-hosted-guide/">n8n</a> fits better. Reach for Dify when you want the knowledge base, app publishing, team management, and observability together.</p>
+
+<h2>What is actually running: the Dify service stack</h2>
+
+<p>Understanding why Dify needs 4 GB of RAM is easier once you see what Compose starts. It is not one app but a small fleet of cooperating services: an <strong>API</strong> server, a background <strong>worker</strong> (Celery) for embeddings and async jobs, the <strong>web</strong> front end, a <strong>Postgres</strong> database, <strong>Redis</strong> for queues and caching, a <strong>vector store</strong> (Weaviate by default) for your knowledge bases, a <strong>sandbox</strong> for safely running code in workflows, an <strong>ssrf_proxy</strong> for safe outbound requests, and an <strong>nginx</strong> reverse proxy in front. When a container is unhealthy, knowing which one it is, with <code>docker compose ps</code> and <code>docker compose logs &lt;service&gt;</code>, turns a vague "Dify is down" into a five-minute fix.</p>
+
+<h2>Build a RAG app step by step</h2>
+
+<p>The knowledge base is Dify's signature feature, so here is the end-to-end flow. First, create a <strong>Knowledge</strong>, upload your documents, and choose how they are chunked; smaller chunks improve precision, larger ones preserve context, so match the size to your content. Pick an <strong>embedding model</strong> (a local one via Ollama keeps ingestion free and private). Enable <strong>hybrid search</strong> so retrieval uses both keyword and vector matching, and turn on <strong>reranking</strong> for better passage ordering. Then create a <strong>Chatflow</strong> or <strong>Agent</strong> app, attach the Knowledge as context, and use the built-in <strong>hit-testing</strong> tool to confirm the right passages come back for sample questions before you ship. Finally, <strong>publish</strong> the app as a hosted web app or an API endpoint. The whole loop is visual, which is exactly the engineering time Dify saves over wiring a retrieval pipeline yourself.</p>
+
+<h2>6. Dify cannot connect to Ollama or a local model</h2>
+
+<p><strong>What you see:</strong> you add Ollama as a model provider but Dify reports a connection error, even though Ollama works on the host.</p>
+
+<p><strong>What it is:</strong> the same Docker networking trap that catches every container-to-host connection. From inside Dify's containers, <code>localhost</code> is the container, not your machine where Ollama listens.</p>
+
+<p><strong>The fix:</strong> make Ollama listen on all interfaces with <code>OLLAMA_HOST=0.0.0.0:11434</code>, then in Dify's model settings use <code>http://host.docker.internal:11434</code> on Docker Desktop, or your host's LAN IP on Linux, as the base URL. See the <a href="/ollama/">Ollama setup guide</a> for the host-side change.</p>
+
+<h2>Back up a Dify deployment</h2>
+
+<p>Dify's state lives in three places, and a real backup covers all of them: the <strong>Postgres database</strong> (apps, workflows, settings, accounts), the <strong>vector store data</strong> (your embedded knowledge bases), and the <strong>file storage volume</strong> (uploaded documents). Snapshot the Docker volumes on a schedule and dump Postgres, and before any version upgrade take a fresh backup, because Dify upgrades run schema migrations that are not designed to roll backward. Keep your reconciled <code>.env</code> alongside the backup so a restore lands on the same configuration.</p>
+
+<h2>Dify vs Flowise vs Langflow vs n8n (2026)</h2>
+
+<p>These four get compared constantly, but they solve different problems. Dify, Flowise, and Langflow are LLM app builders; n8n is an automation tool with AI nodes.</p>
+
+<table>
+<thead>
+<tr><th>Tool</th><th>Best for</th><th>Footprint</th><th>RAG</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Dify</strong></td><td>Full-stack LLM apps: RAG, agents, publishing, team management</td><td>Heavier (~4 GB+ multi-service)</td><td>Strong, production-ready hybrid search</td><td>Best default for most teams shipping AI products</td></tr>
+<tr><td><strong>Flowise</strong></td><td>Chatbot with retrieval, fastest path to production</td><td>Light (~1 GB)</td><td>Strong, simpler</td><td>Pick when simplicity wins</td></tr>
+<tr><td><strong>Langflow</strong></td><td>Visual multi-agent design on LangChain/LangGraph</td><td>Medium</td><td>Good</td><td>DataStax-backed visual IDE</td></tr>
+<tr><td><strong>n8n</strong></td><td>Orchestration, scheduling, 400+ integrations with AI steps</td><td>Medium</td><td>Via larger automation flows</td><td>Choose when orchestration is the hard part</td></tr>
+</tbody>
+</table>
+
+<h2>What changed in Dify in 2026</h2>
+
+<ul>
+<li><strong>On the 1.x line</strong> with the current release 1.14.2 (May 19, 2026), which requires database migrations and reorganized Docker environment variables under <code>docker/envs/**</code>.</li>
+<li><strong>Security hardening:</strong> stronger tenant isolation for sensitive endpoints and tool-credential updates restricted to workspace admins and owners.</li>
+<li><strong>Reliability:</strong> restored tracing after workflow resumption and improved workflow callback tracking.</li>
+<li><strong>Plugin system:</strong> the plugin daemon was upgraded, continuing Dify's move toward a pluggable, extensible platform.</li>
+</ul>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Is Dify free and open source?</h3>
+
+<p>Yes. Dify is open source and free to self-host, and the self-hosted edition has no meaningful feature limits. A paid cloud offering exists for teams that do not want to run infrastructure, but self-hosting gives you the full platform.</p>
+
+<h3>What are Dify's system requirements?</h3>
+
+<p>You need Docker Engine 24.0 or newer and Docker Compose v2. The documented production minimum is 2 vCPUs, 4 GB RAM, and 40 GB SSD. Because Dify runs several services, give it 8 GB or more for real workloads or concurrent users.</p>
+
+<h3>Dify vs Flowise: which should I choose?</h3>
+
+<p>Choose Dify for a full-stack AI application with a knowledge base, agents, app publishing, team management, and observability. Choose Flowise when you want the simplest, lightest path to a chatbot with retrieval; it runs in about 1 GB of RAM versus Dify's 4 GB minimum.</p>
+
+<h3>Can Dify use local models with Ollama?</h3>
+
+<p>Yes. In Settings, then Model Providers, add Ollama and point Dify at your Ollama endpoint to run fully local, no-per-token-cost inference. You can combine local and hosted providers within the same app. See the <a href="/ollama/">Ollama setup guide</a>.</p>
+
+<h3>Is the self-hosted version of Dify limited?</h3>
+
+<p>No. The self-hosted edition has no meaningful feature limitations compared to the cloud version. The main trade-off is that you operate the infrastructure yourself, including upgrades, backups, and scaling.</p>
+
+<hr/>
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="https://docs.dify.ai/en/getting-started/install-self-hosted/docker-compose" target="_blank" rel="noopener">Dify Docker Compose Docs</a> &ndash; official self-hosting guide</li>
+<li><a href="https://github.com/langgenius/dify" target="_blank" rel="noopener">Dify on GitHub</a> &ndash; source, releases, and migration notes</li>
+<li><a href="/ollama/">Ollama setup guide</a> &ndash; run local models to power Dify</li>
+<li><a href="/n8n-self-hosted-guide/">n8n guide</a> and <a href="/crewai-setup-production-guide/">CrewAI guide</a> &ndash; orchestration and agent-framework companions</li>
+</ul>
+
+<p><em>Last updated: June 13, 2026.</em></p>
+
+<p><em>Josh writes about AI agents, local AI, and GEO, and runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto's newest restaurants.</em></p>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Dify free and open source?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Dify is open source and free to self-host, and the self-hosted edition has no meaningful feature limits. A paid cloud offering exists for teams that do not want to run infrastructure, but self-hosting gives you the full platform."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are Dify's system requirements?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You need Docker Engine 24.0 or newer and Docker Compose v2. The documented production minimum is 2 vCPUs, 4 GB RAM, and 40 GB SSD. Because Dify runs several services, give it 8 GB or more for real workloads or concurrent users."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dify vs Flowise: which should I choose?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Choose Dify for a full-stack AI application with a knowledge base, agents, app publishing, team management, and observability. Choose Flowise when you want the simplest, lightest path to a chatbot with retrieval; it runs in about 1 GB of RAM versus Dify's 4 GB minimum."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Dify use local models with Ollama?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. In Settings, then Model Providers, add Ollama and point Dify at your Ollama endpoint to run fully local, no-per-token-cost inference. You can combine local and hosted providers within the same app."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the self-hosted version of Dify limited?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The self-hosted edition has no meaningful feature limitations compared to the cloud version. The main trade-off is that you operate the infrastructure yourself, including upgrades, backups, and scaling."
+      }
+    }
+  ]
+}
+</script>
+</body>
+</html>

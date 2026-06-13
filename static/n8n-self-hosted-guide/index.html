@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>n8n Self-Hosted Setup Guide (2026): Docker, AI Agents, Scaling</title>
+  <meta content="Self-host n8n with Docker in 2026, build AI agent workflows, and fix the real problems: queue-mode scaling, webhooks breaking after upgrades, backups, and how n8n compares to Make and Zapier on cost." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="n8n Self-Hosted Setup Guide (2026): Docker, AI Agents, Scaling" property="og:title"/>
+<meta content="Self-host n8n with Docker in 2026, build AI agent workflows, and fix the real problems: queue-mode scaling, webhooks breaking after upgrades, backups, and how n8n compares to Make and Zapier on cost." property="og:description"/>
+<meta content="https://joshuaopolko.com/n8n-self-hosted-guide/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
+<meta content="https://joshuaopolko.com/assets/n8n-hero.jpg" property="og:image"/>
+<meta content="https://joshuaopolko.com/assets/n8n-hero.jpg" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="A machine of glowing teal conduits and amber brass nodes carrying capsules of data, representing an n8n automation workflow" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:published_time"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="n8n Self-Hosted Setup Guide (2026): Docker, AI Agents, Scaling" name="twitter:title"/>
+<meta content="Self-host n8n with Docker, build AI agent workflows, and fix scaling, webhook, and backup problems." name="twitter:description"/>
+<meta content="https://joshuaopolko.com/assets/n8n-hero.jpg" name="twitter:image"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="13 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/n8n-self-hosted-guide/" rel="canonical"/>
+<script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/assets/n8n-hero.jpg","url":"https://joshuaopolko.com/assets/n8n-hero.jpg","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/n8n-self-hosted-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/n8n-self-hosted-guide/","name":"n8n Self-Hosted Setup Guide (2026)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/n8n-self-hosted-guide/#webpage","url":"https://joshuaopolko.com/n8n-self-hosted-guide/","name":"n8n Self-Hosted Setup Guide (2026): Docker, AI Agents, Scaling","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/assets/n8n-hero.jpg"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/n8n-self-hosted-guide/#breadcrumb"}},{"@type":"BlogPosting","headline":"n8n Self-Hosted Setup Guide (2026): Docker, AI Agents, Scaling","keywords":"n8n, n8n self-hosted, n8n docker, n8n ai agent, n8n vs make vs zapier, n8n queue mode, workflow automation 2026","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Self-host n8n with Docker in 2026, build AI agent workflows, and fix the real problems: queue-mode scaling, webhooks breaking after upgrades, backups, and how n8n compares to Make and Zapier on cost.","name":"n8n Self-Hosted Setup Guide (2026): Docker, AI Agents, Scaling","@id":"https://joshuaopolko.com/n8n-self-hosted-guide/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/n8n-self-hosted-guide/#webpage"},"image":{"@id":"https://joshuaopolko.com/assets/n8n-hero.jpg"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/n8n-self-hosted-guide/#webpage"}}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#b4532a; --accent-ink:#8f3f1f; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.post-body th{background:var(--code-bg);font:600 .96em var(--sans)}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script src="/assets/nav.js?v=3" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Perplexica</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li class="has-sub"><a href="#">Research <span aria-hidden="true">▾</span></a><ul><li><a href="/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivity</a></li><li><a href="/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li><li><a href="/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>n8n Self-Hosted Setup Guide (2026): Docker, AI Agents, and Scaling</h1>
+  <figure class="hero"><img src="/assets/n8n-hero.jpg" alt="A machine of glowing teal conduits and amber brass nodes carrying capsules of data, representing an n8n automation workflow" width="1200" height="630" loading="eager"></figure>
+  <div class="post-body">
+
+<p>n8n is the workflow automation tool developers reach for when Zapier gets expensive and Make feels like a black box. It is fair-code, self-hostable, connects to 400-plus services, and since the LangChain-powered AI nodes landed it doubles as an AI agent builder. The Community Edition is free to self-host under the Sustainable Use License, with no execution limits, and the current release is <strong>2.25.7 (June 10, 2026)</strong>. A single Docker container gets you running in minutes. The work, as always, is production: queue mode for scale, surviving upgrades without breaking webhooks, and backing up the right things. This guide covers the install, an AI agent workflow, and the problems people actually hit, plus how n8n stacks up against Make and Zapier.</p>
+
+<h2>Key takeaways</h2>
+
+<ul>
+<li><strong>Quick start is one container:</strong> <code>docker run</code> the image, map port <code>5678</code>, mount a volume, and set an encryption key.</li>
+<li><strong>For anything real, use Docker Compose with Postgres</strong> instead of the default SQLite, and add Redis when you move to queue mode.</li>
+<li><strong>Pin your version.</strong> Do not run <code>:latest</code> in production; n8n upgrades can break webhook workflows. Pin a tag and upgrade deliberately after testing.</li>
+<li><strong>Scale vertically first, then queue mode.</strong> Switch to <code>EXECUTIONS_MODE=queue</code> with Redis and worker containers when you approach ~80% CPU.</li>
+<li><strong>Back up the database <em>and</em> the encryption key.</strong> Without <code>N8N_ENCRYPTION_KEY</code>, your stored credentials are unrecoverable.</li>
+<li><strong>The AI Agent node is a cluster node:</strong> attach sub-nodes for the chat model, memory, and tools. It works with OpenAI, Anthropic, or a local model via <a href="/ollama/">Ollama</a>.</li>
+<li><strong>n8n wins on cost at scale</strong> because self-hosting is flat-rate, while Zapier and Make bill per task or operation.</li>
+</ul>
+
+<h2>Install n8n with Docker (quick start)</h2>
+
+<p>The fastest way to try n8n is a single container. Set an encryption key up front so the credentials you create are portable, and mount a volume so nothing is lost on restart.</p>
+
+<pre><code># Create a persistent volume and run n8n
+docker volume create n8n_data
+
+docker run -d --name n8n -p 5678:5678 \
+  -e N8N_ENCRYPTION_KEY="replace-with-a-long-random-string" \
+  -e GENERIC_TIMEZONE="America/Toronto" \
+  -v n8n_data:/home/node/.n8n \
+  docker.n8n.io/n8nio/n8n:2.25.7
+
+# Open the editor
+# http://localhost:5678</code></pre>
+
+<p>Note the pinned tag <code>:2.25.7</code> rather than <code>:latest</code>. That single choice prevents a surprise upgrade from breaking live workflows, which is the most common self-hosting regret.</p>
+
+<h2>Production install with Docker Compose</h2>
+
+<p>For real use, run n8n against Postgres rather than the bundled SQLite, which struggles under concurrent executions. This Compose file wires n8n to Postgres; add Redis and workers when you reach the scaling section.</p>
+
+<pre><code># docker-compose.yml
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: change-me
+      POSTGRES_DB: n8n
+    volumes: ["pg_data:/var/lib/postgresql/data"]
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.25.7
+    restart: always
+    ports: ["5678:5678"]
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_USER: n8n
+      DB_POSTGRESDB_PASSWORD: change-me
+      N8N_ENCRYPTION_KEY: replace-with-a-long-random-string
+      WEBHOOK_URL: https://n8n.example.com/
+    volumes: ["n8n_data:/home/node/.n8n"]
+    depends_on: ["postgres"]
+
+volumes: { pg_data: {}, n8n_data: {} }</code></pre>
+
+<h2>Build an AI agent workflow</h2>
+
+<p>n8n's AI features are built on LangChain. The <strong>AI Agent</strong> node is a root, or cluster, node: on its own it does nothing, but you attach sub-nodes to give it a brain and hands. Connect a <strong>Chat Model</strong> sub-node (OpenAI, Anthropic, or a local model), an optional <strong>Memory</strong> sub-node to carry context across turns, and one or more <strong>Tool</strong> sub-nodes the agent can call. Trigger the workflow from a webhook, a schedule, or a chat trigger, and the agent reasons over its tools to complete the task. For a fully private, no-API-cost setup, point the Chat Model at a local model served by <a href="/ollama/">Ollama</a>, and if you outgrow single-agent workflows, compare the dedicated frameworks in my <a href="/crewai-setup-production-guide/">CrewAI guide</a>.</p>
+
+<h2>1. Webhooks break after an upgrade</h2>
+
+<p><strong>What you see:</strong> a workflow that worked yesterday stops firing after you pulled a new image, or webhook URLs return 404.</p>
+
+<p><strong>What it is:</strong> running <code>:latest</code> means an automatic, untested version jump. n8n moves fast, and breaking changes occasionally land that affect webhook registration or node behavior.</p>
+
+<p><strong>The fix:</strong> pin a specific version tag in your Compose file and upgrade on purpose. Read the release notes, bump the tag in staging, confirm your critical workflows still fire, then promote. Keep the previous tag handy so a rollback is one edit away.</p>
+
+<h2>2. Executions pile up and the instance is slow</h2>
+
+<p><strong>What you see:</strong> workflows queue behind each other, the editor feels sluggish, and a busy webhook drops events under load.</p>
+
+<p><strong>What it is:</strong> by default n8n runs in "main" mode, executing everything in one process. That is fine for light use but does not parallelize.</p>
+
+<p><strong>The fix:</strong> switch to <strong>queue mode</strong>. Set <code>EXECUTIONS_MODE=queue</code>, add a Redis service as the message broker, and run one or more dedicated <code>worker</code> containers that pull jobs from the queue. The main instance handles the UI and webhooks while workers execute in parallel. A common trigger to make the move is sustained CPU around 80%. Scale by adding workers, and reach for an external broker like RabbitMQ only if you need more resilience than Redis provides.</p>
+
+<h2>3. You lost your workflows or credentials</h2>
+
+<p><strong>What you see:</strong> after a container rebuild, workflows are gone, or restored credentials fail to decrypt.</p>
+
+<p><strong>What it is:</strong> two separate mistakes. Either the data volume was not persisted, or the <code>N8N_ENCRYPTION_KEY</code> changed, which makes every stored credential undecryptable.</p>
+
+<p><strong>The fix:</strong> persist the <code>/home/node/.n8n</code> volume, use Postgres and back up the database on a schedule, and store the <code>N8N_ENCRYPTION_KEY</code> somewhere safe and never let it change between deployments. Treat the key like a production secret, because losing it means re-entering every credential by hand.</p>
+
+<h2>4. Webhooks do not work behind a reverse proxy</h2>
+
+<p><strong>What you see:</strong> webhooks work locally but external services cannot reach them, or the URLs n8n generates point at <code>localhost</code>.</p>
+
+<p><strong>What it is:</strong> n8n needs to know its public URL to register webhooks correctly.</p>
+
+<p><strong>The fix:</strong> set <code>WEBHOOK_URL</code> (and <code>N8N_HOST</code>) to your public HTTPS domain, terminate TLS at a reverse proxy such as Caddy or Nginx, and forward to port 5678. After changing these, re-save the affected workflows so the webhook URLs regenerate.</p>
+
+<h2>5. Self-hosting is not actually free</h2>
+
+<p><strong>What you see:</strong> you moved off Zapier to save money, then spent weekends on Docker, SSL, backups, monitoring, and queue tuning.</p>
+
+<p><strong>What it is:</strong> the license is free; the operations are not. Hosting, patching, monitoring uptime, and tuning queue mode are real engineering time.</p>
+
+<p><strong>The fix:</strong> be honest about the trade. Self-hosting pays off when your task volume is high enough that per-task billing would dwarf the ops cost, or when data residency matters. For low volume, a managed plan can be cheaper once you price your own time. Right-size the decision rather than defaulting to self-host on principle.</p>
+
+<h2>6. The database fills up with execution data</h2>
+
+<p><strong>What you see:</strong> over weeks of running, the database grows steadily, backups get slower, and disk usage creeps toward full on a busy instance.</p>
+
+<p><strong>What it is:</strong> by default n8n stores the full execution history, including the data that passed through every node. High-frequency workflows accumulate this fast, and nothing prunes it automatically unless you ask.</p>
+
+<p><strong>The fix:</strong> turn on execution pruning so old runs are cleared on a schedule. Set <code>EXECUTIONS_DATA_PRUNE=true</code> and a retention window with <code>EXECUTIONS_DATA_MAX_AGE</code> (in hours), and optionally cap the row count. For noisy workflows you do not need to audit, set them to save only on error rather than on success, which keeps the table lean.</p>
+
+<pre><code># Environment for the n8n service
+EXECUTIONS_DATA_PRUNE=true
+EXECUTIONS_DATA_MAX_AGE=336        # keep 14 days of execution history (hours)
+EXECUTIONS_DATA_PRUNE_MAX_COUNT=10000</code></pre>
+
+<h2>Secure a self-hosted n8n instance</h2>
+
+<p>An n8n instance holds credentials to everything it automates, so treat it like production infrastructure, not a hobby container. A few essentials cover most of the risk:</p>
+
+<ul>
+<li><strong>Use the built-in user management,</strong> not a single shared login. The legacy basic-auth approach is deprecated; create an owner account and invite users with roles instead.</li>
+<li><strong>Always terminate TLS</strong> at a reverse proxy (Caddy or Nginx) and serve n8n only over HTTPS. Set <code>N8N_SECURE_COOKIE=true</code> so the session cookie is not sent over plain HTTP.</li>
+<li><strong>Limit what is public.</strong> Only the webhook endpoints need to be reachable from the internet; keep the editor behind a VPN, IP allowlist, or proxy auth if you can.</li>
+<li><strong>Keep current.</strong> Track releases and apply security updates deliberately, on your pinned-version cadence.</li>
+</ul>
+
+<h2>Back up the right things</h2>
+
+<p>A working backup of n8n is three parts, and missing any one of them makes a restore fail. Back up the <strong>database</strong> (a scheduled <code>pg_dump</code> if you are on Postgres), the <strong><code>/home/node/.n8n</code> volume</strong>, and most importantly the <strong><code>N8N_ENCRYPTION_KEY</code></strong>, stored separately in your secrets manager. The encryption key is the part people forget: without it, a restored database cannot decrypt any of your stored credentials, so you would have to re-enter every API key and connection by hand. Test a restore into a throwaway instance occasionally, because a backup you have never restored is a hope, not a plan.</p>
+
+<h2>n8n vs Make vs Zapier (2026)</h2>
+
+<p>All three automate workflows, but they bill and scale very differently, and only n8n is self-hostable.</p>
+
+<table>
+<thead>
+<tr><th>Tool</th><th>Hosting</th><th>Cost model</th><th>AI agents</th><th>Best for</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>n8n</strong></td><td>Self-hosted or cloud</td><td>Flat (self-host) or per-execution</td><td>Native LangChain AI Agent nodes</td><td>High volume, data control, AI workflows, 400+ integrations</td></tr>
+<tr><td><strong>Make</strong></td><td>Managed cloud only</td><td>Per-operation</td><td>Some AI modules</td><td>Visual builders who want zero ops</td></tr>
+<tr><td><strong>Zapier</strong></td><td>Managed cloud only</td><td>Per-task (expensive at scale)</td><td>AI actions and agents</td><td>Simple, broad app coverage, non-technical users</td></tr>
+</tbody>
+</table>
+
+<p>The pattern: Make and Zapier scale your bill linearly with usage, while self-hosted n8n scales vertically. More tasks mean a bigger server, not a bigger invoice. For data-heavy or high-frequency automation, that difference compounds fast.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Is n8n free?</h3>
+
+<p>The n8n Community Edition is free to self-host under the Sustainable Use License, with no execution limits. Paid plans cover n8n Cloud (managed hosting) and the Enterprise edition (SSO, advanced permissions, scaling features). For most self-hosters the Community Edition is enough.</p>
+
+<h3>n8n vs Zapier: which is cheaper?</h3>
+
+<p>At low volume, Zapier's managed convenience can be cheaper once you price your own time. At high volume, self-hosted n8n is dramatically cheaper because it is flat-rate, while Zapier bills per task. The crossover comes when per-task fees exceed the cost of running and maintaining a server.</p>
+
+<h3>How do I scale n8n?</h3>
+
+<p>Scale vertically first by giving the instance more CPU and RAM. When you approach roughly 80% CPU, switch to queue mode: set <code>EXECUTIONS_MODE=queue</code>, add Redis as the broker, and run dedicated worker containers that execute jobs in parallel. Add workers to scale out further.</p>
+
+<h3>Why did my webhooks stop working after an upgrade?</h3>
+
+<p>You were likely running the <code>:latest</code> tag and an automatic version jump introduced a breaking change. Pin a specific version, read release notes before upgrading, test in staging, and keep the previous tag ready for rollback.</p>
+
+<h3>Can n8n run local LLMs?</h3>
+
+<p>Yes. Attach a Chat Model sub-node pointed at a local model served by Ollama to the AI Agent node. This gives you fully private, no-per-token-cost AI workflows. See the <a href="/ollama/">Ollama setup guide</a> for running the model locally.</p>
+
+<hr/>
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="https://docs.n8n.io/hosting/" target="_blank" rel="noopener">n8n Self-Hosting Docs</a> &ndash; official Docker and Compose guidance</li>
+<li><a href="https://github.com/n8n-io/n8n" target="_blank" rel="noopener">n8n on GitHub</a> &ndash; source, releases, and the Sustainable Use License</li>
+<li><a href="https://docs.n8n.io/advanced-ai/" target="_blank" rel="noopener">n8n Advanced AI docs</a> &ndash; the AI Agent node and LangChain sub-nodes</li>
+<li><a href="/ollama/">Ollama setup guide</a> and <a href="/crewai-setup-production-guide/">CrewAI guide</a> &ndash; pair n8n with local models and dedicated agent frameworks</li>
+</ul>
+
+<p><em>Last updated: June 13, 2026.</em></p>
+
+<p><em>Josh writes about AI agents, automation, and GEO, and runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto's newest restaurants.</em></p>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is n8n free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The n8n Community Edition is free to self-host under the Sustainable Use License, with no execution limits. Paid plans cover n8n Cloud (managed hosting) and the Enterprise edition. For most self-hosters the Community Edition is enough."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "n8n vs Zapier: which is cheaper?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At low volume, Zapier's managed convenience can be cheaper once you price your own time. At high volume, self-hosted n8n is dramatically cheaper because it is flat-rate while Zapier bills per task. The crossover comes when per-task fees exceed the cost of running and maintaining a server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I scale n8n?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scale vertically first with more CPU and RAM. When you approach roughly 80 percent CPU, switch to queue mode: set EXECUTIONS_MODE=queue, add Redis as the broker, and run dedicated worker containers that execute jobs in parallel. Add workers to scale out."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why did my n8n webhooks stop working after an upgrade?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You were likely running the :latest tag and an automatic version jump introduced a breaking change. Pin a specific version, read release notes before upgrading, test in staging, and keep the previous tag ready for rollback."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can n8n run local LLMs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Attach a Chat Model sub-node pointed at a local model served by Ollama to the AI Agent node, giving you fully private, no-per-token-cost AI workflows."
+      }
+    }
+  ]
+}
+</script>
+</body>
+</html>

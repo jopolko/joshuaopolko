@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>Driftlights: Depth of Field &amp; Object Permanence in WebXR</title>
+  <meta content="A live WebXR demo of a depth-of-field light field: hundreds of glowing orbs anchored in world space with real bokeh, bloom, and click-to-leave-a-light, built in Three.js." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+  <meta content="webxr depth of field, bokeh webgl, three.js postprocessing, object permanence vr, webxr demo, interactive 3d" name="keywords">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="Driftlights: Depth of Field &amp; Object Permanence in WebXR" property="og:title"/>
+<meta content="A live, in-browser WebXR light field with real bokeh depth of field. Hundreds of glowing orbs sit fixed in world space; orbit them, leave your own lights, or step inside in VR." property="og:description"/>
+<meta content="https://joshuaopolko.com/driftlights/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-13T18:00:00+00:00" property="og:updated_time"/>
+<meta content="https://joshuaopolko.com/assets/driftlights-hero.png" property="og:image"/>
+<meta content="https://joshuaopolko.com/assets/driftlights-hero.png" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="A field of glowing orbs suspended in dark space with soft bokeh depth-of-field blur" property="og:image:alt"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="2026-06-13T18:00:00+00:00" property="article:published_time"/>
+<meta content="2026-06-13T18:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Driftlights: Depth of Field &amp; Object Permanence in WebXR" name="twitter:title"/>
+<meta content="A live in-browser WebXR light field with real bokeh depth of field and world-anchored objects you can orbit or step into." name="twitter:description"/>
+<meta content="https://joshuaopolko.com/assets/driftlights-hero.png" name="twitter:image"/>
+<link href="https://joshuaopolko.com/driftlights/" rel="canonical"/>
+<script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/assets/driftlights-hero.png","url":"https://joshuaopolko.com/assets/driftlights-hero.png","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/driftlights/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/driftlights/","name":"Driftlights: Depth of Field & Object Permanence in WebXR"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/driftlights/#webpage","url":"https://joshuaopolko.com/driftlights/","name":"Driftlights: Depth of Field & Object Permanence in WebXR","datePublished":"2026-06-13T18:00:00+00:00","dateModified":"2026-06-13T18:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/assets/driftlights-hero.png"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/driftlights/#breadcrumb"}},{"@type":"Article","headline":"Driftlights: Depth of Field & Object Permanence in WebXR","keywords":"webxr depth of field, bokeh webgl, three.js postprocessing, object permanence vr, webxr demo","datePublished":"2026-06-13T18:00:00+00:00","dateModified":"2026-06-13T18:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"A live WebXR depth-of-field light field built in Three.js: hundreds of glowing orbs anchored in world space with real bokeh, bloom, and click-to-leave-a-light interaction.","name":"Driftlights: Depth of Field & Object Permanence in WebXR","@id":"https://joshuaopolko.com/driftlights/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/driftlights/#webpage"},"image":{"@id":"https://joshuaopolko.com/assets/driftlights-hero.png"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/driftlights/#webpage"}}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#b4532a; --accent-ink:#8f3f1f; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);color:var(--muted);font:400 14px/1.6 var(--sans)}
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+/* live demo */
+.xrd{margin:1.8em 0 2.2em;font-family:var(--sans)}
+.xrd-stage{position:relative;border-radius:16px;overflow:hidden;background:#05060b;aspect-ratio:16/9;box-shadow:0 24px 60px -22px rgba(180,83,42,.55),0 0 0 1px rgba(255,255,255,.06) inset;border:1px solid #221b16}
+@media(max-width:640px){.xrd-stage{aspect-ratio:4/5}}
+.xrd-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.xrd-canvas:active{cursor:grabbing}
+.xrd-top{position:absolute;top:14px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;gap:12px}
+.xrd-tag{font:600 11px/1.4 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:#ffd9c4;background:rgba(180,83,42,.22);border:1px solid rgba(255,170,120,.3);padding:6px 11px;border-radius:999px;backdrop-filter:blur(8px)}
+.xrd-hint{font:500 12px/1.5 var(--sans);color:rgba(255,255,255,.62);text-align:right;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.xrd-panel{position:absolute;left:14px;right:14px;bottom:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;padding:14px 16px;border-radius:13px;background:rgba(8,10,18,.62);backdrop-filter:blur(14px) saturate(1.3);border:1px solid rgba(255,255,255,.1);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+@media(max-width:640px){.xrd-panel{grid-template-columns:1fr 1fr;gap:8px 14px;padding:12px}}
+.xrd-ctl{display:flex;flex-direction:column;gap:5px;min-width:0}
+.xrd-ctl label{font:600 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.66);display:flex;justify-content:space-between;gap:8px}
+.xrd-ctl label b{color:#ffb98c;font-weight:700}
+.xrd-ctl input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,#b4532a,#ffb98c);outline:none;cursor:pointer}
+.xrd-ctl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid #b4532a;box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:pointer}
+.xrd-ctl input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid #b4532a;cursor:pointer}
+.xrd-actions{position:absolute;top:12px;right:14px;display:flex;gap:8px}
+.xrd-vrslot button{font:700 12px/1 var(--sans)!important;letter-spacing:.04em;color:#fff!important;background:rgba(180,83,42,.9)!important;border:1px solid rgba(255,180,140,.5)!important;padding:10px 15px!important;border-radius:10px!important;cursor:pointer;position:static!important;left:auto!important;right:auto!important;bottom:auto!important;width:auto!important;transform:none!important;backdrop-filter:blur(8px);opacity:1!important;text-transform:none!important;box-shadow:0 4px 14px rgba(180,83,42,.4);transition:transform .12s,background .15s}
+.xrd-vrslot button:hover{transform:translateY(-1px);background:#b4532a!important}
+.xrd-vrslot{display:inline-flex}.xrd-vrslot a{display:none}
+.xrd-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:24px;text-align:center;color:#cbb;font:500 14px/1.6 var(--sans);background:#0a0b12}
+</style>
+<script src="/assets/nav.js?v=3" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Perplexica</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li class="has-sub"><a href="#">Research <span aria-hidden="true">▾</span></a><ul><li><a href="/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivity</a></li><li><a href="/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li><li><a href="/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>Driftlights: Depth of Field &amp; Object Permanence in WebXR</h1>
+  <div class="post-body">
+
+<p>Most "WebXR demos" are a clever shader painted on the inside of a sphere. They look great until you move, and then you notice the whole universe is glued to your face &mdash; there's no <em>there</em> there. Driftlights is the opposite. It's a real volume of hundreds of glowing orbs hanging at fixed points in space, rendered with genuine optical <strong>depth of field</strong>, so the near ones melt into soft bokeh and the far ones haze into fog. Orbit around and they stay put. Click, and you leave a light behind that's still there when you come back. Put on a headset and you can walk among them.</p>
+
+<div style="background:#f4f1ea;border-radius:12px;padding:14px 18px;margin:0 0 1.6em;font:500 15px/1.55 var(--sans);color:#3f3d38">
+<strong>The point of the demo:</strong> two things the shader demos can't do &mdash; <strong>depth of field</strong> (a real focal plane with bokeh, not a flat filter) and <strong>object permanence</strong> (objects anchored in world space that persist as you move and as you place new ones).
+</div>
+
+<section id="xr-demo" class="xrd" aria-label="Interactive WebXR depth-of-field light field">
+  <div class="xrd-stage">
+    <canvas class="xrd-canvas" aria-label="A field of glowing orbs suspended in space with depth-of-field bokeh, rendered with Three.js WebXR"></canvas>
+    <div class="xrd-top">
+      <span class="xrd-tag">Three.js · WebXR · Depth of Field</span>
+      <span class="xrd-hint">Drag to orbit · Click to leave a light<br>Enter VR to walk among them</span>
+    </div>
+    <div class="xrd-actions"><span class="xrd-vrslot"></span></div>
+    <div class="xrd-panel" role="group" aria-label="Scene controls">
+      <div class="xrd-ctl"><label>Focus <b data-v="focus"></b></label><input type="range" id="xrd-focus" min="4" max="22" step="0.1" value="11"></div>
+      <div class="xrd-ctl"><label>Aperture <b data-v="ap"></b></label><input type="range" id="xrd-ap" min="0" max="10" step="0.1" value="4.2"></div>
+      <div class="xrd-ctl"><label>Bloom <b data-v="bloom"></b></label><input type="range" id="xrd-bloom" min="0" max="1.6" step="0.02" value="0.78"></div>
+      <div class="xrd-ctl"><label>Exposure <b data-v="exp"></b></label><input type="range" id="xrd-exp" min="0.5" max="2" step="0.02" value="1.05"></div>
+      <div class="xrd-ctl"><label>Drift <b data-v="drift"></b></label><input type="range" id="xrd-drift" min="0" max="2" step="0.02" value="0.45"></div>
+      <div class="xrd-ctl"><label>Lights <b data-v="lights"></b></label><input type="range" id="xrd-twk" min="0" max="2" step="0.02" value="1"></div>
+    </div>
+    <div class="xrd-fallback" id="xrd-fallback">Your browser blocked WebGL, so the live scene can't render here. Try a current desktop or mobile browser.</div>
+  </div>
+</section>
+
+<h2>What you're actually looking at</h2>
+
+<p>The blur is the whole trick. Real cameras have a <strong>focal plane</strong>: things at one distance are sharp, and everything nearer or farther falls out of focus into round highlights &mdash; bokeh. Driftlights renders that honestly using the scene's depth buffer, not a fake vignette. Slide <strong>Focus</strong> and watch the sharp band travel through the field; slide <strong>Aperture</strong> to open the lens wider and drown the edges in creamy circles.</p>
+
+<p>The orbs are not a backdrop. Each one is a real mesh at a fixed coordinate, which is what makes <strong>object permanence</strong> obvious: as the camera drifts, near and far orbs slide past each other with true parallax, the way real objects do. <strong>Click anywhere</strong> and you drop a new light into the world at that point. Orbit away, come back &mdash; it's still glowing exactly where you left it, casting light on its neighbours.</p>
+
+<h2>How it works</h2>
+
+<p>It's <a href="https://threejs.org/" target="_blank" rel="noopener">Three.js</a> with a small post-processing stack. A normal render pass draws the orbs, then a <a href="https://threejs.org/docs/#examples/en/postprocessing/EffectComposer" target="_blank" rel="noopener">BokehPass</a> reads the depth buffer and blurs by distance from the focal plane, an UnrealBloomPass adds the glow, and an OutputPass tone-maps it. The lights are <code>MeshStandardMaterial</code> orbs with emissive color; the ones you place carry a real <code>PointLight</code> so they illuminate the field around them.</p>
+
+<p>WebXR needs to render straight to the headset's framebuffer per eye, which screen-space post-processing fights with. So the loop branches: on desktop it runs the full bokeh-and-bloom composer; the moment you <em>Enter VR</em> it switches to a direct stereo render. You lose the artificial bokeh in the headset &mdash; but you gain the real thing, because now your own two eyes are doing the depth. It's the same idea behind my <a href="/three-js-pattern/">Three.js fractal</a> and <a href="/babylon-js-grid-shader/">Babylon.js grid</a> demos, just pointed at optics instead of noise.</p>
+
+<h2>Things to try</h2>
+
+<ul>
+<li><strong>Rack focus.</strong> Drag <strong>Focus</strong> slowly from 4 to 22 and watch the sharp plane sweep front to back.</li>
+<li><strong>Open the lens.</strong> Push <strong>Aperture</strong> up for dreamy, almost abstract bokeh; pull it to zero for everything-in-focus.</li>
+<li><strong>Leave a trail.</strong> Click around the volume to plant your own lights, then orbit to see them hold position.</li>
+<li><strong>Go in.</strong> On a Quest or any WebXR headset, hit <em>Enter VR</em> and use the trigger to place lights at your controller.</li>
+</ul>
+
+<h2>Frequently asked questions</h2>
+
+<h3>What is depth of field in WebGL?</h3>
+
+<p>Depth of field is the optical effect where only objects at a chosen distance (the focal plane) are sharp while nearer and farther objects blur into bokeh. In WebGL it's done as a post-processing pass that samples the scene's depth buffer and blurs each pixel by how far it sits from the focal distance.</p>
+
+<h3>What does "object permanence" mean in a 3D demo?</h3>
+
+<p>It means the objects live at fixed world coordinates rather than being painted onto your view. They persist as you move, show true parallax, and stay where you place them. It's the difference between a real 3D scene and a screen-space shader that follows the camera.</p>
+
+<h3>Do I need a VR headset to use it?</h3>
+
+<p>No. On desktop or mobile you orbit by dragging and place lights by clicking, with full bokeh depth of field. A WebXR headset is optional &mdash; it just lets you step inside the field and place lights with a controller. No app install, no downloads.</p>
+
+<hr/>
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="https://threejs.org/docs/#examples/en/postprocessing/EffectComposer" target="_blank" rel="noopener">Three.js EffectComposer &amp; post-processing</a> &ndash; the bokeh and bloom passes used here</li>
+<li><a href="https://www.w3.org/TR/webxr/" target="_blank" rel="noopener">WebXR Device API</a> &ndash; the standard that powers Enter VR</li>
+<li><a href="/three-js-pattern/">Three.js fractal visualization</a> and <a href="/babylon-js-grid-shader/">Babylon.js cosmic grid</a> &ndash; the shader-driven cousins of this demo</li>
+</ul>
+
+<p><em>Last updated: June 13, 2026.</em></p>
+
+<p><em>Josh builds WebXR and self-hosted tooling, and runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto's newest restaurants.</em></p>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const stage = document.querySelector('#xr-demo');
+const canvas = stage.querySelector('.xrd-canvas');
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias:true, powerPreference:'high-performance' }); }
+catch(e){ document.querySelector('#xrd-fallback').style.display='flex'; }
+
+if (renderer) {
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+  renderer.xr.enabled = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x05060b);
+  scene.fog = new THREE.FogExp2(0x05060b, 0.042);
+
+  const camera = new THREE.PerspectiveCamera(60, 16/9, 0.1, 200);
+  camera.position.set(0, 0.8, 12);
+
+  scene.add(new THREE.HemisphereLight(0x99bbff, 0x140a08, 0.45));
+  const key = new THREE.PointLight(0xffd9b0, 8, 60, 2); key.position.set(6,8,6); scene.add(key);
+
+  const palette = [0xe0703a, 0xff8a4c, 0x2dd4bf, 0x49e0c5, 0x8b7bd8, 0xffe6c2].map(c=>new THREE.Color(c));
+  const rng = (a,b)=>a+Math.random()*(b-a);
+  const geo = new THREE.IcosahedronGeometry(1, 3);
+  const orbs = [];
+  const field = new THREE.Group(); scene.add(field);
+  for (let i=0;i<150;i++){
+    const col = palette[(Math.random()*palette.length)|0].clone();
+    const big = Math.random()<0.12;
+    const r = big ? rng(0.34,0.7) : rng(0.05,0.26);
+    const m = new THREE.MeshStandardMaterial({ color:col, emissive:col, emissiveIntensity: big?2.1:1.5, roughness:0.35, metalness:0.0 });
+    const o = new THREE.Mesh(geo, m); o.scale.setScalar(r);
+    o.position.set(rng(-8,8), rng(-3.4,3.6), rng(-9,8));
+    o.userData = { by:o.position.y, ph:rng(0,6.28), spd:rng(0.2,0.8), amp:rng(0.05,0.4) };
+    field.add(o); orbs.push(o);
+  }
+
+  let lights = 0; const maxPointLights = 8;
+  function spawnAt(pos){
+    const c = new THREE.Color(0xfff0d8);
+    const m = new THREE.MeshStandardMaterial({ color:c, emissive:c, emissiveIntensity:3.0, roughness:0.3 });
+    const o = new THREE.Mesh(geo, m); o.scale.setScalar(0.22); o.position.copy(pos);
+    o.userData = { by:pos.y, ph:Math.random()*6.28, spd:0.5, amp:0.08 };
+    scene.add(o); orbs.push(o);
+    if (lights < maxPointLights){ o.add(new THREE.PointLight(0xffe7c4, 6, 9, 2)); }
+    lights++; const out=stage.querySelector('[data-v="lights"]'); if(out) out.textContent=lights;
+  }
+
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true; controls.dampingFactor = 0.06;
+  controls.minDistance = 3; controls.maxDistance = 26;
+  controls.autoRotate = true; controls.autoRotateSpeed = 0.45;
+  controls.target.set(0, 0, 0);
+
+  const ray = new THREE.Raycaster(); const ndc = new THREE.Vector2();
+  let downX=0, downY=0, downT=0;
+  canvas.addEventListener('pointerdown', e=>{ downX=e.clientX; downY=e.clientY; downT=performance.now(); });
+  canvas.addEventListener('pointerup', e=>{
+    const moved = Math.hypot(e.clientX-downX, e.clientY-downY);
+    if (moved < 6 && performance.now()-downT < 500){
+      const r = canvas.getBoundingClientRect();
+      ndc.x = ((e.clientX-r.left)/r.width)*2-1; ndc.y = -((e.clientY-r.top)/r.height)*2+1;
+      ray.setFromCamera(ndc, camera);
+      spawnAt(ray.ray.origin.clone().add(ray.ray.direction.clone().multiplyScalar(9)));
+    }
+  });
+
+  let composer=null, bokeh=null, bloom=null;
+  try {
+    composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    bokeh = new BokehPass(scene, camera, { focus:11.0, aperture:0.0042, maxblur:0.012 });
+    composer.addPass(bokeh);
+    bloom = new UnrealBloomPass(new THREE.Vector2(1,1), 0.78, 0.62, 0.82);
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+  } catch(e){ composer=null; }
+
+  function bk(name,val){ const u = bokeh && (bokeh.uniforms || (bokeh.materialBokeh && bokeh.materialBokeh.uniforms)); if(u && u[name]) u[name].value = val; }
+
+  let twk = 1;
+  const fmt = v => (Math.round(v*100)/100).toString();
+  const bind = (id, fn) => { const el=document.querySelector('#xrd-'+id), out=stage.querySelector('[data-v="'+id+'"]');
+    const s=()=>{ fn(parseFloat(el.value)); if(out) out.textContent=fmt(el.value); }; el.addEventListener('input',s); s(); };
+  bind('focus', v=>bk('focus', v));
+  bind('ap',    v=>bk('aperture', v*0.001));
+  bind('bloom', v=>{ if(bloom) bloom.strength=v; });
+  bind('exp',   v=>{ renderer.toneMappingExposure=v; });
+  bind('drift', v=>{ controls.autoRotateSpeed=v; });
+  bind('twk',   v=>{ twk=v; });
+  stage.querySelector('[data-v="lights"]').textContent = lights;
+
+  for (const i of [0,1]){
+    const c = renderer.xr.getController(i); scene.add(c);
+    c.addEventListener('selectstart', ()=> spawnAt(c.getWorldPosition(new THREE.Vector3())));
+  }
+  const vrBtn = VRButton.createButton(renderer);
+  stage.querySelector('.xrd-vrslot').appendChild(vrBtn);
+
+  function resize(){
+    const r = stage.querySelector('.xrd-stage').getBoundingClientRect();
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width/r.height; camera.updateProjectionMatrix();
+    if (composer) composer.setSize(r.width, r.height);
+  }
+  new ResizeObserver(resize).observe(stage.querySelector('.xrd-stage')); resize();
+
+  renderer.setAnimationLoop((t)=>{
+    const time = t*0.001;
+    for (const o of orbs){ o.position.y = o.userData.by + Math.sin(time*o.userData.spd + o.userData.ph)*o.userData.amp*twk; }
+    controls.update();
+    if (renderer.xr.isPresenting || !composer) renderer.render(scene, camera);
+    else composer.render();
+  });
+}
+</script>
+</body>
+</html>

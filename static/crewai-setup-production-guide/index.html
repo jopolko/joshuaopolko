@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>CrewAI Setup Guide and Production Fixes (2026)</title>
+  <meta content="Install CrewAI in 2026 with the exact uv and pip commands, then fix the real production problems: tool-calling loops, slow crews, and choosing CrewAI vs LangGraph." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives" property="og:title"/>
+<meta content="Install CrewAI in 2026 with the exact uv and pip commands, then fix the production problems people actually hit: runaway tool-calling loops, slow crews, black-box prompts, memory at scale, and choosing between CrewAI, LangGraph, AutoGen/AG2, Agno and PydanticAI." property="og:description"/>
+<meta content="https://joshuaopolko.com/crewai-setup-production-guide/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
+<meta content="https://joshuaopolko.com/assets/crewai-hero.jpg" property="og:image"/>
+<meta content="https://joshuaopolko.com/assets/crewai-hero.jpg" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Five sleek black humanoid robots with glowing amber visors around a dark glass table, an orchestrator robot directing them — a CrewAI multi-agent crew" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:published_time"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="CrewAI Setup Guide and Production Fixes (2026)" name="twitter:title"/>
+<meta content="The exact 2026 install commands, plus fixes for the production problems people actually hit with CrewAI." name="twitter:description"/>
+<meta content="https://joshuaopolko.com/assets/crewai-hero.jpg" name="twitter:image"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="11 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/crewai-setup-production-guide/" rel="canonical"/>
+<script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/assets/crewai-hero.jpg","url":"https://joshuaopolko.com/assets/crewai-hero.jpg","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/crewai-setup-production-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/","name":"CrewAI Setup Guide and Production Fixes (2026)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/crewai-setup-production-guide/#webpage","url":"https://joshuaopolko.com/crewai-setup-production-guide/","name":"CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/assets/crewai-hero.jpg"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/#breadcrumb"}},{"@type":"BlogPosting","headline":"CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives","keywords":"crewai, crewai setup, crewai install, crewai vs langgraph, crewai production, crewai observability, multi-agent framework, ai agents 2026","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Install CrewAI in 2026 with the exact uv and pip commands, then fix the production problems people actually hit: runaway tool-calling loops, slow crews, black-box prompts, memory at scale, and choosing between CrewAI, LangGraph, AutoGen/AG2, Agno and PydanticAI.","name":"CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives","@id":"https://joshuaopolko.com/crewai-setup-production-guide/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/#webpage"},"image":{"@id":"https://joshuaopolko.com/assets/crewai-hero.jpg"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/#webpage"}}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#b4532a; --accent-ink:#8f3f1f; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+
+/* header + nav */
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+/* article */
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:.5em}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.post-body th{background:var(--code-bg);font:600 .96em var(--sans)}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+
+/* footer */
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script src="/assets/nav.js?v=3" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Perplexica</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li class="has-sub"><a href="#">Research <span aria-hidden="true">▾</span></a><ul><li><a href="/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivity</a></li><li><a href="/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li><li><a href="/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>CrewAI Setup Guide and Production Fixes (2026): Install, Observability, and Alternatives</h1>
+  <figure class="hero"><img src="/assets/crewai-hero.jpg" alt="Five sleek black humanoid robots with glowing amber visors around a dark glass table, an orchestrator robot directing them — a CrewAI multi-agent crew" width="1200" height="630" loading="eager"></figure>
+  <div class="post-body">
+
+<p>CrewAI is one of the fastest ways to get a multi-agent system running. You can scaffold a working crew in a couple of commands, and that low barrier is exactly why it now powers millions of daily agent executions and sits at roughly 45,900 GitHub stars as of early 2026. The trouble starts after the demo: crews that take ten minutes to finish, agents that call the same tool six times in a row, and no clear view of what prompt actually went to the model. This guide does both halves. First the exact 2026 install commands, then the production problems people genuinely hit and the fix for each, an honest comparison against LangGraph and the other 2026 frameworks, and what changed this year so you are not following advice written for the old 0.x releases.</p>
+
+<h2>Key takeaways</h2>
+
+<ul>
+<li><strong>Install is now uv-first.</strong> The documented 2026 path is <code>uv tool install crewai</code> then <code>crewai create crew</code>, not <code>pip install</code> (which still works). CrewAI requires <strong>Python &gt;=3.10 and &lt;3.14</strong>.</li>
+<li><strong>The latest stable release is 1.14.3 (April 24, 2026).</strong> If a tutorial references v0.x, it predates the LLM-core rewrite, Flows, pluggable memory backends, and native observability. Check the version before trusting old advice.</li>
+<li><strong>Runaway tool-calling loops are the signature failure</strong> and a cost risk. Cap them with <code>max_iter</code>, <code>max_rpm</code>, and <code>max_execution_time</code> rather than hoping the agent stops on its own.</li>
+<li><strong>Slow crews are usually abstraction overhead.</strong> Move deterministic steps into Flows, reserve Crews for genuine autonomy, and use cheaper models for sub-tasks.</li>
+<li><strong>The old "memory is locked to SQLite/Chroma" complaint is largely fixed.</strong> v1.12 added a Qdrant Edge backend and hierarchical memory isolation, and memory, knowledge, and RAG backends are now pluggable.</li>
+<li><strong>Wire observability before you deploy.</strong> CrewAI now emits streaming tool-call events and has its own AMP platform, but most teams still plug in Langfuse, AgentOps, LangSmith, or Arize Phoenix.</li>
+<li><strong>CrewAI vs LangGraph is the real decision.</strong> Pick CrewAI for fast role-based teamwork; pick LangGraph when you need granular, stateful control of long-running workflows.</li>
+</ul>
+
+<h2>Quick install (the uv way, 2026)</h2>
+
+<p>CrewAI's documentation now uses Astral's <code>uv</code> as the primary package and dependency manager. This is the fastest, most reproducible path and the one the project supports first. Confirm your Python version, install <code>uv</code>, then install the CrewAI CLI.</p>
+
+<pre><code># 1. CrewAI needs Python >=3.10 and <3.14
+python3 --version
+
+# 2. Install the uv package manager (macOS / Linux)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Windows (PowerShell):
+# powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# 3. Install the CrewAI CLI as a uv tool
+uv tool install crewai
+
+# If the crewai command is not found afterward, fix your PATH:
+uv tool update-shell</code></pre>
+
+<h2>Create and run your first crew</h2>
+
+<p>Scaffolding generates a project with <code>agents.yaml</code>, <code>tasks.yaml</code>, a <code>crew.py</code>, and a <code>.env</code> file for your keys. Edit the YAML to define roles and tasks, drop your API key into <code>.env</code>, then install dependencies and run.</p>
+
+<pre><code># Scaffold a new crew project
+crewai create crew my_first_crew
+cd my_first_crew
+
+# Add your model key to .env (created during scaffolding)
+# OPENAI_API_KEY=sk-...
+# MODEL=gpt-4o          # or any supported provider/model
+
+# Install project dependencies into the local environment
+crewai install
+
+# Run the crew
+crewai run
+
+# Add extra packages later with uv, not pip:
+uv add <package-name></code></pre>
+
+<h2>pip install (the alternative)</h2>
+
+<p>If you are dropping CrewAI into an existing project that already manages its own environment, the classic pip install still works. Add the <code>tools</code> extra to pull in the prebuilt tool library (web search, file IO, RAG helpers, and more).</p>
+
+<pre><code># Core framework only
+pip install crewai
+
+# Framework plus the tools package
+pip install 'crewai[tools]'</code></pre>
+
+<p>One thing to know up front: a full CrewAI install with tools pulls a large dependency tree, so isolate it in a virtual environment. This is the root of the "my .venv is a gigabyte, how do I even deploy this" complaint, and the fix is environment hygiene, covered below.</p>
+
+<h2>Configure your LLM provider</h2>
+
+<p>CrewAI reads provider configuration from environment variables and a <code>MODEL</code> setting. As of the 1.x line it ships native, OpenAI-compatible providers including OpenRouter, DeepSeek, Ollama, vLLM, Cerebras, and Dashscope, alongside the usual OpenAI, Anthropic, and Azure options. For local or privacy-sensitive work, point <code>MODEL</code> at an Ollama or vLLM endpoint instead of a hosted API.</p>
+
+<h2>Crews vs Flows: pick the right primitive</h2>
+
+<p>This is the single most important design decision in 2026 CrewAI, and getting it wrong is behind most "it is too slow and unpredictable" complaints. <strong>Crews</strong> are autonomous: agents decide which tools to call and when, which is powerful but non-deterministic and slower. <strong>Flows</strong>, made production-ready on January 8, 2026, give you event-driven, deterministic orchestration with explicit steps, streaming tool-call events, and human-in-the-loop checkpoints. Use a Crew where you genuinely want the model to figure out the path; use a Flow for everything that has a known sequence. Most real systems are a Flow that calls a small Crew only where autonomy earns its cost.</p>
+
+<h2>1. Agents call the same tool six times in a row</h2>
+
+<p><strong>What you see:</strong> an agent loops on one tool, repeats near-identical calls, or two agents bounce a task back and forth until the run finally ends or times out.</p>
+
+<p><strong>What it is:</strong> this is the most-reported CrewAI failure, and it is a cost problem as much as a correctness one. Without explicit termination conditions, an agent that is not satisfied with a tool result will simply try again, and again. GitHub issues document tool calls being retried until something runs out of memory.</p>
+
+<p><strong>The fix:</strong> cap the agent and the crew. Set <code>max_iter</code> (maximum reasoning iterations before the agent must answer), <code>max_rpm</code> (rate limit), and <code>max_execution_time</code> on agents, and give the crew a hard iteration ceiling. Then tighten the tool's description and the agent's backstory so success criteria are unambiguous, because vague instructions are what send agents into retry spirals.</p>
+
+<pre><code>from crewai import Agent
+
+researcher = Agent(
+    role="Researcher",
+    goal="Find and summarize three sources, then stop",
+    backstory="You return concise findings and do not re-run a tool that already succeeded.",
+    max_iter=6,             # cap reasoning loops
+    max_rpm=20,             # rate limit tool/LLM calls
+    max_execution_time=120, # seconds, hard stop
+)</code></pre>
+
+<h2>2. A crew run takes ten minutes</h2>
+
+<p><strong>What you see:</strong> a task that feels simple takes minutes to complete, and your costs scale with the wall-clock time.</p>
+
+<p><strong>What it is:</strong> abstraction overhead. Role-based prompts get processed through full reasoning loops for every agent, so a five-agent crew can mean many sequential LLM round-trips even for modest work. This is inherent to the autonomous model, not a bug.</p>
+
+<p><strong>The fix:</strong> move deterministic steps out of Crews and into Flows so they run as plain code instead of model decisions. Reserve full agent autonomy for the one or two steps that need it. Use a smaller, cheaper model for narrow sub-tasks and your strongest model only for the hard reasoning step. And resist adding agents for their own sake: fewer, better-scoped agents almost always beat a large crew.</p>
+
+<h2>3. You cannot see the prompt that was sent to the model</h2>
+
+<p><strong>What you see:</strong> an agent produces a wrong or strange answer and you have no idea what final prompt, context, or tool payload produced it. You cannot explain the output to stakeholders, and you cannot add prompt caching because you cannot see the static prefix.</p>
+
+<p><strong>What it is:</strong> historically CrewAI was a black box, and this was its loudest criticism. That has improved: the 1.x line surfaces real <code>finish_reason</code>, sampling params, and response IDs on LLM events, and Flows emit streaming tool-call events. But visibility is still something you turn on, not something you get for free.</p>
+
+<p><strong>The fix:</strong> wire an observability layer before you deploy, not after an incident. The common 2026 stacks are <a href="https://github.com/langfuse/langfuse" target="_blank" rel="noopener">Langfuse</a>, <a href="https://github.com/AgentOps-AI/agentops" target="_blank" rel="noopener">AgentOps</a>, LangSmith, and Arize Phoenix, all of which trace agent steps, payloads, and token usage. For enterprises, CrewAI's own Agent Operations Platform (AMP) adds tracing, metrics, hallucination scoring, and LLM testing in one control plane, though reviewers still rate its maturity behind LangSmith. Whichever you choose, write trajectory evals against a labeled dataset so regressions show up before users do.</p>
+
+<h2>4. The virtual environment is huge and deployment is painful</h2>
+
+<p><strong>What you see:</strong> a multi-hundred-megabyte or gigabyte <code>.venv</code>, slow cold starts, and dependency conflicts when you add CrewAI to an existing service.</p>
+
+<p><strong>What it is:</strong> CrewAI plus tools brings a wide dependency tree. In a fresh project this is fine; dropped into an existing codebase it collides with pinned versions of shared libraries.</p>
+
+<p><strong>The fix:</strong> use <code>uv</code> for fast, reproducible, lock-filed environments, and isolate CrewAI in its own service or container rather than importing it into a monolith. If you only need to call a crew from elsewhere, run it behind a thin HTTP boundary so its dependency tree never touches your main app. Containerize for deployment so the environment that passed tests is the one that ships.</p>
+
+<h2>5. Memory does not scale past local SQLite or Chroma</h2>
+
+<p><strong>What you see:</strong> agent memory and knowledge default to local datastores, which is a non-starter for a pool of pods where a shared, durable vector store is required.</p>
+
+<p><strong>What it is:</strong> this was a real limitation in the 0.x era and a frequent reason teams looked elsewhere. It is largely resolved in 2026: v1.12 introduced a Qdrant Edge memory backend and hierarchical memory isolation with automatic root scoping, and the June 2026 release made memory, knowledge, RAG, and flow backends pluggable.</p>
+
+<p><strong>The fix:</strong> configure a production vector backend (Qdrant) instead of the default, and use hierarchical memory isolation so concurrent runs do not corrupt each other's state. If you read older posts claiming CrewAI cannot use enterprise vector databases, check the date; that advice is stale.</p>
+
+<h2>CrewAI vs the alternatives in 2026</h2>
+
+<p>CrewAI is not the only multi-agent framework, and the honest answer to "which one" depends on whether you value speed of assembly or depth of control. Here is how the main 2026 options compare.</p>
+
+<table>
+<thead>
+<tr><th>Framework</th><th>Best for</th><th>Control model</th><th>Production maturity</th><th>Learning curve</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>CrewAI</strong></td><td>Fast role-based multi-agent teamwork; Flows for deterministic pipelines</td><td>Role and task abstractions; Flows for explicit control</td><td>High; millions of daily executions, AMP for enterprise</td><td>Low</td></tr>
+<tr><td><strong>LangGraph</strong></td><td>Stateful, long-running, controllable production workflows</td><td>Explicit graph DSL over state, edges, and memory</td><td>Very high; the default for serious stateful systems, LangSmith for observability</td><td>High</td></tr>
+<tr><td><strong>AutoGen / AG2</strong></td><td>Conversational multi-agent and research workflows</td><td>Conversation-driven agents; note the Microsoft AutoGen v0.4+ rewrite vs community AG2 (v0.2 lineage) split</td><td>Medium to high</td><td>Medium</td></tr>
+<tr><td><strong>Agno (ex-Phidata)</strong></td><td>High-performance multi-agent runtime with a built-in UI</td><td>Performance-focused runtime</td><td>Growing</td><td>Medium</td></tr>
+<tr><td><strong>PydanticAI</strong></td><td>Type-safe, structured agent outputs</td><td>Pydantic schema validation on every output</td><td>Growing fast in Python-typed shops</td><td>Low to medium</td></tr>
+<tr><td><strong>smolagents</strong></td><td>Minimalism; small, code-first agents</td><td>Lightweight, little abstraction</td><td>Good for small scopes</td><td>Very low</td></tr>
+</tbody>
+</table>
+
+<p>If you want the opposite of CrewAI's role abstractions, a framework where agents write and run their own code with no hard-coded rails, see my walkthrough of <a href="/agent-zero/">Agent Zero</a>. It sits at the fully-autonomous end of the spectrum where CrewAI sits at the structured-teamwork end.</p>
+
+<h3>When to choose CrewAI, and when not to</h3>
+
+<ul>
+<li><strong>Choose CrewAI</strong> when you want to stand up a multi-agent workflow quickly, your problem maps cleanly onto roles and tasks, and you will use Flows for the deterministic parts.</li>
+<li><strong>Choose LangGraph</strong> when you need granular control over state and branching in a long-running system, or when auditable, deterministic behavior matters more than assembly speed.</li>
+<li><strong>Roll your own</strong> (FastAPI plus a thin LLM client like LiteLLM) when total prompt control is the requirement and you are willing to maintain the plumbing. This is a vocal minority position for good reason: it trades convenience for control.</li>
+</ul>
+
+<h2>What changed in CrewAI in 2025 to 2026</h2>
+
+<p>A lot of the criticism you will find online is real but dated. Here is what is current, so you can judge old advice against it:</p>
+
+<ul>
+<li><strong>Version:</strong> stable 1.14.3 as of April 24, 2026, on an active 1.x line with frequent releases. The June 11, 2026 changelog added pluggable default backends for memory, knowledge, RAG, and flow, a Chat API for conversational flows, and a native Snowflake Cortex provider.</li>
+<li><strong>Flows went production-ready</strong> (January 8, 2026) with streaming tool-call events and human-in-the-loop feedback.</li>
+<li><strong>Memory is pluggable,</strong> with a Qdrant Edge backend and hierarchical memory isolation.</li>
+<li><strong>Native MCP and A2A support</strong> for tool and agent interoperability.</li>
+<li><strong>Native OpenAI-compatible providers</strong> including OpenRouter, DeepSeek, Ollama, vLLM, Cerebras, and Dashscope.</li>
+<li><strong>AMP (the Agent Operations Platform)</strong> for enterprise observability, governance, guardrails, a visual editor, and a unified control plane.</li>
+</ul>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Is CrewAI production ready in 2026?</h3>
+
+<p>Yes, with caveats. CrewAI reports millions of daily agent executions in production and ships an enterprise Agent Operations Platform for observability and governance. The framework is production-capable, but reliability still depends on you: cap agent loops, move deterministic logic into Flows, wire observability, and write evals. The framework is ready; an unguarded crew is not.</p>
+
+<h3>Why is CrewAI slow?</h3>
+
+<p>Crews are autonomous, so each agent's role-based prompt runs through a full reasoning loop, and a multi-agent crew chains many sequential LLM calls. The fix is to move deterministic steps into Flows, use fewer and better-scoped agents, and assign cheaper models to narrow sub-tasks while reserving your strongest model for the hard reasoning step.</p>
+
+<h3>Why do CrewAI agents call the same tool repeatedly?</h3>
+
+<p>Without explicit termination conditions, an agent that is unsatisfied with a tool result retries it, sometimes until it runs out of memory or time. Set <code>max_iter</code>, <code>max_rpm</code>, and <code>max_execution_time</code> on agents and a crew-level iteration cap, and write unambiguous goals and tool descriptions so the agent knows when it has succeeded.</p>
+
+<h3>CrewAI vs LangGraph: which should I use?</h3>
+
+<p>Choose CrewAI for fast, role-based multi-agent teamwork and quick assembly. Choose LangGraph when you need granular, stateful control over long-running or complex workflows and are willing to learn its graph DSL. Many teams prototype in CrewAI and move performance-critical, stateful systems to LangGraph.</p>
+
+<h3>Does CrewAI support enterprise vector databases like Qdrant?</h3>
+
+<p>Yes, as of v1.12 and later. CrewAI added a Qdrant Edge memory backend and hierarchical memory isolation, and memory, knowledge, and RAG backends are now pluggable. Older posts claiming CrewAI is locked to local SQLite or Chroma are out of date.</p>
+
+<h3>How do I see what prompts CrewAI sends to the LLM?</h3>
+
+<p>The 1.x line surfaces finish reason, sampling parameters, and response IDs on LLM events, and Flows emit streaming tool-call events. For full visibility, wire an observability tool such as Langfuse, AgentOps, LangSmith, or Arize Phoenix before deploying, or use CrewAI's AMP platform for enterprise tracing.</p>
+
+<hr/>
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="https://docs.crewai.com/en/installation" target="_blank" rel="noopener">CrewAI Installation Docs</a> &ndash; official uv-based setup and requirements</li>
+<li><a href="https://docs.crewai.com/en/changelog" target="_blank" rel="noopener">CrewAI Changelog</a> &ndash; version history and 2026 release notes</li>
+<li><a href="https://github.com/crewAIInc/crewAI" target="_blank" rel="noopener">CrewAI GitHub Repository</a> &ndash; source, issues, and discussions</li>
+<li><a href="https://pypi.org/project/crewai/" target="_blank" rel="noopener">crewai on PyPI</a> &ndash; latest release and install metadata</li>
+<li><a href="https://github.com/langfuse/langfuse" target="_blank" rel="noopener">Langfuse</a> and <a href="https://github.com/AgentOps-AI/agentops" target="_blank" rel="noopener">AgentOps</a> &ndash; common CrewAI observability layers</li>
+<li><a href="https://www.langchain.com/langgraph" target="_blank" rel="noopener">LangGraph</a> &ndash; the main stateful-orchestration alternative</li>
+<li><a href="https://github.com/ag2ai/ag2" target="_blank" rel="noopener">AG2</a> &ndash; the community continuation of AutoGen's v0.2 lineage</li>
+<li><a href="/agent-zero/">Agent Zero</a> &ndash; a fully-autonomous, no-rails alternative on this site</li>
+</ul>
+
+<p><em>Last updated: June 13, 2026.</em></p>
+
+<p><em>Josh writes about AI agents, GEO, and self-hosted tooling, and runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto's newest restaurants.</em></p>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is CrewAI production ready in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, with caveats. CrewAI reports millions of daily agent executions in production and ships an enterprise Agent Operations Platform for observability and governance. Reliability still depends on the developer: cap agent loops, move deterministic logic into Flows, wire observability, and write evals. The framework is ready; an unguarded crew is not."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is CrewAI slow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Crews are autonomous, so each agent's role-based prompt runs through a full reasoning loop and a multi-agent crew chains many sequential LLM calls. Move deterministic steps into Flows, use fewer and better-scoped agents, and assign cheaper models to narrow sub-tasks while reserving your strongest model for the hard reasoning step."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do CrewAI agents call the same tool repeatedly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Without explicit termination conditions, an agent that is unsatisfied with a tool result retries it, sometimes until it runs out of memory or time. Set max_iter, max_rpm, and max_execution_time on agents plus a crew-level iteration cap, and write unambiguous goals and tool descriptions so the agent knows when it has succeeded."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "CrewAI vs LangGraph: which should I use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Choose CrewAI for fast, role-based multi-agent teamwork and quick assembly. Choose LangGraph when you need granular, stateful control over long-running or complex workflows and are willing to learn its graph DSL. Many teams prototype in CrewAI and move performance-critical, stateful systems to LangGraph."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does CrewAI support enterprise vector databases like Qdrant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, as of v1.12 and later. CrewAI added a Qdrant Edge memory backend and hierarchical memory isolation, and memory, knowledge, and RAG backends are now pluggable. Older posts claiming CrewAI is locked to local SQLite or Chroma are out of date."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I see what prompts CrewAI sends to the LLM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 1.x line surfaces finish reason, sampling parameters, and response IDs on LLM events, and Flows emit streaming tool-call events. For full visibility, wire an observability tool such as Langfuse, AgentOps, LangSmith, or Arize Phoenix before deploying, or use CrewAI's AMP platform for enterprise tracing."
+      }
+    }
+  ]
+}
+</script>
+</body>
+</html>

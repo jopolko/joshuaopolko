@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>Perplexica (Now Vane) Self-Hosted Guide (2026): Open-Source Perplexity</title>
+  <meta content="Self-host Perplexica, now rebranded Vane, in 2026: one Docker image with a bundled SearXNG, connect Ollama or a hosted model, and fix the common Ollama connection errors. Plus how it compares to Perplexity and Morphic." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="Perplexica (Now Vane) Self-Hosted Guide (2026): Open-Source Perplexity" property="og:title"/>
+<meta content="Self-host Perplexica, now rebranded Vane, in 2026: one Docker image with a bundled SearXNG, connect Ollama or a hosted model, and fix the common Ollama connection errors. Plus how it compares to Perplexity and Morphic." property="og:description"/>
+<meta content="https://joshuaopolko.com/perplexica-self-hosted-guide/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
+<meta content="https://joshuaopolko.com/assets/perplexica-hero.jpg" property="og:image"/>
+<meta content="https://joshuaopolko.com/assets/perplexica-hero.jpg" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="A glowing orb suspended in a dark library ringed by floating open books lit by teal beams and god-rays, representing Perplexica AI search grounded in cited sources" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:published_time"/>
+<meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Perplexica (Now Vane) Self-Hosted Guide (2026)" name="twitter:title"/>
+<meta content="Self-host the open-source Perplexity alternative with one Docker image, connect Ollama, and fix connection errors." name="twitter:description"/>
+<meta content="https://joshuaopolko.com/assets/perplexica-hero.jpg" name="twitter:image"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="12 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/perplexica-self-hosted-guide/" rel="canonical"/>
+<script class="rank-math-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","logo":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"},"image":{"@type":"ImageObject","@id":"https://joshuaopolko.com/#logo","url":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","contentUrl":"https://joshuaopolko.com/wp-content/uploads/2022/02/kindpng_4018571.png","caption":"Joshua Opolko","inLanguage":"en-US","width":"787","height":"895"}},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://joshuaopolko.com/assets/perplexica-hero.jpg","url":"https://joshuaopolko.com/assets/perplexica-hero.jpg","width":"1200","height":"630","inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/perplexica-self-hosted-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":"2","item":{"@id":"https://joshuaopolko.com/perplexica-self-hosted-guide/","name":"Perplexica (Now Vane) Self-Hosted Guide (2026)"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/perplexica-self-hosted-guide/#webpage","url":"https://joshuaopolko.com/perplexica-self-hosted-guide/","name":"Perplexica (Now Vane) Self-Hosted Guide (2026): Open-Source Perplexity","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"primaryImageOfPage":{"@id":"https://joshuaopolko.com/assets/perplexica-hero.jpg"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/perplexica-self-hosted-guide/#breadcrumb"}},{"@type":"BlogPosting","headline":"Perplexica (Now Vane) Self-Hosted Guide (2026): Open-Source Perplexity","keywords":"perplexica, vane, perplexica self-hosted, open source perplexity, perplexica ollama, perplexica docker, searxng ai search 2026","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"description":"Self-host Perplexica, now rebranded Vane, in 2026: one Docker image with a bundled SearXNG, connect Ollama or a hosted model, and fix the common Ollama connection errors. Plus how it compares to Perplexity and Morphic.","name":"Perplexica (Now Vane) Self-Hosted Guide (2026): Open-Source Perplexity","@id":"https://joshuaopolko.com/perplexica-self-hosted-guide/#richSnippet","isPartOf":{"@id":"https://joshuaopolko.com/perplexica-self-hosted-guide/#webpage"},"image":{"@id":"https://joshuaopolko.com/assets/perplexica-hero.jpg"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://joshuaopolko.com/perplexica-self-hosted-guide/#webpage"}}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#b4532a; --accent-ink:#8f3f1f; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.post-body th{background:var(--code-bg);font:600 .96em var(--sans)}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script src="/assets/nav.js?v=3" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Perplexica</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/claude-fable-5-issues-fixes/">Claude Fable 5</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li class="has-sub"><a href="#">Research <span aria-hidden="true">▾</span></a><ul><li><a href="/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/">Hypersensitivity</a></li><li><a href="/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/">Princess &amp; the Pea</a></li><li><a href="/how-intra-community-trauma-shapes-the-architecture-of-belonging/">Belonging</a></li><li><a href="/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/">Terror Management</a></li><li><a href="/manifesto-of-a-modern-solar-cultist/">Winter Manifesto</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>Perplexica (Now Vane) Self-Hosted Guide (2026): Your Own Open-Source Perplexity</h1>
+  <figure class="hero"><img src="/assets/perplexica-hero.jpg" alt="A glowing orb suspended in a dark library ringed by floating open books lit by teal beams and god-rays, representing Perplexica AI search grounded in cited sources" width="1200" height="630" loading="eager"></figure>
+  <div class="post-body">
+
+<p>Perplexica is the most popular open-source, self-hostable alternative to Perplexity: an AI search engine that reads the live web and answers your questions with citations, images, and videos. In March 2026 the project was <strong>rebranded to Vane</strong>, so the GitHub repository and Docker image now carry the Vane name, but it is the same tool and most people still search for it as Perplexica. It is MIT-licensed and completely free, with no paid tiers or seat caps. The best part for privacy: it ships as a single Docker image that bundles the web front end, the API, and its own private SearXNG metasearch engine, so there is almost nothing to wire up. This guide covers the install, connecting a model (including a fully local one via Ollama), the connection errors people hit, and how it compares to Perplexity and Morphic.</p>
+
+<h2>Key takeaways</h2>
+
+<ul>
+<li><strong>Perplexica is now Vane</strong> (rebranded March 2026). The Docker image is <code>itzcrazykns1337/vane:latest</code>; the project and search intent are otherwise unchanged.</li>
+<li><strong>It is one container.</strong> The image bundles the Next.js front end, the API, and a private SearXNG, so you do not stand up SearXNG separately.</li>
+<li><strong>Run it, then use the setup wizard:</strong> map port <code>3000</code>, open the browser, pick a model provider, paste a key, and search.</li>
+<li><strong>Bring your own model.</strong> OpenAI, Anthropic, Gemini, Groq, or a fully local model via <a href="/ollama/">Ollama</a> or LM Studio.</li>
+<li><strong>The number-one problem is Ollama connectivity</strong> from inside the container. Use your host's IP or <code>host.docker.internal</code>, not <code>localhost</code>, and make Ollama listen on all interfaces.</li>
+<li><strong>It has Speed, Balanced, and Quality modes</strong> to trade latency against depth and cost, plus web, academic, and discussion source focuses.</li>
+<li><strong>It is MIT-licensed and free,</strong> with no paid tiers.</li>
+</ul>
+
+<h2>Install Perplexica (Vane) with Docker</h2>
+
+<p>Because the image bundles SearXNG, a single <code>docker run</code> is enough to get a working private Perplexity clone. Map the web port, give it a volume for persistent data, and open the setup wizard.</p>
+
+<pre><code># Run Perplexica / Vane (bundles the UI, API, and a private SearxNG)
+docker run -d \
+  --name perplexica \
+  -p 3000:3000 \
+  -v perplexica-data:/home/vane/data \
+  itzcrazykns1337/vane:latest
+
+# Open the app and complete the setup wizard
+# http://localhost:3000</code></pre>
+
+<p>On first visit the setup wizard asks for a model provider. Pick one, paste your API key (or point it at a local model), confirm, and you are searching. SearXNG runs inside the same container on its own internal port, so there is nothing extra to configure for web search itself.</p>
+
+<h2>Connect a model (hosted or local)</h2>
+
+<p>Perplexica is model-agnostic and needs two kinds of model: a chat model to write the answer, and optionally an embedding model to rerank search results. In the wizard or the settings menu, choose from OpenAI, Anthropic, Gemini, Groq, or a local backend such as <a href="/ollama/">Ollama</a>, LM Studio, or local Transformers. Running the chat and embedding models locally through Ollama gives you a fully private answer engine where neither your queries nor your keys leave your machine.</p>
+
+<h2>1. Perplexica cannot connect to Ollama</h2>
+
+<p><strong>What you see:</strong> a 500 error from Ollama, a message like "llama runner process no longer running," or the model simply never responds even though Ollama works fine in your terminal.</p>
+
+<p><strong>What it is:</strong> the most common Perplexica issue, and it is almost always Docker networking. From inside the Perplexica container, <code>localhost</code> means the container itself, not your host where Ollama runs. Ollama also binds to localhost by default and will refuse connections from another origin.</p>
+
+<p><strong>The fix:</strong> two changes. First, make Ollama listen on all interfaces by setting <code>OLLAMA_HOST=0.0.0.0:11434</code> in its service and restarting it. Second, in Perplexica's settings set the Ollama API URL to your host's real address, not localhost: use <code>http://host.docker.internal:11434</code> on Docker Desktop, or your machine's LAN IP (for example <code>http://192.168.1.50:11434</code>) on Linux. Verify the URL is reachable from inside the container before blaming the model.</p>
+
+<pre><code># On the Ollama host: listen on all interfaces
+sudo systemctl edit ollama
+#   [Service]
+#   Environment="OLLAMA_HOST=0.0.0.0:11434"
+sudo systemctl restart ollama
+
+# In Perplexica settings, set the Ollama API URL to one of:
+#   http://host.docker.internal:11434   (Docker Desktop)
+#   http://YOUR_HOST_LAN_IP:11434        (Linux)</code></pre>
+
+<h2>2. Web search returns nothing</h2>
+
+<p><strong>What you see:</strong> the model answers from its own knowledge but no live sources or citations appear.</p>
+
+<p><strong>What it is:</strong> the bundled SearXNG is not reachable, or an outbound network restriction is blocking it.</p>
+
+<p><strong>The fix:</strong> since SearXNG is bundled in the same container in the current Vane image, confirm the container is healthy and has outbound internet access. If you are on a locked-down network or behind a corporate proxy, allow the container's egress. Check the container logs for SearXNG errors rather than assuming the LLM is at fault.</p>
+
+<h2>3. Answers are slow or low quality</h2>
+
+<p><strong>What you see:</strong> responses take a long time, or the synthesis is thin compared to Perplexity.</p>
+
+<p><strong>What it is:</strong> answer quality and speed track the model you chose and the mode you are in. A small local model on Speed mode will be fast and shallow; a strong hosted model on Quality mode is slower and deeper.</p>
+
+<p><strong>The fix:</strong> match mode to need. Use Speed for quick lookups, Balanced for everyday use, and Quality when depth matters. If local answers feel weak, step up to a larger local model (mind your VRAM, see the <a href="/ollama/">Ollama guide</a>) or use a hosted model for the chat step while keeping search local.</p>
+
+<h2>Optimization modes and focus modes</h2>
+
+<p>Perplexica gives you two dials that decide the speed, cost, and shape of every answer. The <strong>optimization mode</strong> trades latency against depth: <em>Speed</em> does a quick single pass for fast lookups, <em>Balanced</em> is the sensible default, and <em>Quality</em> does more retrieval and reasoning for harder questions at higher latency and token cost. The <strong>focus mode</strong> narrows where it searches, with options such as a general web search, an academic mode that favors papers and scholarly sources, a writing-assistant mode that skips web search entirely, and dedicated modes for video and discussion sources. The practical habit: leave it on Balanced web search for everyday questions, switch to Quality plus academic focus for research, and use the writing mode when you just want the model without live search.</p>
+
+<h2>Keep it updated and persistent</h2>
+
+<p>Because Perplexica ships as a single image, updating is a pull-and-recreate, and your settings survive as long as the data volume does. Pull the new image, stop and remove the old container, and start a fresh one against the same named volume so your provider keys and history carry over.</p>
+
+<pre><code># Update to the latest image without losing your data
+docker pull itzcrazykns1337/vane:latest
+docker stop perplexica && docker rm perplexica
+docker run -d --name perplexica -p 3000:3000 \
+  -v perplexica-data:/home/vane/data \
+  itzcrazykns1337/vane:latest</code></pre>
+
+<p>The named volume (<code>perplexica-data</code>) is what makes this safe: your configuration lives there, not in the container, so recreating the container is routine rather than risky.</p>
+
+<h2>Expose Perplexica on your network</h2>
+
+<p>By default the app answers on <code>localhost:3000</code>, which is fine on your own machine but not for a household or team instance. To reach it from other devices, put a reverse proxy (Caddy or Nginx) in front, terminate TLS with a real certificate, and forward to port 3000. Caddy makes this a two-line config with automatic HTTPS. Do not expose port 3000 directly to the public internet without auth in front of it, since anyone who reaches it can spend your model credits; keep it on your LAN, behind a VPN, or behind proxy authentication.</p>
+
+<h2>What to use a self-hosted answer engine for</h2>
+
+<p>Once it is running, Perplexica earns its keep as a private research tool. It is genuinely useful for literature and source gathering where you want citations you can click through rather than an unsourced summary, for searches you would rather not send to a commercial engine tied to your identity, and for offline-leaning setups where a local model answers from live web results without any data leaving your control. Paired with a capable local model through <a href="/ollama/">Ollama</a>, it becomes an answer engine whose queries, keys, and history are entirely yours, which is the whole reason to self-host instead of using the hosted original.</p>
+
+<h2>Perplexica vs Perplexity vs Morphic (2026)</h2>
+
+<p>If you want web answers with citations, these are the three names that come up. The trade is convenience versus control and privacy.</p>
+
+<table>
+<thead>
+<tr><th>Tool</th><th>Hosting</th><th>Cost</th><th>Privacy</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Perplexica / Vane</strong></td><td>Self-hosted, one Docker image</td><td>Free (MIT), pay only your own model</td><td>High; bundled SearXNG, local models possible</td><td>Closest open-source Perplexity clone; bring your own key</td></tr>
+<tr><td><strong>Perplexity</strong></td><td>Hosted SaaS</td><td>Free tier and paid Pro</td><td>Lower; your queries go to their service</td><td>Most polished, zero setup, not private or self-hostable</td></tr>
+<tr><td><strong>Morphic</strong></td><td>Self-hostable or hosted</td><td>Free / open source</td><td>Medium to high</td><td>Generative-UI answer engine; local mode leans on OpenAI-style APIs</td></tr>
+</tbody>
+</table>
+
+<p>Choose Perplexica/Vane when you want a private, free answer engine you control and can point at local models. Choose Perplexity when you want the most polished hosted experience and do not need privacy or self-hosting.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Is Perplexica the same as Vane?</h3>
+
+<p>Yes. Perplexica was rebranded to Vane in March 2026. The GitHub repository and Docker image (<code>itzcrazykns1337/vane:latest</code>) now use the Vane name, but it is the same open-source AI search engine. Most people still search for it as Perplexica.</p>
+
+<h3>Is Perplexica free?</h3>
+
+<p>Yes. Perplexica (Vane) is MIT-licensed and free, with no paid tiers, license keys, or seat caps. Your only cost is whatever model you connect, and that is zero if you run a local model through Ollama.</p>
+
+<h3>Why can't Perplexica connect to Ollama?</h3>
+
+<p>Almost always Docker networking. Inside the container, <code>localhost</code> is the container, not your host. Set <code>OLLAMA_HOST=0.0.0.0:11434</code> on the Ollama side, then in Perplexica's settings use <code>http://host.docker.internal:11434</code> (Docker Desktop) or your host's LAN IP (Linux) as the Ollama API URL.</p>
+
+<h3>Does Perplexica need a separate SearXNG?</h3>
+
+<p>No longer. The current Vane image bundles a private SearXNG inside the same container, so web search works out of the box with nothing extra to deploy. You only need to supply a model provider.</p>
+
+<h3>Perplexica vs Perplexity: what is the difference?</h3>
+
+<p>Perplexica is self-hosted, free, and private; you run it and bring your own model, including local ones. Perplexity is a polished hosted service with zero setup but no self-hosting and less privacy. Choose Perplexica for control and privacy, Perplexity for convenience.</p>
+
+<hr/>
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="https://github.com/ItzCrazyKns/Perplexica" target="_blank" rel="noopener">Perplexica / Vane on GitHub</a> &ndash; source, Docker image, and setup docs</li>
+<li><a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG</a> &ndash; the bundled metasearch engine</li>
+<li><a href="/ollama/">Ollama setup guide</a> &ndash; run a fully local model to power Perplexica</li>
+<li><a href="/agent-zero/">Agent Zero</a> and <a href="/crewai-setup-production-guide/">CrewAI</a> &ndash; more self-hosted AI tooling on this site</li>
+</ul>
+
+<p><em>Last updated: June 13, 2026.</em></p>
+
+<p><em>Josh writes about AI agents, local AI, and GEO, and runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto's newest restaurants.</em></p>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Perplexica the same as Vane?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Perplexica was rebranded to Vane in March 2026. The GitHub repository and Docker image (itzcrazykns1337/vane:latest) now use the Vane name, but it is the same open-source AI search engine. Most people still search for it as Perplexica."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Perplexica free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Perplexica (Vane) is MIT-licensed and free, with no paid tiers, license keys, or seat caps. Your only cost is whatever model you connect, and that is zero if you run a local model through Ollama."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why can't Perplexica connect to Ollama?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Almost always Docker networking. Inside the container, localhost is the container, not your host. Set OLLAMA_HOST=0.0.0.0:11434 on the Ollama side, then in Perplexica's settings use http://host.docker.internal:11434 on Docker Desktop or your host's LAN IP on Linux as the Ollama API URL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Perplexica need a separate SearXNG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No longer. The current Vane image bundles a private SearXNG inside the same container, so web search works out of the box with nothing extra to deploy. You only need to supply a model provider."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Perplexica vs Perplexity: what is the difference?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Perplexica is self-hosted, free, and private; you run it and bring your own model, including local ones. Perplexity is a polished hosted service with zero setup but no self-hosting and less privacy. Choose Perplexica for control and privacy, Perplexity for convenience."
+      }
+    }
+  ]
+}
+</script>
+</body>
+</html>
