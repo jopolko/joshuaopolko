@@ -13,6 +13,9 @@ DirectoryIndex index.html
   Redirect 301 /sitemap_index.xml https://joshuaopolko.com/sitemap.xml
   Redirect 301 /post-sitemap.xml  https://joshuaopolko.com/sitemap.xml
   Redirect 301 /page-sitemap.xml  https://joshuaopolko.com/sitemap.xml
+
+  # Merged duplicate SLM article into its canonical page (2026-06-16)
+  RedirectMatch 301 ^/local-llms/?$ https://joshuaopolko.com/small-language-models-slms/
 </IfModule>
 
 # Long cache for static assets; HTML stays fresh
