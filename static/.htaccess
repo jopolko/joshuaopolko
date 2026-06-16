@@ -1,5 +1,12 @@
 # joshuaopolko.com — static (migrated off WordPress)
 Options -Indexes +FollowSymLinks
+
+# Canonical host: force www -> apex (both were serving 200, splitting crawl budget)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.joshuaopolko\.com$ [NC]
+  RewriteRule ^(.*)$ https://joshuaopolko.com/$1 [R=301,L]
+</IfModule>
 DirectoryIndex index.html
 
 <IfModule mod_alias.c>
