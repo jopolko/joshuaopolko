@@ -163,6 +163,7 @@ figure.hero{margin:0 0 1.8em}
 
 <script src="/assets/nav.js?v=3" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "@id": "https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/#faq", "mainEntity": [{"@type": "Question", "name": "What does JOSIE stand for?", "acceptedAnswer": {"@type": "Answer", "text": "JOSIE is short for \"Just One Super Intelligent Entity.\" It is a self-hosted AI assistant that combines a local language model, a vector-database memory, and private web search into one n8n workflow."}}, {"@type": "Question", "name": "What hardware do I need to run JOSIE?", "acceptedAnswer": {"@type": "Answer", "text": "A machine with Docker and about 16 GB of RAM runs the 8B JOSIEFIED-Qwen3 model alongside Qdrant comfortably. A GPU is optional but speeds up responses, and smaller quantized tags such as q4_k_m let JOSIE run on less RAM."}}, {"@type": "Question", "name": "How does JOSIE remember across sessions?", "acceptedAnswer": {"@type": "Answer", "text": "Every conversation and uploaded document is embedded with mxbai-embed-large and stored in Qdrant. On each new query, JOSIE retrieves the most semantically relevant chunks and feeds them back as context, so memory persists between sessions instead of resetting."}}, {"@type": "Question", "name": "Is JOSIE private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The model, embeddings, memory, and search all run on your own hardware. No prompts, documents, or queries leave your network, which makes air-gapped, GDPR-friendly deployments possible."}}, {"@type": "Question", "name": "Can I swap in a different model?", "acceptedAnswer": {"@type": "Answer", "text": "Any Ollama-compatible model works. Point the n8n Ollama node at a different tag, such as a larger Qwen3 or a Llama 3 variant. JOSIEFIED-Qwen3:8b is the default because it is tool-tuned and lightly filtered, with a 40K-token context window."}}, {"@type": "Question", "name": "How is JOSIE different from ChatGPT or a cloud assistant?", "acceptedAnswer": {"@type": "Answer", "text": "Cloud assistants forget between sessions, cap web access, and send your data to a vendor. JOSIE keeps persistent memory, gives unlimited private web search through SearXNG, and runs entirely local with no per-token cost or lock-in."}}]}</script>
 </head>
 <body>
 <header class="site-head">
@@ -327,36 +328,92 @@ Focus Keywords: AI workflow automation, persistent memory AI, n8n AI assistant, 
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Quick Setup Guide</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Install JOSIE: Step by Step</h2>
 
+<p class="wp-block-paragraph"><strong>Prerequisites:</strong> <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a> and roughly 16 GB of RAM to run the 8B model alongside Qdrant comfortably. JOSIE is built bottom-up: stand up the three services, then let n8n orchestrate them.</p>
 
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Step 1: The brain (Ollama plus the JOSIEFIED model)</h3>
 
-<p class="wp-block-paragraph"><strong>Prerequisites:</strong> <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a>, n8n, Ollama, Qdrant, SearXNG</p>
+<p class="wp-block-paragraph">Ollama runs the language model and the embedding model locally, so nothing leaves your machine. Full walkthrough in my <a href="https://joshuaopolko.com/ollama/">Ollama self-hosting guide</a>.</p>
 
+<pre><code># install Ollama (Linux / macOS)
+curl -fsSL https://ollama.com/install.sh | sh
 
+# the uncensored, tool-tuned model that reasons (8B, 40K context)
+ollama pull goekdenizguelmez/JOSIEFIED-Qwen3:8b
 
-<p class="wp-block-paragraph"><strong>Installation Steps:</strong></p>
+# the embedding model that powers memory search
+ollama pull mxbai-embed-large</code></pre>
 
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Step 2: The memory (Qdrant vector database)</h3>
 
+<p class="wp-block-paragraph">Qdrant stores every conversation and document as vectors, so JOSIE recalls by meaning, not keyword. One container:</p>
+
+<pre><code># run Qdrant, persisting data to ./qdrant_storage
+docker run -p 6333:6333 -p 6334:6334 \
+  -v "$(pwd)/qdrant_storage:/qdrant/storage" \
+  qdrant/qdrant</code></pre>
+
+<p class="wp-block-paragraph">The dashboard lives at <code>http://localhost:6333/dashboard</code>. See the <a href="https://qdrant.tech/documentation/quickstart/" target="_blank" rel="noopener noreferrer">Qdrant quickstart</a> for cloud and clustering options.</p>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Step 3: The eyes (SearXNG private web search)</h3>
+
+<p class="wp-block-paragraph">SearXNG gives JOSIE unlimited, untracked web access with a clean JSON API. Full setup in my <a href="https://joshuaopolko.com/searxng-self-hosted-guide/">SearXNG self-hosting guide</a>. Enable the JSON format so n8n can read results:</p>
+
+<pre><code># searxng/settings.yml
+search:
+  formats:
+    - html
+    - json</code></pre>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Step 4: The conductor (n8n wires it together)</h3>
+
+<p class="wp-block-paragraph">n8n is the workflow engine that routes each query to the right tool: web search, memory, or document lookup. Stand it up with my <a href="https://joshuaopolko.com/n8n-self-hosted-guide/">n8n self-hosting guide</a>, then build the JOSIE flow:</p>
+
+<pre><code># run n8n, persisting workflows to a named volume
+docker volume create n8n_data
+docker run -d --name n8n -p 5678:5678 \
+  -v n8n_data:/home/node/.n8n \
+  docker.n8n.io/n8nio/n8n</code></pre>
+
+<p class="wp-block-paragraph">In n8n, add credentials for Ollama (<code>http://localhost:11434</code>), Qdrant (<code>http://localhost:6333</code>), and SearXNG, then wire four moves:</p>
 
 <ol class="wp-block-list">
-
-<li>Deploy SearXNG via <a href="https://github.com/searxng/searxng-docker" target="_blank" rel="noopener noreferrer">Docker compose</a></li>
-
-
-<li>Install <a href="https://qdrant.tech/documentation/quickstart/" target="_blank" rel="noopener noreferrer">Qdrant</a> locally or cloud</li>
-
-
-<li>Configure JOSIEFIED-Qwen3:8b in Ollama</li>
-
-
-<li>Import <a href="https://docs.n8n.io/workflows/templates/" target="_blank" rel="noopener noreferrer">n8n workflow template</a></li>
-
+<li><strong>Trigger to router.</strong> A chat trigger feeds a Switch node that reads the query and picks the tool.</li>
+<li><strong>Remember.</strong> A Qdrant node retrieves the top matches (top-K 3 for documents, 50 for conversation history) and passes them to the model as context.</li>
+<li><strong>Search when needed.</strong> For fresh facts, an HTTP Request node hits SearXNG's JSON API and hands results to the model.</li>
+<li><strong>Answer and store.</strong> The model replies, and every exchange is embedded with mxbai-embed-large and written back to Qdrant, so JOSIE remembers next time.</li>
 </ol>
 
+<p class="wp-block-paragraph"><strong>Performance:</strong> fully local, sub-second vector search, and <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer">Kubernetes</a>-ready when you outgrow a single box.</p>
 
 
-<p class="wp-block-paragraph"><strong>Performance:</strong> Local processing, optimized storage, sub-second searches, <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer">Kubernetes</a>-ready for production scaling.</p>
+
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">JOSIE FAQ</h2>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">What does JOSIE stand for?</h3>
+
+<p class="wp-block-paragraph">JOSIE is short for "Just One Super Intelligent Entity." It is a self-hosted AI assistant that combines a local language model, a vector-database memory, and private web search into one n8n workflow.</p>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">What hardware do I need to run JOSIE?</h3>
+
+<p class="wp-block-paragraph">A machine with Docker and about 16 GB of RAM runs the 8B JOSIEFIED-Qwen3 model alongside Qdrant comfortably. A GPU is optional but speeds up responses, and smaller quantized tags such as q4_k_m let JOSIE run on less RAM.</p>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">How does JOSIE remember across sessions?</h3>
+
+<p class="wp-block-paragraph">Every conversation and uploaded document is embedded with mxbai-embed-large and stored in Qdrant. On each new query, JOSIE retrieves the most semantically relevant chunks and feeds them back as context, so memory persists between sessions instead of resetting.</p>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Is JOSIE private?</h3>
+
+<p class="wp-block-paragraph">Yes. The model, embeddings, memory, and search all run on your own hardware. No prompts, documents, or queries leave your network, which makes air-gapped, GDPR-friendly deployments possible.</p>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Can I swap in a different model?</h3>
+
+<p class="wp-block-paragraph">Any Ollama-compatible model works. Point the n8n Ollama node at a different tag, such as a larger Qwen3 or a Llama 3 variant. JOSIEFIED-Qwen3:8b is the default because it is tool-tuned and lightly filtered, with a 40K-token context window.</p>
+
+<h3 class="wp-block-heading" style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">How is JOSIE different from ChatGPT or a cloud assistant?</h3>
+
+<p class="wp-block-paragraph">Cloud assistants forget between sessions, cap web access, and send your data to a vendor. JOSIE keeps persistent memory, gives unlimited private web search through SearXNG, and runs entirely local with no per-token cost or lock-in.</p>
 
 
 
@@ -403,7 +460,7 @@ Focus Keywords: AI workflow automation, persistent memory AI, n8n AI assistant, 
 
 
 
-<p class="wp-block-paragraph"><em>Last updated: January 2025</em></p>
+<p class="wp-block-paragraph"><em>Last updated: June 2026</em></p>
 
   </div>
 </main>
