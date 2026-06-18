@@ -129,7 +129,7 @@ h1{font:600 clamp(26px,4vw,38px)/1.1 var(--serif);margin:0 0 .2em}
     <div class="chips" id="top-users"></div>
   </div>
 
-  <p class="note" id="note">Source: <code>fail2ban</code> (sshd jail) and the server's SSH authentication log, regenerated every 30&nbsp;minutes. Internal/private ranges are excluded; only origin countries, networks (ISP&nbsp;/&nbsp;ASN), and aggregate counts are shown — no individual addresses, successful logins, or account detail. Geolocation and network attribution via ip-api.com.</p>
+  <p class="note" id="note">Source: <code>fail2ban</code> (sshd jail) and the server's SSH authentication log, regenerated every 30&nbsp;minutes. Internal/private ranges are excluded; only origin countries, networks (ISP&nbsp;/&nbsp;ASN), and aggregate counts are shown, no individual addresses, successful logins, or account detail. Geolocation and network attribution via ip-api.com.</p>
 </main>
 <footer class="site-foot"><p>&copy; Joshua Opolko</p></footer>
 
@@ -139,7 +139,7 @@ h1{font:600 clamp(26px,4vw,38px)/1.1 var(--serif);margin:0 0 .2em}
   var flag = function (cc) { if (!cc || cc.length !== 2) return '🌐'; return String.fromCodePoint(0x1F1E6 + cc.charCodeAt(0) - 65, 0x1F1E6 + cc.charCodeAt(1) - 65); };
   var projX = function (lon) { return (lon + 180) / 360 * 1000; };
   var projY = function (lat) { return (90 - lat) / 180 * 500; };
-  // Categorical palette — vibrant and legible on the cream background. Shared
+  // Categorical palette, vibrant and legible on the cream background. Shared
   // across country bars, network bars, and map markers (a marker inherits its
   // origin country's colour).
   var PAL = ['#e6194B','#f58231','#ffb000','#3cb44b','#0ea5a5','#4363d8','#911eb4','#d6336c','#7cb518','#b5651d','#1098ad','#e8590c'];
@@ -153,7 +153,7 @@ h1{font:600 clamp(26px,4vw,38px)/1.1 var(--serif);margin:0 0 .2em}
       ['#4363d8', s.currently_failed, 'Currently failing']
     ];
     document.getElementById('cards').innerHTML = cards.map(function (c) {
-      return '<div class="card"><div class="n" style="color:' + c[0] + '">' + (c[1] != null ? c[1] : '–') + '</div><div class="l">' + c[2] + '</div></div>';
+      return '<div class="card"><div class="n" style="color:' + c[0] + '">' + (c[1] != null ? c[1] : ', ') + '</div><div class="l">' + c[2] + '</div></div>';
     }).join('');
 
     var days = d.by_day || [];
@@ -170,7 +170,7 @@ h1{font:600 clamp(26px,4vw,38px)/1.1 var(--serif);margin:0 0 .2em}
       return '<span class="chip">' + esc(x.user) + ' · ' + x.count + '</span>';
     }).join('') || '<span class="chip">none</span>';
 
-    // Countries first — each origin country gets a palette colour that the map
+    // Countries first, each origin country gets a palette colour that the map
     // markers reuse, so a marker's colour matches its country's bar.
     var cs = d.top_countries || [];
     var cmax = (cs[0] && cs[0].count) || 1;
@@ -179,7 +179,7 @@ h1{font:600 clamp(26px,4vw,38px)/1.1 var(--serif);margin:0 0 .2em}
       var col = PAL[i % PAL.length];
       if (x.cc) colorByCc[x.cc] = col;
       return '<div class="row"><span class="ip">' + flag(x.cc) + ' ' + esc(x.country) + '</span><span class="track"><span class="fill" style="width:' + Math.round(x.count / cmax * 100) + '%;background:' + col + '"></span></span><span class="c">' + x.count + '</span></div>';
-    }).join('') || '<p class="note" style="border:0;margin:0">No geolocated attacks yet — populating on next refresh.</p>';
+    }).join('') || '<p class="note" style="border:0;margin:0">No geolocated attacks yet, populating on next refresh.</p>';
 
     var nets = d.top_networks || [];
     var nmax = (nets[0] && nets[0].count) || 1;
@@ -188,7 +188,7 @@ h1{font:600 clamp(26px,4vw,38px)/1.1 var(--serif);margin:0 0 .2em}
       var asn = x.asn ? ' <span class="cc">' + esc(x.asn) + '</span>' : '';
       var fl = x.cc ? flag(x.cc) + ' ' : '';
       return '<div class="row"><span class="ip">' + fl + esc(x.network || 'Unknown network') + asn + '</span><span class="track"><span class="fill" style="width:' + Math.round(x.count / nmax * 100) + '%;background:' + col + '"></span></span><span class="c">' + x.count + '</span></div>';
-    }).join('') || '<p class="note" style="border:0;margin:0">No network data yet — populating on next refresh.</p>';
+    }).join('') || '<p class="note" style="border:0;margin:0">No network data yet, populating on next refresh.</p>';
 
     var pts = d.attack_map || [];
     var pmax = (pts[0] && pts[0].count) || 1;

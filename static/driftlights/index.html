@@ -123,10 +123,10 @@ img{max-width:100%;height:auto}
   <h1>Driftlights: Depth of Field &amp; Object Permanence in WebXR</h1>
   <div class="post-body">
 
-<p>Most "WebXR demos" are a clever shader painted on the inside of a sphere. They look great until you move, and then you notice the whole universe is glued to your face &mdash; there's no <em>there</em> there. Driftlights is the opposite. It's a real volume of hundreds of glowing orbs hanging at fixed points in space, rendered with genuine optical <strong>depth of field</strong>, so the near ones melt into soft bokeh and the far ones haze into fog. Orbit around and they stay put. Click, and you leave a light behind that's still there when you come back. Put on a headset and you can walk among them.</p>
+<p>Most "WebXR demos" are a clever shader painted on the inside of a sphere. They look great until you move, and then you notice the whole universe is glued to your face, there's no <em>there</em> there. Driftlights is the opposite. It's a real volume of hundreds of glowing orbs hanging at fixed points in space, rendered with genuine optical <strong>depth of field</strong>, so the near ones melt into soft bokeh and the far ones haze into fog. Orbit around and they stay put. Click, and you leave a light behind that's still there when you come back. Put on a headset and you can walk among them.</p>
 
 <div style="background:#f4f1ea;border-radius:12px;padding:14px 18px;margin:0 0 1.6em;font:500 15px/1.55 var(--sans);color:#3f3d38">
-<strong>The point of the demo:</strong> two things the shader demos can't do &mdash; <strong>depth of field</strong> (a real focal plane with bokeh, not a flat filter) and <strong>object permanence</strong> (objects anchored in world space that persist as you move and as you place new ones).
+<strong>The point of the demo:</strong> two things the shader demos can't do, <strong>depth of field</strong> (a real focal plane with bokeh, not a flat filter) and <strong>object permanence</strong> (objects anchored in world space that persist as you move and as you place new ones).
 </div>
 
 <section id="xr-demo" class="xrd" aria-label="Interactive WebXR depth-of-field light field">
@@ -151,15 +151,15 @@ img{max-width:100%;height:auto}
 
 <h2>What you're actually looking at</h2>
 
-<p>The blur is the whole trick. Real cameras have a <strong>focal plane</strong>: things at one distance are sharp, and everything nearer or farther falls out of focus into round highlights &mdash; bokeh. Driftlights renders that honestly using the scene's depth buffer, not a fake vignette. Slide <strong>Focus</strong> and watch the sharp band travel through the field; slide <strong>Aperture</strong> to open the lens wider and drown the edges in creamy circles.</p>
+<p>The blur is the whole trick. Real cameras have a <strong>focal plane</strong>: things at one distance are sharp, and everything nearer or farther falls out of focus into round highlights, bokeh. Driftlights renders that honestly using the scene's depth buffer, not a fake vignette. Slide <strong>Focus</strong> and watch the sharp band travel through the field; slide <strong>Aperture</strong> to open the lens wider and drown the edges in creamy circles.</p>
 
-<p>The orbs are not a backdrop. Each one is a real mesh at a fixed coordinate, which is what makes <strong>object permanence</strong> obvious: as the camera drifts, near and far orbs slide past each other with true parallax, the way real objects do. <strong>Click anywhere</strong> and you drop a new light into the world at that point. Orbit away, come back &mdash; it's still glowing exactly where you left it, casting light on its neighbours.</p>
+<p>The orbs are not a backdrop. Each one is a real mesh at a fixed coordinate, which is what makes <strong>object permanence</strong> obvious: as the camera drifts, near and far orbs slide past each other with true parallax, the way real objects do. <strong>Click anywhere</strong> and you drop a new light into the world at that point. Orbit away, come back, it's still glowing exactly where you left it, casting light on its neighbours.</p>
 
 <h2>How it works</h2>
 
 <p>It's <a href="https://threejs.org/" target="_blank" rel="noopener">Three.js</a> with a small post-processing stack. A normal render pass draws the orbs, then a <a href="https://threejs.org/docs/#examples/en/postprocessing/EffectComposer" target="_blank" rel="noopener">BokehPass</a> reads the depth buffer and blurs by distance from the focal plane, an UnrealBloomPass adds the glow, and an OutputPass tone-maps it. The lights are <code>MeshStandardMaterial</code> orbs with emissive color; the ones you place carry a real <code>PointLight</code> so they illuminate the field around them.</p>
 
-<p>WebXR needs to render straight to the headset's framebuffer per eye, which screen-space post-processing fights with. So the loop branches: on desktop it runs the full bokeh-and-bloom composer; the moment you <em>Enter VR</em> it switches to a direct stereo render. You lose the artificial bokeh in the headset &mdash; but you gain the real thing, because now your own two eyes are doing the depth. It's the same idea behind my <a href="/three-js-pattern/">Three.js fractal</a> and <a href="/babylon-js-grid-shader/">Babylon.js grid</a> demos, just pointed at optics instead of noise.</p>
+<p>WebXR needs to render straight to the headset's framebuffer per eye, which screen-space post-processing fights with. So the loop branches: on desktop it runs the full bokeh-and-bloom composer; the moment you <em>Enter VR</em> it switches to a direct stereo render. You lose the artificial bokeh in the headset, but you gain the real thing, because now your own two eyes are doing the depth. It's the same idea behind my <a href="/three-js-pattern/">Three.js fractal</a> and <a href="/babylon-js-grid-shader/">Babylon.js grid</a> demos, just pointed at optics instead of noise.</p>
 
 <h2>Things to try</h2>
 
@@ -182,16 +182,16 @@ img{max-width:100%;height:auto}
 
 <h3>Do I need a VR headset to use it?</h3>
 
-<p>No. On desktop or mobile you orbit by dragging and place lights by clicking, with full bokeh depth of field. A WebXR headset is optional &mdash; it just lets you step inside the field and place lights with a controller. No app install, no downloads.</p>
+<p>No. On desktop or mobile you orbit by dragging and place lights by clicking, with full bokeh depth of field. A WebXR headset is optional, it just lets you step inside the field and place lights with a controller. No app install, no downloads.</p>
 
 <hr/>
 
 <h2>Resources</h2>
 
 <ul>
-<li><a href="https://threejs.org/docs/#examples/en/postprocessing/EffectComposer" target="_blank" rel="noopener">Three.js EffectComposer &amp; post-processing</a> &ndash; the bokeh and bloom passes used here</li>
-<li><a href="https://www.w3.org/TR/webxr/" target="_blank" rel="noopener">WebXR Device API</a> &ndash; the standard that powers Enter VR</li>
-<li><a href="/three-js-pattern/">Three.js fractal visualization</a> and <a href="/babylon-js-grid-shader/">Babylon.js cosmic grid</a> &ndash; the shader-driven cousins of this demo</li>
+<li><a href="https://threejs.org/docs/#examples/en/postprocessing/EffectComposer" target="_blank" rel="noopener">Three.js EffectComposer &amp; post-processing</a>, the bokeh and bloom passes used here</li>
+<li><a href="https://www.w3.org/TR/webxr/" target="_blank" rel="noopener">WebXR Device API</a>, the standard that powers Enter VR</li>
+<li><a href="/three-js-pattern/">Three.js fractal visualization</a> and <a href="/babylon-js-grid-shader/">Babylon.js cosmic grid</a>, the shader-driven cousins of this demo</li>
 </ul>
 
 <p><em>Last updated: June 13, 2026.</em></p>

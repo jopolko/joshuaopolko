@@ -24,7 +24,7 @@
 <meta content="https://joshuaopolko.com/assets/crewai-hero.jpg" property="og:image:secure_url"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="Five sleek black humanoid robots with glowing amber visors around a dark glass table, an orchestrator robot directing them — a CrewAI multi-agent crew" property="og:image:alt"/>
+<meta content="Five sleek black humanoid robots with glowing amber visors around a dark glass table, an orchestrator robot directing them, a CrewAI multi-agent crew" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="2026-06-13T16:00:00+00:00" property="article:published_time"/>
 <meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
@@ -133,7 +133,7 @@ figure.hero{margin:0 0 1.8em}
 </header>
 <main class="article">
   <h1>CrewAI Setup Guide and Production Fixes (2026): Install, Observability, and Alternatives</h1>
-  <figure class="hero"><img src="/assets/crewai-hero.jpg" alt="Five sleek black humanoid robots with glowing amber visors around a dark glass table, an orchestrator robot directing them — a CrewAI multi-agent crew" width="1200" height="630" loading="eager"></figure>
+  <figure class="hero"><img src="/assets/crewai-hero.jpg" alt="Five sleek black humanoid robots with glowing amber visors around a dark glass table, an orchestrator robot directing them, a CrewAI multi-agent crew" width="1200" height="630" loading="eager"></figure>
   <div class="post-body">
 
 <p>CrewAI is one of the fastest ways to get a multi-agent system running. You can scaffold a working crew in a couple of commands, and that low barrier is exactly why it now powers millions of daily agent executions and sits at roughly 45,900 GitHub stars as of early 2026. The trouble starts after the demo: crews that take ten minutes to finish, agents that call the same tool six times in a row, and no clear view of what prompt actually went to the model. This guide does both halves. First the exact 2026 install commands, then the production problems people genuinely hit and the fix for each, an honest comparison against LangGraph and the other 2026 frameworks, and what changed this year so you are not following advice written for the old 0.x releases.</p>
@@ -332,14 +332,14 @@ researcher = Agent(
 <h2>Resources</h2>
 
 <ul>
-<li><a href="https://docs.crewai.com/en/installation" target="_blank" rel="noopener">CrewAI Installation Docs</a> &ndash; official uv-based setup and requirements</li>
-<li><a href="https://docs.crewai.com/en/changelog" target="_blank" rel="noopener">CrewAI Changelog</a> &ndash; version history and 2026 release notes</li>
-<li><a href="https://github.com/crewAIInc/crewAI" target="_blank" rel="noopener">CrewAI GitHub Repository</a> &ndash; source, issues, and discussions</li>
-<li><a href="https://pypi.org/project/crewai/" target="_blank" rel="noopener">crewai on PyPI</a> &ndash; latest release and install metadata</li>
-<li><a href="https://github.com/langfuse/langfuse" target="_blank" rel="noopener">Langfuse</a> and <a href="https://github.com/AgentOps-AI/agentops" target="_blank" rel="noopener">AgentOps</a> &ndash; common CrewAI observability layers</li>
-<li><a href="https://www.langchain.com/langgraph" target="_blank" rel="noopener">LangGraph</a> &ndash; the main stateful-orchestration alternative</li>
-<li><a href="https://github.com/ag2ai/ag2" target="_blank" rel="noopener">AG2</a> &ndash; the community continuation of AutoGen's v0.2 lineage</li>
-<li><a href="/agent-zero/">Agent Zero</a> &ndash; a fully-autonomous, no-rails alternative on this site</li>
+<li><a href="https://docs.crewai.com/en/installation" target="_blank" rel="noopener">CrewAI Installation Docs</a>, official uv-based setup and requirements</li>
+<li><a href="https://docs.crewai.com/en/changelog" target="_blank" rel="noopener">CrewAI Changelog</a>, version history and 2026 release notes</li>
+<li><a href="https://github.com/crewAIInc/crewAI" target="_blank" rel="noopener">CrewAI GitHub Repository</a>, source, issues, and discussions</li>
+<li><a href="https://pypi.org/project/crewai/" target="_blank" rel="noopener">crewai on PyPI</a>, latest release and install metadata</li>
+<li><a href="https://github.com/langfuse/langfuse" target="_blank" rel="noopener">Langfuse</a> and <a href="https://github.com/AgentOps-AI/agentops" target="_blank" rel="noopener">AgentOps</a>, common CrewAI observability layers</li>
+<li><a href="https://www.langchain.com/langgraph" target="_blank" rel="noopener">LangGraph</a>, the main stateful-orchestration alternative</li>
+<li><a href="https://github.com/ag2ai/ag2" target="_blank" rel="noopener">AG2</a>, the community continuation of AutoGen's v0.2 lineage</li>
+<li><a href="/agent-zero/">Agent Zero</a>, a fully-autonomous, no-rails alternative on this site</li>
 </ul>
 
 <p><em>Last updated: June 13, 2026.</em></p>

@@ -137,13 +137,13 @@ figure.hero{margin:0 0 1.8em}
   <figure class="hero"><img src="/assets/searxng-hero.jpg" alt="A single glowing lantern under a protective glass dome on a dark foggy plain with distant search-engine lights on the horizon, representing private SearXNG metasearch" width="1200" height="630" loading="eager"></figure>
   <div class="post-body">
 
-<p>Here is a thing that still feels slightly illegal the first time you do it: you spin up a $5 box, paste in one Docker command, and ten minutes later you have a search engine that answers to you and nobody else. No ad profile. No "based on your recent searches." No quiet little record of every 3 a.m. question you ever typed. That's <a href="https://github.com/searxng/searxng" target="_blank" rel="noopener">SearXNG</a> &mdash; a free, open-source metasearch engine that, as of June 2026, carries roughly 32,000 GitHub stars and over 9,500 commits, and is very much still being shipped. This is the guide to standing it up yourself, understanding why it actually works, and deciding whether to run your own or borrow someone else's.</p>
+<p>Here is a thing that still feels slightly illegal the first time you do it: you spin up a $5 box, paste in one Docker command, and ten minutes later you have a search engine that answers to you and nobody else. No ad profile. No "based on your recent searches." No quiet little record of every 3 a.m. question you ever typed. That's <a href="https://github.com/searxng/searxng" target="_blank" rel="noopener">SearXNG</a>, a free, open-source metasearch engine that, as of June 2026, carries roughly 32,000 GitHub stars and over 9,500 commits, and is very much still being shipped. This is the guide to standing it up yourself, understanding why it actually works, and deciding whether to run your own or borrow someone else's.</p>
 
 <h2>Key takeaways</h2>
 
 <ul>
 <li><strong>SearXNG is a metasearch engine, not a search engine.</strong> It owns no index. It forwards your query to <strong>up to 262 upstream engines</strong> (Google, Bing, Wikipedia, Reddit, and hundreds more), then merges and de-duplicates the results (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">docs.searxng.org</a>, 2026).</li>
-<li><strong>The privacy comes from architecture, not promises.</strong> The upstream engines see your <em>server</em>, not you &mdash; and SearXNG strips the tracking junk in between. No cookies, no profile, no fingerprint to sell.</li>
+<li><strong>The privacy comes from architecture, not promises.</strong> The upstream engines see your <em>server</em>, not you, and SearXNG strips the tracking junk in between. No cookies, no profile, no fingerprint to sell.</li>
 <li><strong>Setup is one Compose file.</strong> The maintained 2026 path is the <code>container/</code> compose files in the main repo; the old <code>searxng-docker</code> helper repo was <strong>archived on March 28, 2026</strong>.</li>
 <li><strong>Default internal port is 8080.</strong> Add a real secret key and a reverse proxy before you expose it to the internet.</li>
 <li><strong>It's AGPL-3.0 and a fork of searx</strong> (started mid-2021), with around 70 well-maintained public instances if you'd rather not self-host.</li>
@@ -155,17 +155,17 @@ figure.hero{margin:0 0 1.8em}
 
 <p>So the flow is simple. You ask SearXNG. SearXNG asks Google, Bing, Brave, Wikipedia, Stack Overflow, and however many others you enabled. They answer SearXNG. SearXNG hands you the blend. You can weight engines, group them by category (general, images, news, science, IT, maps), and switch the whole thing to a different upstream if one starts misbehaving.</p>
 
-<blockquote>SearXNG aggregates results from up to 262 upstream search services and merges them into one ranked page. Because it holds no index of its own, no single engine ever sees the full stream of one person's searches &mdash; the defining property that makes profiling structurally hard rather than merely promised (SearXNG documentation, 2026).</blockquote>
+<blockquote>SearXNG aggregates results from up to 262 upstream search services and merges them into one ranked page. Because it holds no index of its own, no single engine ever sees the full stream of one person's searches, the defining property that makes profiling structurally hard rather than merely promised (SearXNG documentation, 2026).</blockquote>
 
-<p>For a fuller picture of how this slots into a private, AI-flavoured stack &mdash; SearXNG as the retrieval layer feeding a local model &mdash; see my walkthrough of <a href="/perplexica-self-hosted-guide/">self-hosting Vane (formerly Perplexica)</a>, which uses SearXNG under the hood as its search backend.</p>
+<p>For a fuller picture of how this slots into a private, AI-flavoured stack, SearXNG as the retrieval layer feeding a local model, see my walkthrough of <a href="/perplexica-self-hosted-guide/">self-hosting Vane (formerly Perplexica)</a>, which uses SearXNG under the hood as its search backend.</p>
 
 <h2>Why can't Google profile you through SearXNG?</h2>
 
-<p>Because Google never meets you. Every upstream request originates from your SearXNG server's IP, carrying no account, no long-lived cookie, and no per-user fingerprint &mdash; so the behavioural profile Google normally assembles has nobody to attach itself to (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG docs</a>, 2026). From Google's side it looks like one slightly odd visitor running a lot of unrelated one-off queries.</p>
+<p>Because Google never meets you. Every upstream request originates from your SearXNG server's IP, carrying no account, no long-lived cookie, and no per-user fingerprint, so the behavioural profile Google normally assembles has nobody to attach itself to (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG docs</a>, 2026). From Google's side it looks like one slightly odd visitor running a lot of unrelated one-off queries.</p>
 
-<p>SearXNG also scrubs the layer in between. Results links are cleaned of the tracking parameters engines love to staple on. Cookies and JavaScript are optional &mdash; the no-JS HTML interface is a first-class citizen, which is also why AI crawlers and screen readers handle it fine. And if you want to disappear further, SearXNG can route its outbound requests over Tor.</p>
+<p>SearXNG also scrubs the layer in between. Results links are cleaned of the tracking parameters engines love to staple on. Cookies and JavaScript are optional, the no-JS HTML interface is a first-class citizen, which is also why AI crawlers and screen readers handle it fine. And if you want to disappear further, SearXNG can route its outbound requests over Tor.</p>
 
-<p>Here's the honest caveat, because the indie-privacy crowd oversells this constantly: if you run a <em>public</em> instance that thousands of people share, your individual queries hide in the crowd, but the operator could log them. If you run a <em>private, single-user</em> instance, nobody can profile you &mdash; but every query visibly comes from your one IP, so you've traded crowd-anonymity for trust. Pick your threat model. For most people who just want out of the ad-profiling machine, a private instance behind a VPN is the sweet spot.</p>
+<p>Here's the honest caveat, because the indie-privacy crowd oversells this constantly: if you run a <em>public</em> instance that thousands of people share, your individual queries hide in the crowd, but the operator could log them. If you run a <em>private, single-user</em> instance, nobody can profile you, but every query visibly comes from your one IP, so you've traded crowd-anonymity for trust. Pick your threat model. For most people who just want out of the ad-profiling machine, a private instance behind a VPN is the sweet spot.</p>
 
 <h2>Quick start: the Docker Compose path (2026)</h2>
 
@@ -192,11 +192,11 @@ docker compose up -d</code></pre>
 docker compose ps           # what's running
 docker compose down         # stop and remove</code></pre>
 
-<p><strong>One recency note that will save you an hour:</strong> half the tutorials online tell you to <code>git clone searxng/searxng-docker</code>. That repo was archived on March 28, 2026, and now points people at the <code>container/</code> compose files above. If a guide starts with the old helper repo, it predates the move &mdash; use the commands here instead.</p>
+<p><strong>One recency note that will save you an hour:</strong> half the tutorials online tell you to <code>git clone searxng/searxng-docker</code>. That repo was archived on March 28, 2026, and now points people at the <code>container/</code> compose files above. If a guide starts with the old helper repo, it predates the move, use the commands here instead.</p>
 
 <h2>Hardening: a secret key, the limiter, and a real domain</h2>
 
-<p>SearXNG requires a unique <code>server.secret_key</code> in its <code>settings.yml</code>, and a fresh install ships with the literal placeholder <code>ultrasecretkey</code> &mdash; which is exactly as safe as it sounds. Replace it with a real random value before you expose the instance:</p>
+<p>SearXNG requires a unique <code>server.secret_key</code> in its <code>settings.yml</code>, and a fresh install ships with the literal placeholder <code>ultrasecretkey</code>, which is exactly as safe as it sounds. Replace it with a real random value before you expose the instance:</p>
 
 <pre><code># Generate a strong secret and inject it into settings.yml
 # (path is your mounted config dir, e.g. ./config/settings.yml)
@@ -204,13 +204,13 @@ sed -i "s|ultrasecretkey|$(openssl rand -hex 32)|g" ./config/settings.yml
 
 docker compose restart</code></pre>
 
-<p>Three more things separate a toy from something you'd actually leave running. First, turn on the <strong>limiter and bot detection</strong> in <code>settings.yml</code> so scrapers don't get your instance rate-limited or blocked by the upstream engines. Second, put a <strong>reverse proxy with TLS</strong> (Caddy or Nginx) in front of it so traffic is encrypted and the container never faces the raw internet. Third, if it's just for you, don't expose it publicly at all &mdash; bind it to localhost and reach it over Tailscale, WireGuard, or an SSH tunnel.</p>
+<p>Three more things separate a toy from something you'd actually leave running. First, turn on the <strong>limiter and bot detection</strong> in <code>settings.yml</code> so scrapers don't get your instance rate-limited or blocked by the upstream engines. Second, put a <strong>reverse proxy with TLS</strong> (Caddy or Nginx) in front of it so traffic is encrypted and the container never faces the raw internet. Third, if it's just for you, don't expose it publicly at all, bind it to localhost and reach it over Tailscale, WireGuard, or an SSH tunnel.</p>
 
-<p>If "a private box that quietly does one job well and answers only to you" is a pattern you like, it's the same philosophy behind treating your <a href="/ai-infrastructure/">own site as AI infrastructure</a> &mdash; small, owned, legible services instead of renting everything from a platform.</p>
+<p>If "a private box that quietly does one job well and answers only to you" is a pattern you like, it's the same philosophy behind treating your <a href="/ai-infrastructure/">own site as AI infrastructure</a>, small, owned, legible services instead of renting everything from a platform.</p>
 
 <h2>The one-liner: a single throwaway container</h2>
 
-<p>Sometimes you don't want a Compose stack &mdash; you just want to poke at SearXNG for an afternoon. A single <code>docker run</code> gives you a disposable instance with config and cache mounted to the host, mapping the internal 8080 to 8888 so it doesn't collide with anything (<a href="https://docs.searxng.org/admin/installation-docker.html" target="_blank" rel="noopener">SearXNG docs</a>, 2026):</p>
+<p>Sometimes you don't want a Compose stack, you just want to poke at SearXNG for an afternoon. A single <code>docker run</code> gives you a disposable instance with config and cache mounted to the host, mapping the internal 8080 to 8888 so it doesn't collide with anything (<a href="https://docs.searxng.org/admin/installation-docker.html" target="_blank" rel="noopener">SearXNG docs</a>, 2026):</p>
 
 <pre><code>mkdir -p ./searxng/config/ ./searxng/data/ &amp;&amp; cd ./searxng/
 
@@ -220,7 +220,7 @@ docker run --name searxng -d \
     -v "./data/:/var/cache/searxng/" \
     docker.io/searxng/searxng:latest</code></pre>
 
-<p>Visit <code>http://localhost:8888</code>, kick the tires, and <code>docker container stop searxng &amp;&amp; docker container rm searxng</code> when you're done. The mounted <code>./config/</code> survives, so your tweaks carry over if you bring it back. Prefer building from source? <code>git clone</code> the main repo and run <code>make container</code> &mdash; but for almost everyone the published image is the right call.</p>
+<p>Visit <code>http://localhost:8888</code>, kick the tires, and <code>docker container stop searxng &amp;&amp; docker container rm searxng</code> when you're done. The mounted <code>./config/</code> survives, so your tweaks carry over if you bring it back. Prefer building from source? <code>git clone</code> the main repo and run <code>make container</code>, but for almost everyone the published image is the right call.</p>
 
 <h2>SearXNG vs Google vs DuckDuckGo vs Whoogle</h2>
 
@@ -231,8 +231,8 @@ docker run --name searxng -d \
 <tr><th>Engine</th><th>Who sees your identity</th><th>Tracks / profiles you</th><th>Result source</th><th>Self-hostable</th><th>Ads</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>SearXNG (self-hosted)</strong></td><td>Only your own server</td><td>No &mdash; no index, no account, no profile</td><td>Up to 262 upstream engines, merged</td><td>Yes (this guide)</td><td>None</td></tr>
-<tr><td><strong>Google</strong></td><td>Google, fully, tied to your account</td><td>Yes &mdash; that's the business model</td><td>Own index</td><td>No</td><td>Many</td></tr>
+<tr><td><strong>SearXNG (self-hosted)</strong></td><td>Only your own server</td><td>No, no index, no account, no profile</td><td>Up to 262 upstream engines, merged</td><td>Yes (this guide)</td><td>None</td></tr>
+<tr><td><strong>Google</strong></td><td>Google, fully, tied to your account</td><td>Yes, that's the business model</td><td>Own index</td><td>No</td><td>Many</td></tr>
 <tr><td><strong>DuckDuckGo</strong></td><td>DuckDuckGo (trust their no-log policy)</td><td>Claims no profiling; you're trusting a third party</td><td>Mostly Bing, plus its own crawler</td><td>No</td><td>Yes (non-targeted)</td></tr>
 <tr><td><strong>Whoogle / Startpage</strong></td><td>The proxy operator</td><td>Proxied Google results; no personal profile</td><td>Google (proxied)</td><td>Whoogle: yes &middot; Startpage: no</td><td>Startpage: optional</td></tr>
 </tbody>
@@ -242,15 +242,15 @@ docker run --name searxng -d \
 
 <h2>Should you self-host or use a public instance?</h2>
 
-<p>Around 70 well-maintained public SearXNG instances run today, and using one costs you nothing and zero setup (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG docs</a>, 2026). The catch is trust: a public instance's operator <em>could</em> log your searches, and you have no way to verify they don't. The upside is crowd cover &mdash; your queries blend into everyone else's traffic from that instance.</p>
+<p>Around 70 well-maintained public SearXNG instances run today, and using one costs you nothing and zero setup (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG docs</a>, 2026). The catch is trust: a public instance's operator <em>could</em> log your searches, and you have no way to verify they don't. The upside is crowd cover, your queries blend into everyone else's traffic from that instance.</p>
 
-<p>Self-hosting flips both. You trust nobody, because the only logs are yours and you can turn them off. But your private instance sends every query from a single IP, so you'll usually want it behind a VPN or Tor for outbound cover. My rule of thumb: use a reputable public instance for casual, throwaway lookups; self-host the instance you make your daily driver. It's the same calculus as running your own <a href="/ollama/">local models with Ollama</a> &mdash; a little setup buys you results that never leave your control.</p>
+<p>Self-hosting flips both. You trust nobody, because the only logs are yours and you can turn them off. But your private instance sends every query from a single IP, so you'll usually want it behind a VPN or Tor for outbound cover. My rule of thumb: use a reputable public instance for casual, throwaway lookups; self-host the instance you make your daily driver. It's the same calculus as running your own <a href="/ollama/">local models with Ollama</a>, a little setup buys you results that never leave your control.</p>
 
 <h2>Is SearXNG still maintained in 2026?</h2>
 
-<p>Yes, and actively. As of June 2026 the repository sits at roughly 32,000 stars, 3,000 forks, and more than 9,500 commits, with 167 open issues and 44 open pull requests in flight &mdash; the signature of a live project, not an abandoned one (<a href="https://github.com/searxng/searxng" target="_blank" rel="noopener">SearXNG on GitHub</a>, 2026). It's written mostly in Python, licensed AGPL-3.0, and ships rolling container images rather than ceremonial version tags.</p>
+<p>Yes, and actively. As of June 2026 the repository sits at roughly 32,000 stars, 3,000 forks, and more than 9,500 commits, with 167 open issues and 44 open pull requests in flight, the signature of a live project, not an abandoned one (<a href="https://github.com/searxng/searxng" target="_blank" rel="noopener">SearXNG on GitHub</a>, 2026). It's written mostly in Python, licensed AGPL-3.0, and ships rolling container images rather than ceremonial version tags.</p>
 
-<p>The project began in mid-2021 as a fork of the older <code>searx</code>, and the community has steadily modernised it since &mdash; consolidating on the in-repo <code>container/</code> compose files and retiring the separate <code>searxng-docker</code> helper in early 2026. Translations run through Weblate, coordination happens on Matrix, and engine definitions get patched constantly as upstream sites change their markup. In a landscape where privacy tools quietly die, SearXNG keeps shipping.</p>
+<p>The project began in mid-2021 as a fork of the older <code>searx</code>, and the community has steadily modernised it since, consolidating on the in-repo <code>container/</code> compose files and retiring the separate <code>searxng-docker</code> helper in early 2026. Translations run through Weblate, coordination happens on Matrix, and engine definitions get patched constantly as upstream sites change their markup. In a landscape where privacy tools quietly die, SearXNG keeps shipping.</p>
 
 <h2>Frequently asked questions</h2>
 
@@ -264,7 +264,7 @@ docker run --name searxng -d \
 
 <h3>Does SearXNG work without JavaScript?</h3>
 
-<p>Yes &mdash; the no-JavaScript HTML interface is first-class, not an afterthought. That's deliberate: it keeps the attack surface small, loads fast, and stays readable to screen readers and crawlers. Cookies and scripts are optional throughout, and connections are encrypted, which is core to the project's privacy posture (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG docs</a>, 2026).</p>
+<p>Yes, the no-JavaScript HTML interface is first-class, not an afterthought. That's deliberate: it keeps the attack surface small, loads fast, and stays readable to screen readers and crawlers. Cookies and scripts are optional throughout, and connections are encrypted, which is core to the project's privacy posture (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG docs</a>, 2026).</p>
 
 <h3>Will search engines block my SearXNG instance?</h3>
 
@@ -279,13 +279,13 @@ docker run --name searxng -d \
 <h2>Resources</h2>
 
 <ul>
-<li><a href="https://github.com/searxng/searxng" target="_blank" rel="noopener">SearXNG GitHub Repository</a> &ndash; source, issues, and current activity</li>
-<li><a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG Documentation</a> &ndash; how it works, engines, and configuration</li>
-<li><a href="https://docs.searxng.org/admin/installation-docker.html" target="_blank" rel="noopener">Docker Installation Docs</a> &ndash; the official 2026 Compose path</li>
-<li><a href="https://docs.searxng.org/admin/settings/index.html" target="_blank" rel="noopener">settings.yml Reference</a> &ndash; secret key, limiter, engines, and UI options</li>
-<li><a href="https://searx.space/" target="_blank" rel="noopener">searx.space</a> &ndash; a live directory of public SearXNG instances</li>
-<li><a href="/perplexica-self-hosted-guide/">Self-host Vane (formerly Perplexica)</a> &ndash; an AI answer engine that uses SearXNG as its search backend</li>
-<li><a href="/ollama/">Ollama</a> &ndash; run local models privately, the same own-your-stack philosophy</li>
+<li><a href="https://github.com/searxng/searxng" target="_blank" rel="noopener">SearXNG GitHub Repository</a>, source, issues, and current activity</li>
+<li><a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG Documentation</a>, how it works, engines, and configuration</li>
+<li><a href="https://docs.searxng.org/admin/installation-docker.html" target="_blank" rel="noopener">Docker Installation Docs</a>, the official 2026 Compose path</li>
+<li><a href="https://docs.searxng.org/admin/settings/index.html" target="_blank" rel="noopener">settings.yml Reference</a>, secret key, limiter, engines, and UI options</li>
+<li><a href="https://searx.space/" target="_blank" rel="noopener">searx.space</a>, a live directory of public SearXNG instances</li>
+<li><a href="/perplexica-self-hosted-guide/">Self-host Vane (formerly Perplexica)</a>, an AI answer engine that uses SearXNG as its search backend</li>
+<li><a href="/ollama/">Ollama</a>, run local models privately, the same own-your-stack philosophy</li>
 </ul>
 
 <p><em>Last updated: June 13, 2026.</em></p>
