@@ -162,9 +162,7 @@ def _sitemap_eligible(idx_path, url):
 # Pages that live outside static/ but must appear in the sitemap.
 STATIC_URLS = [
     ("https://joshuaopolko.com/kidsevents/",              "daily"),
-    ("https://joshuaopolko.com/kidsevents/earlyon-guide/","daily"),
     ("https://joshuaopolko.com/kidsevents/free-museum-days/","daily"),
-    ("https://joshuaopolko.com/kidsevents/parks-rec-guide/","daily"),
     ("https://joshuaopolko.com/kidsevents/neighbourhoods/","daily"),
     ("https://joshuaopolko.com/kidsevents/methodology/",  "daily"),
     ("https://joshuaopolko.com/hometurf/",                "weekly"),

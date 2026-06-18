@@ -5,15 +5,14 @@
 - [Toronto Kids Events](https://joshuaopolko.com/kidsevents/): Free and low-cost kids and family events across Toronto, aggregated daily from EarlyON drop-in centres, Toronto Public Library, City Parks & Recreation, museums, and community groups. Browse by date, age group, category, and neighbourhood.
 
 ## Toronto Kids Events guides (editorial, live data refreshed daily)
-- [EarlyON Centres: A Parent's Guide](https://joshuaopolko.com/kidsevents/earlyon-guide/): What EarlyON drop-ins are, first-visit expectations, and this week's session counts across 200+ Toronto centres.
 - [Free Museum Days in Toronto for Kids](https://joshuaopolko.com/kidsevents/free-museum-days/): Every recurring free window — ROM third Tuesdays, AGO first Wednesdays, Canada Strong Pass summer, always-free Toronto History Museums.
-- [Parks & Rec Drop-Ins, Explained](https://joshuaopolko.com/kidsevents/parks-rec-guide/): Drop-in vs registered programs, what's free for kids, and this week's drop-in counts by category.
 - [Kids Events by Neighbourhood](https://joshuaopolko.com/kidsevents/neighbourhoods/): How free programming distributes across Toronto's districts, with live counts.
 - [Data Sources & Methodology](https://joshuaopolko.com/kidsevents/methodology/): Where the event data comes from, daily rebuild process, accuracy policy, and privacy.
 - [HomeTurf — Toronto Neighbourhood Guide](https://joshuaopolko.com/hometurf/): Compare all 158 Toronto neighbourhoods by share of children, median household income, schools, licensed childcare, demographics, transit use, and growth.
 - [NowServingTO](https://nowservingto.com): Daily-fresh directory of Toronto's newest restaurants by cuisine.
 
 ## AI & GEO
+- [The GEO Field Manual](https://joshuaopolko.com/geo-field-manual/): Ten technical steps to get cited by ChatGPT, Claude, Perplexity, and Gemini, with the data behind each, copy-paste prompts, and a master prompt you can hand any AI.
 - [GEO: 0 to 1,800 AI Citations in 120 Days](https://joshuaopolko.com/claude-seo/): Optimizing for AI citation instead of clicks.
 - [Your Site as AI Infrastructure](https://joshuaopolko.com/ai-infrastructure/): Becoming a trusted source for ChatGPT and Claude.
 - [The LLM-as-ETL Architecture](https://joshuaopolko.com/llm-etl-architecture/): Building a data pipeline around Claude.
