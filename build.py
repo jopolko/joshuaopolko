@@ -147,9 +147,7 @@ PAGE_TMPL = """<!DOCTYPE html>
 HAND_WRITTEN = {"", "security"}  # "" = root/home
 
 # Slugs to force-exclude from the sitemap (empty stubs, drafts, junk).
-SITEMAP_EXCLUDE = {
-    "child-abuse-in-religious-communities-what-the-research-shows",  # empty stub: H1 only, no body
-}
+SITEMAP_EXCLUDE = set()  # manual override for technically-eligible-but-shouldn't-list pages
 
 def _sitemap_eligible(idx_path, url):
     """A page belongs in the sitemap only if it is indexable and self-canonical.
