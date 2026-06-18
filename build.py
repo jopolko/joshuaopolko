@@ -36,6 +36,7 @@ NAV_ITEMS = [
         ("Vane",                    "/perplexica-self-hosted-guide/"),
         ("SearXNG",                 "/searxng-self-hosted-guide/"),
         ("Agent Zero",              "/agent-zero/"),
+        ("Building JOSIE",          "/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/"),
         ("Site as AI Infrastructure","/ai-infrastructure/"),
         ("LLM-as-ETL",              "/llm-etl-architecture/"),
         ("GEO Field Manual",        "/geo-field-manual/"),
@@ -46,6 +47,7 @@ NAV_ITEMS = [
     ]),
     ("XR", "#", [
         ("Driftlights",        "/driftlights/"),
+        ("Architectural Viz",  "/architectural-visualization/"),
         ("cyubeVR",            "/cyubevr/"),
         ("NeosVR",             "/neosvr/"),
         ("Three.js WebXR",     "/three-js-pattern/"),
@@ -57,6 +59,7 @@ NAV_ITEMS = [
     ]),
     ("Research", "#", [
         ("Hypersensitivity",  "/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/"),
+        ("Abuse Structure",   "/abuse-structure/"),
         ("Princess & the Pea","/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/"),
         ("Belonging",         "/how-intra-community-trauma-shapes-the-architecture-of-belonging/"),
         ("Terror Management", "/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/"),
