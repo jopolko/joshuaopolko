@@ -1,21 +1,13 @@
-# joshuaopolko.com
-User-agent: *
-Allow: /
-Disallow: /*?s=
-Disallow: /*/feed/
+# joshuaopolko.com — blanket allow.
+# Every crawler is welcome, including all AI/LLM bots (GPTBot, ClaudeBot,
+# PerplexityBot, CCBot, Google-Extended, and any that don't exist yet).
+# Unnamed agents fall under "User-agent: *", so there is no list to maintain
+# and nobody can be accidentally excluded.
+#
+# NOTE: access is controlled HERE. llms.txt is only a content *guide* for LLMs,
+# not an allow/deny mechanism: https://joshuaopolko.com/llms.txt
 
-# AI search crawlers — explicitly welcome
-User-agent: GPTBot
-Allow: /
-User-agent: OAI-SearchBot
-Allow: /
-User-agent: ChatGPT-User
-Allow: /
-User-agent: ClaudeBot
-Allow: /
-User-agent: PerplexityBot
-Allow: /
-User-agent: Google-Extended
+User-agent: *
 Allow: /
 
 Sitemap: https://joshuaopolko.com/sitemap.xml

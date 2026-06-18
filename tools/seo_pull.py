@@ -6,6 +6,10 @@ up" report.
 Run:  .venv-seo/bin/python tools/seo_pull.py            # full report
       .venv-seo/bin/python tools/seo_pull.py --days 90  # longer window
       .venv-seo/bin/python tools/seo_pull.py --json     # machine-readable
+      .venv-seo/bin/python tools/seo_pull.py --aeo      # AEO citation map (GSC queries)
+      .venv-seo/bin/python tools/seo_pull.py --aeo --prompts "best toronto patios; new restaurant openings"
+      .venv-seo/bin/python tools/seo_pull.py --aeo --prompts @tools/aeo_seeds/joshuaopolko.com.txt
+      # ...or drop the queries in tools/aeo_seeds/<host>.txt and just run --aeo
 
 Credentials — all in /var/secrets/nowservingto.env:
   GSC   -> GOOGLE_SERVICE_ACCOUNT_JSON (service account; must be a user on the property)
@@ -20,6 +24,10 @@ SITE = "https://joshuaopolko.com/"
 # (GOOGLE_SERVICE_ACCOUNT_JSON, minified one-liner). We deliberately do NOT
 # read ~/.config/claude-seo/* anymore.
 SECRETS = Path("/var/secrets/nowservingto.env")
+# Per-site AEO seed files: tools/aeo_seeds/<host>.txt, one query per line.
+# Lets you pin the queries you actually care about instead of inheriting GSC's
+# impression skew. See report_aeo() for the resolution order.
+SEEDS_DIR = Path(__file__).resolve().parent / "aeo_seeds"
 
 
 def load_secrets():
@@ -38,13 +46,40 @@ def daterange(days):
     return (end - dt.timedelta(days=days)).isoformat(), end.isoformat()
 
 
+GSC_SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
+# VPS auths to Google with an OAuth user token (same file the existing
+# gsc_pull.py/ga4_pull.py use), not a service account.
+OAUTH_TOKEN_FILE = Path("/var/secrets/nowservingto-google-token.json")
+
+
 def _gsc_creds():
-    from google.oauth2 import service_account
+    """GSC credentials. Prefer a service account (GOOGLE_SERVICE_ACCOUNT_JSON in
+    secrets — the dev box has it); otherwise fall back to the OAuth user token
+    the VPS already has, refreshing it in-memory when expired."""
     raw = load_secrets().get("GOOGLE_SERVICE_ACCOUNT_JSON", "")
-    if not raw:
-        raise RuntimeError(f"GOOGLE_SERVICE_ACCOUNT_JSON missing from {SECRETS}")
-    return service_account.Credentials.from_service_account_info(
-        json.loads(raw), scopes=["https://www.googleapis.com/auth/webmasters.readonly"])
+    if raw:
+        from google.oauth2 import service_account
+        return service_account.Credentials.from_service_account_info(
+            json.loads(raw), scopes=GSC_SCOPES)
+    if OAUTH_TOKEN_FILE.exists():
+        from google.oauth2.credentials import Credentials
+        from google.auth.transport.requests import Request
+        d = json.loads(OAUTH_TOKEN_FILE.read_text())
+        creds = Credentials(token=d["token"], refresh_token=d["refresh_token"],
+                            token_uri=d["token_uri"], client_id=d["client_id"],
+                            client_secret=d["client_secret"], scopes=d["scopes"])
+        if creds.expired or not creds.valid:
+            creds.refresh(Request())
+            try:  # best-effort persist; /var/secrets is root-owned, write may fail
+                OAUTH_TOKEN_FILE.write_text(json.dumps({
+                    "token": creds.token, "refresh_token": creds.refresh_token,
+                    "token_uri": creds.token_uri, "client_id": creds.client_id,
+                    "client_secret": creds.client_secret, "scopes": list(creds.scopes)}, indent=2))
+            except OSError:
+                pass
+        return creds
+    raise RuntimeError(f"no GSC creds: GOOGLE_SERVICE_ACCOUNT_JSON in {SECRETS} "
+                       f"or {OAUTH_TOKEN_FILE}")
 
 
 def gsc_client():
@@ -244,31 +279,74 @@ def _domain(url):
         return ""
 
 
-def report_aeo(secrets, n_prompts=15, top_results=10, days=90):
-    """AEO citation map: take the top GSC queries (real demand), search each via
+def _seed_prompts(host):
+    """Per-site seed file (tools/aeo_seeds/<host>.txt), one query per line;
+    blanks and #-comments ignored. Empty list if the file is absent."""
+    f = SEEDS_DIR / f"{host}.txt"
+    if not f.exists():
+        return []
+    return [ln.strip() for ln in f.read_text().splitlines()
+            if ln.strip() and not ln.lstrip().startswith("#")]
+
+
+def parse_prompts_arg(spec):
+    """--prompts accepts either '@path/to/file.txt' (one query per line) or an
+    inline list separated by newlines or semicolons (commas are used only when
+    neither is present, since real queries often contain commas)."""
+    if not spec:
+        return []
+    if spec.startswith("@"):
+        p = Path(spec[1:]).expanduser()
+        lines = p.read_text().splitlines() if p.exists() else []
+        parts = [ln for ln in lines if not ln.lstrip().startswith("#")]
+    else:
+        s = spec.replace("\n", ";")
+        if ";" not in s and "," in s:
+            s = s.replace(",", ";")
+        parts = s.split(";")
+    return [x.strip() for x in parts if x.strip()]
+
+
+def report_aeo(secrets, prompts=None, n_prompts=15, top_results=10, days=90):
+    """AEO citation map: take a set of queries (real demand), search each via
     SearXNG, and aggregate which domains surface — a keyless proxy for which
     sources AI answer engines ground/cite for that demand. Flags where SITE is
-    absent (the roadmap: pages to create or sources to get referenced by)."""
+    absent (the roadmap: pages to create or sources to get referenced by).
+
+    Query source, in priority order:
+      1. `prompts`  — explicit list (from --prompts); run every one, no cap.
+      2. seed file  — tools/aeo_seeds/<host>.txt if it exists; run every one.
+      3. GSC        — top `n_prompts` queries by impressions (the default).
+    With (1) or (2) the GSC call is skipped entirely, so it works without a
+    Search Console grant."""
     import requests
     from collections import Counter
-    sx = (secrets.get("SEARXNG_URL") or "").rstrip("/")
-    if not sx:
-        return {"error": "SEARXNG_URL not set in secrets"}
+    # SearXNG conventionally runs on the same box at :8888; default to it so the
+    # tool works on hosts whose secrets file doesn't record SEARXNG_URL.
+    sx = (secrets.get("SEARXNG_URL") or "http://127.0.0.1:8888").rstrip("/")
     host = SITE.replace("https://", "").replace("http://", "").strip("/")
     host = host[4:] if host.startswith("www.") else host
-    try:
-        sc = gsc_client()
-        props = [s["siteUrl"] for s in sc.sites().list().execute().get("siteEntry", [])]
-    except Exception as e:
-        return {"error": f"GSC auth failed: {e}"}
-    prop = _match_property(props, SITE)
-    if not prop:
-        return {"error": f"no GSC access to {host}"}
-    start, end = daterange(days)
-    rows = gsc_query(sc, prop, start, end, ["query"], row_limit=300)
-    queries = [r["keys"][0] for r in sorted(rows, key=lambda r: -r["impressions"])[:n_prompts]]
+
+    queries = list(prompts or [])
+    source = "--prompts"
     if not queries:
-        return {"error": "no GSC queries in window"}
+        queries, source = _seed_prompts(host), f"seed file aeo_seeds/{host}.txt"
+    if not queries:
+        source = f"top {n_prompts} GSC queries by impressions"
+        try:
+            sc = gsc_client()
+            props = [s["siteUrl"] for s in sc.sites().list().execute().get("siteEntry", [])]
+        except Exception as e:
+            return {"error": f"GSC auth failed: {e}"}
+        prop = _match_property(props, SITE)
+        if not prop:
+            return {"error": f"no GSC access to {host} — pass --prompts "
+                    f"or add tools/aeo_seeds/{host}.txt to skip GSC"}
+        start, end = daterange(days)
+        rows = gsc_query(sc, prop, start, end, ["query"], row_limit=300)
+        queries = [r["keys"][0] for r in sorted(rows, key=lambda r: -r["impressions"])[:n_prompts]]
+    if not queries:
+        return {"error": "no queries to run (empty --prompts/seed file and no GSC demand)"}
     doms = Counter(); you_in = 0; per = []
     for q in queries:
         try:
@@ -287,15 +365,56 @@ def report_aeo(secrets, n_prompts=15, top_results=10, days=90):
         you_in += present
         per.append({"q": q, "domains": seen[:6], "you": present,
                     "rank": (seen.index(host) + 1) if present else None})
-    return {"host": host, "prompts": len(queries), "you_in": you_in,
+    return {"host": host, "prompts": len(queries), "source": source, "you_in": you_in,
             "top_domains": doms.most_common(15), "per": per}
+
+
+def _norm_q(q):
+    return " ".join(q.lower().split())
+
+
+def suggest_from_gsc(secrets, days=90, n=20):
+    """GSC queries with real demand that are NOT already in the seed file —
+    candidates to promote into tools/aeo_seeds/<host>.txt. This is GSC's proper
+    role: a discovery feeder, not the target list. Graceful error dict if the
+    service account lacks access or the google libs aren't installed."""
+    host = SITE.replace("https://", "").replace("http://", "").strip("/")
+    host = host[4:] if host.startswith("www.") else host
+    seed = {_norm_q(q) for q in _seed_prompts(host)}
+    try:
+        sc = gsc_client()
+        props = [s["siteUrl"] for s in sc.sites().list().execute().get("siteEntry", [])]
+    except Exception as e:
+        return {"host": host, "error": f"GSC unavailable: {str(e)[:80]}"}
+    prop = _match_property(props, SITE)
+    if not prop:
+        return {"host": host, "error": f"no GSC access to {host}"}
+    start, end = daterange(days)
+    rows = gsc_query(sc, prop, start, end, ["query"], row_limit=500)
+    fresh = [r for r in rows if _norm_q(r["keys"][0]) not in seed]
+    fresh.sort(key=lambda r: -r["impressions"])
+    return {"host": host, "seeded": len(seed),
+            "suggestions": [{"query": r["keys"][0], "impr": r["impressions"],
+                             "clicks": r["clicks"], "pos": round(r["position"], 1)}
+                            for r in fresh[:n]]}
+
+
+def print_suggest(s):
+    print(f"\n################  GSC suggestions · {s.get('host','')}  ################")
+    if "error" in s:
+        print("  " + s["error"]); return
+    if not s["suggestions"]:
+        print(f"  (no GSC queries outside your {s['seeded']}-line seed)"); return
+    print(f"  real GSC demand NOT in your {s['seeded']}-line seed — promote the good ones:")
+    for q in s["suggestions"]:
+        print(f"    {q['impr']:6d} imp  {q['clicks']:4d} clk  pos {q['pos']:5.1f}  \"{q['query']}\"")
 
 
 def print_aeo(a):
     print(f"\n################  AEO citation map · {a.get('host','')}  ################")
     if "error" in a:
         print("  " + a["error"]); return
-    print(f"  {a['prompts']} prompts (top GSC queries) · YOU surface in {a['you_in']}/{a['prompts']}")
+    print(f"  {a['prompts']} prompts ({a.get('source','?')}) · YOU surface in {a['you_in']}/{a['prompts']}")
     print("\n  TOP DOMAINS across your demand (who AI grounds on — your targets):")
     for d, n in a["top_domains"]:
         print(f"    {n:2d}/{a['prompts']}  {d}{'   <- you' if d==a['host'] else ''}")
@@ -313,15 +432,27 @@ def main():
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--psi", action="store_true", help="also run PageSpeed on top pages")
     ap.add_argument("--aeo", action="store_true", help="AEO citation map: domains that surface for your top GSC queries (via SearXNG)")
+    ap.add_argument("--prompts", help="AEO queries to run instead of GSC's top queries: "
+                    "'a; b; c', or @path/to/file.txt (one per line). Overrides the "
+                    "per-site seed file tools/aeo_seeds/<host>.txt.")
+    ap.add_argument("--suggest-from-gsc", action="store_true",
+                    help="list real GSC queries NOT already in the seed file (promote the good ones)")
     args = ap.parse_args()
+    aeo_prompts = parse_prompts_arg(args.prompts)
     secrets = load_secrets()
     sites = SITES_ALL if args.all else [args.site]
     out = {}
     global SITE
     for s in sites:
         SITE = _norm(s)
+        if args.suggest_from_gsc:
+            sg = suggest_from_gsc(secrets)
+            out[s] = {"suggest": sg} if args.json else None
+            if not args.json:
+                print_suggest(sg)
+            continue
         if args.aeo:
-            a = report_aeo(secrets)
+            a = report_aeo(secrets, prompts=aeo_prompts)
             out[s] = {"aeo": a} if args.json else None
             if not args.json:
                 print_aeo(a)

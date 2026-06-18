@@ -7,7 +7,7 @@ Options -Indexes +FollowSymLinks
   RewriteCond %{HTTP_HOST} ^www\.joshuaopolko\.com$ [NC]
   RewriteRule ^(.*)$ https://joshuaopolko.com/$1 [R=301,L]
 </IfModule>
-DirectoryIndex index.html
+DirectoryIndex index.html index.php
 
 <IfModule mod_alias.c>
   # Consolidate the WordPress front page
@@ -20,9 +20,21 @@ DirectoryIndex index.html
   Redirect 301 /sitemap_index.xml https://joshuaopolko.com/sitemap.xml
   Redirect 301 /post-sitemap.xml  https://joshuaopolko.com/sitemap.xml
   Redirect 301 /page-sitemap.xml  https://joshuaopolko.com/sitemap.xml
+  # Dead sitemap variants bots kept probing (2026-06-16) -> the one real sitemap
+  Redirect 301 /news-sitemap.xml       https://joshuaopolko.com/sitemap.xml
+  Redirect 301 /news_sitemap.xml       https://joshuaopolko.com/sitemap.xml
+  Redirect 301 /sitemap-index.xml      https://joshuaopolko.com/sitemap.xml
+  Redirect 301 /standalone-sitemap.xml https://joshuaopolko.com/sitemap.xml
+  Redirect 301 /sitemap.txt            https://joshuaopolko.com/sitemap.xml
+  Redirect 301 /sitemap.html           https://joshuaopolko.com/sitemap.xml
 
   # Merged duplicate SLM article into its canonical page (2026-06-16)
   RedirectMatch 301 ^/local-llms/?$ https://joshuaopolko.com/small-language-models-slms/
+
+  # Retired reactive page - deliberately gone, not restored (2026-06-16). 410 Gone
+  # (not 404) so search + AI engines drop it fast instead of retrying a soft-404.
+  # Thin, zero-click, topic owned by far bigger sites.
+  RedirectMatch 410 ^/claude-fable-5-issues-fixes/?$
 </IfModule>
 
 # Long cache for static assets; HTML stays fresh
