@@ -57,13 +57,6 @@ NAV_ITEMS = [
         ("Vision & the Brain", "/vision-dominates-half-your-brains-processing-power/"),
         ("XR in Military",     "/military-application/"),
     ]),
-    ("Research", "#", [
-        ("Hypersensitivity",  "/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/"),
-        ("Princess & the Pea","/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/"),
-        ("Belonging",         "/how-intra-community-trauma-shapes-the-architecture-of-belonging/"),
-        ("Terror Management", "/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/"),
-        ("Winter Manifesto",  "/manifesto-of-a-modern-solar-cultist/"),
-    ]),
     ("About", "/about/", []),
 ]
 
