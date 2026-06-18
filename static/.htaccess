@@ -31,6 +31,9 @@ DirectoryIndex index.html index.php
   # Merged duplicate SLM article into its canonical page (2026-06-16)
   RedirectMatch 301 ^/local-llms/?$ https://joshuaopolko.com/small-language-models-slms/
 
+  # JOSIE n8n page was an earlier attempt; consolidate onto the cited canonical (2026-06-18)
+  RedirectMatch 301 ^/building-josie-advanced-ai-workflow-with-persistent-memory-and-live-data-access/?$ https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/
+
   # Retired reactive page - deliberately gone, not restored (2026-06-16). 410 Gone
   # (not 404) so search + AI engines drop it fast instead of retrying a soft-404.
   # Thin, zero-click, topic owned by far bigger sites.
