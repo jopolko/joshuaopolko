@@ -43,6 +43,9 @@ ErrorDocument 410 /404.html
   # (not 404) so search + AI engines drop it fast instead of retrying a soft-404.
   # Thin, zero-click, topic owned by far bigger sites.
   RedirectMatch 410 ^/claude-fable-5-issues-fixes/?$
+
+  # Retired stub - a few unfinished thoughts, deliberately removed (2026-06-18). 410 Gone.
+  RedirectMatch 410 ^/abuse-structure/?$
 </IfModule>
 
 # Long cache for static assets; HTML stays fresh

@@ -59,7 +59,6 @@ NAV_ITEMS = [
     ]),
     ("Research", "#", [
         ("Hypersensitivity",  "/hypersensitivity-a-unified-theory-of-adaptation-across-marginalized-communities/"),
-        ("Abuse Structure",   "/abuse-structure/"),
         ("Princess & the Pea","/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/"),
         ("Belonging",         "/how-intra-community-trauma-shapes-the-architecture-of-belonging/"),
         ("Terror Management", "/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/"),
