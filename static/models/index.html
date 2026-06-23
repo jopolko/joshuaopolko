@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>Best Local LLM Models to Run on Ollama (2026)</title>
   <meta content="The landscape of Large Language Models (LLMs) is evolving at an amazing pace" name="description"/>
@@ -42,14 +42,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -58,7 +58,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -137,7 +139,7 @@ figure.hero{margin:0 0 1.8em}
 /* ---- homepage ---- */
 .home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
 .hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
-.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--serif);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
 .hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
 .hero .meta a{color:var(--accent-ink);text-decoration:none}
 .sec{margin:46px 0}
@@ -152,22 +154,22 @@ figure.hero{margin:0 0 1.8em}
 @media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
 
 </style>
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta>
 
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>Best Local LLM Models to Run on Ollama (2026)</h1>
@@ -177,9 +179,36 @@ figure.hero{margin:0 0 1.8em}
 
 The landscape of Large Language Models (LLMs) is evolving at an amazing pace. This post explores leading language models: Qwen2.5-Coder, JOSIEFIED-Qwen2.5:7b, Llama3.2:3b, Qwen3:8b, Gemma3n:e4b, Qwen2.5VL:7b, and mxbai-embed-large:335m, their architectural innovations, unique features, and diverse applications.
 
+<h2>Key takeaways</h2>
+<ul>
+<li><strong>Coding specialist:</strong> Qwen2.5-Coder handles 92+ programming languages with 128K context, making it the top local model for software development tasks.</li>
+<li><strong>Best 3B edge model:</strong> Llama3.2:3b runs on 4GB of RAM with no GPU, making it the right choice when hardware is constrained or privacy requires fully on-device inference.</li>
+<li><strong>Dual-mode reasoning:</strong> Qwen3:8b switches between deep "thinking" mode for complex problems and fast conversational mode, offering the best versatility at the 8B parameter level.</li>
+<li><strong>Multimodal on-device:</strong> Gemma3n:e4b processes text, images, and audio with a 4B-equivalent memory footprint, enabling true multimodal AI on consumer hardware.</li>
+<li><strong>Vision and document AI:</strong> Qwen2.5VL:7b understands images and hour-long videos, making it the go-to for document analysis, OCR, and visual question answering.</li>
+<li><strong>Embeddings for RAG:</strong> mxbai-embed-large:335m is a dedicated embedding model that outperforms larger commercial alternatives on MTEB benchmarks and pairs with any chat model for retrieval-augmented generation.</li>
+<li><strong>All run locally:</strong> Every model listed deploys via Ollama, removing API costs and keeping sensitive data entirely on your own hardware.</li>
+</ul>
+
+<h2>Model comparison at a glance</h2>
+<table>
+<thead>
+<tr><th>Model</th><th>Parameters</th><th>Primary Use</th><th>Context</th><th>Min. Hardware</th></tr>
+</thead>
+<tbody>
+<tr><td>Qwen2.5-Coder</td><td>7B-32B</td><td>Code generation and debugging</td><td>128K</td><td>8GB VRAM</td></tr>
+<tr><td>JOSIEFIED-Qwen2.5:7b</td><td>7.61B</td><td>Research, creative conversation</td><td>128K</td><td>8GB VRAM</td></tr>
+<tr><td>Llama3.2:3b</td><td>3.21B</td><td>Edge AI, mobile, IoT</td><td>128K</td><td>4GB RAM</td></tr>
+<tr><td>Qwen3:8b</td><td>8.2B</td><td>Reasoning and agentic workflows</td><td>32K-131K</td><td>8GB VRAM</td></tr>
+<tr><td>Gemma3n:e4b</td><td>8B (4B effective)</td><td>Multimodal on-device</td><td>Varies</td><td>4GB RAM</td></tr>
+<tr><td>Qwen2.5VL:7b</td><td>7B</td><td>Vision and language</td><td>Varies</td><td>8GB VRAM</td></tr>
+<tr><td>mxbai-embed-large:335m</td><td>334M</td><td>Embeddings and semantic search</td><td>512 tokens</td><td>2GB RAM</td></tr>
+</tbody>
+</table>
+
 <hr />
 
-<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Qwen2.5-Coder: The Code Whisperer</h2>
+<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What Can Qwen2.5-Coder Do for Local Code Generation?</h2>
 Qwen2.5-Coder is a specialized model designed for software development, capable of generating, debugging, and refining code across 92+ programming languages. Recent research from arXiv (2025) shows significant improvements in code generation accuracy.
 
 <h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Core features:</h3>
@@ -195,7 +224,7 @@ Supporting up to 128K tokens, Qwen2.5-Coder excels with large codebases, automat
 
 <hr />
 
-<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">JOSIEFIED-Qwen2.5:7b: The Uncensored Conversationalist</h2>
+<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What Is JOSIEFIED-Qwen2.5:7b and Who Should Use It?</h2>
 JOSIEFIED-Qwen2.5:7b (7.61B parameters) provides direct, uncensored responses with impressive long-context features (128K input/8K output tokens). According to Hugging Face reports (2025), such models are increasingly valuable for research applications.
 
 <h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Key Features:</h3>
@@ -211,7 +240,7 @@ Ideal for creative writing, exploratory research, and specialized chatbots where
 
 <hr />
 
-<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Llama3.2:3b: Lightweight Powerhouse for Edge Devices</h2>
+<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Is Llama3.2:3b the Right Model for Edge and Mobile AI?</h2>
 Llama3.2:3b (3.21B parameters) is optimized for low-latency, on-device setting it up. Meta&#8217;s 2025 research publications highlight significant advances in edge AI features.
 
 <h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Key Innovations:</h3>
@@ -277,7 +306,7 @@ Document analysis, advanced OCR, visual question answering, content moderation, 
 
 <hr />
 
-<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">mxbai-embed-large:335m: The Semantic Maestro</h2>
+<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What Is mxbai-embed-large and When Do You Need an Embedding Model?</h2>
 mxbai-embed-large:335m (334M parameters) transforms text into high-dimensional vectors capturing semantic meaning. Research from arXiv Information Retrieval (2025) shows continued advancement in embedding models.
 
 <h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">Core Advantages:</h3>
@@ -293,32 +322,51 @@ Powers information retrieval, semantic search, recommendation systems, RAG appli
 
 <hr />
 
-<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Key Trends Shaping the LLM Landscape</h2>
+<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What Are the Key Trends Shaping Local LLMs in 2026?</h2>
 
-<h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">1. Specialization on Generalization:</h3>
-Models like Qwen2.5-Coder and Qwen2.5VL excel in specific domains while retaining broad linguistic features.
+<h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">1. Specialization over Generalization:</h3>
+Models like Qwen2.5-Coder and Qwen2.5VL excel in specific domains while retaining broad linguistic capabilities. This shift reflects a maturing understanding that most real-world AI deployments have a defined scope: a developer needs reliable code generation, a media team needs visual understanding, a logistics company needs a reasoning engine. By targeting training toward a domain, developers get sharper and more predictable results than a general-purpose model can deliver. Expect fine-tuned specialist variants to become the default choice for production deployments in 2026 and beyond.
 
-<h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">2. Efficiency Focus:</h3>
-From Llama3.2:3b&#8217;s lightweight design to Gemma3n:e4b&#8217;s Per-Layer Embeddings, maximizing performance while minimizing resources makes AI accessible across diverse hardware.
+<h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">2. Efficiency as a First-Class Goal:</h3>
+From Llama3.2:3b's pruning-and-distillation design to Gemma3n:e4b's Per-Layer Embeddings, maximizing performance while minimizing resources makes AI accessible across diverse hardware. Efficiency research has moved from academic curiosity to the primary driver of model architecture decisions. Techniques like 4-bit quantization, knowledge distillation, and improved attention mechanisms (such as QK-Norm in Qwen3) allow 8B parameter models to match the reasoning quality of earlier 70B models. As consumer hardware improves in parallel, the ceiling for on-device AI keeps rising with each hardware generation.
 
 <h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">3. Multimodal Integration:</h3>
-Processing text, images, audio, and video creates truly intelligent, context-aware AI systems for human-like interaction.
+Processing text, images, audio, and video creates truly intelligent, context-aware AI systems for human-like interaction. Multimodal capability is no longer a premium feature reserved for cloud APIs: Gemma3n:e4b and Qwen2.5VL:7b demonstrate that sub-10B parameter models can handle real-world visual and audio tasks on consumer hardware. Applications that were previously impossible to run locally, such as real-time document scanning, video summarization, and ambient audio understanding, are becoming standard offline capabilities. Cross-modal reasoning, where a model connects information across image, text, and audio simultaneously, is the defining frontier for 2026.
 
-<h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">4. Open Source Democratization:</h3>
-Powerful open-source models (Qwen, Llama, Gemma) democratize AI research, fostering innovation and diverse applications across the comm<a href="https://unity.com/" target="_blank" rel="noopener noreferrer">unity</a>.
+<h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">4. Open-Source Democratization:</h3>
+Powerful open-source models from Alibaba (Qwen), Meta (Llama), and Google (Gemma) democratize AI research, fostering innovation across industries that could never access expensive proprietary APIs. The open-source ecosystem has reached a tipping point: community fine-tunes, quantized variants, and tooling like Ollama and llama.cpp mean that a developer with a consumer laptop can run state-of-the-art models within minutes. This accessibility is compressing the innovation cycle. Breakthroughs that once took quarters to reach practitioners now circulate through the community within days of a new model release, accelerating downstream applications far faster than any single lab can.
 
 <h3 style="font-size: 1.15em;font-weight: 600;line-height: 1.3;margin: 1em 0 0.5em 0">5. Reinforcement Learning Evolution:</h3>
-RL-first training approaches develop advanced reasoning features, leading to more autonomous problem-solving models.
+Reinforcement learning from human feedback and outcome-based RL techniques develop advanced reasoning capabilities, leading to models that approach problems more autonomously. Qwen3:8b's thinking mode is a direct product of this training paradigm: the model has learned to allocate deliberate reasoning steps before committing to an answer. This internal chain-of-thought behavior improves accuracy on math, logic, and coding tasks without requiring external scaffolding from the developer. RL-trained reasoning is becoming a baseline expectation for any model positioned as a developer or productivity tool in 2026.
 
 <hr />
 
-<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Conclusion: A Future Forged by Diverse AI</h2>
+<h2 style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What Does the Future of Open-Source Local AI Look Like?</h2>
 These models, Qwen2.5-Coder, JOSIEFIED-Qwen2.5:7b, Llama3.2:3b, Qwen3:8b, Gemma3n:e4b, Qwen2.5VL:7b, and mxbai-embed-large:335m, illustrate the incredible breadth of innovation in AI. The future isn&#8217;t about a single monolithic model, but a diverse ecosystem optimized for various tasks, setting it up environments, and performance needs.
 
 As these models evolve, they will reshape industries, enhance human features, and integrate intelligent machines into every facet of our lives. Ongoing advancements in efficiency, multimodality, and open-source availability promise an exciting era of innovation, making AI more powerful, accessible, and impactful than ever before.
 
 </div>
 
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+<h2 class="wp-block-heading">Frequently asked questions</h2>
+
+<h3>Which local LLM is the best choice for coding tasks in 2026?</h3>
+<p>Qwen2.5-Coder is the strongest dedicated coding model available locally via Ollama. It supports 92+ programming languages, handles up to 128K tokens of context (useful for large codebases), and includes smart debugging and cross-language translation capabilities. For general-purpose work that also includes coding, Qwen3:8b is a strong second choice thanks to its thinking mode, which improves accuracy on algorithmic and logic-heavy problems. Both run on hardware with 8GB of VRAM or more.</p>
+
+<h3>What is the difference between Qwen2.5-Coder and Qwen3:8b for coding?</h3>
+<p>Qwen2.5-Coder is purpose-built for software development: its training prioritizes code syntax, API knowledge, and debugging patterns across 92+ languages. Qwen3:8b is a general-purpose reasoning model with a dual-mode architecture that makes it excellent for complex algorithmic thinking and agentic coding workflows, but it has not been fine-tuned specifically on code. Use Qwen2.5-Coder when you need reliable code generation and completion. Use Qwen3:8b when the task involves architectural decisions, multi-step reasoning, or orchestrating tools as an agent.</p>
+
+<h3>Can I run these LLM models on a laptop without a dedicated GPU?</h3>
+<p>Yes, for the smaller models. Llama3.2:3b and Gemma3n:e4b are designed to run on as little as 4GB of RAM using CPU inference via Ollama. mxbai-embed-large:335m (334M parameters) runs on 2GB and is CPU-friendly by design. The 7B and 8B models (Qwen2.5-Coder, Qwen3:8b, Qwen2.5VL:7b) work best with a GPU; running them on CPU is possible but noticeably slow for interactive use. Quantized 4-bit versions of most models halve the VRAM requirement with minimal quality loss.</p>
+
+<h3>What is an embedding model and how is mxbai-embed-large different from chat models?</h3>
+<p>An embedding model converts text into a numeric vector that captures its meaning, rather than generating a text response. mxbai-embed-large:335m produces these vectors for use in retrieval-augmented generation (RAG) pipelines, semantic search, and recommendation systems. Unlike a chat model, you do not converse with it directly: your application sends text to it and receives a 1024-dimensional vector back. Pairing mxbai-embed-large with a chat model like Qwen3:8b gives you both semantic retrieval and language generation in a fully local, privacy-preserving stack.</p>
+
+<h3>How do I choose the right model size for my use case?</h3>
+<p>Start with the smallest model that meets your accuracy requirements. For simple classification, summarization, or short-form Q&A, Llama3.2:3b (3.21B parameters) is often sufficient and responds fastest. For coding, document analysis, or tasks requiring multi-step reasoning, step up to a 7B or 8B model. Reserve 30B+ models for tasks where accuracy is critical and you have the hardware to match. Always benchmark on your actual use case: a smaller model fine-tuned for your domain often outperforms a much larger general-purpose model and costs a fraction as much to run.</p>
 
 <hr class="wp-block-separator has-alpha-channel-opacity" />
 
@@ -351,5 +399,53 @@ As these models evolve, they will reshape industries, enhance human features, an
 <footer class="site-foot">
   <p>&copy; Joshua Opolko</p>
 </footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which local LLM is the best choice for coding tasks in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Qwen2.5-Coder is the strongest dedicated coding model available locally via Ollama. It supports 92+ programming languages, handles up to 128K tokens of context, and includes smart debugging and cross-language translation. For general-purpose work that also includes coding, Qwen3:8b is a strong second choice thanks to its thinking mode. Both run on hardware with 8GB of VRAM or more."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Qwen2.5-Coder and Qwen3:8b for coding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Qwen2.5-Coder is purpose-built for software development, with training focused on code syntax, API knowledge, and debugging patterns across 92+ languages. Qwen3:8b is a general-purpose reasoning model with dual-mode architecture that excels at algorithmic thinking and agentic workflows. Use Qwen2.5-Coder for reliable code generation and completion. Use Qwen3:8b for architectural decisions, multi-step reasoning, or orchestrating tools as an agent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run these LLM models on a laptop without a dedicated GPU?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, for the smaller models. Llama3.2:3b and Gemma3n:e4b run on as little as 4GB of RAM using CPU inference via Ollama. mxbai-embed-large:335m runs on 2GB and is CPU-friendly. The 7B and 8B models work best with a GPU but can run on CPU. Quantized 4-bit versions of most models halve the VRAM requirement with minimal quality loss."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an embedding model and how is mxbai-embed-large different from chat models?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An embedding model converts text into a numeric vector that captures its meaning, rather than generating a text response. mxbai-embed-large:335m produces these vectors for retrieval-augmented generation (RAG) pipelines, semantic search, and recommendation systems. Pairing it with a chat model like Qwen3:8b gives you both semantic retrieval and language generation in a fully local, privacy-preserving stack."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose the right model size for my use case?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start with the smallest model that meets your accuracy requirements. For simple summarization or short-form Q&A, Llama3.2:3b (3.21B parameters) is often sufficient and responds fastest. For coding, document analysis, or multi-step reasoning, step up to a 7B or 8B model. A smaller model fine-tuned for your domain often outperforms a larger general-purpose model at a fraction of the compute cost."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

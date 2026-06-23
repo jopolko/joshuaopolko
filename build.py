@@ -26,7 +26,6 @@ NAV_ITEMS = [
         ("NowServingTO",      "https://nowservingto.com"),
         ("Kids Events",       "/kidsevents/"),
         ("HomeTurf",          "/hometurf/"),
-        ("Security Dashboard","/security/"),
     ]),
     ("AI & GEO", "#", [
         ("CrewAI",                  "/crewai-setup-production-guide/"),
@@ -40,20 +39,16 @@ NAV_ITEMS = [
         ("Site as AI Infrastructure","/ai-infrastructure/"),
         ("LLM-as-ETL",              "/llm-etl-architecture/"),
         ("GEO Field Manual",        "/geo-field-manual/"),
+        ("GEO Observatory",         "/geo-observatory/"),
         ("GEO: AI Citation",        "/geo-ai-citation/"),
-        ("Lost in the Token",       "/jamaican-patois-ai/"),
         ("Claude SEO/GEO",          "/claude-seo/"),
         ("Claude Code Spec Workflow","/claude-code-specification-workflow-mcp/"),
     ]),
     ("XR", "#", [
-        ("Driftlights",        "/driftlights/"),
         ("Architectural Viz",  "/architectural-visualization/"),
         ("cyubeVR",            "/cyubevr/"),
         ("NeosVR",             "/neosvr/"),
-        ("Three.js WebXR",     "/three-js-pattern/"),
-        ("A-Frame VR",         "/a-frame-vr-scene-with-custom-shaders/"),
-        ("Babylon.js Clouds",  "/babylon-js-clouds/"),
-        ("Babylon.js Grid",    "/babylon-js-grid-shader/"),
+        ("VR Visual Effects",  "/psychedelic-vr-visual-effects-meta-quest/"),
         ("Vision & the Brain", "/vision-dominates-half-your-brains-processing-power/"),
         ("XR in Military",     "/military-application/"),
     ]),
@@ -66,7 +61,7 @@ def nav_html():
         if sub:
             out.append(f'<li class="has-sub"><a href="{html.escape(href)}">{html.escape(label)} <span aria-hidden="true">▾</span></a><ul>')
             for sl, sh in sub:
-                out.append(f'<li><a href="{html.escape(sh)}">{html.escape(sl)}</a></li>')
+                out.append(f'<li><a href="{html.escape(sh)}">{sl}</a></li>')
             out.append('</ul></li>')
         else:
             out.append(f'<li><a href="{html.escape(href)}">{html.escape(label)}</a></li>')
@@ -112,7 +107,7 @@ PAGE_TMPL = """<!DOCTYPE html>
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#fbfaf7">
 {seo}
-<link rel="stylesheet" href="/assets/site.css?v=9">
+<link rel="stylesheet" href="/assets/site.css?v=11">
 <script src="/assets/nav.js?v=3" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
@@ -136,7 +131,7 @@ PAGE_TMPL = """<!DOCTYPE html>
 """
 
 # Pages with hand-written <main> that must not be overwritten by retemplate.
-HAND_WRITTEN = {"", "security"}  # "" = root/home
+HAND_WRITTEN = {""}  # "" = root/home  (/security/ retired 2026-06-19, 301 -> /geo-observatory)
 
 # Slugs to force-exclude from the sitemap (empty stubs, drafts, junk).
 SITEMAP_EXCLUDE = set()  # manual override for technically-eligible-but-shouldn't-list pages
@@ -166,6 +161,7 @@ STATIC_URLS = [
     ("https://joshuaopolko.com/kidsevents/neighbourhoods/","daily"),
     ("https://joshuaopolko.com/kidsevents/methodology/",  "daily"),
     ("https://joshuaopolko.com/hometurf/",                "weekly"),
+    ("https://joshuaopolko.com/geo-observatory/",         "daily"),
 ]
 
 def write_sitemap():

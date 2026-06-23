@@ -13,7 +13,7 @@ Pipeline order:  build.py --all  →  seo_complete.py  →  inline_css.py  →  
 import pathlib
 
 BASE = pathlib.Path(__file__).resolve().parent / "static"
-LINK = '<link rel="stylesheet" href="/assets/site.css?v=9">'
+LINK = '<link rel="stylesheet" href="/assets/site.css?v=11">'
 
 
 def _style_block():

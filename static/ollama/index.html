@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <link rel="preload" as="image" href="https://joshuaopolko.com/wp-content/uploads/2025/06/cover-image-836.webp" fetchpriority="high">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>Ollama Setup Guide (2026): Install, Run LLMs, Fix GPU Issues</title>
   <meta content="Install Ollama with the exact 2026 commands, run your first model, use the OpenAI-compatible API, and fix the common problems: GPU not used, out-of-memory, slow concurrency, and choosing between Ollama, llama.cpp, LM Studio and vLLM." name="description"/>
@@ -42,14 +42,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -58,7 +58,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -124,13 +126,13 @@ figure.hero{margin:0 0 1.8em}
     left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
 }
 </style>
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>Ollama Setup Guide (2026): Install, Run LLMs Locally, and Fix the Common Issues</h1>
@@ -150,7 +152,7 @@ figure.hero{margin:0 0 1.8em}
 <li><strong>Pick the runtime for the job:</strong> Ollama for local development, llama.cpp for raw speed and embedded use, LM Studio for a GUI, vLLM for production serving.</li>
 </ul>
 
-<h2>Install Ollama</h2>
+<h2>How do I install Ollama?</h2>
 
 <p>Ollama runs on Linux, macOS, and Windows, and in Docker. Pick your platform.</p>
 
@@ -171,9 +173,9 @@ docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 <pre><code>ollama --version
 curl http://localhost:11434/api/tags   # should return your (empty) model list</code></pre>
 
-<h2>Run your first model</h2>
+<h2>How do I run my first Ollama model?</h2>
 
-<p>Models are pulled from the Ollama library by name and tag. The tag encodes the parameter size and quantization, which is what determines whether it fits on your hardware.</p>
+<p>Models are pulled from the Ollama library by name and tag. The tag encodes the parameter size and quantization, for example <code>llama3.2:3b-instruct-q4_K_M</code>, which determines whether the model fits on your hardware and how fast it runs. If you leave out the tag, Ollama pulls a sensible default (usually a 4-bit quantized version of a mid-size variant).</p>
 
 <pre><code># Download and chat with a model
 ollama run llama3.2
@@ -191,11 +193,13 @@ ollama run llama3.2 --verbose
 # Remove a model to reclaim disk
 ollama rm qwen3</code></pre>
 
+<p>Before you run, check how much VRAM you have available. A 7 to 8B model at Q4 needs roughly 5 to 6 GB, a 13B model needs about 8 to 10 GB, and a 70B model needs 40 GB or more. If the model is too large, Ollama will load it partly on the CPU, which is much slower. Run <code>ollama ps</code> after loading to see the GPU/CPU split and confirm the model is fully on the GPU. When in doubt, start with a smaller model that fits entirely in VRAM; it will outperform a larger model that spills over to system RAM.</p>
+
 <p>Inside a chat, type <code>/bye</code> to exit. If you are unsure which models to choose for your hardware, see my companion piece on the <a href="/models/">best local models to run</a> and the broader case for <a href="/small-language-models-slms/">running LLMs locally</a>.</p>
 
-<h2>Use the OpenAI-compatible API</h2>
+<h2>How do I use Ollama's OpenAI-compatible API?</h2>
 
-<p>This is the feature that makes Ollama genuinely useful in apps: it speaks the OpenAI API. Point any OpenAI client at the local endpoint and most code works unchanged. That also means a local Ollama model can back an agent framework such as <a href="/crewai-setup-production-guide/">CrewAI</a> or <a href="/agent-zero/">Agent Zero</a> for fully private, no-API-cost development.</p>
+<p>Ollama's OpenAI-compatible API is the feature that makes it genuinely useful in real apps. Point any OpenAI client at <code>http://localhost:11434/v1</code> with an arbitrary API key (Ollama ignores the key value) and the standard SDK calls work without modification: chat completions, streaming, model listing, and embeddings are all supported. That means any code written against the OpenAI SDK can be redirected to a fully local, zero-cost model by changing a single <code>base_url</code> parameter. It also means a local Ollama model can back an agent framework such as <a href="/crewai-setup-production-guide/">CrewAI</a> or <a href="/agent-zero/">Agent Zero</a> for fully private, no-API-cost development. If you are building a tool that needs to stay entirely on-device, whether for privacy, offline capability, or cost control, the API compatibility makes Ollama the easiest drop-in replacement for any OpenAI-dependent project.</p>
 
 <pre><code># Raw HTTP
 curl http://localhost:11434/v1/chat/completions -d '{
@@ -212,9 +216,11 @@ resp = client.chat.completions.create(
 )
 print(resp.choices[0].message.content)</code></pre>
 
-<h2>Customize a model with a Modelfile</h2>
+<h2>How do I customize a model with a Modelfile?</h2>
 
-<p>A <code>Modelfile</code> lets you bake a system prompt and parameters into a reusable named model, the same idea as a Dockerfile.</p>
+<p>A <code>Modelfile</code> lets you bake a system prompt and inference parameters into a reusable named model, following the same idea as a Dockerfile. Instead of passing the same flags and system prompt every time, you define them once in a text file and build a named model layer with <code>ollama create</code>. The result shows up in <code>ollama list</code> and behaves exactly as configured every time you call it.</p>
+
+<p>The most useful parameters to set are <code>temperature</code> (lower for factual tasks, higher for creative work), <code>num_ctx</code> (the context window; raise it when you need long conversations, lower it to save VRAM), and <code>top_p</code> or <code>top_k</code> for sampling behavior. You can also add a <code>TEMPLATE</code> directive to override the chat template if the model's default does not match your use case. This is particularly useful when you want a consistent, stripped-down assistant persona across all your local tooling without repeating the system prompt in every call.</p>
 
 <pre><code># Modelfile
 FROM llama3.2
@@ -273,7 +279,7 @@ sudo systemctl restart ollama</code></pre>
 
 <p><strong>The fix:</strong> match the model to your VRAM with margin to spare, prefer a Q4_K_M quant for the best size-to-quality trade-off, and verify with <code>ollama ps</code> that it loaded fully onto the GPU. When in doubt, start smaller; a model that runs entirely on the GPU beats a larger one spilling to CPU.</p>
 
-<h2>Ollama vs llama.cpp vs LM Studio vs vLLM (2026)</h2>
+<h2>Ollama vs llama.cpp vs LM Studio vs vLLM: which should I use in 2026?</h2>
 
 <p>Ollama is not the only way to run models locally, and the ecosystem has split cleanly by workload. Ollama and LM Studio are experience layers; llama.cpp and MLX are the underlying engines; vLLM is a serving system. Here is how to choose.</p>
 

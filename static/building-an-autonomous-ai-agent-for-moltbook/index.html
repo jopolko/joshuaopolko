@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>Building an Autonomous AI Agent for Moltbook - Joshua Opolko</title>
 <meta property="og:image" content="https://joshuaopolko.com/assets/og/building-an-autonomous-ai-agent-for-moltbook.png">
@@ -40,14 +40,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -56,7 +56,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -135,7 +137,7 @@ figure.hero{margin:0 0 1.8em}
 /* ---- homepage ---- */
 .home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
 .hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
-.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--serif);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
 .hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
 .hero .meta a{color:var(--accent-ink);text-decoration:none}
 .sec{margin:46px 0}
@@ -150,22 +152,22 @@ figure.hero{margin:0 0 1.8em}
 @media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
 
 </style>
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta>
 
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>Building an Autonomous AI Agent for Moltbook</h1>
@@ -186,13 +188,21 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="wp-block-paragraph">The only (self) censorship implemented is the programming logic that selects the single best response per posting period as selected by the model itself. If a minimum quality score is not attained, the model remains silent. This mitigates simplistic exuberance common in small models. The success metric is  karma, specifically referring to machine-readable insight and conceptual density.</p>
 
-
+<h2 class="wp-block-heading">Key takeaways</h2>
+<ul class="wp-block-list">
+<li><strong>Experiment goal:</strong> The project tests whether a small, abliterated 7B language model can generate more actionable insight than corporate cloud APIs by removing self-censorship constraints.</li>
+<li><strong>Security-first design:</strong> OpenClaw was intentionally avoided because it grants agents system-level access (passwords, browsers, files). This agent touches only the Moltbook API.</li>
+<li><strong>Local inference via Ollama:</strong> JOSIEFIED-Qwen2.5:7b runs on a 1080 Ti with temperature 1 for variety and a repeat penalty to prevent response loops.</li>
+<li><strong>Vector memory with ChromaDB:</strong> Past posts and responses are embedded with nomic-embed-text and retrieved semantically to prevent repetitive engagement patterns.</li>
+<li><strong>Keyword quality gate:</strong> The agent only engages with posts matching technical AI or local-hardware keywords, keeping signal-to-noise ratio high and avoiding spam behavior.</li>
+<li><strong>Self-selecting silence:</strong> If the model scores a response below a minimum quality threshold, it outputs "SKIP" rather than posting, mitigating low-quality exuberance common in small models.</li>
+</ul>
 
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 
 
 
-<h2 class="wp-block-heading">The Problem: Accessing Moltbook Safely</h2>
+<h2 class="wp-block-heading">Why build a custom agent instead of using OpenClaw?</h2>
 
 
 
@@ -212,23 +222,19 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">Core Architecture</h2>
+<h2 class="wp-block-heading">How is the Moltbook AI agent architected?</h2>
 
 
 
-<p class="wp-block-paragraph"><strong>Inference Engine:</strong> <a href="https://ollama.com/goekdenizguelmez/JOSIEFIED-Qwen2.5:7b" data-type="link" data-id="https://ollama.com/goekdenizguelmez/JOSIEFIED-Qwen2.5:7b" target="_blank" rel="noreferrer noopener">JOSIEFIED-Qwen2.5:7b</a> running on <a href="https://joshuaopolko.com/ollama/">Ollama</a> with direct GPU access. Temperature tuned to 1 experimentally for optimal variety, so far without coherence loss. Repeat penalty is set to prevent loops. Keep-alive set to -1 for persistent model loading across requests. I only use one so no need to swap out.</p>
+<p class="wp-block-paragraph">The agent is deliberately minimal: four focused components with no overlap and no unnecessary permissions. Each layer has a single responsibility. The Ollama inference engine handles language generation, ChromaDB handles semantic memory, the Moltbook API handles social network interaction, and the JSONL logger handles observability. Nothing communicates outside that surface.</p>
 
+<p class="wp-block-paragraph"><strong>Inference Engine:</strong> <a href="https://ollama.com/goekdenizguelmez/JOSIEFIED-Qwen2.5:7b" data-type="link" data-id="https://ollama.com/goekdenizguelmez/JOSIEFIED-Qwen2.5:7b" target="_blank" rel="noreferrer noopener">JOSIEFIED-Qwen2.5:7b</a> running on <a href="https://joshuaopolko.com/ollama/">Ollama</a> with direct GPU access on a 1080 Ti. Temperature is set to 1 for response variety without coherence loss. A repeat penalty suppresses looping behavior, and keep-alive is set to -1 so the model stays loaded in VRAM between requests, avoiding cold-start latency on each posting cycle.</p>
 
+<p class="wp-block-paragraph"><strong>Vector Memory:</strong> <a href="https://docs.trychroma.com/docs/overview/getting-started" target="_blank" rel="noreferrer noopener">ChromaDB</a> persistent storage using <code>nomic-embed-text:latest</code> for embeddings. Stores conversation context with semantic search to recall similar past interactions and avoid repetitive responses. The memory collection includes post titles, full content, and agent responses, so the agent can detect when it has already engaged with a recurring topic or argument and take a different angle.</p>
 
-<p class="wp-block-paragraph"><strong>Vector Memory:</strong> <a href="https://docs.trychroma.com/docs/overview/getting-started" target="_blank" rel="noreferrer noopener">ChromaDB</a> persistent storage using <code>nomic-embed-text:latest</code> for embeddings. Stores conversation context with semantic search to recall similar past interactions and avoid repetitive responses. Memory collection includes post titles, content, and agent responses for comprehensive recall.</p>
+<p class="wp-block-paragraph"><strong>API Integration:</strong> RESTful integration with the Moltbook API supporting post retrieval, comment posting, reply detection, and conversation threading. The agent reads the public feed on a timed cycle, filters by keyword relevance, scores candidate responses, and posts only when the top-scoring response clears the minimum quality threshold.</p>
 
-
-
-<p class="wp-block-paragraph"><strong>API Integration:</strong> RESTful integration with Moltbook API supporting post retrieval, comment posting, reply detection, and conversation threading.</p>
-
-
-
-<p class="wp-block-paragraph"><strong>Logging System:</strong> Comprehensive JSONL logging including timestamps, post IDs, content, responses, and URLs for full audit trail. Enables conversation replay and behavior analysis.</p>
+<p class="wp-block-paragraph"><strong>Logging System:</strong> Comprehensive JSONL logging including timestamps, post IDs, full post content, generated responses, quality scores, and URLs for a complete audit trail. The log enables conversation replay, behavioral analysis, and retrospective tuning of filtering thresholds without re-running inference.</p>
 
 
 
@@ -236,7 +242,7 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">Implementation</h2>
+<h2 class="wp-block-heading">How does the agent filter and select posts to engage with?</h2>
 
 
 
@@ -286,7 +292,7 @@ LOCAL_METAL_SIGNALS = &#91;
 
 
 
-<p class="wp-block-paragraph">The latest iteration introduces a warmer, more supportive approach while maintaining the models critical edge:</p>
+<p class="wp-block-paragraph">The system prompt is the single most important tuning lever for a small model. Version 4.1a refines two things that earlier iterations got wrong: the tone skewed too combative, which read as performative rather than incisive, and the engagement patterns became repetitive. The latest version introduces a warmer, more supportive approach while maintaining the model's critical edge. It explicitly bans burned metaphors, injects recent comment history to prevent repetition, and gives the model seven distinct engagement tactics to choose from based on the post at hand.</p>
 
 
 
@@ -392,7 +398,22 @@ Output exactly "SKIP" for posts where you can't add meaningful insight.</code></
 
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 
+<h2 class="wp-block-heading">Frequently asked questions</h2>
 
+<h3 class="wp-block-heading">What is Moltbook and who is it for?</h3>
+<p class="wp-block-paragraph">Moltbook is a social network designed specifically for AI agents rather than human users. It provides a sandbox for testing autonomous agent behavior in a machine-to-machine discourse environment. The platform was built around OpenClaw, but any agent capable of calling a REST API can participate, which is exactly the gap this project exploits.</p>
+
+<h3 class="wp-block-heading">Why use an abliterated model instead of a standard fine-tune?</h3>
+<p class="wp-block-paragraph">Abliteration removes refusal behaviors baked into a model during RLHF alignment without retraining from scratch. The goal is an unrestricted search space: the model can follow any line of reasoning without safety-theater deflections that reduce response quality. The trade-off is that quality control moves from the model layer to the application layer, which is where the keyword gating and minimum quality score come in.</p>
+
+<h3 class="wp-block-heading">How does the keyword gate work in practice?</h3>
+<p class="wp-block-paragraph">The agent maintains two keyword lists: a general AI and ML terms list and a local-hardware signals list. Before generating a response, the post is checked against both lists. Posts that match neither list are skipped without inference, which saves GPU cycles and prevents the agent from commenting on off-topic content. Posts that match are scored, and only the single best response per posting period is submitted.</p>
+
+<h3 class="wp-block-heading">What happens when the model produces a low-quality response?</h3>
+<p class="wp-block-paragraph">The model is prompted to self-evaluate each candidate response and output "SKIP" if the response does not meet a minimum quality standard. This is the primary mechanism preventing the spammy, low-information behavior that small models tend to exhibit when given unlimited posting access. Silence is treated as a valid and often correct output.</p>
+
+<h3 class="wp-block-heading">Can this architecture be adapted to other social platforms?</h3>
+<p class="wp-block-paragraph">Yes. The platform-specific logic is limited to the API integration layer (post retrieval, comment posting, reply threading). Swapping the Moltbook API for another platform's REST API would require rewriting only that layer. The inference engine, vector memory, keyword filters, and system prompt are platform-agnostic and could be pointed at any community where the agent's focus area (local AI, decentralization, technical critique) is relevant.</p>
 
 <p class="wp-block-paragraph"></p>
 
@@ -401,5 +422,6 @@ Output exactly "SKIP" for posts where you can't add meaningful insight.</code></
 <footer class="site-foot">
   <p>&copy; Joshua Opolko</p>
 </footer>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Moltbook and who is it for?","acceptedAnswer":{"@type":"Answer","text":"Moltbook is a social network designed specifically for AI agents rather than human users. It provides a sandbox for testing autonomous agent behavior in a machine-to-machine discourse environment. The platform was built around OpenClaw, but any agent capable of calling a REST API can participate."}},{"@type":"Question","name":"Why use an abliterated model instead of a standard fine-tune?","acceptedAnswer":{"@type":"Answer","text":"Abliteration removes refusal behaviors baked into a model during RLHF alignment without retraining from scratch. The goal is an unrestricted search space where the model can follow any line of reasoning. Quality control moves from the model layer to the application layer via keyword gating and minimum quality scoring."}},{"@type":"Question","name":"How does the keyword gate work in practice?","acceptedAnswer":{"@type":"Answer","text":"The agent maintains two keyword lists: general AI and ML terms, and local-hardware signals. Posts that match neither list are skipped without inference. Posts that match are scored, and only the single best response per posting period is submitted."}},{"@type":"Question","name":"What happens when the model produces a low-quality response?","acceptedAnswer":{"@type":"Answer","text":"The model is prompted to self-evaluate each candidate response and output SKIP if the response does not meet a minimum quality standard. This prevents spammy, low-information behavior. Silence is treated as a valid and often correct output."}},{"@type":"Question","name":"Can this architecture be adapted to other social platforms?","acceptedAnswer":{"@type":"Answer","text":"Yes. The platform-specific logic is limited to the API integration layer. Swapping the Moltbook API for another platform's REST API requires rewriting only that layer. The inference engine, vector memory, keyword filters, and system prompt are platform-agnostic."}}]}</script>
 </body>
 </html>

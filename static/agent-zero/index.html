@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <link rel="preload" as="image" href="https://joshuaopolko.com/wp-content/uploads/2025/06/ao.webp" fetchpriority="high">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>Agent Zero: How to Install and Use the Autonomous AI Agent</title>
   <meta content="Install and run Agent Zero, the open-source autonomous AI agent: Docker setup, the GitHub repo, real-world use cases, and how it compares to other agent frameworks." name="description"/>
@@ -43,14 +43,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -59,7 +59,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -138,7 +140,7 @@ figure.hero{margin:0 0 1.8em}
 /* ---- homepage ---- */
 .home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
 .hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
-.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--serif);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
 .hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
 .hero .meta a{color:var(--accent-ink);text-decoration:none}
 .sec{margin:46px 0}
@@ -153,22 +155,22 @@ figure.hero{margin:0 0 1.8em}
 @media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
 
 </style>
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta>
 
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>Agent Zero: How to Install and Use the Autonomous AI Agent</h1>
@@ -185,13 +187,21 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<p class="wp-block-paragraph">Agent Zero is an open-source, fully autonomous AI agent framework that treats your computer as its tool, it writes and runs its own code, spawns sub-agents for subtasks, and remembers across sessions. This guide covers what it is, how to install it with Docker, where to get it on GitHub, what you can build, and how it compares to other agent frameworks.</p>
+<p class="wp-block-paragraph">Agent Zero is an open-source, fully autonomous AI agent framework that treats your computer as its tool. It writes and runs its own code, spawns sub-agents for subtasks, and remembers across sessions. This guide covers what it is, how to install it with Docker, where to get it on GitHub, what you can build, and how it compares to other agent frameworks.</p>
+
+<h2>Key takeaways</h2>
+
+<ul>
+<li><strong>Agent Zero is fully autonomous:</strong> it writes code, executes terminal commands, spawns sub-agents, and persists memory across sessions without requiring human translation of AI suggestions into actions.</li>
+<li><strong>Docker is the fastest install path.</strong> <code>docker pull agent0ai/agent-zero</code> then <code>docker run -p 50001:80 agent0ai/agent-zero</code> gets it running in under two minutes at <code>http://localhost:50001</code>.</li>
+<li><strong>Almost nothing is hard-coded.</strong> All behavior comes from modifiable system prompts, making Agent Zero the most customizable autonomous framework available in 2026.</li>
+<li><strong>MCP and A2A support is built in</strong> for standardized tool integration and cross-vendor agent communication. A2A was formalized by the Linux Foundation in June 2025.</li>
+<li><strong>Gartner forecasts 33% of enterprise software</strong> will incorporate agentic AI by 2028, up from under 1% in 2024, making framework selection a strategic decision now.</li>
+<li><strong>Security requires Docker isolation.</strong> Agent Zero has full system access within its container. Always run it in an isolated environment and never expose it directly to the internet.</li>
+</ul>
 
 
-
-
-
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Getting Started with Agent Zero GitHub</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How do you install Agent Zero?</h2>
 
 
 
@@ -264,7 +274,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Persistent Development Sessions</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What does Agent Zero's persistent memory enable?</h2>
 
 
 
@@ -293,7 +303,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What You Can Build with Agent Zero</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What can you build with Agent Zero?</h2>
 
 
 
@@ -380,7 +390,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">The Agentic AI Revolution</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Why is the agentic AI market growing so fast?</h2>
 
 
 
@@ -388,7 +398,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Technical Architecture: Dynamic Multi-Agent Hierarchy</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How does Agent Zero's multi-agent architecture work?</h2>
 
 
 
@@ -428,7 +438,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">The Computer-as-Tool Paradigm</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What is Agent Zero's computer-as-tool paradigm?</h2>
 
 
 
@@ -436,7 +446,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Protocol Integration: MCP and A2A</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How does Agent Zero integrate MCP and A2A protocols?</h2>
 
 
 
@@ -456,7 +466,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Real-World Applications</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What are real-world Agent Zero applications?</h2>
 
 
 
@@ -464,7 +474,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Security Architecture: Docker Isolation</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How does Agent Zero handle security in production?</h2>
 
 
 
@@ -472,19 +482,21 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Comparative Analysis: Agent Zero vs. Industry Leaders</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How does Agent Zero compare to LangChain, AutoGPT, and CrewAI?</h2>
 
+<p class="wp-block-paragraph">The multi-agent AI framework landscape in 2026 spans a wide spectrum from deterministic to fully autonomous. Here is an honest comparison of the main options:</p>
 
-
-<p class="wp-block-paragraph"><strong>LangChain (30% market share)</strong>: Excels in structured, reliable systems with deterministic outputs and robust error handling, ideal for enterprise-grade production systems.</p>
-
-
-
-<p class="wp-block-paragraph"><strong>AutoGPT (25% market share)</strong>: Emphasizes goal-oriented autonomy with real-time internet access and self-modification. Over 70% of developers prefer AutoGPT for autonomous code generation projects.</p>
-
-
-
-<p class="wp-block-paragraph"><strong>CrewAI (20% market share)</strong>: Simplifies collaborative task execution with well-defined roles and team-oriented workflows.</p>
+<table>
+<thead>
+<tr><th>Framework</th><th>Market share</th><th>Approach</th><th>Best for</th><th>Memory</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Agent Zero</strong></td><td>Growing, open-source</td><td>Computer-as-tool; no hard-coded rails, dynamic code creation at runtime</td><td>Radical customization, terminal access, cross-session learning</td><td>Persistent, AI-filtered across sessions</td></tr>
+<tr><td><strong>LangChain</strong></td><td>~30%</td><td>Structured and reliable; deterministic outputs with robust error handling</td><td>Enterprise-grade production systems requiring predictability</td><td>Session-based plus optional external stores</td></tr>
+<tr><td><strong>AutoGPT</strong></td><td>~25%</td><td>Goal-oriented autonomy with real-time internet access and self-modification</td><td>Autonomous code generation projects</td><td>File-based, bounded to session</td></tr>
+<tr><td><strong>CrewAI</strong></td><td>~20%</td><td>Role-based collaborative agents with team-oriented workflows and Flows</td><td>Multi-agent task delegation with defined roles</td><td>Optional pluggable backends since v1.12</td></tr>
+</tbody>
+</table>
 
 
 
@@ -516,7 +528,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Memory Systems: Beyond Session-Based Context</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How does Agent Zero's memory persist across sessions?</h2>
 
 
 
@@ -524,7 +536,7 @@ python run.py</code></pre>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Why Agent Zero Matters</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Why does Agent Zero matter for autonomous AI?</h2>
 
 
 
@@ -534,7 +546,29 @@ python run.py</code></pre>
 
 <hr class="wp-block-separator has-alpha-channel-opacity" />
 
+<h2>Frequently asked questions</h2>
 
+<h3>What is Agent Zero?</h3>
+
+<p>Agent Zero is a free, open-source autonomous AI agent framework that treats your computer as its tool. It writes and runs its own code, spawns sub-agents for subtasks, and maintains persistent memory across sessions. Unlike AI assistants that suggest actions, Agent Zero executes them directly inside a Docker-isolated Linux environment.</p>
+
+<h3>How does Agent Zero differ from LangChain or CrewAI?</h3>
+
+<p>The defining difference is the computer-as-tool paradigm. LangChain excels at structured, deterministic systems with predefined tools. CrewAI uses role-based collaborative agents for structured teamwork. Agent Zero has almost nothing hard-coded: agents dynamically write their own tools and all behavior stems from modifiable system prompts. This makes it maximally flexible but less predictable than the alternatives.</p>
+
+<h3>Is Agent Zero safe to use?</h3>
+
+<p>Agent Zero has full system access within its container and can execute arbitrary code. The official documentation explicitly warns it "Can Be Dangerous." Always run it inside Docker for container isolation, never expose it to the raw internet, and set resource limits. Apply the same security posture you would to any system with arbitrary code execution capabilities.</p>
+
+<h3>What LLMs does Agent Zero support?</h3>
+
+<p>Agent Zero uses LiteLLM for multi-provider support: OpenAI GPT-4, Anthropic Claude, Azure OpenAI, and local models via <a href="/ollama/">Ollama</a>. Configure providers in <code>models.yaml</code> and <code>providers.yaml</code>. For privacy-focused deployments, a local Ollama model means no data leaves your infrastructure and there are no per-token API costs.</p>
+
+<h3>Does Agent Zero support Model Context Protocol?</h3>
+
+<p>Yes. Agent Zero supports both MCP server and MCP client roles, providing standardized interfaces to connect the agent to external data sources and tools. It also supports the Agent-to-Agent (A2A) protocol formalized by the Linux Foundation in June 2025, enabling cross-vendor agent coordination via HTTP, SSE, and JSON-RPC.</p>
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
 
 <h2 class="wp-block-heading">Resources</h2>
 
@@ -584,5 +618,53 @@ python run.py</code></pre>
 <footer class="site-foot">
   <p>&copy; Joshua Opolko</p>
 </footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Agent Zero?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Agent Zero is a free, open-source autonomous AI agent framework that treats your computer as its tool. It writes and runs its own code, spawns sub-agents for subtasks, and maintains persistent memory across sessions. Unlike AI assistants that suggest actions, Agent Zero executes them directly inside a Docker-isolated Linux environment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Agent Zero differ from LangChain or CrewAI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The defining difference is the computer-as-tool paradigm. LangChain excels at structured, deterministic systems with predefined tools. CrewAI uses role-based collaborative agents for structured teamwork. Agent Zero has almost nothing hard-coded: agents dynamically write their own tools and all behavior stems from modifiable system prompts, making it maximally flexible but less predictable than the alternatives."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Agent Zero safe to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Agent Zero has full system access within its container and can execute arbitrary code. The official documentation explicitly warns it 'Can Be Dangerous.' Always run it inside Docker for container isolation, never expose it to the raw internet, and set resource limits. Apply the same security posture you would to any system with arbitrary code execution capabilities."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What LLMs does Agent Zero support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Agent Zero uses LiteLLM for multi-provider support: OpenAI GPT-4, Anthropic Claude, Azure OpenAI, and local models via Ollama. Configure providers in models.yaml and providers.yaml. For privacy-focused deployments, a local Ollama model means no data leaves your infrastructure and there are no per-token API costs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Agent Zero support Model Context Protocol?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Agent Zero supports both MCP server and MCP client roles, providing standardized interfaces to connect the agent to external data sources and tools. It also supports the Agent-to-Agent (A2A) protocol formalized by the Linux Foundation in June 2025, enabling cross-vendor agent coordination via HTTP, SSE, and JSON-RPC."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

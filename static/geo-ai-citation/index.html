@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>GEO: Optimizing for AI Citation Instead of Clicks</title>
   <meta content="GEO replaces click optimization with citation optimization. Real data: ChatGPT-User bot hits ramping, Bing citations 0 to 97/day in 120 days, /answers cited within 72 hours of launch." name="description"/>
@@ -37,14 +37,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -53,7 +53,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -132,7 +134,7 @@ figure.hero{margin:0 0 1.8em}
 /* ---- homepage ---- */
 .home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
 .hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
-.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--serif);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
 .hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
 .hero .meta a{color:var(--accent-ink);text-decoration:none}
 .sec{margin:46px 0}
@@ -147,22 +149,22 @@ figure.hero{margin:0 0 1.8em}
 @media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
 
 </style>
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta>
 
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>GEO: Optimizing for AI Citation Instead of Clicks</h1>
@@ -189,7 +191,15 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="post-lede wp-block-paragraph">Search is no longer about ranking first and hoping someone clicks. It is about being the source an AI quotes when a user asks your exact question. GEO is how you become that source.</p>
 
-
+<h2>Key takeaways</h2>
+<ul>
+<li><strong>GEO replaces click optimization:</strong> Generative Engine Optimization targets AI citations, not ranked link positions. The user sees your content quoted in an AI answer, not as one of ten blue links.</li>
+<li><strong>Platform indexes are different:</strong> ChatGPT reads Bing, Claude reads Brave Search (~30B pages), Perplexity uses its own index, and Google AI Overviews draws 92% of citations from top-10 ranking pages. Each requires distinct optimization.</li>
+<li><strong>Live bots are the signal that matters:</strong> ChatGPT-User and Claude-User fire only when a real user query triggers a citation. Every hit in your server logs equals one AI answer being served to a real person right now.</li>
+<li><strong>Passage length is the extraction window:</strong> The optimal citation unit is 134-167 words. Shorter lacks claim density; longer exceeds the extraction unit that AI systems use when pulling quotes.</li>
+<li><strong>Answer-first structure is not optional:</strong> Direct answer in the first sentence, two or three sentences of named-source specifics, one sentence of context or implication. This is the pattern AI extraction systems are optimized to find.</li>
+<li><strong>Zero-to-citation is a threshold event:</strong> NowServingTO's /answers page was cited within 72 hours of launch because the format matched extraction requirements from day one. No authority-building period required.</li>
+</ul>
 
 <h2 class="wp-block-heading">What Is GEO?</h2>
 
@@ -229,7 +239,15 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="wp-block-paragraph">Platform citation behavior differs significantly, and treating all AI search as equivalent is a strategy error. Google AI Overviews draws 92% of its citations from top-10 ranking pages, domain age and external editorial links still matter here. Perplexity has the lowest domain-age threshold and weights specificity most heavily: if your page is the most specific available answer to a query, Perplexity will cite it regardless of domain age. ChatGPT weights Wikipedia at 47.9% of citation sources and Reddit at 11.3%, brand presence on those platforms matters as much as on-page structure. Only 11% of domains appear in both ChatGPT and Google AIO results for the same query. Platform-specific optimization is not optional.</p>
 
-
+<table>
+<thead><tr><th>Platform</th><th>Index source</th><th>Domain age threshold</th><th>Key citation weight</th><th>Priority action</th></tr></thead>
+<tbody>
+<tr><td><strong>Google AI Overviews</strong></td><td>Google (92% from top-10)</td><td>High</td><td>Domain authority, editorial links</td><td>Classic SEO, Google Search Console</td></tr>
+<tr><td><strong>ChatGPT Search</strong></td><td>Bing + OpenAI crawl</td><td>Medium</td><td>Wikipedia 47.9%, Reddit 11.3%</td><td>Bing Webmaster Tools, Wikipedia presence</td></tr>
+<tr><td><strong>Claude</strong></td><td>Brave Search (~30B pages)</td><td>Medium</td><td>Brave organic rankings (~87% overlap)</td><td>Allow Claude-SearchBot, rank in Brave</td></tr>
+<tr><td><strong>Perplexity</strong></td><td>Own AI-native index</td><td>Lowest</td><td>Answer specificity</td><td>Crawl access, Reddit mentions</td></tr>
+</tbody>
+</table>
 
 <h2 class="wp-block-heading">What Is the Optimal Answer Structure for AI Citation?</h2>
 
@@ -271,11 +289,71 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="wp-block-paragraph">Full audit data, bot traffic logs, and platform-by-platform score breakdowns: <a href="https://joshuaopolko.com/claude-seo/">GEO case study with three audit runs and Bing citation chart</a>.</p>
 
+<h2>Frequently asked questions</h2>
+<h3>What is GEO and how does it differ from SEO?</h3>
+<p>GEO (Generative Engine Optimization) is the practice of structuring content so AI assistants choose it as a citation source when answering user queries. SEO optimizes for a ranked position in a list of links; GEO optimizes for inclusion in a synthesized AI answer delivered directly to the user. The user may never see your URL in a results list at all. The signals overlap (schema, server-side rendering, clean crawl access) but the selection logic is genuinely different: AI engines weight answer specificity, passage extractability, and named-source attribution over domain age and raw link count.</p>
+<h3>How long does it take to get cited by an AI?</h3>
+<p>The gating factor is index coverage and crawl access. If those are in place, citation can arrive quickly: NowServingTO's /answers page was cited within 72 hours of launch because the content format matched extraction requirements from publication. The joshuaopolko.com case shows a clean threshold: zero citations through one day, then citations began and compounded to 1,800 in 120 days. Fix the technical gates first (right index, correct crawlers allowed, server-side HTML), then focus on passage structure and named-source attribution on every statistic.</p>
+<h3>How do AI systems decide what to cite?</h3>
+<p>AI assistants select citations through a two-step process: retrieval (finding candidate pages from an index or live crawl) and selection (choosing which passage to quote). Retrieval is determined by index coverage and crawl access. Selection is driven by passage extractability: answer-first structure, the 134-167 word extraction window, question-format headings that map cleanly to a query, and named source attribution on every statistic. Pages that open each section with a direct answer in the first sentence and support it with a named data point are structurally optimized for the selection step.</p>
+<h3>What is the best content structure for AI citation?</h3>
+<p>The optimal structure for each H2 section: direct answer in the first sentence, two to three sentences of supporting specifics with named source attribution, one sentence of context or implication. Keep the block in the 134-167 word range. Use question-format H2 headings so AI systems can map the question-answer pair as a discrete unit. Every key statistic needs a named source attached ("According to Ahrefs, 2025" beats "studies show"). Passages that follow this template are self-contained, attributable, and extractable without surrounding context.</p>
+<h3>Can a new site with no backlinks get AI citations?</h3>
+<p>Yes, and the data is clear on this. Perplexity has the lowest domain-age threshold of any major AI search platform. ChatGPT's citation algorithm weights answer specificity over domain authority. A site launched six weeks ago with precise, well-structured content can outrank a ten-year-old review aggregator if it answers the specific query more accurately. The joshuaopolko.com case reached 97 citations per day within four months of launch. The threshold is passage quality and index coverage, not accumulated domain authority.</p>
 
   </div>
 </main>
 <footer class="site-foot">
   <p>&copy; Joshua Opolko</p>
 </footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://joshuaopolko.com/geo-ai-citation/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is GEO and how does it differ from SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GEO (Generative Engine Optimization) is the practice of structuring content so AI assistants choose it as a citation source when answering user queries. SEO optimizes for a ranked position in a list of links; GEO optimizes for inclusion in a synthesized AI answer. The signals overlap but the selection logic is different: AI engines weight answer specificity, passage extractability, and named-source attribution over domain age and raw link count."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to get cited by an AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The gating factor is index coverage and crawl access. If those are in place, citation can arrive quickly. NowServingTO's /answers page was cited within 72 hours of launch because the content format matched extraction requirements from publication. Fix the technical gates first (right index, correct crawlers allowed, server-side HTML), then focus on passage structure and named-source attribution."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do AI systems decide what to cite?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI assistants select citations through a two-step process: retrieval (finding candidate pages from an index or live crawl) and selection (choosing which passage to quote). Selection is driven by passage extractability: answer-first structure, the 134-167 word extraction window, question-format headings, and named source attribution on every statistic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the best content structure for AI citation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The optimal structure for each H2 section: direct answer in the first sentence, two to three sentences of supporting specifics with named source attribution, one sentence of context or implication. Keep each block in the 134-167 word range. Use question-format H2 headings so AI systems can map the question-answer pair as a discrete unit. Every key statistic needs a named source attached."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a new site with no backlinks get AI citations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Perplexity has the lowest domain-age threshold of any major AI search platform. ChatGPT's citation algorithm weights answer specificity over domain authority. A site launched six weeks ago with precise, well-structured content can outrank a ten-year-old review aggregator if it answers the specific query more accurately. The threshold is passage quality and index coverage, not accumulated domain authority."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

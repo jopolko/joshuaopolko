@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On</title>
   <meta content="Most apps bolt LLMs onto existing pipelines. NowServingTO built the whole thing around one: Haiku classification, web_search verification, tiered self-healing re-checks, static output at $0.35/day." name="description"/>
@@ -37,14 +37,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -53,7 +53,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -132,7 +134,7 @@ figure.hero{margin:0 0 1.8em}
 /* ---- homepage ---- */
 .home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
 .hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
-.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--serif);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
 .hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
 .hero .meta a{color:var(--accent-ink);text-decoration:none}
 .sec{margin:46px 0}
@@ -147,22 +149,22 @@ figure.hero{margin:0 0 1.8em}
 @media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
 
 </style>
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta>
 
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>The LLM-as-ETL Architecture: Building a Data Pipeline Around Claude Instead of Bolting It On</h1>
@@ -181,7 +183,15 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="post-lede wp-block-paragraph">Most people add an LLM to a pipeline they already built. I built the pipeline around the LLM, and that inversion changes everything about how the system behaves.</p>
 
-
+<h2>Key takeaways</h2>
+<ul>
+<li><strong>LLM-as-ETL replaces the transformation layer:</strong> Instead of deterministic rules, a language model handles ambiguous input classification at scale, changing where engineering trust lives.</li>
+<li><strong>Front-load deterministic checks:</strong> NowServingTO runs a free chain denylist before any LLM call, cutting costs and reserving expensive steps for genuinely hard cases.</li>
+<li><strong>One call, three outputs:</strong> A single Haiku web_search call returns cuisine tag, operating status, and website URL simultaneously, reducing cost and context incoherence.</li>
+<li><strong>The gates are the product:</strong> Of 2,016 food licences, only 258 (12.8%) reach the public directory. The filtering, not the raw data, is the value.</li>
+<li><strong>Self-healing via re-check intervals:</strong> Every cached entry carries a verified_at timestamp; stale entries are auto-queued by source type, from 7 days (unclear verdicts) to 180 days (own-website links).</li>
+<li><strong>Silent success is a failure mode:</strong> The worst production bug was a cron job that exited zero but stopped writing the output file. Always verify file modification time after each run.</li>
+</ul>
 
 <h2 class="wp-block-heading">What Is an LLM-as-ETL Architecture?</h2>
 
@@ -258,11 +268,14 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<p class="wp-block-paragraph">Build around the LLM when the transformation step is the hard problem, when your pipeline&#8217;s core challenge is making structured sense of ambiguous, unstructured, or semi-structured input at scale. Cuisine classification from business names in 30+ languages is exactly this. No lookup table handles it well. An LLM handles it cheaply and accurately. Bolt an LLM on when the transformation step is already solved and you are adding a new capability: generating summaries of structured records, drafting templated copy from database fields, classifying support tickets in an existing routing system.</p>
-
-
-
-<p class="wp-block-paragraph">The practical test: if removing the LLM would require rebuilding the pipeline from scratch, you built around it. If removing it would just turn off a feature, you bolted it on. Neither is inherently wrong. But knowing which one you are doing matters for how you design error handling, cost controls, and cache invalidation.</p>
+<table>
+<thead><tr><th>Approach</th><th>Use when</th><th>Without the LLM</th><th>Error handling focus</th></tr></thead>
+<tbody>
+<tr><td><strong>Build around the LLM</strong></td><td>Transformation is the core problem: ambiguous inputs, 30+ languages, no deterministic rule covers it cleanly</td><td>Pipeline must be rebuilt from scratch</td><td>Catch model failures across the whole system design</td></tr>
+<tr><td><strong>Bolt the LLM on</strong></td><td>Transformation already solved; LLM adds summaries, copy drafts, or ticket routing on top of existing logic</td><td>Feature turns off; rest of pipeline still runs</td><td>Isolate to the feature wrapper only</td></tr>
+</tbody>
+</table>
+<p class="wp-block-paragraph">Cuisine classification from business names in 30+ languages is a build-around problem. No lookup table handles it reliably. An LLM handles it cheaply and accurately. Generating editorial copy from existing structured records is a bolt-on problem. Neither approach is wrong, but knowing which you are building changes how you design error handling, cost controls, and cache invalidation strategy.</p>
 
 
 
@@ -288,11 +301,76 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="wp-block-paragraph"><em>NowServingTO is running in production at <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, Toronto&#8217;s daily-refresh directory of newly licensed restaurants across 45 cuisine categories, verified open, chains excluded.</em></p>
 
+<h2>Frequently asked questions</h2>
+
+<h3>What is the difference between LLM-as-ETL and a traditional ETL pipeline?</h3>
+<p>A traditional ETL pipeline uses deterministic transformations: regex, lookups, and rule-based logic that produce predictable outputs from predictable inputs. LLM-as-ETL replaces the transformation step with a language model call, enabling the system to handle ambiguous, multilingual, or unstructured inputs that no lookup table covers well. The tradeoff is that you shift trust from code you fully control to a model whose reasoning you must validate through output schema checks and downstream gates.</p>
+
+<h3>How much does running Claude Haiku as an ETL engine cost at production scale?</h3>
+<p>NowServingTO's full nightly pipeline runs at approximately $0.35 per day for a directory covering 2,000+ licence entries. That cost is achieved by front-loading free deterministic checks (the chain denylist), caching every classification result with a verified_at timestamp, and batching re-checks by source-type interval rather than re-checking everything nightly. The biggest cost driver is web_search calls, which are reserved for entries that actually need fresh verification rather than running on every record.</p>
+
+<h3>What happens when Claude returns a refusal instead of a structured verdict?</h3>
+<p>Early in the project, Haiku occasionally returned a refusal string instead of a structured JSON verdict. Without strict output validation, those refusals propagated into the wire file and rendered raw text to users. The fix is explicit schema validation before any response is written to cache: if the response does not parse into the expected structure, the entry is flagged as unclear and re-queued for the next run. Never trust model output as valid without parsing it first.</p>
+
+<h3>Why does NowServingTO require a Google Places match before showing an entry?</h3>
+<p>A City of Toronto food-service licence is not proof a restaurant is open or serves walk-in customers. Licences cover ghost kitchens, catering operations, and institutional food services that will never have a public-facing Google Places listing. Requiring a Places match with OPERATIONAL status acts as a final-layer reality check: if Google's index cannot confirm the business exists at that address as a functioning restaurant, neither can NowServingTO. The Places gate is what transforms a raw licence dump into a useful directory.</p>
+
+<h3>How does the self-healing re-check system prevent stale data?</h3>
+<p>Every cached entry stores a verified_at timestamp alongside its verdict. The nightly cron compares that timestamp against a re-check interval calibrated to how volatile each source type is: unclear verdicts re-check every 7 days, social media links every 30 days, and stable own-website links every 180 days. As new restaurants build a web presence, the system silently upgrades their entries from unclear to confirmed-open without manual intervention. The directory heals itself as the internet catches up to the physical world.</p>
+
 
   </div>
 </main>
 <footer class="site-foot">
   <p>&copy; Joshua Opolko</p>
 </footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between LLM-as-ETL and a traditional ETL pipeline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A traditional ETL pipeline uses deterministic transformations: regex, lookups, and rule-based logic that produce predictable outputs from predictable inputs. LLM-as-ETL replaces the transformation step with a language model call, enabling the system to handle ambiguous, multilingual, or unstructured inputs that no lookup table covers well. The tradeoff is that you shift trust from code you fully control to a model whose reasoning you must validate through output schema checks and downstream gates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does running Claude Haiku as an ETL engine cost at production scale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NowServingTO's full nightly pipeline runs at approximately $0.35 per day for a directory covering 2,000+ licence entries. That cost is achieved by front-loading free deterministic checks (the chain denylist), caching every classification result with a verified_at timestamp, and batching re-checks by source-type interval rather than re-checking everything nightly. The biggest cost driver is web_search calls, reserved for entries that actually need fresh verification."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when Claude returns a refusal instead of a structured verdict?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Early in the project, Haiku occasionally returned a refusal string instead of a structured JSON verdict. Without strict output validation, those refusals propagated into the wire file and rendered raw text to users. The fix is explicit schema validation before any response is written to cache: if the response does not parse into the expected structure, the entry is flagged as unclear and re-queued for the next run."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does NowServingTO require a Google Places match before showing an entry?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A City of Toronto food-service licence is not proof a restaurant is open or serves walk-in customers. Licences cover ghost kitchens, catering operations, and institutional food services that will never have a public-facing Google Places listing. Requiring a Places match with OPERATIONAL status acts as a final-layer reality check: if Google's index cannot confirm the business exists at that address as a functioning restaurant, neither can NowServingTO."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the self-healing re-check system prevent stale data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every cached entry stores a verified_at timestamp alongside its verdict. The nightly cron compares that timestamp against a re-check interval calibrated to how volatile each source type is: unclear verdicts re-check every 7 days, social media links every 30 days, and stable own-website links every 180 days. As new restaurants build a web presence, the system silently upgrades their entries from unclear to confirmed-open without manual intervention."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

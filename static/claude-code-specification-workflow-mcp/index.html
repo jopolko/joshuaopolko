@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <link rel="preload" as="image" href="https://joshuaopolko.com/wp-content/uploads/2025/08/unnamed-1-1.webp" fetchpriority="high">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>Spec-Driven Development with Claude Code (Spec Workflow MCP)</title>
   <meta content="A practical spec-driven development workflow for Claude Code with the Spec Workflow MCP, turn a feature idea into requirements, design, and tested code." name="description"/>
@@ -43,14 +43,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -59,7 +59,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -138,7 +140,7 @@ figure.hero{margin:0 0 1.8em}
 /* ---- homepage ---- */
 .home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
 .hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
-.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--serif);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
 .hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
 .hero .meta a{color:var(--accent-ink);text-decoration:none}
 .sec{margin:46px 0}
@@ -153,22 +155,22 @@ figure.hero{margin:0 0 1.8em}
 @media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
 
 </style>
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta>
 
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>Spec-Driven Development with Claude Code (Spec Workflow MCP)</h1>
@@ -177,45 +179,42 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="wp-block-paragraph">How a specification-driven workflow transformed three weeks of failed VR development into flawless, production-ready code on the first attempt.</p>
 
-
-
 <p class="wp-block-paragraph">For three weeks, I battled impossible 3D VR hand-tracking code. Countless <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a> sessions, Google searches, and a browser-crashing prototype left me stuck. Development hell consumed my time. Despite access to cutting-edge AI tools, the complexity of <a href="https://www.w3.org/TR/webxr/" target="_blank" rel="noopener noreferrer">WebXR</a> hand-tracking defeated every attempt.</p>
-
-
 
 <p class="wp-block-paragraph">Then I discovered specification-driven development with Claude Code MCP, and everything changed.</p>
 
+<h2>Key takeaways</h2>
 
+<ul>
+<li><strong>Spec-driven development uses four systematic phases:</strong> requirements analysis (EARS format), system design (Mermaid diagrams), task planning, and systematic execution, in that order.</li>
+<li><strong>Install is one command:</strong> <code>claude mcp add spec-workflow npx @pimzino/spec-workflow-mcp@latest -- /path/to/your/project</code></li>
+<li><strong>Use it for complex, multi-component features.</strong> For quick scripts and single-file utilities, standard Claude Code is faster.</li>
+<li><strong>The spec workflow prevents the three most common AI coding failures:</strong> scope creep, architectural inconsistencies, and incomplete implementations that require major rewrites.</li>
+<li><strong>MCP integration enables live data access during design,</strong> so the architecture is validated against your real database schemas and APIs before a single line of code is written.</li>
+<li><strong>The result is built-in documentation:</strong> requirements, Mermaid architecture diagrams, and task breakdowns serve as comprehensive project docs from day one.</li>
+</ul>
 
 <h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What is Claude Code Specification Workflow?</h2>
 
 
 
-<p class="wp-block-paragraph">Claude Code specification workflow is an automated, <a href="https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/" target="_blank" rel="noopener noreferrer">spec-driven development approach</a> that transforms feature ideas into complete implementations. It uses four systematic phases: requirements analysis, system design, task planning, and execution.</p>
+<p class="wp-block-paragraph">Claude Code specification workflow is an automated, <a href="https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/" target="_blank" rel="noopener noreferrer">spec-driven development approach</a> that transforms feature ideas into complete, production-ready implementations through four systematic phases: requirements analysis, system design, task planning, and execution. Rather than generating code reactively from a prompt, the workflow forces the AI to understand what to build before deciding how to build it, the same discipline that distinguishes senior engineers from junior ones.</p>
+
+<p class="wp-block-paragraph">Unlike standard <a href="https://joshuaopolko.com/ai-code-generation-claude-vs-gemini-a-developers-real-world-comparison/">AI coding tools</a> that generate code reactively in response to vague prompts, this specification workflow provides a structured, repeatable process with checkpoints. This prevents the three most common AI-assisted development failures: scope creep (the feature keeps expanding mid-build), architectural inconsistencies (components that do not fit together cleanly), and incomplete implementations (code that works for the happy path but breaks on edge cases). The structured approach is especially valuable for complex, multi-component features where reactive code generation reliably produces an unmaintainable tangle.</p>
 
 
 
-<p class="wp-block-paragraph">Unlike standard <a href="https://joshuaopolko.com/ai-code-generation-claude-vs-gemini-a-developers-real-world-comparison/">AI coding tools</a> that generate code reactively, this specification workflow provides structured, repeatable processes. This prevents common failures like scope creep, architectural inconsistencies, and incomplete implementations.</p>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What are the four phases of spec-driven development?</h2>
 
+<p class="wp-block-paragraph">The workflow enforces four phases in strict sequence. Each phase produces a document the next phase builds on, making it impossible to skip straight to code without understanding the requirements or design. This is the key structural difference from standard AI-assisted coding, where "write me a feature" jumps directly to implementation.</p>
 
+<p class="wp-block-paragraph"><strong>Requirements Specification:</strong> Analyzes the feature request and creates structured requirements using <a href="https://alistairmavin.com/ears/" target="_blank" rel="noopener noreferrer">EARS format</a> (WHEN/IF/THEN patterns) that eliminate ambiguity and create testable acceptance criteria. The output is a requirements document that defines what done means, before any code is written.</p>
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">The Four Phases of Spec-Driven Development</h2>
+<p class="wp-block-paragraph"><strong>System Design:</strong> Generates technical architecture with <a href="https://mermaid.js.org/" target="_blank" rel="noopener noreferrer">Mermaid diagrams</a> showing component relationships, data flow, API interfaces, and state management. With MCP integration, the design phase can query your actual database schemas and file structures to ensure the architecture fits your existing system rather than conflicting with it.</p>
 
+<p class="wp-block-paragraph"><strong>Task Planning:</strong> Breaks the feature into atomic tasks, each with specific requirements, acceptance criteria, test cases, and dependency ordering following <a href="https://www.agilealliance.org/glossary/tdd/" target="_blank" rel="noopener noreferrer">test-driven development</a> principles. Tasks are sized so each one is verifiable independently, which prevents the "it worked until the last piece" integration failure.</p>
 
-
-<p class="wp-block-paragraph"><strong>Requirements Specification:</strong> Analyzes feature requests and creates structured requirements using <a href="https://alistairmavin.com/ears/" target="_blank" rel="noopener noreferrer">EARS format</a> (WHEN/IF/THEN patterns) that eliminate ambiguity and create testable acceptance criteria.</p>
-
-
-
-<p class="wp-block-paragraph"><strong>System Design:</strong> Generates technical architecture with <a href="https://mermaid.js.org/" target="_blank" rel="noopener noreferrer">Mermaid diagrams</a> showing component relationships, data flow, API interfaces, and state management before writing code.</p>
-
-
-
-<p class="wp-block-paragraph"><strong>Task Planning:</strong> Breaks complex features into atomic tasks, each with specific requirements, acceptance criteria, test cases, and dependencies following <a href="https://www.agilealliance.org/glossary/tdd/" target="_blank" rel="noopener noreferrer">test-driven development</a> principles.</p>
-
-
-
-<p class="wp-block-paragraph"><strong>Systematic Execution:</strong> Implements planned tasks in order, validating each step against requirements to catch integration issues immediately.</p>
+<p class="wp-block-paragraph"><strong>Systematic Execution:</strong> Implements tasks in planned order, validating each step against the requirements document to catch integration issues immediately rather than at the end. If a task fails validation, the workflow surfaces the mismatch before it propagates through the remaining work.</p>
 
 
 
@@ -244,35 +243,25 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Real-World Results</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What results did spec-driven development produce?</h2>
 
-
-
-<p class="wp-block-paragraph">When I applied Claude Code specification workflow to my VR hand-tracking project:</p>
-
-
+<p class="wp-block-paragraph">After three weeks of failed WebXR hand-tracking attempts using standard Claude Code sessions, I applied the specification workflow to the same problem. One workflow run delivered what weeks of iterative prompting could not: working, production-ready code on the first attempt. This is not an incremental improvement in output quality; it is a categorical shift in what AI-assisted development can achieve on genuinely complex problems.</p>
 
 <ul class="wp-block-list">
 
-<li><strong>First-Run Success</strong>, Code worked flawlessly without debugging or documentation hunting</li>
+<li><strong>First-run success:</strong> code worked flawlessly without a single round of debugging or documentation hunting</li>
 
+<li><strong>Complete implementation:</strong> both desktop and VR modes functioned correctly with proper gesture mapping throughout</li>
 
-<li><strong>Complete Implementation</strong>, Both desktop and VR modes functioned correctly with proper gesture mapping</li>
-
-
-<li><strong>Production-Ready</strong>, Clean architecture, error handling, and maintainable structure from the start</li>
+<li><strong>Production-ready:</strong> clean architecture, comprehensive error handling, and maintainable structure from the start, not bolted on afterward</li>
 
 </ul>
 
-
-
-<p class="wp-block-paragraph">This wasn&#8217;t incremental improvement, it was a categorical shift in AI-assisted development capability.</p>
+<p class="wp-block-paragraph">The mechanism behind this is straightforward: the spec phase forced precise problem definition that my iterative prompting had skipped. Three weeks of failure was mostly failure to define the problem clearly, not failure of the AI to execute. The workflow front-loads that definition work so execution can succeed.</p>
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How to Install</h2>
-
-
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">How do I install the Spec Workflow MCP?</h2>
 
 <p class="wp-block-paragraph">Getting started requires one command:</p>
 
@@ -286,7 +275,7 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Key Benefits</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">What are the key benefits of the spec workflow?</h2>
 
 
 
@@ -363,13 +352,25 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Why This Matters</h2>
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Spec workflow vs standard Claude Code: when to use which</h2>
 
+<table>
+<thead>
+<tr><th>Situation</th><th>Spec workflow</th><th>Standard Claude Code</th></tr>
+</thead>
+<tbody>
+<tr><td>Multi-component features</td><td>Yes, phases prevent integration failures</td><td>Risky, scope tends to drift</td></tr>
+<tr><td>Complex business logic with edge cases</td><td>Yes, EARS requirements make edge cases explicit</td><td>Edge cases often missed</td></tr>
+<tr><td>Team environment needing documentation</td><td>Yes, requirements and diagrams are produced automatically</td><td>No documentation produced</td></tr>
+<tr><td>Strict testing requirements</td><td>Yes, acceptance criteria per task</td><td>Tests are an afterthought</td></tr>
+<tr><td>Quick prototype or single-file script</td><td>Overhead not worth it</td><td>Faster</td></tr>
+<tr><td>Debugging a specific bug</td><td>Not needed</td><td>Faster</td></tr>
+</tbody>
+</table>
 
+<h2 class="wp-block-heading" style="font-size: 1.25em;font-weight: 600;line-height: 1.3;margin: 1.2em 0 0.6em 0">Why does spec-driven development matter?</h2>
 
-<p class="wp-block-paragraph">As <a href="https://www.ibm.com/topics/ai-agents" target="_blank" rel="noopener noreferrer">IBM notes about agentic workflows</a>, effective AI development isn&#8217;t about more powerful models. It&#8217;s about better organization of AI capabilities. The specification workflow organizes AI into focused, systematic processes that mirror how professional development teams actually work: requirements definition, system design, implementation, and validation.</p>
-
-
+<p class="wp-block-paragraph">As <a href="https://www.ibm.com/topics/ai-agents" target="_blank" rel="noopener noreferrer">IBM notes about agentic workflows</a>, effective AI development is not about more powerful models. It is about better organization of AI capabilities. The specification workflow organizes Claude Code into focused, systematic processes that mirror how professional development teams actually work: requirements definition, system design, implementation, and validation. The AI does not need to be smarter; it needs a structure that forces it to understand the problem before generating solutions.</p>
 
 <p class="wp-block-paragraph">After three weeks of failure, one specification workflow run delivered exactly what I needed. Your next impossible project might be one specification away from success.</p>
 
@@ -377,7 +378,29 @@ figure.hero{margin:0 0 1.8em}
 
 <hr class="wp-block-separator has-alpha-channel-opacity" />
 
+<h2>Frequently asked questions</h2>
 
+<h3>What is the Claude Code Spec Workflow MCP?</h3>
+
+<p>The Spec Workflow MCP is an open-source Model Context Protocol server that adds spec-driven development to Claude Code. It introduces four phases (requirements, design, task planning, execution) that transform a feature idea into production-ready code by forcing structured analysis before implementation. Install it with one command: <code>claude mcp add spec-workflow npx @pimzino/spec-workflow-mcp@latest -- /path/to/project</code>.</p>
+
+<h3>When should I use the spec workflow instead of standard Claude Code?</h3>
+
+<p>Use the spec workflow for features with multiple integrated components, complex business logic with edge cases, team environments needing documentation, or projects where long-term architecture matters. Use standard Claude Code for quick prototypes, single-file utilities, debugging, and simple refactoring. The workflow adds upfront overhead that pays off exponentially as complexity increases.</p>
+
+<h3>What is EARS format in the requirements phase?</h3>
+
+<p>EARS (Easy Approach to Requirements Syntax) is a structured requirements format using WHEN/IF/THEN patterns that eliminate ambiguity from feature requests. Instead of "the user should be able to upload files," EARS produces "WHEN the user selects files AND all files are under 10 MB, the system SHALL upload them and display progress. IF any file exceeds 10 MB, the system SHALL reject it with an error message." Each statement is directly testable, which is what makes the downstream execution phase reliable.</p>
+
+<h3>Does the spec workflow work with any project or language?</h3>
+
+<p>Yes. The Spec Workflow MCP is language-agnostic and works with any project Claude Code can read. The requirements and design phases produce language-independent artifacts (EARS requirements, Mermaid diagrams). The execution phase implements in whatever language your project uses. It is particularly valuable for JavaScript/TypeScript, Python, and any language where complex multi-file features are common.</p>
+
+<h3>What is the real-time dashboard?</h3>
+
+<p>The MCP server auto-launches a web dashboard when you start a spec workflow session. It shows the current phase, which tasks are complete, which are in progress, and the overall implementation status. This gives you a live view of Claude Code's progress through the plan rather than having to read through long conversation threads to understand what has been done.</p>
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
 
 <h2 class="wp-block-heading">Essential Resources</h2>
 
@@ -421,5 +444,53 @@ figure.hero{margin:0 0 1.8em}
 <footer class="site-foot">
   <p>&copy; Joshua Opolko</p>
 </footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Claude Code Spec Workflow MCP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Spec Workflow MCP is an open-source Model Context Protocol server that adds spec-driven development to Claude Code. It introduces four phases (requirements, design, task planning, execution) that transform a feature idea into production-ready code by forcing structured analysis before implementation. Install it with: claude mcp add spec-workflow npx @pimzino/spec-workflow-mcp@latest -- /path/to/project"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use the spec workflow instead of standard Claude Code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the spec workflow for features with multiple integrated components, complex business logic with edge cases, team environments needing documentation, or projects where long-term architecture matters. Use standard Claude Code for quick prototypes, single-file utilities, debugging, and simple refactoring. The workflow adds upfront overhead that pays off exponentially as complexity increases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is EARS format in the requirements phase?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EARS (Easy Approach to Requirements Syntax) is a structured requirements format using WHEN/IF/THEN patterns that eliminate ambiguity from feature requests. Each statement is directly testable, which is what makes the downstream execution phase reliable and prevents scope creep."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the spec workflow work with any project or language?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Spec Workflow MCP is language-agnostic and works with any project Claude Code can read. The requirements and design phases produce language-independent artifacts (EARS requirements, Mermaid diagrams). The execution phase implements in whatever language your project uses."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the real-time dashboard in the spec workflow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The MCP server auto-launches a web dashboard when you start a spec workflow session. It shows the current phase, which tasks are complete, which are in progress, and the overall implementation status, giving you a live view of Claude Code's progress through the plan."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

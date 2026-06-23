@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^.*$ https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/ [R=301,L]
+</IfModule>

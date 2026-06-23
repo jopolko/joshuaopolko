@@ -20,6 +20,12 @@ SITE_LOG_PREFIX = {
     "joshuaopolko.com": "access.log",
     "nowservingto.com": "nowservingto-access.log",
 }
+# site -> local sitemap path on the VPS (read on the origin to avoid the
+# Cloudflare 403 a default fetch gets; HTTP fallback handles dev runs).
+SITE_SITEMAP = {
+    "joshuaopolko.com": Path("/var/www/html/sitemap.xml"),
+    "nowservingto.com": Path("/var/www/html/nowservingto/sitemap.xml"),
+}
 INSIGHT_MODEL = "claude-sonnet-4-6"  # weekly, 2 sites — pennies; quality over cost
 
 # ua-substring -> (operator, display, is_ai). Search engines kept as context.
@@ -155,6 +161,32 @@ def options(site, sig, aeo, sug, api_key):
     return _fallback_options(sig)
 
 
+def _existing_paths(site):
+    """Paths already published on `site`, pulled from its sitemap. Gives the LLM
+    ground truth so it can tell 'optimize an existing page' apart from 'write a
+    new one' instead of recommending content the site already has. Reads the
+    local sitemap on the VPS first (the live URL 403s behind Cloudflare), falls
+    back to HTTP for dev. Best-effort: returns [] on any failure."""
+    try:
+        smf = SITE_SITEMAP.get(site)
+        if smf and smf.exists():
+            xml = smf.read_text(errors="replace")
+        else:
+            import requests
+            r = requests.get(f"https://{site}/sitemap.xml", timeout=20,
+                             headers={"User-Agent": "Mozilla/5.0 (aeo-weekly)"})
+            r.raise_for_status()
+            xml = r.text
+        paths = set()
+        for loc in re.findall(r"<loc>\s*([^<]+?)\s*</loc>", xml):
+            m = re.match(rf"https?://{re.escape(site)}(/[^?#]*)", loc.strip())
+            if m and m.group(1) not in ("", "/"):
+                paths.add(m.group(1))
+        return sorted(paths)
+    except Exception:
+        return []
+
+
 def _llm_options(site, sig, aeo, sug, api_key):
     import requests
     gaps = [p["q"] for p in (aeo.get("per") or []) if not p.get("you")] if isinstance(aeo, dict) else []
@@ -167,6 +199,7 @@ def _llm_options(site, sig, aeo, sug, api_key):
         "head_term_gaps_in_web_search": gaps,
         "gsc_real_demand_not_in_seed": [s["query"] for s in (sug.get("suggestions") or [])[:8]]
         if isinstance(sug, dict) else [],
+        "your_existing_pages": _existing_paths(site),
     }
     prompt = (
         "You are a sharp GEO/SEO analyst writing one section of a weekly report for the "
@@ -180,6 +213,14 @@ def _llm_options(site, sig, aeo, sug, api_key):
         "(official docs, major media). Those rank briefly, get ~0 clicks, aren't durably citable, "
         "and dilute domain quality. If a GSC/head-term gap is one of those traps, name it as a "
         "trap-to-skip in one line and move on.\n\n"
+        "GROUND-TRUTH AGAINST EXISTING PAGES (critical, do this before every suggestion): "
+        "`your_existing_pages` lists the paths already published on this site. A head-term or GSC "
+        "'gap' means the site does NOT rank for that query or it is not in the seed file; it does "
+        "NOT mean the page is missing. For each query you act on, check whether an existing page "
+        "already covers it (match the topic against the slugs). If one does, the action is to "
+        "OPTIMIZE or EXPAND that page (name its exact path), never to 'write' or 'create' it. Only "
+        "recommend creating a NEW page when no existing page covers the query. Never tell the "
+        "operator to write something they have already published.\n\n"
         "Write 3-5 specific 'options to consider' - each a concrete, fillable gap with the action "
         "and the why, tied to a number in the data. Also flag: AI 404s wasting crawl budget; an "
         "AI engine crawling thin vs peers; high-value pages AI bots aren't reading. Terse and "

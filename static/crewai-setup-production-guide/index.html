@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>CrewAI Setup Guide and Production Fixes (2026)</title>
   <meta content="Install CrewAI in 2026 with the exact uv and pip commands, then fix the real production problems: tool-calling loops, slow crews, and choosing CrewAI vs LangGraph." name="description"/>
@@ -41,14 +41,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -57,7 +57,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -123,13 +125,13 @@ figure.hero{margin:0 0 1.8em}
     left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
 }
 </style>
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>CrewAI Setup Guide and Production Fixes (2026): Install, Observability, and Alternatives</h1>
@@ -150,7 +152,7 @@ figure.hero{margin:0 0 1.8em}
 <li><strong>CrewAI vs LangGraph is the real decision.</strong> Pick CrewAI for fast role-based teamwork; pick LangGraph when you need granular, stateful control of long-running workflows.</li>
 </ul>
 
-<h2>Quick install (the uv way, 2026)</h2>
+<h2>How do I install CrewAI in 2026?</h2>
 
 <p>CrewAI's documentation now uses Astral's <code>uv</code> as the primary package and dependency manager. This is the fastest, most reproducible path and the one the project supports first. Confirm your Python version, install <code>uv</code>, then install the CrewAI CLI.</p>
 
@@ -168,7 +170,7 @@ uv tool install crewai
 # If the crewai command is not found afterward, fix your PATH:
 uv tool update-shell</code></pre>
 
-<h2>Create and run your first crew</h2>
+<h2>How do I create and run my first crew?</h2>
 
 <p>Scaffolding generates a project with <code>agents.yaml</code>, <code>tasks.yaml</code>, a <code>crew.py</code>, and a <code>.env</code> file for your keys. Edit the YAML to define roles and tasks, drop your API key into <code>.env</code>, then install dependencies and run.</p>
 
@@ -189,7 +191,7 @@ crewai run
 # Add extra packages later with uv, not pip:
 uv add <package-name></code></pre>
 
-<h2>pip install (the alternative)</h2>
+<h2>How do I install CrewAI with pip?</h2>
 
 <p>If you are dropping CrewAI into an existing project that already manages its own environment, the classic pip install still works. Add the <code>tools</code> extra to pull in the prebuilt tool library (web search, file IO, RAG helpers, and more).</p>
 
@@ -201,11 +203,11 @@ pip install 'crewai[tools]'</code></pre>
 
 <p>One thing to know up front: a full CrewAI install with tools pulls a large dependency tree, so isolate it in a virtual environment. This is the root of the "my .venv is a gigabyte, how do I even deploy this" complaint, and the fix is environment hygiene, covered below.</p>
 
-<h2>Configure your LLM provider</h2>
+<h2>How do I configure an LLM provider in CrewAI?</h2>
 
 <p>CrewAI reads provider configuration from environment variables and a <code>MODEL</code> setting. As of the 1.x line it ships native, OpenAI-compatible providers including OpenRouter, DeepSeek, Ollama, vLLM, Cerebras, and Dashscope, alongside the usual OpenAI, Anthropic, and Azure options. For local or privacy-sensitive work, point <code>MODEL</code> at an Ollama or vLLM endpoint instead of a hosted API.</p>
 
-<h2>Crews vs Flows: pick the right primitive</h2>
+<h2>Crews vs Flows: which should I use?</h2>
 
 <p>This is the single most important design decision in 2026 CrewAI, and getting it wrong is behind most "it is too slow and unpredictable" complaints. <strong>Crews</strong> are autonomous: agents decide which tools to call and when, which is powerful but non-deterministic and slower. <strong>Flows</strong>, made production-ready on January 8, 2026, give you event-driven, deterministic orchestration with explicit steps, streaming tool-call events, and human-in-the-loop checkpoints. Use a Crew where you genuinely want the model to figure out the path; use a Flow for everything that has a known sequence. Most real systems are a Flow that calls a small Crew only where autonomy earns its cost.</p>
 
@@ -288,7 +290,7 @@ researcher = Agent(
 <li><strong>Roll your own</strong> (FastAPI plus a thin LLM client like LiteLLM) when total prompt control is the requirement and you are willing to maintain the plumbing. This is a vocal minority position for good reason: it trades convenience for control.</li>
 </ul>
 
-<h2>What changed in CrewAI in 2025 to 2026</h2>
+<h2>What changed in CrewAI between 2025 and 2026?</h2>
 
 <p>A lot of the criticism you will find online is real but dated. Here is what is current, so you can judge old advice against it:</p>
 

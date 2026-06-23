@@ -22,6 +22,7 @@ from email.utils import formataddr, formatdate, make_msgid
 
 import seo_pull as sp
 import crawl_insight as ci
+import saas_opportunity_scan as sos
 
 HERE = Path(__file__).resolve().parent
 SNAP_DIR = HERE / "logs" / "aeo"
@@ -108,6 +109,21 @@ def render(results, suggestions, crawl, prev, today):
         elif isinstance(sg, dict) and "error" in sg:
             lines.append(f"  GSC: {sg['error']}")
         lines.append("")
+    # SaaS-opportunity scan: Reddit wish/pain x what AI assistants already fetch.
+    # Framed honestly (see r/microsaas critique): loud posters rarely buy, so this
+    # is leads-to-CHASE, not ideas-to-build. The cross with AI-read demand is the
+    # built-in "why not just ChatGPT?" filter: if assistants keep fetching jo to
+    # answer a query, the model alone wasn't enough = a real data/reliability gap.
+    lines.append("############  SAAS OPPORTUNITIES (where to LOOK, not validated ideas)  ############")
+    lines.append("  Reddit wish/pain x topics AI assistants already fetch from jo. Loud posters")
+    lines.append("  rarely pay: treat as leads to CHASE (go talk to them), not ideas to build.")
+    lines.append("  Filter each by: why wouldn't they just use ChatGPT? (needs private/fresh data,")
+    lines.append("  regulated info, or must run reliably on its own). Your unfair edge = AI-citation reach.")
+    try:
+        lines.append(sos.render_report(sos.scan()))
+    except Exception as e:
+        lines.append(f"  scan failed: {str(e)[:70]}")
+    lines.append("")
     lines.append("Logs: /var/log/apache2 (7d) · also at nowservingto.com/usage")
     lines.append("Snapshot history: tools/logs/aeo/ · seeds: tools/aeo_seeds/<host>.txt")
     return "\n".join(lines)

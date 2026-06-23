@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>GEO: 0 to 1,800 AI Citations in 120 Days</title>
   <meta content="A live GEO case study: three Claude Code audit runs on a real production site, ten fixes in one session, and the Bing data showing 0 to 1,800 AI citations in 120 days." name="description"/>
@@ -39,14 +39,14 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
@@ -55,7 +55,9 @@ img{max-width:100%;height:auto}
 
 /* header + nav */
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -134,7 +136,7 @@ figure.hero{margin:0 0 1.8em}
 /* ---- homepage ---- */
 .home-wrap{max-width:72rem;margin:0 auto;padding:14px 22px 80px}
 .hero{padding:6px 0 16px;border-bottom:1px solid var(--line);margin-bottom:30px}
-.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--display);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
+.hero-line{font:600 clamp(26px,3.7vw,42px)/1.2 var(--serif);letter-spacing:-.012em;color:var(--ink);max-width:62rem;margin:0 0 22px}
 .hero .meta{font:600 14px/1 var(--sans);color:var(--muted)}
 .hero .meta a{color:var(--accent-ink);text-decoration:none}
 .sec{margin:46px 0}
@@ -149,22 +151,22 @@ figure.hero{margin:0 0 1.8em}
 @media(max-width:560px){.cards{grid-template-columns:1fr 1fr}}
 
 </style>
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta></meta>
 
-<script defer="" src="/assets/nav.js?v=3"></script>
+<script defer="" src="/assets/nav.js?v=6"></script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script></meta>
 
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>GEO: 0 to 1,800 AI Citations in 120 Days</h1>
@@ -210,17 +212,23 @@ figure.hero{margin:0 0 1.8em}
 
 <p class="post-lede wp-block-paragraph">GEO is what happens when you stop optimizing for an algorithm that counts backlinks and start optimizing for an AI assistant deciding whether to cite you in front of 900 million weekly ChatGPT users. Three audit runs, ten fixes, and the actual Bing data showing what happened.</p>
 
+<h2>Key takeaways</h2>
+<ul>
+<li><strong>GEO differs from SEO fundamentally:</strong> AI assistants weight answer specificity over domain authority. A six-week-old site with precise, structured answers can outrank a ten-year-old review aggregator.</li>
+<li><strong>Three runs, measurable improvement:</strong> Claude Code's claude-seo plugin took NowServingTO from 67 to 81 out of 100 across three audit runs, with Google AIO scores rising from 58 to 82.</li>
+<li><strong>Live citation bots are the real signal:</strong> ChatGPT-User and Claude-User hits in your server logs are citations being served to real users. Indexing bots (GPTBot, ClaudeBot) are background signals, not live citation events.</li>
+<li><strong>Citations arrive as a threshold event:</strong> joshuaopolko.com showed zero citations through November 12, then citations started and compounded to 1,800 in 120 days, peaking at 97 per day on February 23.</li>
+<li><strong>Off-site gaps cap on-page wins:</strong> Perplexity weights Reddit at 46.7% of citation sources; ChatGPT at 11.3%. Technical scores improve independently, but platform coverage requires off-site presence that audits alone cannot fix.</li>
+<li><strong>One session fixed ten issues:</strong> A single claude-seo audit caught a 2.1 MB GeoJSON file never deployed to production, 253 wrong schema properties, LLM refusal text served live to users, and a 3-day silent build failure.</li>
+</ul>
+
+<h2 class="wp-block-heading">How Has the SEO Model Changed for AI Search?</h2>
 
 
-<h2 class="wp-block-heading">The Model Has Changed</h2>
 
+<p class="wp-block-paragraph">Traditional SEO is a decade-long domain authority accumulation game. AI assistants do not play it. ChatGPT's citation algorithm cares whether your answer is specific, structured, and verifiably sourced. A six-week-old government-data directory beats a ten-year-old review aggregator if it answers the query more precisely. Perplexity has the lowest domain-age threshold of any major AI search platform; it weights answer specificity above almost everything else. Google AI Overviews is the exception, drawing 92% of its citations from pages already ranking in the top 10, so classic domain authority matters there specifically.</p>
 
-
-<p class="wp-block-paragraph">Traditional SEO is a decade-long domain authority accumulation game. AI assistants don&#8217;t play it. ChatGPT&#8217;s citation algorithm cares whether your answer is specific, structured, and verifiably sourced. A six-week-old government-data directory beats a ten-year-old review aggregator if it answers the query more precisely.</p>
-
-
-
-<p class="wp-block-paragraph">SEO signals that still matter in GEO: schema markup, server-side rendering, clean robots.txt. Legacy infrastructure, necessary but not sufficient. The new work is citability: 134-167 word self-contained answer blocks, question-based headings, declared data provenance. That&#8217;s the entire game.</p>
+<p class="wp-block-paragraph">The SEO signals that still matter in GEO are infrastructure: schema markup, server-side rendering so AI crawlers see real HTML, and a clean robots.txt that allows the search and user bots (not just the training crawlers). These are table stakes, necessary but not sufficient. The new work is citability: 134-167 word self-contained answer blocks, question-based H2 headings, and declared data provenance on every statistic. Named sources beat "studies show" by a wide margin for AI extraction. That is the entire game.</p>
 
 
 
@@ -228,7 +236,7 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">The Audit Machine</h2>
+<h2 class="wp-block-heading">What Does the GEO Audit Machine Do?</h2>
 
 
 
@@ -259,7 +267,7 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">GEO Score: Three Runs</h2>
+<h2 class="wp-block-heading">What Were the GEO Scores Across Three Audit Runs?</h2>
 
 
 
@@ -292,11 +300,21 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">Platform Breakdown: Before vs After</h2>
+<h2 class="wp-block-heading">How Did Platform Scores Change Before and After Optimization?</h2>
 
 
 
-<p class="wp-block-paragraph">Google AI Overviews and Bing Copilot improved sharply, schema fixes, CollectionPage @id, iterated answer content. Perplexity and ChatGPT Search <em>declined slightly</em>. That&#8217;s not a regression, it&#8217;s the Reddit and Wikipedia gap. Perplexity weights Reddit at 46.7% of citation sources; ChatGPT at 11.3%. Zero Reddit presence means zero citation pathway on those platforms regardless of technical quality.</p>
+<p class="wp-block-paragraph">Google AI Overviews and Bing Copilot improved sharply after schema fixes, CollectionPage @id corrections, and iterated answer content. Perplexity and ChatGPT Search declined slightly. That is not a technical regression. It is the Reddit and Wikipedia gap made visible: Perplexity weights Reddit at 46.7% of citation sources; ChatGPT weights Wikipedia at 47.9% and Reddit at 11.3%. Zero Reddit presence means zero citation pathway on those platforms regardless of technical quality. On-page work and off-site presence are independent levers, and technical audits only move one of them.</p>
+
+<table>
+<thead><tr><th>Platform</th><th>Run 1 baseline</th><th>Run 3 score</th><th>Delta</th><th>Limiting factor</th></tr></thead>
+<tbody>
+<tr><td><strong>Google AI Overviews</strong></td><td>58/100</td><td>82/100</td><td>+24</td><td>Fixed: schema, CollectionPage @id</td></tr>
+<tr><td><strong>Bing Copilot</strong></td><td>52/100</td><td>75/100</td><td>+23</td><td>Fixed: schema, answer content</td></tr>
+<tr><td><strong>Perplexity</strong></td><td>74/100</td><td>72/100</td><td>-2</td><td>Reddit gap (46.7% citation weight)</td></tr>
+<tr><td><strong>ChatGPT Search</strong></td><td>71/100</td><td>68/100</td><td>-3</td><td>Wikipedia gap (47.9% citation weight)</td></tr>
+</tbody>
+</table>
 
 
 
@@ -349,7 +367,7 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">The Outcome: 0 to 1,800 Citations in 120 Days</h2>
+<h2 class="wp-block-heading">What Did 0 to 1,800 AI Citations in 120 Days Look Like?</h2>
 
 
 
@@ -397,7 +415,7 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">Who&#8217;s Actually Crawling</h2>
+<h2 class="wp-block-heading">Which AI Bots Are Actually Crawling Your Site?</h2>
 
 
 
@@ -447,11 +465,9 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<h2 class="wp-block-heading">Still Open</h2>
+<h2 class="wp-block-heading">What GEO Gaps Remain?</h2>
 
-
-
-<p class="wp-block-paragraph">The remaining gap isn&#8217;t technical. Perplexity and ChatGPT weight Reddit and Wikipedia at 11-47% of citation sources. The fix is presence, monthly posts on r/toronto, r/TorontoFood. A Wikidata entity for the site (30 minutes, no notability threshold). Not SEO hacks. The actual signals those platforms use.</p>
+<p class="wp-block-paragraph">The remaining gap is not technical. Perplexity weights Reddit at 46.7% of its citation sources; ChatGPT weights Wikipedia at 47.9% and Reddit at 11.3%. The on-page fixes and schema improvements move the Google AIO and Bing Copilot scores substantially, but Perplexity and ChatGPT Search scores declined slightly because those platforms require off-site presence that no amount of technical auditing can substitute for. The three concrete actions left: monthly participation in r/toronto and r/TorontoFood (authentic, not promotional), a Wikidata entity for NowServingTO (30 minutes, no notability threshold required), and earned mentions in the local listicles and directories those platforms already cite for Toronto restaurant queries. These are not SEO hacks. They are the actual citation signals those platforms use, and they require time and genuine presence, not a single-session fix.</p>
 
 
 
@@ -478,13 +494,73 @@ figure.hero{margin:0 0 1.8em}
 
 
 
-<p class="wp-block-paragraph"><a href="https://nowservingto.com" target="_blank" rel="noopener">NowServingTO</a>, Toronto&#8217;s daily-refresh directory of newly licensed restaurants across 45 cuisine categories, verified open via social media, chains excluded.</p>
+<p class="wp-block-paragraph"><a href="https://nowservingto.com" target="_blank" rel="noopener">NowServingTO</a>, Toronto's daily-refresh directory of newly licensed restaurants across 45 cuisine categories, verified open via social media, chains excluded.</p>
 
+<h2>Frequently asked questions</h2>
+<h3>What is GEO and why does it matter for AI search?</h3>
+<p>GEO (Generative Engine Optimization) is the discipline of structuring content so AI assistants select it as a citation source when generating answers. It matters because AI-generated answers are displacing traditional search results for a growing share of queries. Being cited in an AI answer is a qualitatively different outcome from ranking in a list of links: the AI quotes your content directly, often without showing a results page at all. The selection logic is different from Google's, and over 900 million people use ChatGPT weekly, so separate optimization is required.</p>
+<h3>How is this different from SEO I already do?</h3>
+<p>Traditional SEO accumulates domain authority through backlinks, editorial signals, and page age. AI citation weights answer specificity over domain authority. Perplexity has the lowest domain-age threshold of any major AI search platform. The legacy SEO signals that still matter in GEO are infrastructure: schema markup, server-side rendering, and a clean robots.txt that allows AI search bots. The new work is passage citability: 134-167 word self-contained answer blocks, question-based H2 headings, and named-source attribution on every statistic.</p>
+<h3>What does the claude-seo audit tool actually check?</h3>
+<p>The claude-seo plugin for Claude Code runs seven parallel subagents covering GEO citability, technical SEO, E-E-A-T signals, schema markup, Core Web Vitals, local signals, and content quality. For GEO specifically, it tests passage extractability, AI crawler access, llms.txt compliance, passage length distribution, question-heading coverage, and platform-specific scoring for Google AI Overviews, ChatGPT, Perplexity, and Bing Copilot. It is open source, free, and requires Claude Code 1.0.33 or later. Full source at github.com/AgriciDaniel/claude-seo.</p>
+<h3>How do I know if AI engines are already citing me?</h3>
+<p>Check your server logs for two categories of AI bot. Indexing crawlers (GPTBot, ClaudeBot, OAI-SearchBot) run in the background and users see nothing. Live citation bots (ChatGPT-User, Claude-User) fire only when a real user query triggers a real-time page fetch. Every ChatGPT-User hit in your access logs equals one citation being served to a real user right now. For Bing-powered Copilot, check Bing Webmaster Tools directly: it reports AI citations as a separate metric showing how often your pages are surfaced in AI answers.</p>
+<h3>What is the fastest way to start getting AI citations?</h3>
+<p>Fix the technical gates first: ensure your content is in server-side HTML (not JavaScript-rendered), add your site to Bing Webmaster Tools, verify the right AI search bots (OAI-SearchBot, Claude-SearchBot, PerplexityBot) are allowed in robots.txt, and confirm your pages are indexed in Bing and Brave Search. Then restructure key pages with answer-first paragraphs, question-format H2 headings, and passage blocks in the 134-167 word range. The zero-to-citation transition tends to be a threshold event, not a gradual curve: nothing, then citations that compound.</p>
 
   </div>
 </main>
 <footer class="site-foot">
   <p>&copy; Joshua Opolko</p>
 </footer>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://joshuaopolko.com/claude-seo/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is GEO and why does it matter for AI search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GEO (Generative Engine Optimization) is the discipline of structuring content so AI assistants select it as a citation source when generating answers. It matters because AI-generated answers are displacing traditional search results. Being cited in an AI answer means the AI quotes your content directly, often without showing a results page at all. The selection logic is different from Google's, so separate optimization is required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is GEO different from SEO I already do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Traditional SEO accumulates domain authority through backlinks, editorial signals, and page age. AI citation weights answer specificity over domain authority. Perplexity has the lowest domain-age threshold of any major AI search platform. The new work in GEO is passage citability: 134-167 word self-contained answer blocks, question-based H2 headings, and named-source attribution on every statistic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the claude-seo audit tool actually check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The claude-seo plugin runs seven parallel subagents covering GEO citability, technical SEO, E-E-A-T signals, schema markup, Core Web Vitals, local signals, and content quality. For GEO specifically, it tests passage extractability, AI crawler access, llms.txt compliance, and platform-specific scoring for Google AI Overviews, ChatGPT, Perplexity, and Bing Copilot. It is open source and free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know if AI engines are already citing me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check your server logs for live citation bots: ChatGPT-User and Claude-User fire only when a real user query triggers a real-time page fetch. Every ChatGPT-User hit equals one citation being served to a real user right now. For Bing-powered Copilot, Bing Webmaster Tools reports AI citations directly as a separate metric."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the fastest way to start getting AI citations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fix the technical gates first: server-side HTML, Bing Webmaster Tools, AI search bots allowed in robots.txt, indexed in Bing and Brave Search. Then restructure key pages with answer-first paragraphs, question-format H2 headings, and passage blocks of 134-167 words. The zero-to-citation transition tends to be a threshold event, not a gradual curve."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

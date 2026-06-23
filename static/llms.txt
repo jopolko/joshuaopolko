@@ -13,6 +13,7 @@
 
 ## AI & GEO
 - [The GEO Field Manual](https://joshuaopolko.com/geo-field-manual/): Ten technical steps to get cited by ChatGPT, Claude, Perplexity, and Gemini, with the data behind each, copy-paste prompts, and a master prompt you can hand any AI.
+- [AEO, Answered](https://joshuaopolko.com/geo-answers/): First-party answers to the questions people actually ask about getting cited by AI: whether AEO produces real results, why some sites get cited consistently and others don't, and what an AI-visibility tool should do.
 - [GEO: 0 to 1,800 AI Citations in 120 Days](https://joshuaopolko.com/claude-seo/): Optimizing for AI citation instead of clicks.
 - [Your Site as AI Infrastructure](https://joshuaopolko.com/ai-infrastructure/): Becoming a trusted source for ChatGPT and Claude.
 - [The LLM-as-ETL Architecture](https://joshuaopolko.com/llm-etl-architecture/): Building a data pipeline around Claude.

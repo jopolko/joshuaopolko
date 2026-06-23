@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>Perplexica (Now Vane) Self-Hosted Guide (2026): Open-Source Perplexity</title>
   <meta content="Self-host Perplexica, now rebranded Vane, in 2026: one Docker image with a bundled SearXNG, connect Ollama or a hosted model, and fix the common Ollama connection errors. Plus how it compares to Perplexity and Morphic." name="description"/>
@@ -41,21 +41,23 @@
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
-  --line:#e7e3da; --accent:#7d1d24; --accent-ink:#5c141b; --code-bg:#f4f1ea;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
   --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --measure:56rem;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--ink);
   font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
 a{color:var(--accent-ink);text-underline-offset:2px}
 a:hover{color:var(--accent)}
 img{max-width:100%;height:auto}
 .site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line)}
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
 .brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
 .site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
@@ -115,13 +117,13 @@ figure.hero{margin:0 0 1.8em}
     left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
 }
 </style>
-<script src="/assets/nav.js?v=3" defer></script>
+<script src="/assets/nav.js?v=6" defer></script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
 </head>
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="/security/">Security Dashboard</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/jamaican-patois-ai/">Lost in the Token</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/driftlights/">Driftlights</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/three-js-pattern/">Three.js WebXR</a></li><li><a href="/a-frame-vr-scene-with-custom-shaders/">A-Frame VR</a></li><li><a href="/babylon-js-clouds/">Babylon.js Clouds</a></li><li><a href="/babylon-js-grid-shader/">Babylon.js Grid</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>Perplexica (Now Vane) Self-Hosted Guide (2026): Your Own Open-Source Perplexity</h1>
@@ -142,7 +144,7 @@ figure.hero{margin:0 0 1.8em}
 <li><strong>It is MIT-licensed and free,</strong> with no paid tiers.</li>
 </ul>
 
-<h2>Install Perplexica (Vane) with Docker</h2>
+<h2>How do I install Perplexica (Vane) with Docker?</h2>
 
 <p>Because the image bundles SearXNG, a single <code>docker run</code> is enough to get a working private Perplexity clone. Map the web port, give it a volume for persistent data, and open the setup wizard.</p>
 
@@ -158,9 +160,11 @@ docker run -d \
 
 <p>On first visit the setup wizard asks for a model provider. Pick one, paste your API key (or point it at a local model), confirm, and you are searching. SearXNG runs inside the same container on its own internal port, so there is nothing extra to configure for web search itself.</p>
 
-<h2>Connect a model (hosted or local)</h2>
+<h2>How do I connect a model to Perplexica?</h2>
 
-<p>Perplexica is model-agnostic and needs two kinds of model: a chat model to write the answer, and optionally an embedding model to rerank search results. In the wizard or the settings menu, choose from OpenAI, Anthropic, Gemini, Groq, or a local backend such as <a href="/ollama/">Ollama</a>, LM Studio, or local Transformers. Running the chat and embedding models locally through Ollama gives you a fully private answer engine where neither your queries nor your keys leave your machine.</p>
+<p>Perplexica is model-agnostic and needs two kinds of model: a chat model to write the answer, and optionally an embedding model to rerank search results for relevance before synthesis. In the setup wizard or the settings menu, choose from hosted providers (OpenAI, Anthropic, Gemini, Groq) or a local backend such as <a href="/ollama/">Ollama</a>, LM Studio, or local Transformers.</p>
+
+<p>For the chat model, a capable 7B or 13B local model works well for everyday questions; a stronger hosted model like GPT-4o or Claude produces noticeably better synthesis on complex research tasks. For embeddings, Ollama can serve a lightweight model like <code>nomic-embed-text</code> at effectively zero cost. Running both locally through Ollama gives you a fully private answer engine: your queries, your web searches, and your model weights all stay on your machine, with no API keys required and no per-query cost. If you are running a local model for the first time, see the <a href="/ollama/">Ollama setup guide</a> for the install steps and hardware sizing.</p>
 
 <h2>1. Perplexica cannot connect to Ollama</h2>
 
@@ -196,7 +200,7 @@ sudo systemctl restart ollama
 
 <p><strong>The fix:</strong> match mode to need. Use Speed for quick lookups, Balanced for everyday use, and Quality when depth matters. If local answers feel weak, step up to a larger local model (mind your VRAM, see the <a href="/ollama/">Ollama guide</a>) or use a hosted model for the chat step while keeping search local.</p>
 
-<h2>Optimization modes and focus modes</h2>
+<h2>What are Perplexica's optimization and focus modes?</h2>
 
 <p>Perplexica gives you two dials that decide the speed, cost, and shape of every answer. The <strong>optimization mode</strong> trades latency against depth: <em>Speed</em> does a quick single pass for fast lookups, <em>Balanced</em> is the sensible default, and <em>Quality</em> does more retrieval and reasoning for harder questions at higher latency and token cost. The <strong>focus mode</strong> narrows where it searches, with options such as a general web search, an academic mode that favors papers and scholarly sources, a writing-assistant mode that skips web search entirely, and dedicated modes for video and discussion sources. The practical habit: leave it on Balanced web search for everyday questions, switch to Quality plus academic focus for research, and use the writing mode when you just want the model without live search.</p>
 
@@ -217,11 +221,11 @@ docker run -d --name vane -p 3000:3000 \
 
 <p>By default the app answers on <code>localhost:3000</code>, which is fine on your own machine but not for a household or team instance. To reach it from other devices, put a reverse proxy (Caddy or Nginx) in front, terminate TLS with a real certificate, and forward to port 3000. Caddy makes this a two-line config with automatic HTTPS. Do not expose port 3000 directly to the public internet without auth in front of it, since anyone who reaches it can spend your model credits; keep it on your LAN, behind a VPN, or behind proxy authentication.</p>
 
-<h2>What to use a self-hosted answer engine for</h2>
+<h2>What should I use a self-hosted answer engine for?</h2>
 
 <p>Once it is running, Perplexica earns its keep as a private research tool. It is genuinely useful for literature and source gathering where you want citations you can click through rather than an unsourced summary, for searches you would rather not send to a commercial engine tied to your identity, and for offline-leaning setups where a local model answers from live web results without any data leaving your control. Paired with a capable local model through <a href="/ollama/">Ollama</a>, it becomes an answer engine whose queries, keys, and history are entirely yours, which is the whole reason to self-host instead of using the hosted original.</p>
 
-<h2>Perplexica vs Perplexity vs Morphic (2026)</h2>
+<h2>Perplexica vs Perplexity vs Morphic: which should I choose in 2026?</h2>
 
 <p>If you want web answers with citations, these are the three names that come up. The trade is convenience versus control and privacy.</p>
 
