@@ -10,13 +10,13 @@
 <link rel="manifest" href="/site.webmanifest?v=6">
 <meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
-<title>VR Visual Effects That Exploit the Visual Cortex: 11 Psychedelic Techniques</title>
-<meta name="description" content="11 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.">
+<title>VR Visual Effects That Exploit the Visual Cortex: 13 Psychedelic Techniques</title>
+<meta name="description" content="8 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.">
 <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VR Visual Effects That Exploit the Visual Cortex: 11 Psychedelic Techniques">
-<meta property="og:description" content="11 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.">
+<meta property="og:title" content="VR Visual Effects That Exploit the Visual Cortex: 13 Psychedelic Techniques">
+<meta property="og:description" content="13 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.">
 <meta property="og:url" content="https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/">
 <meta property="og:site_name" content="Joshua Opolko">
 <meta property="article:section" content="XR">
@@ -30,8 +30,8 @@
 <meta property="og:image:alt" content="Swirling neon psychedelic visual effects rendered in a VR scene">
 <meta property="og:image:type" content="image/webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VR Visual Effects That Exploit the Visual Cortex: 11 Psychedelic Techniques">
-<meta name="twitter:description" content="11 psychedelic VR visual effects with live interactive Three.js WebGL demos. Enter VR on Meta Quest via the browser.">
+<meta name="twitter:title" content="VR Visual Effects That Exploit the Visual Cortex: 13 Psychedelic Techniques">
+<meta name="twitter:description" content="8 psychedelic VR visual effects with live interactive Three.js WebGL demos. Enter VR on Meta Quest via the browser.">
 <meta name="twitter:image" content="https://joshuaopolko.com/wp-content/uploads/2025/09/Gemini_Generated_Image_pq1c5tpq1c5tpq1c.webp">
 <link href="https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/" rel="canonical">
 <script type="application/ld+json">
@@ -55,9 +55,9 @@
     },
     {
       "@type":"BlogPosting","@id":"https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#richSnippet",
-      "headline":"VR Visual Effects That Exploit the Visual Cortex: 11 Psychedelic Techniques with Live Demos",
-      "description":"11 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.",
-      "keywords":"psychedelic VR, visual cortex, Three.js WebXR, GLSL shaders, browser VR, Meta Quest, VR visual effects, WebGL demos, fractal VR, flow distortion",
+      "headline":"VR Visual Effects That Exploit the Visual Cortex: 13 Psychedelic Techniques with Live Demos",
+      "description":"8 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.",
+      "keywords":"psychedelic VR, visual cortex, Three.js WebXR, GLSL shaders, browser VR, Meta Quest, VR visual effects, WebGL demos, fractal VR, infinite tunnel",
       "datePublished":"2025-09-08T02:24:08+00:00","dateModified":"2026-06-23T00:00:00+00:00",
       "wordCount":2800,
       "author":{"@id":"https://joshuaopolko.com/#person"},
@@ -72,10 +72,10 @@
       "@type":"FAQPage","@id":"https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#faq",
       "mainEntity":[
         {"@type":"Question","name":"What makes VR visual effects psychedelic?","acceptedAnswer":{"@type":"Answer","text":"Psychedelic VR effects work by simultaneously overwhelming multiple visual cortex processing streams: motion detection (MT/V5), color processing (V4), scale-invariant pattern recognition, and temporal integration. The visual cortex dedicates 50-55% of the cerebral cortex to vision, making it highly susceptible to calibrated perceptual overload that exceeds its capacity to form stable representations."}},
-        {"@type":"Question","name":"Can I run these VR effects in the browser without Unity?","acceptedAnswer":{"@type":"Answer","text":"Yes. Three.js r169 with ShaderMaterial exposes raw GLSL control and supports the WebXR Device API, which runs natively in Meta Quest Browser. All 11 demos on this page initialize lazily as you scroll. On a Quest, click the Enter VR button below any demo to enter an immersive-VR session with full head tracking and stereo rendering."}},
+        {"@type":"Question","name":"Can I run these VR effects in the browser without Unity?","acceptedAnswer":{"@type":"Answer","text":"Yes. Three.js r169 with ShaderMaterial exposes raw GLSL control and supports the WebXR Device API, which runs natively in Meta Quest Browser. All 13 demos on this page initialize lazily as you scroll. On a Quest, click the Enter VR button below any demo to enter an immersive-VR session with full head tracking and stereo rendering."}},
         {"@type":"Question","name":"How do I enter VR from the browser on Meta Quest?","acceptedAnswer":{"@type":"Answer","text":"Open this page in Meta Quest Browser. Scroll to any demo and tap the Enter VR button that appears below the canvas. The browser requests permission for an immersive-vr session via the WebXR Device API. The demo renders in full stereo at the Quest's native refresh rate. Press the menu button to exit."}},
         {"@type":"Question","name":"What is the performance budget for psychedelic VR on Meta Quest?","acceptedAnswer":{"@type":"Answer","text":"Quest 3 targets 90Hz (11.1ms frame budget); Quest 2 targets 72Hz (13.9ms). Fullscreen GLSL fragment shaders typically cost 2-5ms. GPU particles cost 1-3ms. Running 3-4 combined effects requires adaptive quality: monitor frame time and reduce shader iteration counts if the budget is exceeded."}},
-        {"@type":"Question","name":"Which visual effects cause the strongest perceptual response in VR?","acceptedAnswer":{"@type":"Answer","text":"Fractal kaleidoscopes are consistently the strongest because they simultaneously overload scale-invariant pattern recognition, V4 color processing, and spatial mapping. Tunnel effects rank second by exploiting the looming response. Flow distortion ranks third by overloading MT/V5 motion processing. Combining any two produces the most intense perceptual response within a safe frame budget."}}
+        {"@type":"Question","name":"Which visual effects cause the strongest perceptual response in VR?","acceptedAnswer":{"@type":"Answer","text":"Fractal kaleidoscopes are consistently the strongest because they simultaneously overload scale-invariant pattern recognition, V4 color processing, and spatial mapping. Infinite tunnel effects rank second by exploiting the looming response and vergence-accommodation conflict. God rays rank third by flooding peripheral motion detection with multi-source light. Combining any two produces the most intense perceptual response within a safe frame budget."}}
       ]
     }
   ]
@@ -195,7 +195,7 @@ details.glsl-block summary:hover{color:var(--accent-ink)}
   <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
-  <h1>VR Visual Effects That Exploit the Visual Cortex: 11 Psychedelic Techniques</h1>
+  <h1>VR Visual Effects That Exploit the Visual Cortex: 13 Psychedelic Techniques</h1>
   <figure class="hero">
     <img src="https://joshuaopolko.com/wp-content/uploads/2025/09/Gemini_Generated_Image_pq1c5tpq1c5tpq1c.webp"
          alt="Swirling neon psychedelic visual effects rendered in a VR environment, showing fractal color patterns"
@@ -206,7 +206,7 @@ details.glsl-block summary:hover{color:var(--accent-ink)}
 <div class="tldr">
   <strong>At a glance</strong>
   <ul>
-    <li>The visual cortex occupies <strong>50-55%</strong> of the cerebral cortex. These 11 techniques are calibrated to overwhelm it in the style of SteamVR psychedelic apps</li>
+    <li>The visual cortex occupies <strong>50-55%</strong> of the cerebral cortex. These 13 techniques are calibrated to overwhelm it in the style of SteamVR psychedelic apps</li>
     <li>Every demo is <strong>live in the page</strong>: sliders adjust shader parameters in real time. Set them before tapping <strong>Enter VR</strong> since the browser's DOM controls are hidden in immersive mode. Head tracking is live in all demos; tilt your phone to pan the view on mobile.</li>
     <li>All demos are Three.js r169 via CDN importmap, lazy-initialized on scroll, no build step required</li>
   </ul>
@@ -214,14 +214,14 @@ details.glsl-block summary:hover{color:var(--accent-ink)}
 
 <p>Your visual cortex dedicates 50-55% of the cerebral cortex to processing what you see and burns glucose at a rate that outpaces oxygen supply. The 2025 MICrONS connectome mapped 523 million simultaneous neural connections in a single cubic millimeter of visual cortex, all running in parallel, all susceptible to being overwhelmed by the right kind of input. That is the physiological foundation of psychedelic VR.</p>
 
-<p>These 11 techniques come from the tradition of immersive visual environments designed not to represent reality but to saturate the systems that process it. Each is implemented here as a live Three.js WebGL demo. Sliders below each canvas change shader parameters in real time. On a Meta Quest, click <strong>Enter VR</strong> to open a full immersive-VR session via the WebXR Device API with head tracking and stereo rendering. See the <a href="/vision-dominates-half-your-brains-processing-power/">neuroscience breakdown</a> for the perceptual mechanisms each technique exploits.</p>
+<p>These 13 techniques come from the tradition of immersive visual environments designed not to represent reality but to saturate the systems that process it. Each is implemented here as a live Three.js WebGL demo. Sliders below each canvas change shader parameters in real time. On a Meta Quest, click <strong>Enter VR</strong> to open a full immersive-VR session via the WebXR Device API with head tracking and stereo rendering. See the <a href="/vision-dominates-half-your-brains-processing-power/">neuroscience breakdown</a> for the perceptual mechanisms each technique exploits.</p>
 
 <h2>Key takeaways</h2>
 <ul>
   <li><strong>Visual cortex saturation:</strong> The visual cortex occupies 50-55% of the cerebral cortex. Psychedelic VR works by overloading multiple parallel processing streams simultaneously rather than engaging any single one.</li>
-  <li><strong>11 live WebGL demos:</strong> Every technique runs as an interactive Three.js r169 demo in the browser with real-time shader parameter sliders. No install or build step required.</li>
+  <li><strong>13 live WebGL demos:</strong> Every technique runs as an interactive Three.js r169 demo in the browser with real-time shader parameter sliders. No install or build step required.</li>
   <li><strong>Meta Quest compatible via WebXR:</strong> Each demo includes an Enter VR button that opens a full immersive-VR session via the WebXR Device API with stereo rendering and head tracking on Quest 2 and Quest 3.</li>
-  <li><strong>Fractal kaleidoscope is the strongest technique:</strong> Among all 11 techniques, fractal kaleidoscopes produce the most intense perceptual response by simultaneously overloading V4 color processing, scale-invariant pattern recognition, and spatial mapping.</li>
+  <li><strong>Fractal kaleidoscope is the strongest technique:</strong> Among all 13 techniques, fractal kaleidoscopes produce the most intense perceptual response by simultaneously overloading V4 color processing, scale-invariant pattern recognition, and spatial mapping.</li>
   <li><strong>Quest 2 frame budget is 13.9ms:</strong> Quest 2 targets 72Hz rendering. A single fullscreen GLSL shader costs 2-5ms. Combining 3-4 effects requires adaptive quality management to stay within budget.</li>
   <li><strong>Three.js over Unity for browser VFX:</strong> Three.js ShaderMaterial exposes raw GLSL with no build pipeline, making it faster to iterate and easier to generate with AI assistance than Unity's VFX Graph or Shader Graph.</li>
 </ul>
@@ -230,39 +230,11 @@ details.glsl-block summary:hover{color:var(--accent-ink)}
 
 <p>Three.js r169 exposes raw GLSL shader control via <code>ShaderMaterial</code>, handles WebXR stereo rendering for the Quest browser natively, and is deliverable as a single HTML file with CDN imports. Babylon.js is a viable alternative with stronger built-in scene management for complex multi-object environments. For raw shader VFX with minimal overhead and the highest quality of AI code generation, Three.js wins on simplicity. No build pipeline. No install. The demos on this page load Three.js from jsDelivr CDN and initialize lazily as you scroll.</p>
 
-<h2>What are the 11 psychedelic VR techniques?</h2>
+<h2>What are the 13 psychedelic VR techniques?</h2>
 
-<!-- 1 -->
-<div class="technique" id="t1">
-  <h3>1. Flow-based UV distortion</h3>
-  <p class="cortex-hook">Exploits: MT/V5 motion processing + gap-filling</p>
-  <p>Three overlapping noise fields advance at different rates, creating liquid "breathing" motion the brain interprets as purposeful but cannot resolve into a stable object. The interference patterns between the three fields continuously dissolve any structure the pattern-recognition system starts to form, keeping MT/V5 firing without ever delivering a coherent motion vector. Speed controls animation rate; Warp sets how strongly the noise fields distort the UV lookup; Saturation goes from pastel to fully neon.</p>
-  <div class="demo-wrap">
-    <canvas class="demo-canvas" id="demo-1" width="800" height="300"></canvas>
-    <span class="demo-label">Three.js WebGL</span>
-    <div class="demo-controls">
-      <label><span class="ctrl-head">Speed <span class="val">1.00</span></span><input type="range" class="ctrl" min="0.1" max="3" step="0.05" value="1" data-uniform="uSpeed"></label>
-      <label><span class="ctrl-head">Warp <span class="val">0.28</span></span><input type="range" class="ctrl" min="0.05" max="0.85" step="0.01" value="0.28" data-uniform="uWarp"></label>
-      <label><span class="ctrl-head">Saturation <span class="val">0.97</span></span><input type="range" class="ctrl" min="0.2" max="1" step="0.01" value="0.97" data-uniform="uSat"></label>
-    </div>
-  </div>
-  <details class="glsl-block"><summary>Core GLSL (fragment shader)</summary>
-<pre><code>float t = uTime * 0.35 * uSpeed;
-vec2 n1 = vec2(noise(vUv*2.0+t*0.7), noise(vUv*2.0+t*0.7+5.2)) * 2.0 - 1.0;
-vec2 n2 = vec2(noise(vUv*5.0-t*0.45+3.7), noise(vUv*5.0-t*0.45+9.1)) * 2.0 - 1.0;
-vec2 n3 = vec2(noise(vUv*11.0+t*0.22+7.3), noise(vUv*11.0+t*0.22+1.5)) * 2.0 - 1.0;
-vec2 w = vUv + n1*uWarp + n2*uWarp*0.5 + n3*uWarp*0.25;
-float c = noise(w*5.0 + vec2(t*0.25,-t*0.18));
-gl_FragColor = vec4(hsv2rgb(vec3(c + t*0.08, uSat, 1.0)), 1.0);</code></pre>
-  </details>
-  <div class="ai-prompt"><strong>AI demo prompt</strong>
-    <p>Create a self-contained Three.js r169 WebGL demo (single HTML file, importmap CDN) showing psychedelic flow-based UV distortion. Orthographic camera, fullscreen PlaneGeometry(2,2), ShaderMaterial. Fragment: 3 overlapping noise-field flow layers at different speeds. Full HSV spectrum cycling with uTime. uSpeed, uWarp, uSat uniforms driven by range sliders below the canvas. 300px canvas height.</p>
-  </div>
-</div>
-
-<!-- 2 -->
+<!-- 1 (was 2) -->
 <div class="technique" id="t2">
-  <h3>2. Fractal kaleidoscope</h3>
+  <h3>1. Fractal kaleidoscope</h3>
   <p class="cortex-hook">Exploits: scale-invariant pattern recognition + V4 color processing</p>
   <p>Mandelbrot iteration combined with N-fold rotational symmetry generates a self-similar pattern the brain keeps trying to read at every zoom level and keeps failing. The scale-invariant object recognition system fires continuously because the same structure recurs at every scale; the V4 color area is simultaneously flooded with rapidly cycling hue at maximum saturation. Symmetry slider sets the fold count: low values create wide, angular sectors; high values produce dense mandala geometry.</p>
   <div class="demo-wrap">
@@ -297,72 +269,9 @@ gl_FragColor = vec4((iter < 16.0) ?
   </div>
 </div>
 
-<!-- 3 -->
-<div class="technique" id="t3">
-  <h3>3. GPU particle vortex with additive trails</h3>
-  <p class="cortex-hook">Exploits: object segmentation + motion coherence detection</p>
-  <p>Dense GPU particle systems with additive blending create structures that appear to emerge, coalesce, and dissolve continuously. The object-segmentation system works at its limit: it keeps seeing entities that immediately dissolve back into the field. Each particle follows a unique 3D Lissajous orbit so the global vortex has internal structure the brain can almost parse, producing the characteristic sense of organized intelligence in the noise. In VR, the stereo depth makes the orbital structure appear genuinely three-dimensional around the viewer.</p>
-  <div class="demo-wrap">
-    <canvas class="demo-canvas" id="demo-3" width="800" height="300"></canvas>
-    <span class="demo-label">Three.js WebGL</span>
-    <div class="demo-controls">
-      <label><span class="ctrl-head">Orbit Speed <span class="val">1.00</span></span><input type="range" class="ctrl" min="0.2" max="5" step="0.1" value="1" data-uniform="uOrbitSpeed"></label>
-      <label><span class="ctrl-head">Spread <span class="val">1.00</span></span><input type="range" class="ctrl" min="0.3" max="2.5" step="0.1" value="1" data-uniform="uSpread"></label>
-      <label><span class="ctrl-head">Glow <span class="val">2.20</span></span><input type="range" class="ctrl" min="1" max="5" step="0.1" value="2.2" data-uniform="uGlow"></label>
-    </div>
-  </div>
-  <details class="glsl-block"><summary>Core GLSL (vertex + fragment)</summary>
-<pre><code>// Vertex: Lissajous orbit per particle
-float t = uTime * aSpeed * uOrbitSpeed + aPhase;
-vec3 pos = vec3(
-  aRadius * uSpread * cos(t) * cos(t * 0.37 + 1.0),
-  aRadius * uSpread * sin(t * 1.31) * 0.7,
-  aRadius * uSpread * sin(t) * cos(t * 0.73 + 2.1)
-);
-gl_PointSize = clamp(130.0 / -mvPos.z, 1.0, 12.0);
-
-// Fragment: soft disc with additive glow
-vec2 pc = gl_PointCoord - 0.5;
-if (length(pc) > 0.5) discard;
-float a = 1.0 - smoothstep(0.1, 0.5, length(pc));
-gl_FragColor = vec4(vCol * uGlow, a * 0.9);</code></pre>
-  </details>
-  <div class="ai-prompt"><strong>AI demo prompt</strong>
-    <p>Create a self-contained Three.js r169 WebGL demo showing a psychedelic GPU particle vortex. 4000 THREE.Points with ShaderMaterial. Each particle has aPhase, aRadius, aSpeed attributes. Vertex shader animates unique Lissajous 3D orbit with uTime. uOrbitSpeed, uSpread, uGlow uniforms on sliders. Fragment: soft disc, additive blending, depthWrite:false. Colors by phase through HSV. Camera rotates slowly. 300px canvas.</p>
-  </div>
-</div>
-
-<!-- 4 -->
-<div class="technique" id="t4">
-  <h3>4. Chromatic aberration (fracture mode)</h3>
-  <p class="cortex-hook">Exploits: binocular fusion + color-detail channel separation</p>
-  <p>Extreme chromatic aberration separates RGB channels with a quadratic offset that accelerates toward the edges, creating a tripling of the image that the binocular fusion system tries and fails to merge. The brain's color-detail channel receives conflicting signals from each eye. Pulsing the intensity slowly means the image continuously falls apart and tries to reassemble. In VR, each eye receives a slightly different aberration pattern, compounding the fusion failure.</p>
-  <div class="demo-wrap">
-    <canvas class="demo-canvas" id="demo-4" width="800" height="300"></canvas>
-    <span class="demo-label">Three.js WebGL</span>
-    <div class="demo-controls">
-      <label><span class="ctrl-head">Aberration <span class="val">0.16</span></span><input type="range" class="ctrl" min="0.02" max="0.4" step="0.01" value="0.16" data-uniform="uAberration"></label>
-      <label><span class="ctrl-head">Ring Freq <span class="val">30</span></span><input type="range" class="ctrl" min="8" max="65" step="1" value="30" data-uniform="uFrequency"></label>
-      <label><span class="ctrl-head">Pat Speed <span class="val">2.80</span></span><input type="range" class="ctrl" min="0.3" max="6" step="0.1" value="2.8" data-uniform="uPatSpeed"></label>
-    </div>
-  </div>
-  <details class="glsl-block"><summary>Core GLSL (fragment shader)</summary>
-<pre><code>float pat(vec2 uv) {
-  float r = length(uv - 0.5); float a = atan(uv.y-0.5, uv.x-0.5);
-  return sin(r*uFrequency - uTime*uPatSpeed + a*5.0)*0.5 + 0.5;
-}
-vec2 dir = normalize(vUv - 0.5); float dist = length(vUv - 0.5);
-float ab = dist*dist * uAberration * (sin(uTime*0.55)*0.45 + 0.8);
-gl_FragColor = vec4(pat(vUv+dir*ab*1.5), pat(vUv), pat(vUv-dir*ab*1.5), 1.0);</code></pre>
-  </details>
-  <div class="ai-prompt"><strong>AI demo prompt</strong>
-    <p>Create a self-contained Three.js r169 WebGL demo showing extreme chromatic aberration. Fullscreen quad, ShaderMaterial. Fragment: a polar-coordinate sinusoidal ring pattern function(uv) using uFrequency and uPatSpeed. Apply quadratic RGB channel separation (offset = dist*dist * uAberration, pulsing with sin(time)). Each channel samples the pattern at a different UV offset. uAberration, uFrequency, uPatSpeed sliders. 300px canvas.</p>
-  </div>
-</div>
-
-<!-- 5 -->
+<!-- 2 (was 5) -->
 <div class="technique" id="t5">
-  <h3>5. Infinite tunnel (depth cue overload)</h3>
+  <h3>2. Infinite tunnel (depth cue overload)</h3>
   <p class="cortex-hook">Exploits: looming response + vergence-accommodation conflict</p>
   <p>A tunnel rendered in polar coordinates with continuously advancing depth creates persistent looming motion the brain cannot habituate to, because it never arrives. The vergence-accommodation system drives the eyes to converge on approaching geometry and finds nothing solid. Rush Speed controls how fast the tunnel appears to advance; Symmetry sets angular sector count (higher = denser, more disorienting wall patterns); Brightness scales overall output without changing the color balance.</p>
   <div class="demo-wrap">
@@ -392,9 +301,9 @@ gl_FragColor = vec4(col, 1.0);</code></pre>
   </div>
 </div>
 
-<!-- 6 -->
+<!-- 3 (was 6) -->
 <div class="technique" id="t6">
-  <h3>6. Volumetric god rays (radial light scattering)</h3>
+  <h3>3. Volumetric god rays (radial light scattering)</h3>
   <p class="cortex-hook">Exploits: brightness sensitivity + peripheral motion detection</p>
   <p>Three light sources orbit through a pulsing nebula, each carrying its own color that cycles through the full spectrum as they move. Because they are spaced 120 degrees apart in the color wheel and rotating together, the combined light never settles: it rolls continuously through red, green, blue, amber, and violet in overlapping sweeps. A breathing pulse compresses and expands the whole ray field at whatever rate you set, giving it a heartbeat. The effect is strongest at the edges of your vision: your brain's fast-motion detection system, built to catch danger in the periphery, keeps firing because nothing ever stops moving. In VR, turning your head drags the ray field with you before it snaps back, creating the sensation of swimming through something with physical weight.</p>
   <div class="demo-wrap">
@@ -433,9 +342,9 @@ gl_FragColor=vec4(hsv2rgb(vec3(uTime*0.02,0.75,bg))+c1*acc1+c2*acc2+c3*acc3,1.0)
   </div>
 </div>
 
-<!-- 7 -->
+<!-- 4 (was 7) -->
 <div class="technique" id="t7">
-  <h3>7. Displacement mapping (breathing surfaces)</h3>
+  <h3>4. Displacement mapping (breathing surfaces)</h3>
   <p class="cortex-hook">Exploits: surface normal processing (V2/V3) + proprioceptive conflict</p>
   <p>Animated vertex displacement across a 64x64 mesh creates the "breathing floor" effect familiar from psychedelic experiences. V2 and V3 cortical areas process surface curvature and depth discontinuities; a gently undulating mesh creates continuous non-zero input with no stable resting state. The grid overlay makes the vertex density visible. In Quest VR with head tracking, tilting your head toward the mesh amplifies the proprioceptive conflict between visual motion and vestibular stillness.</p>
   <div class="demo-wrap">
@@ -460,9 +369,9 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);</code></pre>
   </div>
 </div>
 
-<!-- 8 -->
+<!-- 5 (was 8) -->
 <div class="technique" id="t8">
-  <h3>8. Temporal dithering (phosphene induction)</h3>
+  <h3>5. Temporal dithering (phosphene induction)</h3>
   <p class="cortex-hook">Exploits: temporal integration window + afterimage generation</p>
   <p>The visual cortex integrates frames over a window of approximately 100ms. Concentric rings animated at high radial frequency, combined with slowly rotating spokes, produce patterns that change faster than the temporal integration window can cleanly separate. The result is an afterimage-like overlay: you see both the current frame and the previous frame simultaneously, like phosphenes (the visual phenomena caused by pressure or electrical stimulation of the visual cortex). The FBM breathing envelope prevents perceptual adaptation.</p>
   <div class="demo-wrap">
@@ -490,9 +399,9 @@ gl_FragColor = vec4(col, 1.0);</code></pre>
   </div>
 </div>
 
-<!-- 9 -->
+<!-- 6 (was 9) -->
 <div class="technique" id="t9">
-  <h3>9. Multi-layer parallax (depth field saturation)</h3>
+  <h3>6. Multi-layer parallax (depth field saturation)</h3>
   <p class="cortex-hook">Exploits: motion parallax + dorsal-stream depth processing</p>
   <p>Five transparent cloud-shader planes at different Z depths with an oscillating camera create motion parallax: the monocular depth cue the brain uses to infer depth from a moving viewpoint. Unlike stereo depth, motion parallax is processed independently in the dorsal visual stream, so it reads as compelling depth even on a flat screen. In Quest VR with head tracking, turning your head produces the parallax motion naturally without camera scripting, making the depth layers feel genuinely spatial.</p>
   <div class="demo-wrap">
@@ -517,9 +426,9 @@ gl_FragColor = vec4(col * cloud * 1.8, cloud * 0.72);</code></pre>
   </div>
 </div>
 
-<!-- 10 -->
+<!-- 7 (was 10) -->
 <div class="technique" id="t10">
-  <h3>10. Procedural environment generation</h3>
+  <h3>7. Procedural environment generation</h3>
   <p class="cortex-hook">Exploits: scene construction (ventral stream) + environmental presence</p>
   <p>FBM terrain that continuously evolves prevents the ventral visual stream from constructing a stable scene model. The landscape shifts, recolors, and morphs in a way that suggests biological growth rather than mathematical generation. In Quest VR with head tracking and stereo rendering, the terrain appears to surround the viewer at full scale, making it the most immersive of the 10 techniques. Terrain Scale changes the spatial frequency of landscape features; Color Speed controls hue cycling rate across height bands.</p>
   <div class="demo-wrap">
@@ -548,9 +457,9 @@ gl_FragColor = vec4(col, 1.0);</code></pre>
   </div>
 </div>
 
-<!-- 11 -->
+<!-- 8 (was 11) -->
 <div class="technique" id="t11">
-  <h3>11. Volumetric light field (depth of field + spectral cycling)</h3>
+  <h3>8. Volumetric light field (depth of field + spectral cycling)</h3>
   <p class="cortex-hook">Exploits: monocular depth (bokeh focal plane) + V4 chromatic saturation + motion parallax</p>
   <p>Real cameras have a focal plane: objects at one distance are sharp while everything nearer or farther blurs into round highlights called bokeh. This demo renders that honestly by reading the scene's depth buffer through a post-processing pass and blurring each pixel by how far it sits from a chosen focal distance, rather than applying a flat screen-space filter. Hundreds of glowing orbs cycle through the full color spectrum at staggered phase offsets, so the whole volume rolls through a continuous chromatic wave as the camera auto-orbits. Near orbs slide past far ones with true motion parallax while the depth blur dissolves background clusters into dreamy haze and holds foreground clusters sharp until the focal plane sweeps past them. Rack the Focus slider to send the sharp band traveling front to back. Open the Aperture to flood the field in bokeh circles. Click anywhere to plant a light that stays anchored in world space as the camera moves around it. In VR the artificial bokeh switches off and your own two eyes supply the real thing.</p>
   <div class="demo-wrap">
@@ -586,22 +495,182 @@ else composer.render();</code></pre>
   </div>
 </div>
 
+<!-- 9: spiral vortex -->
+<div class="technique" id="t12">
+  <h3>9. Logarithmic spiral vortex (dual-motion confusion)</h3>
+  <p class="cortex-hook">Exploits: MT/V5 motion disambiguation failure (rotation + expansion simultaneously)</p>
+  <p>The visual system contains separate motion detectors for rotation and radial expansion. A logarithmic spiral combines both into a single pattern that neither detector can resolve alone. Every ring also appears to both spin and zoom outward, flooding MT/V5 with contradictory motion vectors it cannot converge on. The depth animation never arrives. Arm Count changes the number of spiral arms; Twist controls how aggressively they coil inward; Dive Speed sets the apparent forward velocity.</p>
+  <div class="demo-wrap">
+    <canvas class="demo-canvas" id="demo-12" width="800" height="300"></canvas>
+    <span class="demo-label">Three.js WebGL</span>
+    <div class="demo-controls">
+      <label><span class="ctrl-head">Dive Speed <span class="val">0.40</span></span><input type="range" class="ctrl" min="0.05" max="2" step="0.05" value="0.4" data-uniform="uDiveSpeed"></label>
+      <label><span class="ctrl-head">Arm Count <span class="val">3</span></span><input type="range" class="ctrl" min="1" max="8" step="1" value="3" data-uniform="uArmCount"></label>
+      <label><span class="ctrl-head">Twist <span class="val">1.00</span></span><input type="range" class="ctrl" min="0.2" max="4" step="0.1" value="1" data-uniform="uTwist"></label>
+    </div>
+  </div>
+  <details class="glsl-block"><summary>Core GLSL (fragment shader)</summary>
+<pre><code>vec2 p = vUv*2.0-1.0; p.x *= uRes.x/uRes.y;
+float r = length(p); float a = atan(p.y,p.x);
+float logr = log(max(r,0.001));
+float arm = mod((a + logr*uArmCount*0.5 + uTime*uTwist*0.4)/(2.0*PI/uArmCount),1.0);
+arm = abs(arm*2.0-1.0);
+float depth = mod(-logr*0.4 - uTime*uDiveSpeed, 1.0);
+float s1 = sin(depth*22.0 - uTime*1.5)*0.5+0.5;
+float s2 = pow(1.0-arm,3.0);
+vec3 col = hsv2rgb(vec3(depth*0.6 + a/(2.0*PI)*0.15 + uTime*0.04,0.97,1.0))*s1*s2*2.5;
+col *= 1.0-smoothstep(0.82,1.0,r);
+gl_FragColor = vec4(col,1.0);</code></pre>
+  </details>
+  <div class="ai-prompt"><strong>AI demo prompt</strong>
+    <p>Create a self-contained Three.js r169 WebGL demo showing a psychedelic logarithmic spiral vortex. Fullscreen quad, ShaderMaterial. Fragment: polar coords, logr=log(r), fold angle into uArmCount spiral arms using (a + logr*uArmCount*0.5 + uTime*uTwist) mod (2PI/uArmCount). Depth = mod(-logr*0.4 - uTime*uDiveSpeed, 1.0). Stripe and arm interference. HSV color cycling on depth and angle. uDiveSpeed, uArmCount, uTwist sliders. Vignette. 300px canvas.</p>
+  </div>
+</div>
+
+<!-- 10: moire -->
+<div class="technique" id="t13">
+  <h3>10. Moiré interference grid (emergent motion)</h3>
+  <p class="cortex-hook">Exploits: V1 spatial frequency channel beating + apparent motion without source movement</p>
+  <p>Two sinusoidal grids at slightly different scales overlap, producing a low-frequency beat pattern that appears to travel across the field even though neither underlying grid moves fast. V1 contains dedicated spatial-frequency detectors tuned to specific grating wavelengths. Two slightly different wavelengths produce a beat at their difference frequency, generating motion signals in MT/V5 from sources that are not actually moving. The emergent wave seems to have a life of its own. Scale sets the grid density; Angle Speed rotates one grid against the other; Saturation controls color depth.</p>
+  <div class="demo-wrap">
+    <canvas class="demo-canvas" id="demo-13" width="800" height="300"></canvas>
+    <span class="demo-label">Three.js WebGL</span>
+    <div class="demo-controls">
+      <label><span class="ctrl-head">Scale <span class="val">12</span></span><input type="range" class="ctrl" min="4" max="30" step="1" value="12" data-uniform="uScale"></label>
+      <label><span class="ctrl-head">Angle Speed <span class="val">0.30</span></span><input type="range" class="ctrl" min="0.02" max="1.5" step="0.02" value="0.3" data-uniform="uAngleSpeed"></label>
+      <label><span class="ctrl-head">Saturation <span class="val">0.90</span></span><input type="range" class="ctrl" min="0.2" max="1" step="0.05" value="0.9" data-uniform="uSaturation"></label>
+    </div>
+  </div>
+  <details class="glsl-block"><summary>Core GLSL (fragment shader)</summary>
+<pre><code>vec2 p = (vUv-0.5); p.x *= uRes.x/uRes.y;
+float t = uTime*uAngleSpeed*0.3;
+vec2 g1 = p*uScale;
+float grid1 = sin(g1.x*6.283)*sin(g1.y*6.283);
+float ca=cos(t),sa=sin(t);
+vec2 g2 = vec2(p.x*ca-p.y*sa, p.x*sa+p.y*ca)*uScale*1.037;
+float grid2 = sin(g2.x*6.283)*sin(g2.y*6.283);
+float moire = grid1*grid2;
+float amp = moire*0.5+0.5;
+vec3 col = hsv2rgb(vec3(amp*0.5+uTime*0.03, uSaturation, pow(amp,0.65)));
+gl_FragColor = vec4(col,1.0);</code></pre>
+  </details>
+  <div class="ai-prompt"><strong>AI demo prompt</strong>
+    <p>Create a self-contained Three.js r169 WebGL demo showing a psychedelic moiré interference field. Fullscreen quad, ShaderMaterial. Fragment: two sinusoidal grids — grid1 = sin(p.x*scale*6.283)*sin(p.y*scale*6.283), grid2 same but rotated by uTime*uAngleSpeed and scaled by 1.037. Multiply grids for interference value. HSV color from interference amplitude cycling with uTime. uScale, uAngleSpeed, uSaturation sliders. 300px canvas.</p>
+  </div>
+</div>
+
+<!-- 11: vection -->
+<div class="technique" id="t14">
+  <h3>11. Radial optic flow (vection)</h3>
+  <p class="cortex-hook">Exploits: MST self-motion detection + vestibular-visual conflict</p>
+  <p>The dorsal visual pathway contains area MST with neurons tuned specifically to optic flow patterns matching forward self-motion: pure radial expansion reliably triggers vection, the compelling but false sensation of actually moving through space. Stationary viewers experience this as genuine motion, while the vestibular system disagrees and finds nothing to report. In VR, the vestibular mismatch with head tracking amplifies the contradiction. Flow Speed sets apparent velocity; Density controls the number of radial streaks; Twist spirals them slightly so the flow never feels purely mechanical.</p>
+  <div class="demo-wrap">
+    <canvas class="demo-canvas" id="demo-14" width="800" height="300"></canvas>
+    <span class="demo-label">Three.js WebGL</span>
+    <div class="demo-controls">
+      <label><span class="ctrl-head">Flow Speed <span class="val">0.55</span></span><input type="range" class="ctrl" min="0.1" max="2.5" step="0.05" value="0.55" data-uniform="uFlowSpeed"></label>
+      <label><span class="ctrl-head">Density <span class="val">9</span></span><input type="range" class="ctrl" min="3" max="20" step="1" value="9" data-uniform="uDensity"></label>
+      <label><span class="ctrl-head">Twist <span class="val">2.50</span></span><input type="range" class="ctrl" min="0" max="8" step="0.5" value="2.5" data-uniform="uTwist"></label>
+    </div>
+  </div>
+  <details class="glsl-block"><summary>Core GLSL (fragment shader)</summary>
+<pre><code>vec2 p = vUv*2.0-1.0; p.x *= uRes.x/uRes.y;
+float r = length(p); float a = atan(p.y,p.x);
+float ring = fract(r*uDensity - uTime*uFlowSpeed);
+float streak = smoothstep(0.0,0.15,ring)*(1.0-smoothstep(0.15,0.5,ring));
+float spoke = pow(sin(a*uDensity*0.5+r*uTwist)*0.5+0.5, 4.0);
+float intensity = streak*(spoke*0.7+0.3)*(0.3+r*1.4);
+intensity *= 1.0-smoothstep(0.72,1.0,r);
+vec3 col = hsv2rgb(vec3(a/(2.0*PI)*0.3+uTime*0.03, 0.8, 1.0))*intensity*2.8;
+gl_FragColor = vec4(col,1.0);</code></pre>
+  </details>
+  <div class="ai-prompt"><strong>AI demo prompt</strong>
+    <p>Create a self-contained Three.js r169 WebGL demo showing radial optic flow (vection illusion). Fullscreen quad, ShaderMaterial. Fragment: polar coords, ring = fract(r*uDensity - uTime*uFlowSpeed), streak = smooth pulse on ring. Angular spokes from sin(angle*uDensity*0.5 + r*uTwist). Multiply streak and spokes, scale by radial brightness gradient. HSV from angle cycling with uTime. uFlowSpeed, uDensity, uTwist sliders. Vignette. 300px canvas.</p>
+  </div>
+</div>
+
+<!-- 12: wave interference -->
+<div class="technique" id="t15">
+  <h3>12. Dual-source wave interference (beat frequency)</h3>
+  <p class="cortex-hook">Exploits: temporal integration window + spatial frequency beating</p>
+  <p>Two circular wave sources orbit each other, emitting sinusoidal waves at slightly different frequencies. Their interference creates a beat pattern at the difference frequency: a breathing, traveling wave that the visual system's 100ms temporal integration window cannot cleanly separate into its two source components. The pattern appears to have its own internal rhythm unrelated to either source. At certain beat frequencies, the visual cortex mistakes the pattern for a genuine object with oscillatory behavior. Wave Freq sets the source spatial frequency; Speed controls how fast the waves travel; Brightness scales the output.</p>
+  <div class="demo-wrap">
+    <canvas class="demo-canvas" id="demo-15" width="800" height="300"></canvas>
+    <span class="demo-label">Three.js WebGL</span>
+    <div class="demo-controls">
+      <label><span class="ctrl-head">Wave Freq <span class="val">14</span></span><input type="range" class="ctrl" min="4" max="30" step="1" value="14" data-uniform="uFreq"></label>
+      <label><span class="ctrl-head">Speed <span class="val">0.80</span></span><input type="range" class="ctrl" min="0.1" max="3" step="0.1" value="0.8" data-uniform="uWaveSpeed"></label>
+      <label><span class="ctrl-head">Brightness <span class="val">1.20</span></span><input type="range" class="ctrl" min="0.3" max="3" step="0.1" value="1.2" data-uniform="uBrightness"></label>
+    </div>
+  </div>
+  <details class="glsl-block"><summary>Core GLSL (fragment shader)</summary>
+<pre><code>vec2 p = vUv; float ar = uRes.x/uRes.y;
+float ot = uTime*0.35;
+vec2 s1 = vec2(0.5+cos(ot)*0.22/ar, 0.5+sin(ot*1.31)*0.18);
+vec2 s2 = vec2(0.5+cos(ot+PI)*0.22/ar, 0.5+sin(ot*1.31+PI)*0.18);
+float d1 = length((p-s1)*vec2(ar,1.0))*uFreq;
+float d2 = length((p-s2)*vec2(ar,1.0))*uFreq;
+float w1 = sin(d1 - uTime*uWaveSpeed*6.0);
+float w2 = sin(d2 - uTime*uWaveSpeed*6.15);
+float interference = (w1+w2)*0.5;
+float amp = abs(interference);
+vec3 col = hsv2rgb(vec3(interference*0.35+0.5+uTime*0.04, 0.97, amp*1.8*uBrightness));
+gl_FragColor = vec4(col,1.0);</code></pre>
+  </details>
+  <div class="ai-prompt"><strong>AI demo prompt</strong>
+    <p>Create a self-contained Three.js r169 WebGL demo showing dual-source wave interference. Fullscreen quad, ShaderMaterial. Fragment: two wave sources orbit via cos/sin(uTime*0.35) offset by PI. Each emits sinusoidal wave at uFreq * distance from source. Source 2 travels at 1.015x speed to create beat frequency. Sum waves, HSV color from phase and amplitude. uFreq, uWaveSpeed, uBrightness sliders. 300px canvas.</p>
+  </div>
+</div>
+
+<!-- 13: polar field -->
+<div class="technique" id="t16">
+  <h3>13. Polar sine field (rotational standing wave)</h3>
+  <p class="cortex-hook">Exploits: V1 orientation selectivity + pattern completion loop</p>
+  <p>Three overlapping sine waves in polar coordinates (radial, angular, and diagonal) generate a lattice of nodes that appears to rotate, breathe, and reorganize simultaneously. V1 contains orientation-selective columns tuned to specific grating angles. When three orientations are simultaneously active at full saturation, the cortex attempts to form a stable percept, identifies a pattern, then finds it has shifted before the identification completes. The loop runs at the speed of the update cycle. Radial Freq controls ring density; Angular Freq sets sector count; Speed drives all three waves.</p>
+  <div class="demo-wrap">
+    <canvas class="demo-canvas" id="demo-16" width="800" height="300"></canvas>
+    <span class="demo-label">Three.js WebGL</span>
+    <div class="demo-controls">
+      <label><span class="ctrl-head">Radial Freq <span class="val">8</span></span><input type="range" class="ctrl" min="3" max="20" step="1" value="8" data-uniform="uRadFreq"></label>
+      <label><span class="ctrl-head">Angular Freq <span class="val">6</span></span><input type="range" class="ctrl" min="2" max="16" step="1" value="6" data-uniform="uAngFreq"></label>
+      <label><span class="ctrl-head">Speed <span class="val">1.00</span></span><input type="range" class="ctrl" min="0.1" max="3" step="0.1" value="1" data-uniform="uSpeed"></label>
+    </div>
+  </div>
+  <details class="glsl-block"><summary>Core GLSL (fragment shader)</summary>
+<pre><code>vec2 p = vUv*2.0-1.0; p.x *= uRes.x/uRes.y;
+float r = length(p); float a = atan(p.y,p.x);
+float radial  = sin(r*uRadFreq - uTime*uSpeed);
+float angular = sin(a*uAngFreq + uTime*uSpeed*0.43);
+float diag    = sin((r*uRadFreq*0.7 + a*uAngFreq*0.5)*1.2 + uTime*uSpeed*0.6);
+float field   = (radial*angular + diag*0.6)/1.6;
+float brightness = field*0.5+0.5;
+vec3 col = hsv2rgb(vec3(field*0.4+r*0.1+uTime*0.05, 0.97, brightness));
+col *= 1.0-smoothstep(0.82,1.05,r);
+gl_FragColor = vec4(col,1.0);</code></pre>
+  </details>
+  <div class="ai-prompt"><strong>AI demo prompt</strong>
+    <p>Create a self-contained Three.js r169 WebGL demo showing a psychedelic polar sine interference field. Fullscreen quad, ShaderMaterial. Fragment: polar coords, three overlapping sine waves: radial = sin(r*uRadFreq - uTime*uSpeed), angular = sin(a*uAngFreq + uTime*uSpeed*0.43), diagonal = sin((r*uRadFreq*0.7 + a*uAngFreq*0.5)*1.2 + uTime*uSpeed*0.6). Combine and map to HSV. uRadFreq, uAngFreq, uSpeed sliders. Vignette. 300px canvas.</p>
+  </div>
+</div>
+
 <hr>
 <h2>What is the WebXR performance budget on Meta Quest?</h2>
 <table>
   <thead><tr><th>Technique</th><th>Type</th><th>Quest 3 (90Hz)</th><th>Quest 2 (72Hz)</th></tr></thead>
   <tbody>
-    <tr><td>Flow UV distortion</td><td>Fragment shader</td><td>2-3ms</td><td>3-5ms</td></tr>
     <tr><td>Fractal kaleidoscope</td><td>Fragment shader</td><td>2-4ms</td><td>4-6ms</td></tr>
-    <tr><td>Particle vortex (4k)</td><td>Points / vertex</td><td>1-2ms</td><td>2-3ms</td></tr>
-    <tr><td>Chromatic aberration</td><td>Fragment shader</td><td>1-2ms</td><td>2-3ms</td></tr>
     <tr><td>Infinite tunnel</td><td>Fragment shader</td><td>1-2ms</td><td>2-3ms</td></tr>
-    <tr><td>God rays (24 samples)</td><td>Fragment shader</td><td>3-5ms</td><td>5-7ms</td></tr>
+    <tr><td>God rays (36 samples)</td><td>Fragment shader</td><td>3-5ms</td><td>5-7ms</td></tr>
     <tr><td>Displacement (64x64)</td><td>Vertex + fragment</td><td>2-3ms</td><td>3-4ms</td></tr>
     <tr><td>Temporal phosphene</td><td>Fragment shader</td><td>1-2ms</td><td>2-3ms</td></tr>
     <tr><td>Parallax layers (5)</td><td>Multi-draw</td><td>2-4ms</td><td>3-5ms</td></tr>
     <tr><td>Procedural terrain</td><td>Vertex + fragment</td><td>2-3ms</td><td>3-5ms</td></tr>
     <tr><td>Volumetric light field (DoF + bloom)</td><td>EffectComposer</td><td>4-6ms</td><td>7-10ms</td></tr>
+    <tr><td>Logarithmic spiral vortex</td><td>Fragment shader</td><td>1-2ms</td><td>2-3ms</td></tr>
+    <tr><td>Moiré interference grid</td><td>Fragment shader</td><td>1ms</td><td>1-2ms</td></tr>
+    <tr><td>Radial optic flow</td><td>Fragment shader</td><td>1ms</td><td>1-2ms</td></tr>
+    <tr><td>Wave interference beats</td><td>Fragment shader</td><td>1ms</td><td>1-2ms</td></tr>
+    <tr><td>Polar sine field</td><td>Fragment shader</td><td>1ms</td><td>1-2ms</td></tr>
     <tr><td><strong>Practical stack (3-4 combined)</strong></td><td></td><td><strong>6-9ms</strong></td><td><strong>9-13ms</strong></td></tr>
   </tbody>
 </table>
@@ -610,10 +679,10 @@ else composer.render();</code></pre>
 <hr>
 <h2 id="faq">Frequently asked questions</h2>
 <div class="faq-item"><h3>What makes VR visual effects psychedelic?</h3><p>Psychedelic VR effects work by simultaneously overwhelming multiple visual cortex processing streams: motion detection in MT/V5, color processing in V4, scale-invariant pattern recognition, and temporal integration. The visual cortex dedicates 50-55% of the cerebral cortex to vision, making it highly susceptible to calibrated perceptual overload. See <a href="/vision-dominates-half-your-brains-processing-power/">the full neuroscience breakdown</a>.</p></div>
-<div class="faq-item"><h3>Can I run these VR effects in the browser without Unity?</h3><p>Yes. Three.js with <code>ShaderMaterial</code> exposes raw GLSL and supports the WebXR Device API natively in Meta Quest Browser. All 11 demos on this page are self-contained. On Quest, open this page in the browser, scroll to any demo, and tap <strong>Enter VR</strong> to start an immersive-VR session with stereo rendering and head tracking.</p></div>
+<div class="faq-item"><h3>Can I run these VR effects in the browser without Unity?</h3><p>Yes. Three.js with <code>ShaderMaterial</code> exposes raw GLSL and supports the WebXR Device API natively in Meta Quest Browser. All 13 demos on this page are self-contained. On Quest, open this page in the browser, scroll to any demo, and tap <strong>Enter VR</strong> to start an immersive-VR session with stereo rendering and head tracking.</p></div>
 <div class="faq-item"><h3>How do I enter VR from the browser on Meta Quest?</h3><p>Open this page in Meta Quest Browser. Scroll to any demo and tap the <strong>Enter VR</strong> button below the canvas. The browser requests permission for an immersive-vr session via the WebXR Device API. The demo renders in full stereo at the Quest's native refresh rate (72Hz on Quest 2, 90Hz on Quest 3). Press the menu button to exit and return to the page.</p></div>
 <div class="faq-item"><h3>What is the performance budget for psychedelic VR on Meta Quest?</h3><p>Quest 3 targets 90Hz (11.1ms frame budget); Quest 2 targets 72Hz (13.9ms). Fullscreen GLSL fragment shaders cost 2-5ms. GPU particles cost 1-3ms. Running 3-4 combined effects is feasible with adaptive quality reducing shader iteration counts at runtime when frame time exceeds 11ms.</p></div>
-<div class="faq-item"><h3>Which visual effects cause the strongest perceptual response in VR?</h3><p>Fractal kaleidoscopes are consistently the strongest because they simultaneously overload scale-invariant pattern recognition, V4 color processing, and spatial mapping. Tunnel effects rank second by exploiting the looming response. Flow distortion ranks third by overloading MT/V5 motion processing. Combining any two produces the most intense perceptual response within a safe frame budget.</p></div>
+<div class="faq-item"><h3>Which visual effects cause the strongest perceptual response in VR?</h3><p>Fractal kaleidoscopes are consistently the strongest because they simultaneously overload scale-invariant pattern recognition, V4 color processing, and spatial mapping. Infinite tunnel effects rank second by exploiting the looming response and vergence-accommodation conflict. God rays rank third by flooding peripheral motion detection from multiple light sources. Combining any two produces the most intense perceptual response within a safe frame budget.</p></div>
 
 <hr>
 <h2>Sources</h2>
@@ -758,21 +827,6 @@ function fsDemo(canvas, frag, wrap) {
 }
 
 // Fragment shaders -----------------------------------------------------------
-const FRAG1=`
-  uniform float uTime,uSpeed,uWarp,uSat;uniform vec2 uRes;varying vec2 vUv;
-  void main(){
-    float t=uTime*0.35*uSpeed;
-    vec2 n1=vec2(noise(vUv*2.0+t*0.7),noise(vUv*2.0+t*0.7+5.2))*2.0-1.0;
-    vec2 n2=vec2(noise(vUv*5.0-t*0.45+3.7),noise(vUv*5.0-t*0.45+9.1))*2.0-1.0;
-    vec2 n3=vec2(noise(vUv*11.0+t*0.22+7.3),noise(vUv*11.0+t*0.22+1.5))*2.0-1.0;
-    vec2 w=vUv+n1*uWarp+n2*uWarp*0.5+n3*uWarp*0.25;
-    float c=noise(w*5.0+vec2(t*0.25,-t*0.18));
-    float c2=noise(w*10.0-vec2(t*0.15,t*0.22));
-    vec3 col=hsv2rgb(vec3(c+t*0.08,uSat,1.0));
-    col=mix(col,hsv2rgb(vec3(c2+t*0.05+0.5,uSat,1.0)),0.4);
-    gl_FragColor=vec4(col,1.0);
-  }
-`;
 const FRAG2=`
   uniform float uTime,uRotSpeed,uZoom,uSymmetry;uniform vec2 uRes;varying vec2 vUv;
   void main(){
@@ -790,22 +844,6 @@ const FRAG2=`
     }
     vec3 col=(iter<16.0)?hsv2rgb(vec3(iter/16.0+uTime*0.06,0.97,1.0)):vec3(0.0);
     gl_FragColor=vec4(col,1.0);
-  }
-`;
-const FRAG4=`
-  uniform float uTime,uAberration,uFrequency,uPatSpeed;uniform vec2 uRes;varying vec2 vUv;
-  float pat(vec2 uv){
-    float r=length(uv-0.5);float a=atan(uv.y-0.5,uv.x-0.5);
-    return sin(r*uFrequency-uTime*uPatSpeed+a*5.0)*0.5+0.5;
-  }
-  void main(){
-    vec2 dir=normalize(vUv-0.5);float dist=length(vUv-0.5);
-    float ab=dist*dist*uAberration*(sin(uTime*0.55)*0.45+0.8);
-    float r=pat(vUv+dir*ab*1.5);float g=pat(vUv);float b=pat(vUv-dir*ab*1.5);
-    vec2 uv2=vUv-0.5;float ca=cos(uTime*0.1),sa=sin(uTime*0.1);
-    uv2=vec2(uv2.x*ca-uv2.y*sa,uv2.x*sa+uv2.y*ca)+0.5;
-    float r2=pat(uv2+dir*ab*0.5)*0.4;
-    gl_FragColor=vec4(r+r2,g,b+r2*0.5,1.0);
   }
 `;
 const FRAG5=`
@@ -865,72 +903,6 @@ const FRAG8=`
     gl_FragColor=vec4(col,1.0);
   }
 `;
-
-// 3D scene demos -------------------------------------------------------------
-function initDemo3(canvas, wrap) {
-  const r=new THREE.WebGLRenderer({canvas,antialias:false});
-  r.setPixelRatio(Math.min(devicePixelRatio,1.5)); r.xr.enabled=true;
-  const w=canvas.clientWidth||800,h=canvas.clientHeight||300;
-  r.setSize(w,h,false); r.setClearColor(0x000000,1);
-  const scene=new THREE.Scene();
-  const cam=new THREE.PerspectiveCamera(70,w/h,0.01,100);
-  cam.position.z=3;
-  const N=4000;
-  const geo=new THREE.BufferGeometry();
-  const ph=new Float32Array(N),ra=new Float32Array(N),sp=new Float32Array(N),pos=new Float32Array(N*3);
-  for(let i=0;i<N;i++){ph[i]=Math.random()*PI*2;ra[i]=0.2+Math.random()*1.4;sp[i]=0.4+Math.random()*1.8;}
-  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  geo.setAttribute('aPhase',new THREE.BufferAttribute(ph,1));
-  geo.setAttribute('aRadius',new THREE.BufferAttribute(ra,1));
-  geo.setAttribute('aSpeed',new THREE.BufferAttribute(sp,1));
-  const gd=n=>{const sl=wrap?wrap.querySelector(`input[data-uniform="${n}"]`):null;return sl?parseFloat(sl.value):1;};
-  const uni={uTime:{value:0},uOrbitSpeed:{value:gd('uOrbitSpeed')},uSpread:{value:gd('uSpread')},uGlow:{value:gd('uGlow')}};
-  const mat=new THREE.ShaderMaterial({
-    uniforms:uni,
-    vertexShader:`
-      attribute float aPhase;attribute float aRadius;attribute float aSpeed;
-      uniform float uTime,uOrbitSpeed,uSpread;varying vec3 vCol;
-      void main(){
-        float t=uTime*aSpeed*uOrbitSpeed+aPhase;
-        vec3 p=vec3(aRadius*uSpread*cos(t)*cos(t*0.37+1.0),aRadius*uSpread*sin(t*1.31)*0.7,aRadius*uSpread*sin(t)*cos(t*0.73+2.1));
-        vec4 mv=modelViewMatrix*vec4(p,1.0);
-        gl_PointSize=clamp(130.0/-mv.z,1.0,12.0);gl_Position=projectionMatrix*mv;
-        float hue=aPhase/6.28318;vec4 K=vec4(1.0,2.0/3.0,1.0/3.0,3.0);
-        vec3 c=vec3(hue+0.55,0.95,1.0);vec3 pp=abs(fract(c.xxx+K.xyz)*6.0-K.www);
-        vCol=mix(K.xxx,clamp(pp-K.xxx,0.0,1.0),c.y);
-      }
-    `,
-    fragmentShader:`
-      varying vec3 vCol;uniform float uGlow;
-      void main(){
-        vec2 pc=gl_PointCoord-0.5;float d=length(pc);
-        if(d>0.5)discard;
-        float a=1.0-smoothstep(0.1,0.5,d);
-        gl_FragColor=vec4(vCol*uGlow,a*0.9);
-      }
-    `,
-    transparent:true,blending:THREE.AdditiveBlending,depthWrite:false
-  });
-  const pts=new THREE.Points(geo,mat); scene.add(pts);
-  const clock=new THREE.Clock();
-  const eu3=new THREE.Euler(0,0,0,'YXZ');
-  const drag3={on:false,lx:0,ly:0,yaw:0,pitch:0};
-  canvas.style.cursor='grab';
-  canvas.addEventListener('mousedown',e=>{drag3.on=true;drag3.lx=e.clientX;drag3.ly=e.clientY;canvas.style.cursor='grabbing';});
-  window.addEventListener('mousemove',e=>{if(!drag3.on)return;drag3.yaw-=(e.clientX-drag3.lx)*0.25;drag3.pitch-=(e.clientY-drag3.ly)*0.25;drag3.pitch=Math.max(-85,Math.min(85,drag3.pitch));drag3.lx=e.clientX;drag3.ly=e.clientY;});
-  window.addEventListener('mouseup',()=>{drag3.on=false;canvas.style.cursor='grab';});
-  r.setAnimationLoop(()=>{
-    const t=clock.getElapsedTime();uni.uTime.value=t;pts.rotation.y=t*0.08;
-    if(!r.xr.isPresenting){
-      if(gyro.active){eu3.x=THREE.MathUtils.degToRad(-(gyro.beta-gyro.b0));eu3.y=THREE.MathUtils.degToRad(-(gyro.gamma-gyro.g0));}
-      else{eu3.x=THREE.MathUtils.degToRad(drag3.pitch);eu3.y=THREE.MathUtils.degToRad(drag3.yaw);}
-      cam.quaternion.setFromEuler(eu3);
-    }
-    r.render(scene,cam);
-  });
-  wireSliders(wrap,uni); createVRButton(r,wrap);
-  return {renderer:r,stop(){r.setAnimationLoop(null);}};
-}
 
 function initDemo7(canvas, wrap) {
   const r=new THREE.WebGLRenderer({canvas,antialias:false});
@@ -1160,6 +1132,21 @@ async function initDemo11(canvas, wrap) {
     field.add(o); orbs.push(o);
   }
 
+  // Sprite-based glow texture (works in VR without EffectComposer)
+  const glowCv=document.createElement('canvas'); glowCv.width=glowCv.height=64;
+  const gctx=glowCv.getContext('2d');
+  const grad=gctx.createRadialGradient(32,32,0,32,32,32);
+  grad.addColorStop(0,'rgba(255,255,255,1)'); grad.addColorStop(0.18,'rgba(255,255,255,0.85)');
+  grad.addColorStop(0.5,'rgba(255,255,255,0.25)'); grad.addColorStop(1,'rgba(255,255,255,0)');
+  gctx.fillStyle=grad; gctx.fillRect(0,0,64,64);
+  const glowTex=new THREE.CanvasTexture(glowCv);
+
+  for(const o of orbs){
+    const sm=new THREE.SpriteMaterial({map:glowTex,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,color:new THREE.Color().setHSL(o.userData.hueBase,0.95,0.7),opacity:0.85});
+    const sp=new THREE.Sprite(sm); sp.scale.setScalar(o.scale.x*7); sp.userData.isHalo=true;
+    o.add(sp);
+  }
+
   let placedLights=0;
   function spawnAt(pos){
     const hueBase=(placedLights*0.137)%1;
@@ -1231,6 +1218,7 @@ async function initDemo11(canvas, wrap) {
       o.material.color.setHSL(hue,0.95,0.5);
       o.material.emissive.setHSL(hue,0.95,0.5);
       o.position.y=o.userData.by+Math.sin(t*o.userData.spd+o.userData.ph)*o.userData.amp;
+      for(const ch of o.children) if(ch.userData.isHalo) ch.material.color.setHSL(hue,0.95,0.8);
     }
     controls.update();
     if(r.xr.isPresenting||!composer) r.render(scene,camera);
@@ -1239,13 +1227,89 @@ async function initDemo11(canvas, wrap) {
   return{renderer:r,stop(){r.setAnimationLoop(null);}};
 }
 
+const FRAG12=`
+  uniform float uTime,uDiveSpeed,uArmCount,uTwist;uniform vec2 uRes;varying vec2 vUv;
+  void main(){
+    vec2 p=vUv*2.0-1.0;p.x*=uRes.x/uRes.y;
+    float r=length(p);float a=atan(p.y,p.x);
+    float logr=log(max(r,0.001));
+    float arm=mod((a+logr*uArmCount*0.5+uTime*uTwist*0.4)/(2.0*PI/uArmCount),1.0);
+    arm=abs(arm*2.0-1.0);
+    float depth=mod(-logr*0.4-uTime*uDiveSpeed,1.0);
+    float s1=sin(depth*22.0-uTime*1.5)*0.5+0.5;
+    float s2=pow(1.0-arm,3.0);
+    vec3 col=hsv2rgb(vec3(depth*0.6+a/(2.0*PI)*0.15+uTime*0.04,0.97,1.0))*s1*s2*2.5;
+    col*=1.0-smoothstep(0.82,1.0,r);
+    gl_FragColor=vec4(col,1.0);
+  }
+`;
+const FRAG13=`
+  uniform float uTime,uScale,uAngleSpeed,uSaturation;uniform vec2 uRes;varying vec2 vUv;
+  void main(){
+    vec2 p=(vUv-0.5);p.x*=uRes.x/uRes.y;
+    float t=uTime*uAngleSpeed*0.3;
+    vec2 g1=p*uScale;
+    float grid1=sin(g1.x*6.283)*sin(g1.y*6.283);
+    float ca=cos(t),sa=sin(t);
+    vec2 g2=vec2(p.x*ca-p.y*sa,p.x*sa+p.y*ca)*uScale*1.037;
+    float grid2=sin(g2.x*6.283)*sin(g2.y*6.283);
+    float moire=grid1*grid2;
+    float amp=moire*0.5+0.5;
+    vec3 col=hsv2rgb(vec3(amp*0.5+uTime*0.03,uSaturation,pow(amp,0.65)));
+    gl_FragColor=vec4(col,1.0);
+  }
+`;
+const FRAG14=`
+  uniform float uTime,uFlowSpeed,uDensity,uTwist;uniform vec2 uRes;varying vec2 vUv;
+  void main(){
+    vec2 p=vUv*2.0-1.0;p.x*=uRes.x/uRes.y;
+    float r=length(p);float a=atan(p.y,p.x);
+    float ring=fract(r*uDensity-uTime*uFlowSpeed);
+    float streak=smoothstep(0.0,0.15,ring)*(1.0-smoothstep(0.15,0.5,ring));
+    float spoke=pow(sin(a*uDensity*0.5+r*uTwist)*0.5+0.5,4.0);
+    float intensity=streak*(spoke*0.7+0.3)*(0.3+r*1.4);
+    intensity*=1.0-smoothstep(0.72,1.0,r);
+    vec3 col=hsv2rgb(vec3(a/(2.0*PI)*0.3+uTime*0.03,0.8,1.0))*intensity*2.8;
+    gl_FragColor=vec4(col,1.0);
+  }
+`;
+const FRAG15=`
+  uniform float uTime,uFreq,uWaveSpeed,uBrightness;uniform vec2 uRes;varying vec2 vUv;
+  void main(){
+    vec2 p=vUv;float ar=uRes.x/uRes.y;
+    float ot=uTime*0.35;
+    vec2 s1=vec2(0.5+cos(ot)*0.22/ar,0.5+sin(ot*1.31)*0.18);
+    vec2 s2=vec2(0.5+cos(ot+PI)*0.22/ar,0.5+sin(ot*1.31+PI)*0.18);
+    float d1=length((p-s1)*vec2(ar,1.0))*uFreq;
+    float d2=length((p-s2)*vec2(ar,1.0))*uFreq;
+    float w1=sin(d1-uTime*uWaveSpeed*6.0);
+    float w2=sin(d2-uTime*uWaveSpeed*6.15);
+    float interference=(w1+w2)*0.5;
+    float amp=abs(interference);
+    vec3 col=hsv2rgb(vec3(interference*0.35+0.5+uTime*0.04,0.97,amp*1.8*uBrightness));
+    gl_FragColor=vec4(col,1.0);
+  }
+`;
+const FRAG16=`
+  uniform float uTime,uRadFreq,uAngFreq,uSpeed;uniform vec2 uRes;varying vec2 vUv;
+  void main(){
+    vec2 p=vUv*2.0-1.0;p.x*=uRes.x/uRes.y;
+    float r=length(p);float a=atan(p.y,p.x);
+    float radial=sin(r*uRadFreq-uTime*uSpeed);
+    float angular=sin(a*uAngFreq+uTime*uSpeed*0.43);
+    float diag=sin((r*uRadFreq*0.7+a*uAngFreq*0.5)*1.2+uTime*uSpeed*0.6);
+    float field=(radial*angular+diag*0.6)/1.6;
+    float brightness=field*0.5+0.5;
+    vec3 col=hsv2rgb(vec3(field*0.4+r*0.1+uTime*0.05,0.97,brightness));
+    col*=1.0-smoothstep(0.82,1.05,r);
+    gl_FragColor=vec4(col,1.0);
+  }
+`;
+
 // Lazy init ------------------------------------------------------------------
 const active={};
 const demoInits={
-  'demo-1':(c,w)=>fsDemo(c,FRAG1,w),
   'demo-2':(c,w)=>fsDemo(c,FRAG2,w),
-  'demo-3':(c,w)=>initDemo3(c,w),
-  'demo-4':(c,w)=>fsDemo(c,FRAG4,w),
   'demo-5':(c,w)=>fsDemo(c,FRAG5,w),
   'demo-6':(c,w)=>fsDemo(c,FRAG6,w),
   'demo-7':(c,w)=>initDemo7(c,w),
@@ -1253,6 +1317,11 @@ const demoInits={
   'demo-9':(c,w)=>initDemo9(c,w),
   'demo-10':(c,w)=>initDemo10(c,w),
   'demo-11':(c,w)=>initDemo11(c,w),
+  'demo-12':(c,w)=>fsDemo(c,FRAG12,w),
+  'demo-13':(c,w)=>fsDemo(c,FRAG13,w),
+  'demo-14':(c,w)=>fsDemo(c,FRAG14,w),
+  'demo-15':(c,w)=>fsDemo(c,FRAG15,w),
+  'demo-16':(c,w)=>fsDemo(c,FRAG16,w),
 };
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(({target,isIntersecting})=>{
