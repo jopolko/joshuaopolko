@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
+<title>XR Visual Tests</title>
+<meta name="description" content="WebXR moiré interference demos running in the browser. Open on a Meta Quest to go fully immersive via WebXR.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://joshuaopolko.com/xr-tests/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XR Visual Tests">
+<meta property="og:description" content="WebXR moiré interference demos running in the browser. Open on a Meta Quest to go fully immersive via WebXR.">
+<meta property="og:url" content="https://joshuaopolko.com/xr-tests/">
+<meta property="og:site_name" content="Joshua Opolko">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XR Visual Tests">
+<meta name="twitter:description" content="WebXR moiré interference demos running in the browser. Open on a Meta Quest to go fully immersive via WebXR.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://joshuaopolko.com/xr-tests/#webpage","url":"https://joshuaopolko.com/xr-tests/","name":"XR Visual Tests","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=11">
+<script src="/assets/nav.js?v=6" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+<style>
+.demo-grid { display: grid; gap: 2.5rem; margin: 2rem 0; }
+.demo-card h2 { margin: 0 0 .35rem; font-size: 1.25rem; }
+.demo-card p  { margin: 0 0 .75rem; color: #555; font-size: .95rem; }
+.demo-actions { display: flex; gap: .75rem; margin-bottom: .75rem; }
+.demo-actions a {
+  display: inline-block; padding: 6px 14px;
+  border: 1px solid var(--accent); border-radius: 6px;
+  color: var(--accent); font-size: .85rem; text-decoration: none;
+  transition: background .15s;
+}
+.demo-actions a:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.demo-frame {
+  width: 100%; height: 68vh; min-height: 380px;
+  border: none; border-radius: 10px; display: block; background: #000;
+}
+</style>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>XR Visual Tests</h1>
+  <div class="post-body">
+
+<p>Two WebGL moiré interference demos. Use the sliders to explore the parameter space. On a Meta Quest, open the demo full screen and tap <strong>Enter VR</strong> to go immersive.</p>
+
+<div class="demo-grid">
+
+  <div class="demo-card">
+    <h2>Moiré Extreme</h2>
+    <p>Rotating sinusoidal grid layers. Interference between four detuned grids creates the beating pattern, with UV warp and chromatic aberration on top.</p>
+    <div class="demo-actions">
+      <a href="/xr-tests/moire-extreme.html" target="_blank">Open full screen</a>
+    </div>
+    <iframe src="/xr-tests/moire-extreme.html" class="demo-frame"
+            allow="xr-spatial-tracking; fullscreen"
+            title="Moiré Extreme"></iframe>
+  </div>
+
+  <div class="demo-card">
+    <h2>Wave Interference</h2>
+    <p>Multiple point sources emit circular wavefronts at slightly detuned frequencies. The moiré comes from the beating between those radial waves as the sources drift in Lissajous orbits.</p>
+    <div class="demo-actions">
+      <a href="/xr-tests/moire-wave.html" target="_blank">Open full screen</a>
+    </div>
+    <iframe src="/xr-tests/moire-wave.html" class="demo-frame"
+            allow="xr-spatial-tracking; fullscreen"
+            title="Wave Interference"></iframe>
+  </div>
+
+</div>
+
+  </div>
+</main>
+</body>
+</html>

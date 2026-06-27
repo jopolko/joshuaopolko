@@ -1,22 +1,55 @@
 # Joshua Opolko
-> Builder of AI systems and Toronto data tools, plus writing on AI/GEO, psychology, and VR.
 
-## Toronto data tools (daily-updated, free)
-- [Toronto Kids Events](https://joshuaopolko.com/kidsevents/): Free and low-cost kids and family events across Toronto, aggregated daily from EarlyON drop-in centres, Toronto Public Library, City Parks & Recreation, museums, and community groups. Browse by date, age group, category, and neighbourhood.
+> GEO/AEO practitioner and self-hosted AI tool builder based in Toronto. First-party data on AI citation patterns. Founder of NowServingTO.
 
-## Toronto Kids Events guides (editorial, live data refreshed daily)
-- [Free Museum Days in Toronto for Kids](https://joshuaopolko.com/kidsevents/free-museum-days/): Every recurring free window — ROM third Tuesdays, AGO first Wednesdays, Canada Strong Pass summer, always-free Toronto History Museums.
-- [Kids Events by Neighbourhood](https://joshuaopolko.com/kidsevents/neighbourhoods/): How free programming distributes across Toronto's districts, with live counts.
-- [Data Sources & Methodology](https://joshuaopolko.com/kidsevents/methodology/): Where the event data comes from, daily rebuild process, accuracy policy, and privacy.
-- [HomeTurf — Toronto Neighbourhood Guide](https://joshuaopolko.com/hometurf/): Compare all 158 Toronto neighbourhoods by share of children, median household income, schools, licensed childcare, demographics, transit use, and growth.
+## GEO and AI Citation
+
+- [GEO Field Manual](https://joshuaopolko.com/geo-field-manual/): Complete 10-step playbook for getting cited by ChatGPT, Claude, Perplexity, and Gemini. Includes first-party data and copy-paste prompts.
+- [GEO Answers](https://joshuaopolko.com/geo-answers/): Practitioner Q&A on AI citation, updated weekly from real questions. Answer-first, falsifiable, grounded in first-party results.
+- [GEO: AI Citation](https://joshuaopolko.com/geo-ai-citation/): Technical breakdown of how AI systems select citations, including the 134-167 word extraction window and passage-level optimization.
+- [GEO Observatory](https://joshuaopolko.com/geo-observatory/): Live AI-crawler data for this domain. Which bots fetch which pages, fetch frequency, and freshness signals.
+- [AI Crawler Report June 2026](https://joshuaopolko.com/ai-crawler-report/): First-party crawler data for June 13-27, 2026. 4,288 AI fetches, 20 bots, top pages, verification rates, and analysis.
+- [Site as AI Infrastructure](https://joshuaopolko.com/ai-infrastructure/): How to structure a website as LLM-readable infrastructure for maximum AI citation.
+- [LLM-as-ETL](https://joshuaopolko.com/llm-etl-architecture/): Using LLMs as extract-transform-load pipelines for structured data work.
+
+## Self-Hosted AI Tools
+
+- [Ollama](https://joshuaopolko.com/ollama/): Run local LLMs with Ollama on Mac, Linux, and Windows. Install guide and model management.
+- [Qwen2.5-VL](https://joshuaopolko.com/qwen2-5-vl/): Local vision-language model that reads license plates, serial numbers, and documents from images through pure visual inference. OCRBench 864 vs GPT-4o-mini 785. Runs on a gaming GPU via Ollama.
+- [Open WebUI](https://joshuaopolko.com/open-webui-self-hosted-guide/): Self-hosted ChatGPT-style interface for Ollama and cloud APIs. Install guide, RAG setup, and multi-user configuration.
+- [AnythingLLM](https://joshuaopolko.com/anythingllm-self-hosted-guide/): Self-hosted AI workspace with RAG, agents, and multi-user support. Complete Docker setup guide.
+- [LibreChat](https://joshuaopolko.com/librechat-self-hosted-guide/): Self-hosted multi-provider AI chat. Docker Compose setup, Ollama integration, and user management.
+- [LiteLLM](https://joshuaopolko.com/litellm-proxy-guide/): OpenAI-compatible proxy for 100-plus LLM providers. Load balancing, fallbacks, and virtual key management.
+- [n8n](https://joshuaopolko.com/n8n-self-hosted-guide/): Self-hosted workflow automation with AI nodes. Docker setup and AI workflow examples.
+- [Dify](https://joshuaopolko.com/dify-self-hosted-guide/): Self-hosted LLM app development platform. RAG pipelines, agents, and API publishing.
+- [Vane (Perplexica)](https://joshuaopolko.com/perplexica-self-hosted-guide/): Self-hosted AI search engine. Docker setup and SearXNG integration.
+- [SearXNG](https://joshuaopolko.com/searxng-self-hosted-guide/): Self-hosted privacy-focused meta search engine. Docker setup and AI tool integration.
+- [Agent Zero](https://joshuaopolko.com/agent-zero/): Self-hosted autonomous AI agent framework with persistent memory and tool use.
+- [CrewAI](https://joshuaopolko.com/crewai-setup-production-guide/): Multi-agent AI framework for production workflows. Setup, role definition, and task orchestration.
+
+## AI Workflows and Architecture
+
+- [Building JOSIE](https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/): Advanced self-hosted AI workflow with persistent memory (Qdrant), web search (SearXNG), and n8n orchestration. Uses JOSIEFIED-Qwen3:8b via Ollama.
+- [Claude Code Spec Workflow](https://joshuaopolko.com/claude-code-specification-workflow-mcp/): Specification-driven development workflow with Claude Code and MCP servers.
+
+## Toronto Data Tools
+
+- [Toronto Kids Events](https://joshuaopolko.com/kidsevents/): Free and low-cost kids and family events across Toronto, aggregated daily from EarlyON centres, libraries, parks, museums, and community groups.
+- [Free Museum Days in Toronto](https://joshuaopolko.com/kidsevents/free-museum-days/): Every recurring free window at Toronto museums, including ROM, AGO, and Toronto History Museums.
+- [HomeTurf Neighbourhood Guide](https://joshuaopolko.com/hometurf/): Compare all 158 Toronto neighbourhoods by household income, schools, childcare, demographics, and transit.
 - [NowServingTO](https://nowservingto.com): Daily-fresh directory of Toronto's newest restaurants by cuisine.
 
-## AI & GEO
-- [The GEO Field Manual](https://joshuaopolko.com/geo-field-manual/): Ten technical steps to get cited by ChatGPT, Claude, Perplexity, and Gemini, with the data behind each, copy-paste prompts, and a master prompt you can hand any AI.
-- [AEO, Answered](https://joshuaopolko.com/geo-answers/): First-party answers to the questions people actually ask about getting cited by AI: whether AEO produces real results, why some sites get cited consistently and others don't, and what an AI-visibility tool should do.
-- [GEO: 0 to 1,800 AI Citations in 120 Days](https://joshuaopolko.com/claude-seo/): Optimizing for AI citation instead of clicks.
-- [Your Site as AI Infrastructure](https://joshuaopolko.com/ai-infrastructure/): Becoming a trusted source for ChatGPT and Claude.
-- [The LLM-as-ETL Architecture](https://joshuaopolko.com/llm-etl-architecture/): Building a data pipeline around Claude.
+## XR and Spatial Computing
+
+- [Architectural Visualization](https://joshuaopolko.com/architectural-visualization/): WebXR architectural visualization with Three.js.
+- [VR Therapy](https://joshuaopolko.com/vr-healing/): Virtual reality mental health applications and VR therapy research.
+- [VR Elderly Care](https://joshuaopolko.com/revolutionizing-elderly-care-with-virtual-reality/): VR dementia therapy and aging care applications.
+- [Vision and the Brain](https://joshuaopolko.com/vision-dominates-half-your-brains-processing-power/): How visual processing dominates human brain resources.
+
+## About
+
+- [About Joshua Opolko](https://joshuaopolko.com/about/): GEO practitioner and developer. Founded NowServingTO, a real-time restaurant wait-time tracker for Toronto.
 
 ## Contact
+
 - GitHub: https://github.com/jopolko

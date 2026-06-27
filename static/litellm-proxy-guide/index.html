@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<title>LiteLLM Proxy: One OpenAI-Compatible API for 100-Plus LLM Providers</title>
+<meta name="description" content="LiteLLM Proxy gives you a single OpenAI-compatible endpoint for 100-plus LLM providers. Docker setup, config.yaml, load balancing, fallbacks, virtual keys, and troubleshooting.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<link rel="canonical" href="https://joshuaopolko.com/litellm-proxy-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LiteLLM Proxy: One OpenAI-Compatible API for 100-Plus LLM Providers">
+<meta property="og:description" content="LiteLLM Proxy gives you a single OpenAI-compatible endpoint for 100-plus LLM providers. Docker setup, config.yaml, load balancing, fallbacks, virtual keys, and troubleshooting.">
+<meta property="og:url" content="https://joshuaopolko.com/litellm-proxy-guide/">
+<meta property="og:site_name" content="Joshua Opolko">
+<meta property="article:published_time" content="2026-06-27T00:00:00+00:00">
+<meta property="article:modified_time" content="2026-06-27T00:00:00+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LiteLLM Proxy: One OpenAI-Compatible API for 100-Plus LLM Providers">
+<meta name="twitter:description" content="LiteLLM Proxy gives you a single OpenAI-compatible endpoint for 100-plus LLM providers. Docker setup, config.yaml, load balancing, fallbacks, virtual keys, and troubleshooting.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/litellm-proxy-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/litellm-proxy-guide/","name":"LiteLLM Proxy: One OpenAI-Compatible API for 100-Plus LLM Providers"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/litellm-proxy-guide/#webpage","url":"https://joshuaopolko.com/litellm-proxy-guide/","name":"LiteLLM Proxy: One OpenAI-Compatible API for 100-Plus LLM Providers","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/litellm-proxy-guide/#breadcrumb"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"Article","@id":"https://joshuaopolko.com/litellm-proxy-guide/#article","headline":"LiteLLM Proxy: One OpenAI-Compatible API for 100-Plus LLM Providers","description":"LiteLLM Proxy gives you a single OpenAI-compatible endpoint for 100-plus LLM providers. Docker setup, config.yaml, load balancing, fallbacks, virtual keys, and troubleshooting.","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/litellm-proxy-guide/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/litellm-proxy-guide/#webpage"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"HowTo","@id":"https://joshuaopolko.com/litellm-proxy-guide/#howto","name":"How to self-host LiteLLM","description":"Step-by-step guide to installing and running LiteLLM on your own server or local machine.","step":[{"@type":"HowToStep","position":1,"name":"Install LiteLLM via pip or Docker","text":"Run pip install 'litellm[proxy]' for a local install, or pull the official docker-compose.yml for the production path that includes PostgreSQL."},{"@type":"HowToStep","position":2,"name":"Create a config.yaml file","text":"Define your model list in config.yaml, mapping short model names to provider-prefixed identifiers such as openai/gpt-4o or anthropic/claude-sonnet-4-5."},{"@type":"HowToStep","position":3,"name":"Set provider API keys","text":"Export each provider key as an environment variable and reference it in config.yaml using the os.environ/ prefix so raw keys never appear in the file."},{"@type":"HowToStep","position":4,"name":"Set the master key and salt key","text":"Create a .env file with LITELLM_MASTER_KEY and LITELLM_SALT_KEY before starting the proxy. The salt key encrypts stored credentials and cannot be changed after the first database write."},{"@type":"HowToStep","position":5,"name":"Start the LiteLLM proxy","text":"Run litellm --config config.yaml for a pip install, or run docker compose up -d to start the proxy and PostgreSQL together. The proxy listens on port 4000 by default."},{"@type":"HowToStep","position":6,"name":"Verify the proxy is running","text":"Send a test request to http://localhost:4000/chat/completions using curl or the OpenAI Python SDK with base_url set to http://localhost:4000. The admin UI is available at http://localhost:4000/ui."}]}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=11">
+<script src="/assets/nav.js?v=3" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>LiteLLM Proxy: One OpenAI-Compatible API for 100-Plus LLM Providers</h1>
+  <div class="post-body">
+<h2>Key takeaways</h2>
+<ul>
+<li>LiteLLM is an open-source library and proxy server that gives you a single OpenAI-compatible API endpoint for 100-plus LLM providers, including OpenAI, Anthropic, Google Vertex AI, AWS Bedrock, Azure, Ollama, Cohere, and Hugging Face</li>
+<li>There are two main modes: the Python SDK (a drop-in replacement for the OpenAI client in your code) and the Proxy Server (a self-hosted gateway that any OpenAI-compatible tool can point at without code changes)</li>
+<li>Install with <code>pip install 'litellm[proxy]'</code> or run the official Docker image; Docker Compose with PostgreSQL is the production-recommended path</li>
+<li>A single <code>config.yaml</code> file controls your model list, routing strategy, fallback chain, and spend limits</li>
+<li>Load balancing is built in: you can use round-robin, least-busy, usage-based, or latency-based routing across multiple API keys or providers</li>
+<li>Fallbacks are declarative: if the primary model fails, LiteLLM automatically retries the next provider in the list with no changes to your application code</li>
+<li>Virtual keys (requires PostgreSQL) let you issue separate keys per team or user with per-key budget caps and automatic spend tracking in USD</li>
+<li>Current stable release is v1.90.0 (June 2026); the project ships weekly minor releases</li>
+</ul>
+<h2>What is LiteLLM and why would I run it?</h2>
+<p>LiteLLM solves the problem of N different provider SDKs by giving you one consistent API surface regardless of which LLM you use. Without it, switching from OpenAI to Anthropic means rewriting your API calls, error handling, and streaming logic. With LiteLLM, you change one string (the model name) and everything else stays the same.</p>
+<p>The project has two distinct use cases.</p>
+<p><strong>Python SDK.</strong> You add <code>from litellm import completion</code> to your application and call any provider the same way you would call the OpenAI client. This is the lightweight path: no server process, no network hop, just a library that translates between provider APIs at the function-call level.</p>
+<p><strong>Proxy Server (the gateway path).</strong> LiteLLM runs a local HTTP server on port 4000 that speaks the OpenAI API spec. Point any tool, any framework, or any user's <code>OPENAI_BASE_URL</code> at <code>http://localhost:4000</code> and it routes requests to whichever backend you configured. This is the more powerful use case because it centralizes routing, logging, and spend tracking outside your application code. Cursor, Open WebUI, LangChain, LlamaIndex, and anything else that supports an OpenAI endpoint work without modification.</p>
+<p>The proxy is also the right choice when you are managing LLM access for a team. You issue virtual keys, set per-key budgets, and see exactly what each user or service is spending.</p>
+<h2>How do I install LiteLLM?</h2>
+<p>For a quick local test, pip install is the fastest path. For production use with virtual keys and spend tracking, Docker Compose with PostgreSQL is the recommended approach.</p>
+<p><strong>Option 1: pip (fastest for local testing)</strong></p>
+<pre><code class="language-bash">pip install 'litellm[proxy]'
+</code></pre>
+<p>Start the proxy with a model wired up:</p>
+<pre><code class="language-bash">litellm --model ollama/llama3 --port 4000
+</code></pre>
+<p>Or point it at a config file:</p>
+<pre><code class="language-bash">litellm --config config.yaml --port 4000
+</code></pre>
+<p><strong>Option 2: uv (recommended for isolated installs)</strong></p>
+<pre><code class="language-bash">uv tool install 'litellm[proxy]'
+litellm --config config.yaml
+</code></pre>
+<p><strong>Option 3: Docker Compose (production)</strong></p>
+<p>Docker Compose is the production-recommended path because it bundles the proxy with a PostgreSQL database, which is required for virtual keys and spend tracking.</p>
+<pre><code class="language-bash"># Pull the official docker-compose.yml
+curl -O https://raw.githubusercontent.com/BerriAI/litellm/main/docker-compose.yml
+
+# Create your environment file
+echo 'LITELLM_MASTER_KEY=&quot;sk-1234&quot;' &gt; .env
+echo 'LITELLM_SALT_KEY=&quot;sk-your-random-salt&quot;' &gt;&gt; .env
+
+# Start everything
+docker compose up -d
+</code></pre>
+<p>The proxy will be available at <code>http://localhost:4000</code>. The admin UI is at <code>http://localhost:4000/ui</code>.</p>
+<p>The <code>LITELLM_SALT_KEY</code> encrypts stored API credentials and cannot be changed after your first write to the database, so set it before you do anything else.</p>
+<h2>How do I configure LiteLLM with a config file?</h2>
+<p>Create a <code>config.yaml</code> in your working directory. This file is the single source of truth for which models are available, how they map to providers, and what your routing and budget rules are.</p>
+<pre><code class="language-yaml">model_list:
+  # OpenAI
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+
+  # Anthropic
+  - model_name: claude-sonnet
+    litellm_params:
+      model: anthropic/claude-sonnet-4-5
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+  # Azure OpenAI
+  - model_name: azure-gpt-4o
+    litellm_params:
+      model: azure/my-gpt4o-deployment
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: &quot;2025-01-01-preview&quot;
+
+  # Ollama (local)
+  - model_name: llama3-local
+    litellm_params:
+      model: ollama/llama3
+      api_base: http://localhost:11434
+
+  # AWS Bedrock
+  - model_name: bedrock-claude
+    litellm_params:
+      model: bedrock/anthropic.claude-3-5-sonnet-20241022-v2:0
+      aws_region_name: us-east-1
+
+litellm_settings:
+  num_retries: 3
+  request_timeout: 30
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+</code></pre>
+<p>The <code>os.environ/</code> syntax tells LiteLLM to read those values from environment variables at startup, so you never have to put raw keys inside the YAML file. Set the matching variables in your shell or <code>.env</code> file before starting the proxy.</p>
+<p>Start the proxy pointing at this file:</p>
+<pre><code class="language-bash">litellm --config config.yaml
+</code></pre>
+<h2>How do I use LiteLLM as an OpenAI-compatible proxy?</h2>
+<p>LiteLLM's proxy speaks the OpenAI API spec exactly, so any client library that supports a custom base URL will work with zero code changes. Just set the base URL to <code>http://localhost:4000</code> and use your LiteLLM master key as the API key.</p>
+<p><strong>Using the OpenAI Python SDK:</strong></p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url=&quot;http://localhost:4000&quot;,
+    api_key=&quot;sk-1234&quot;,  # Your LiteLLM master key (or a virtual key)
+)
+
+response = client.chat.completions.create(
+    model=&quot;claude-sonnet&quot;,  # Matches the model_name in your config.yaml
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Explain load balancing in one sentence.&quot;}],
+)
+
+print(response.choices[0].message.content)
+</code></pre>
+<p><strong>Using curl:</strong></p>
+<pre><code class="language-bash">curl http://localhost:4000/chat/completions \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Authorization: Bearer sk-1234&quot; \
+  -d '{
+    &quot;model&quot;: &quot;gpt-4o&quot;,
+    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello from the proxy!&quot;}]
+  }'
+</code></pre>
+<p>The model name in the request body must match a <code>model_name</code> field in your <code>config.yaml</code>. The proxy translates that to the actual provider and model behind the scenes.</p>
+<p><strong>Using the LiteLLM Python SDK directly (no proxy):</strong></p>
+<pre><code class="language-python">from litellm import completion
+import os
+
+os.environ[&quot;ANTHROPIC_API_KEY&quot;] = &quot;your-key&quot;
+
+response = completion(
+    model=&quot;anthropic/claude-sonnet-4-5&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}],
+)
+
+print(response.choices[0].message.content)
+</code></pre>
+<h2>How do I add load balancing and fallbacks?</h2>
+<p>Load balancing and fallbacks are configured in <code>config.yaml</code> and require no application code changes. LiteLLM handles them entirely in the routing layer.</p>
+<p><strong>Load balancing across multiple deployments:</strong></p>
+<p>List the same <code>model_name</code> more than once with different backends. LiteLLM distributes traffic across them using whatever <code>routing_strategy</code> you set.</p>
+<pre><code class="language-yaml">model_list:
+  # Two OpenAI keys for the same model
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY_1
+      rpm: 500
+
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY_2
+      rpm: 500
+
+  # Fallback target: Anthropic
+  - model_name: claude-fallback
+    litellm_params:
+      model: anthropic/claude-sonnet-4-5
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+router_settings:
+  routing_strategy: least-busy
+  num_retries: 2
+  timeout: 30
+
+litellm_settings:
+  fallbacks:
+    - {&quot;gpt-4o&quot;: [&quot;claude-fallback&quot;]}
+  context_window_fallbacks:
+    - {&quot;gpt-4o&quot;: [&quot;claude-fallback&quot;]}
+</code></pre>
+<p><code>fallbacks</code> fires when the primary returns an error (rate limit, server error, auth failure). <code>context_window_fallbacks</code> fires specifically when the request exceeds the primary model's context window.</p>
+<p>The four routing strategies:
+- <code>simple-shuffle</code>: weighted random pick based on rpm/tpm limits (the default)
+- <code>least-busy</code>: routes to the deployment with the fewest in-flight requests
+- <code>usage-based-routing</code>: tracks live TPM and RPM against configured limits
+- <code>latency-based-routing</code>: prefers the deployment with the lowest recent latency</p>
+<h2>How do I manage virtual keys and track spending?</h2>
+<p>Virtual keys let you issue separate credentials per user, team, or service, each with its own budget cap. The proxy logs every request and accumulates cost in USD automatically.</p>
+<p>Virtual keys require a PostgreSQL database. The Docker Compose setup includes one. If you are running the pip install path, add <code>database_url</code> to your <code>general_settings</code>:</p>
+<pre><code class="language-yaml">general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: &quot;postgresql://user:password@localhost:5432/litellm&quot;
+</code></pre>
+<p>Generate a virtual key with a budget and model restriction:</p>
+<pre><code class="language-bash">curl http://localhost:4000/key/generate \
+  -H &quot;Authorization: Bearer sk-1234&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;models&quot;: [&quot;gpt-4o&quot;, &quot;claude-sonnet&quot;],
+    &quot;max_budget&quot;: 10.00,
+    &quot;duration&quot;: &quot;30d&quot;,
+    &quot;metadata&quot;: {&quot;team&quot;: &quot;backend-eng&quot;}
+  }'
+</code></pre>
+<p>Once the key has accumulated $10 in spend, the proxy rejects further requests with a 429 until the <code>duration</code> window resets. The admin UI at <code>http://localhost:4000/ui</code> gives you a dashboard view of spend per key, per user, and per team without needing to hit the API directly.</p>
+<h2>Troubleshooting</h2>
+<ol>
+<li>
+<p>Provider authentication fails immediately after startup
+What you see: <code>AuthenticationError</code> or HTTP 401 from the provider on the first request.
+What it is: The provider API key environment variable is not set, is set to the wrong name, or was not exported before starting the proxy.
+The fix: Check <code>echo $OPENAI_API_KEY</code> (or the relevant variable) in the same shell session where you run <code>litellm</code>. If the variable is empty, set it and restart. Confirm the variable name matches what is in your <code>config.yaml</code> after the <code>os.environ/</code> prefix.</p>
+</li>
+<li>
+<p>Clients get 401 when hitting the proxy itself
+What you see: Requests from your application get <code>Invalid proxy server token</code>.
+What it is: The client is sending the raw provider key (for example, <code>sk-ant-...</code>) as the Bearer token, but the proxy expects its own master key.
+The fix: Set <code>Authorization: Bearer &lt;your-LITELLM_MASTER_KEY&gt;</code> in all client requests, not the upstream provider key. The proxy holds the provider keys internally and injects them when forwarding requests.</p>
+</li>
+<li>
+<p>Fallbacks never trigger even when the primary is failing
+What you see: The proxy returns the primary provider's error directly without trying the fallback.
+What it is: The <code>model_name</code> in your <code>fallbacks</code> config does not exactly match the <code>model_name</code> value the client sent in the request.
+The fix: Open the proxy logs (<code>--detailed_debug</code> flag) and confirm the model name in the incoming request matches the key in your <code>fallbacks</code> mapping. Both the primary key and the fallback value must match <code>model_name</code> entries in your <code>model_list</code>.</p>
+</li>
+<li>
+<p>Gemini requests fail with credential errors
+What you see: LiteLLM attempts to authenticate with GCP service account credentials when you are using Google AI Studio (not Vertex AI).
+What it is: Without the <code>gemini/</code> prefix, LiteLLM routes the request to Vertex AI and looks for GCP credentials it does not have.
+The fix: Use <code>model: gemini/gemini-2.0-flash</code> (AI Studio, uses <code>GEMINI_API_KEY</code>) rather than <code>model: vertex_ai/gemini-2.0-flash</code> (Vertex, uses GCP service account). These are two different providers in the LiteLLM routing table.</p>
+</li>
+<li>
+<p>Virtual key requests fail with "failed-to-connect-to-db"
+What you see: Any request using a virtual key returns an auth error mentioning the database.
+What it is: The proxy cannot reach PostgreSQL, so it cannot verify the key. Virtual key validation requires a live database connection; if the connection is down, all virtual key requests fail.
+The fix: Confirm your <code>DATABASE_URL</code> is correct and the database is reachable from the proxy container. Run <code>docker compose logs db</code> to check if PostgreSQL started cleanly. Verify the connection string format: <code>postgresql://user:password@host:port/dbname</code>.</p>
+</li>
+</ol>
+<h2>Frequently asked questions</h2>
+<p><strong>Is LiteLLM free and open source?</strong>
+Yes. The core library and proxy server are MIT-licensed and available at github.com/BerriAI/litellm. There is a commercial Enterprise tier that adds RBAC, SSO, and some advanced guardrail features, but everything covered in this guide is in the free open-source version.</p>
+<p><strong>Does LiteLLM support Ollama and local models?</strong>
+Yes. Set the provider prefix to <code>ollama/</code> and the <code>api_base</code> to your Ollama server address (default <code>http://localhost:11434</code>). The model name after the slash must match an Ollama model you have already pulled. You can run Ollama behind the LiteLLM proxy and give multiple clients access to your local models through a single endpoint with the same virtual key controls you use for cloud providers.</p>
+<p><strong>What is the difference between the LiteLLM proxy and the LiteLLM Python SDK?</strong>
+The Python SDK is a library you import into your application. It translates provider APIs at the function-call level and is useful when you control the codebase and just want a unified interface. The proxy is a standalone HTTP server. It is useful when you want to centralize access across many tools and teams, or when you cannot modify the client applications (for example, connecting Cursor or Open WebUI to a non-OpenAI model). You can run both: use the SDK in your own code and the proxy for external tools.</p>
+<p><strong>Does LiteLLM work with LangChain, LlamaIndex, and similar frameworks?</strong>
+Yes. Any framework that accepts a custom <code>openai_api_base</code> or <code>base_url</code> parameter works without modification. Set the base URL to your proxy address and the API key to your master key or a virtual key.</p>
+<p><strong>What happens to in-flight requests if the proxy restarts?</strong>
+In-flight requests are dropped. The proxy is stateless at the request level (state lives in PostgreSQL). For production, run at least two proxy replicas behind a load balancer so a rolling restart does not cause downtime. The official Docker Compose file is single-replica by default; add replicas via <code>docker compose scale litellm=2</code> or use Kubernetes with multiple pods.</p>
+<h2>Resources</h2>
+<ul>
+<li><a href="https://github.com/BerriAI/litellm">BerriAI/litellm on GitHub</a>: full source code, releases, and issue tracker</li>
+<li><a href="https://docs.litellm.ai/">Official LiteLLM documentation</a>: proxy config reference, virtual keys, routing strategies, and provider setup</li>
+<li><a href="https://docs.litellm.ai/docs/proxy/deploy">LiteLLM Docker deployment guide</a>: production deployment with Docker Compose and PostgreSQL</li>
+<li><a href="https://joshuaopolko.com/ollama/">Ollama setup guide</a>: use local models through LiteLLM</li>
+</ul>
+<p>Last updated: June 27, 2026.</p>
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+</body>
+</html>

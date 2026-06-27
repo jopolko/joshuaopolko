@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs</title>
+<meta content="Qwen2.5-VL reads real-world text from images through pure visual inference, no external database. Run the 7B model on a gaming GPU. OCRBench 864 vs GPT-4o-mini 785. First-person results." name="description"/>
+<meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs" property="og:title"/>
+<meta content="Qwen2.5-VL reads real-world text from images through pure visual inference, no external database. Run the 7B model on a gaming GPU. OCRBench 864 vs GPT-4o-mini 785. First-person results." property="og:description"/>
+<meta content="https://joshuaopolko.com/qwen2-5-vl/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="2026-06-27T12:00:00+00:00" property="og:updated_time"/>
+<meta content="2026-06-27T12:00:00+00:00" property="article:published_time"/>
+<meta content="2026-06-27T12:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs" name="twitter:title"/>
+<meta content="Qwen2.5-VL reads real-world text from images through pure visual inference. OCRBench 864 vs GPT-4o-mini 785. Run locally on a gaming GPU." name="twitter:description"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="8 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/qwen2-5-vl/" rel="canonical"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"}},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/qwen2-5-vl/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/qwen2-5-vl/","name":"Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/qwen2-5-vl/#webpage","url":"https://joshuaopolko.com/qwen2-5-vl/","name":"Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"author":{"@id":"https://joshuaopolko.com/#person"},"breadcrumb":{"@id":"https://joshuaopolko.com/qwen2-5-vl/#breadcrumb"},"inLanguage":"en-US","datePublished":"2026-06-27T12:00:00+00:00","dateModified":"2026-06-27T12:00:00+00:00","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"BlogPosting","@id":"https://joshuaopolko.com/qwen2-5-vl/#article","headline":"Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs","description":"Qwen2.5-VL reads real-world text from images through pure visual inference, no external database. Run the 7B model on a gaming GPU. OCRBench 864 vs GPT-4o-mini 785. First-person results.","datePublished":"2026-06-27T12:00:00+00:00","dateModified":"2026-06-27T12:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/qwen2-5-vl/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/qwen2-5-vl/#webpage"},"inLanguage":"en-US","keywords":"qwen2.5-vl, local vision model, vision language model, ocr local, run vision model locally, qwen vision, ollama vision, license plate ocr"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Qwen2.5-VL?","acceptedAnswer":{"@type":"Answer","text":"Qwen2.5-VL is a vision-language model released by Alibaba's Qwen team in January 2025. It comes in 3B, 7B, and 72B parameter sizes and is licensed Apache 2.0. It reads and reasons about images without any external database or specialized OCR pipeline, using only what it learned during training."}},{"@type":"Question","name":"Can Qwen2.5-VL read license plates?","acceptedAnswer":{"@type":"Answer","text":"Yes. Qwen2.5-VL can read license plate numbers, serial numbers, street signs, and other real-world text directly from images. It does not look up a plate database — it recognizes the characters visually, the same way a person would. The 7B model handles this reliably."}},{"@type":"Question","name":"How does Qwen2.5-VL compare to GPT-4o mini on text recognition?","acceptedAnswer":{"@type":"Answer","text":"Qwen2.5-VL 7B scores 864 on OCRBench versus GPT-4o-mini's 785. On DocVQA, it scores 95.7% versus MiniCPM-o 2.6's 93%. It outperforms GPT-4o-mini on document and scene text tasks while running locally at zero API cost."}},{"@type":"Question","name":"What GPU do you need to run Qwen2.5-VL locally?","acceptedAnswer":{"@type":"Answer","text":"The 3B model needs about 3GB of VRAM and runs on most recent gaming GPUs. The 7B model needs 5-6GB of VRAM — an RTX 3060 12GB or RTX 2080 is comfortable. The 72B model needs roughly 45GB of VRAM and requires a high-end workstation or multi-GPU setup."}},{"@type":"Question","name":"How do you run Qwen2.5-VL with Ollama?","acceptedAnswer":{"@type":"Answer","text":"Run: ollama run qwen2.5-vl:7b to pull and start the 7B model. To pass an image, use the Ollama API with a base64-encoded image in the messages array, or use Open WebUI which has built-in image upload."}},{"@type":"Question","name":"Is Qwen2.5-VL free to use commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes. Qwen2.5-VL is released under the Apache 2.0 license, which permits commercial use. All three size variants (3B, 7B, 72B) carry the same license."}}]}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+
+/* header + nav */
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+/* article */
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:.5em}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.post-body th{background:var(--code-bg);font:600 .96em var(--sans)}
+
+/* footer */
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+/* byline */
+.byline{font:400 15px/1.5 var(--sans);color:var(--muted);margin:0 0 2em}
+.byline a{color:var(--muted)}
+
+/* refnote */
+.refnote{font:400 14px/1.7 var(--sans);color:var(--muted);border-top:1px solid var(--line);
+  margin-top:3em;padding-top:1.4em}
+
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script src="/assets/nav.js?v=6" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-1GZN9MX2P4");</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1 class="post-title">Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs</h1>
+  <p class="byline">By <a href="/about/">Joshua Opolko</a> &mdash; June 27, 2026</p>
+  <div class="post-body">
+
+<p>I have used Qwen2.5-VL for a lot of things. License plate numbers from parking lot photos, laptop serial numbers from shots of the bottom of the machine, street signs in low-resolution frames, handwritten labels on server cables. Every time, I expected it to fail or approximate, and every time it came back with the exact characters. It runs locally on a GPU you probably already own. It costs nothing per query. And it beats GPT-4o-mini on the benchmarks that matter for this kind of work. This page covers what it is, what it can read, how to run it, and when it falls short.</p>
+
+<h2>Key takeaways</h2>
+
+<ul>
+<li><strong>Pure visual inference.</strong> Qwen2.5-VL reads text from images the way a person does, through visual pattern recognition from training, not by looking anything up in a plate database or an OCR character table.</li>
+<li><strong>Runs locally on a gaming GPU.</strong> The 7B model needs about 5-6GB of VRAM. An RTX 3060 12GB is comfortable. The 3B model runs on 3GB.</li>
+<li><strong>Outperforms GPT-4o-mini on text extraction.</strong> OCRBench score of 864 versus GPT-4o-mini's 785. DocVQA 95.7%. TextVQA 84.9%.</li>
+<li><strong>Apache 2.0 license.</strong> Free for commercial use across all three sizes (3B, 7B, 72B).</li>
+<li><strong>Works with Ollama.</strong> <code>ollama run qwen2.5-vl:7b</code> is all you need to start.</li>
+<li><strong>Not zero-shot magic for everything.</strong> Very fine print, heavy JPEG compression, and low-light text are still hard. The 7B model is less reliable than the 72B on degraded images.</li>
+</ul>
+
+<h2>What is Qwen2.5-VL?</h2>
+
+<p>Qwen2.5-VL is a vision-language model from Alibaba's Qwen team, released in January 2025. The "VL" stands for vision-language: it accepts both images and text as input and responds in text. It is the 2.5-generation of the Qwen vision series, trained on a large corpus of image-text pairs that includes documents, natural scenes, charts, diagrams, and handwritten content.</p>
+
+<p>It comes in three sizes: 3B, 7B, and 72B parameters. All three are released under Apache 2.0, meaning you can use them commercially without paying royalties. The weights are available on Hugging Face and can be run locally through Ollama.</p>
+
+<p>Qwen2.5-VL is not a wrapper around a traditional OCR engine. It does not call an external API or consult a character database. It processes images end-to-end through the same neural network that handles everything else, which is why it can read text in unusual fonts, partial occlusions, and non-standard orientations without needing a specialized preprocessing step.</p>
+
+<h2>What makes it different from traditional OCR?</h2>
+
+<p>Most OCR tools work by segmenting the image into character candidates, comparing each candidate against a reference database of known glyphs, and returning the closest match. This is reliable in controlled conditions and falls apart when the font is unusual, the image is at an angle, or part of the character is missing.</p>
+
+<p>Qwen2.5-VL does not do this. It reads the entire image as a scene and extracts text from context. The same way you can read a partially obscured word because you know what words look like and what makes sense in context, the model draws on everything it learned during training to interpret what it sees. A license plate that is half in shadow, a serial number with a smudged digit, a street sign viewed from an angle: these are problems the model works through from visual understanding, not from dictionary lookup.</p>
+
+<p>This is also why prompting matters. If you tell the model "read the license plate in this image and return only the plate number," it focuses on that task. If you just ask "what do you see," it gives you a description. The model is responding to the combination of image and instruction, so narrow prompts get precise extraction and broad prompts get broad answers.</p>
+
+<h2>What can Qwen2.5-VL read from real-world images?</h2>
+
+<p>I have personally used it on:</p>
+
+<ul>
+<li><strong>License plates</strong> from parking lot photos taken with a phone, including plates with glare and partial shadow.</li>
+<li><strong>Laptop serial numbers</strong> from the underside of machines, including the small embossed text that is notoriously hard to photograph legibly.</li>
+<li><strong>Street signs</strong> from video frames and wide-angle photos where the sign takes up a small portion of the image.</li>
+<li><strong>Handwritten labels</strong> on server cables and equipment tags.</li>
+<li><strong>Receipts and invoices</strong> with line items, totals, and dates.</li>
+<li><strong>Forms and tables</strong> from scanned PDFs, where it returns structured output in JSON if you ask for it.</li>
+</ul>
+
+<p>In all of these cases the model was not doing a database lookup. It was reading what was in the image the same way you would,.</p>
+
+<h2>How accurate is Qwen2.5-VL on text recognition benchmarks?</h2>
+
+<p>The relevant benchmarks for text extraction from images are OCRBench (which tests printed and handwritten text in natural scenes and documents), DocVQA (document question answering from scanned documents), and TextVQA (reading text embedded in natural scene images).</p>
+
+<table>
+<thead>
+<tr><th>Model</th><th>OCRBench</th><th>DocVQA</th><th>TextVQA</th><th>MMMU</th></tr>
+</thead>
+<tbody>
+<tr><td>Qwen2.5-VL 7B</td><td>864</td><td>95.7%</td><td>84.9%</td><td>58.6</td></tr>
+<tr><td>GPT-4o-mini</td><td>785</td><td>—</td><td>—</td><td>60.0</td></tr>
+<tr><td>MiniCPM-o 2.6</td><td>—</td><td>93.0%</td><td>—</td><td>—</td></tr>
+</tbody>
+</table>
+
+<p>OCRBench 864 versus GPT-4o-mini's 785 is a meaningful gap on text extraction tasks. It is not a marginal win on a niche benchmark: OCR and document understanding are the core use case, and the 7B local model beats the cloud API model on those specific tasks while running free on your hardware.</p>
+
+<p>MMMU (general multimodal reasoning) is the one place GPT-4o-mini leads: 60.0 versus 58.6 for Qwen2.5-VL 7B. That 1.4-point gap is worth keeping in perspective. GPT-4o-mini is a closed, cloud-hosted model from one of the best-funded AI labs in the world, running on OpenAI's infrastructure with a parameter count in the hundreds of billions to trillions (OpenAI has never confirmed exact numbers, but GPT-4 class models are widely estimated in that range). Qwen2.5-VL 7B has 7 billion parameters and runs on your desk. On the benchmark that covers science problems, complex charts, and domain-knowledge reasoning, the cloud giant leads by a rounding error. On document text and scene text, the local model wins outright.</p>
+
+<h2>Which size should you run?</h2>
+
+<p><strong>7B is the right default for most local use.</strong> It fits comfortably in 5-6GB of VRAM, runs on a gaming GPU many people already own, and covers everything described above. The quality difference between 7B and 72B is real but not large for clear image inputs. Where 72B pulls ahead noticeably is on degraded images: heavy compression, extreme angles, very small text in a scene.</p>
+
+<p><strong>3B is for GPU-constrained setups.</strong> If you have 3-4GB of VRAM (a GTX 1060 6GB, an older laptop GPU), the 3B model still works for clean images. License plates and serial numbers on well-lit photos: fine. Video frames from a compressed stream: less reliable.</p>
+
+<p><strong>72B is for serious production workloads</strong> where you need the best accuracy on degraded inputs and have the hardware for it. It requires roughly 45GB of VRAM in half-precision, which means a workstation with multiple high-end cards or a cloud GPU instance. For hobbyist and small-team use, 7B is the answer.</p>
+
+<h2>What GPU do you need to run Qwen2.5-VL locally?</h2>
+
+<p>The model must have a GPU. It is not a question of preference: CPU inference on a 7B vision model is slow enough to be unusable in practice (several minutes per image). A GPU that fits the model in VRAM runs inference in seconds.</p>
+
+<table>
+<thead>
+<tr><th>Model size</th><th>VRAM required</th><th>Example GPU</th></tr>
+</thead>
+<tbody>
+<tr><td>3B (Q4 quantized)</td><td>~3 GB</td><td>GTX 1060 6GB, RTX 3050</td></tr>
+<tr><td>7B (Q4 quantized)</td><td>~5-6 GB</td><td>GTX 1080 Ti, RTX 3060 12GB, RTX 2080</td></tr>
+<tr><td>72B (Q4 quantized)</td><td>~42-48 GB</td><td>2x RTX 3090, A100</td></tr>
+</tbody>
+</table>
+
+<p>The 1080 Ti (11GB VRAM) handles the 7B model well despite being a 2017 card. You do not need current-generation hardware. Ollama loads quantized versions by default, which is why the VRAM numbers are lower than the raw parameter count would suggest. Q4 quantization (4-bit) roughly divides the memory footprint by four versus full precision. You lose a small amount of accuracy, and you gain the ability to run on hardware you actually have.</p>
+
+<p>If you run on a machine without a GPU, Ollama will fall back to CPU inference. It will work, but expect minutes per response rather than seconds.</p>
+
+<h2>How do you run Qwen2.5-VL with Ollama?</h2>
+
+<p>If you have Ollama installed (see the <a href="/ollama/">Ollama setup guide</a>), running Qwen2.5-VL is a single command:</p>
+
+<pre><code>ollama run qwen2.5-vl:7b</code></pre>
+
+<p>This pulls the 7B model and starts an interactive session. To pass an image from the command line:</p>
+
+<pre><code>ollama run qwen2.5-vl:7b "Read the license plate in this image. Return only the plate number." --image /path/to/photo.jpg</code></pre>
+
+<p>To use it from code via the Ollama API:</p>
+
+<pre><code>import ollama, base64
+
+with open("photo.jpg", "rb") as f:
+    image_data = base64.b64encode(f.read()).decode()
+
+response = ollama.chat(
+    model="qwen2.5-vl:7b",
+    messages=[{
+        "role": "user",
+        "content": "Read the license plate. Return only the plate number.",
+        "images": [image_data]
+    }]
+)
+print(response["message"]["content"])</code></pre>
+
+<p>If you run Open WebUI, you can upload images directly in the chat interface without writing any code. Change the model selector to <code>qwen2.5-vl:7b</code>, upload a photo, and type your question. See the <a href="/open-webui-self-hosted-guide/">Open WebUI guide</a> for setup.</p>
+
+<h2>How does Qwen2.5-VL compare to GPT-4o-mini on this kind of task?</h2>
+
+<p>GPT-4o-mini handles vision tasks well and is cheap per token, but it is a cloud API: every image leaves your machine, every query has a cost, and the rate limits apply. For one-off tasks, that is fine. For processing a batch of parking lot photos, logging equipment serial numbers before a data center refresh, or running vision extraction as part of a local pipeline, paying per image and sending images to an external server starts to matter.</p>
+
+<p>Qwen2.5-VL 7B runs at zero marginal cost, keeps images on your hardware, and outperforms GPT-4o-mini on the specific benchmarks for text extraction (OCRBench 864 vs 785). The trade-off is setup time and the GPU requirement. If you already run Ollama for other local models, adding Qwen2.5-VL costs you nothing but the disk space for the model weights.</p>
+
+<p>For general visual reasoning tasks that go beyond text extraction (interpreting complex charts, answering questions requiring domain knowledge), GPT-4o-mini and larger cloud models are still ahead. Qwen2.5-VL 72B closes the gap considerably, but the 7B is purpose-built for the document and scene text use case, not for competing on MMMU-style academic benchmarks.</p>
+
+<h2>What are the limitations of Qwen2.5-VL?</h2>
+
+<p>The model is not infallible, and knowing where it struggles saves debugging time:</p>
+
+<ul>
+<li><strong>Heavily compressed images.</strong> JPEG artifacts that interfere with fine detail (small characters, thin strokes) increase error rates. If you control the image capture, shoot at higher quality settings.</li>
+<li><strong>Very small text in large scenes.</strong> If a license plate takes up 5% of a wide parking lot shot, the 7B model sometimes misses characters. Crop to the area of interest first.</li>
+<li><strong>Ambiguous characters.</strong> 0 vs O, 1 vs I vs l: vision models make the same errors humans do. If the use case requires zero tolerance for this ambiguity (legal plates, inventory systems), add a post-processing step to flag characters that look similar.</li>
+<li><strong>Non-Latin scripts in poor conditions.</strong> The model handles Latin, Chinese, Japanese, Korean, and Arabic, but accuracy drops faster on degraded images for scripts you are less likely to have tested.</li>
+<li><strong>GPU required.</strong> CPU inference is impractically slow for production use.</li>
+</ul>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Does Qwen2.5-VL look up license plates in a database?</h3>
+<p>No. The model does not consult any external database. It reads the characters in the image through visual pattern recognition, the same way a person reads a sign. The accuracy comes from training on a large number of image-text pairs, not from looking anything up at inference time.</p>
+
+<h3>Can Qwen2.5-VL read handwriting?</h3>
+<p>Yes, with caveats. It handles clear handwriting reliably. Rushed or highly stylized handwriting reduces accuracy. The 72B model performs better here than the 7B on difficult cases.</p>
+
+<h3>Does it work on video frames?</h3>
+<p>Yes. Extract frames from video (ffmpeg works fine) and pass them as images. The model supports video input natively through the API, but for most practical use cases, extracting the frame of interest and sending it as a still image is simpler and more reliable.</p>
+
+<h3>What image formats does it accept?</h3>
+<p>JPEG, PNG, WebP, and BMP through the Ollama API. If you are using the transformers library directly, PIL-compatible formats work.</p>
+
+<h3>Is Qwen2.5-VL free for commercial use?</h3>
+<p>Yes. All three sizes are Apache 2.0 licensed.</p>
+
+<div class="refnote">
+<p>Related: <a href="/ollama/">Ollama setup guide</a> for installing the local model runner, <a href="/open-webui-self-hosted-guide/">Open WebUI</a> for a browser-based interface with image upload, <a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a> for integrating local models into automated workflows. Benchmark data from the <a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct">Qwen2.5-VL-7B-Instruct Hugging Face model card</a> (Qwen team, January 2025).</p>
+</div>
+
+  </div>
+</main>
+<footer class="site-foot">
+  <p>Joshua Opolko &mdash; Toronto &mdash; <a href="/about/">About</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Moiré: Wave Interference</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #000; overflow: hidden; }
+canvas { display: block; position: fixed; inset: 0; width: 100%; height: 100%; }
+#ui {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;
+  background: rgba(0,0,0,.52); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px; padding: 14px 24px;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  user-select: none;
+}
+label {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.42); font: 600 10px/1 monospace; letter-spacing: .10em;
+  text-transform: uppercase;
+}
+.val { color: #ff6b35; font-size: 12px; }
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 108px; height: 3px;
+  background: rgba(255,255,255,.14); border-radius: 2px;
+  outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px;
+  border-radius: 50%; background: #ff6b35; cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #ff6b35; border: none; cursor: pointer;
+}
+#vr-btn {
+  background: rgba(255,107,53,.15); border: 1px solid rgba(255,107,53,.5);
+  color: #ff6b35; font: 700 10px/1 monospace; letter-spacing: .12em;
+  text-transform: uppercase; padding: 9px 18px; border-radius: 8px;
+  cursor: pointer; transition: background .15s;
+}
+#vr-btn:hover { background: rgba(255,107,53,.3); }
+#vr-na { color: rgba(255,255,255,.28); font: 600 10px/1 monospace; letter-spacing: .08em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <label>Sources <span class="val" id="v0">6</span>
+    <input type="range" id="s0" min="2" max="8" step="1" value="6">
+  </label>
+  <label>Frequency <span class="val" id="v1">12.0</span>
+    <input type="range" id="s1" min="4.0" max="32.0" step="0.5" value="12.0">
+  </label>
+  <label>Speed <span class="val" id="v2">0.8</span>
+    <input type="range" id="s2" min="0.1" max="3.0" step="0.1" value="0.8">
+  </label>
+  <label>Drift <span class="val" id="v3">0.35</span>
+    <input type="range" id="s3" min="0.0" max="0.80" step="0.05" value="0.35">
+  </label>
+  <label>Saturation <span class="val" id="v4">0.85</span>
+    <input type="range" id="s4" min="0.2" max="1.0" step="0.05" value="0.85">
+  </label>
+  <label>Spread <span class="val" id="v5">0.50</span>
+    <input type="range" id="s5" min="0.1" max="0.9" step="0.05" value="0.50">
+  </label>
+  <div id="vr-slot"></div>
+</div>
+<script>
+const canvas = document.getElementById('c');
+// xrCompatible: true avoids a context-loss cycle when entering WebXR later
+const gl = canvas.getContext('webgl', { xrCompatible: true });
+if (!gl) { document.body.innerHTML = '<p style="color:#fff;padding:2em">WebGL not available</p>'; }
+
+// Declared early so resize() can reference them without hitting the TDZ
+let xrSession  = null;
+let flatRafId  = null;
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  if (!xrSession) gl.viewport(0, 0, canvas.width, canvas.height);
+}
+window.addEventListener('resize', resize);
+resize();
+
+const VERT = `
+attribute vec2 aPos;
+varying   vec2 vUv;
+void main() {
+  vUv = aPos * 0.5 + 0.5;
+  gl_Position = vec4(aPos, 0.0, 1.0);
+}
+`;
+
+// Each source emits circular wavefronts at a slightly detuned frequency.
+// The moiré effect emerges from the beating between those wavefronts.
+// uEyeShift offsets the pattern center per eye for stereoscopic parallax.
+const FRAG = `
+precision highp float;
+
+uniform float uTime, uFreq, uSpeed, uDrift, uSat, uSpread, uSources, uEyeShift;
+uniform vec2  uRes;
+varying vec2  vUv;
+
+#define TAU 6.28318530718
+#define MAX_SOURCES 8
+
+vec3 hsv2rgb(vec3 c) {
+  vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+  vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+  return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+vec2 sourcePos(int i, float t) {
+  float fi = float(i);
+  float r = uSpread * (0.5 + 0.5 * sin(fi * 2.39 + t * 0.07));
+  return vec2(
+    sin(t * (0.29 + fi * 0.13) + fi * 1.13) * r,
+    cos(t * (0.19 + fi * 0.17) + fi * 2.27) * r
+  );
+}
+
+float waveSum(vec2 p, vec2 off, float t) {
+  float s = 0.0;
+  int n = int(uSources);
+  for (int i = 0; i < MAX_SOURCES; i++) {
+    if (i >= n) break;
+    vec2 src = sourcePos(i, uTime * uDrift);
+    float detune = 1.0 + float(i) * 0.031;
+    s += sin(distance(p + off, src) * uFreq * detune * TAU - t);
+  }
+  return s / float(n);
+}
+
+void main() {
+  vec2 p = vUv - 0.5;
+  p.x *= uRes.x / uRes.y;
+
+  float rad = length(p);            // vignette radius stays centred on screen
+  p.x += uEyeShift;                 // shift pattern for stereo parallax
+
+  float t = uTime * uSpeed;
+
+  float aG = waveSum(p, vec2(0.0),                                    t) * 0.5 + 0.5;
+  float aR = waveSum(p, vec2( cos(t * 0.41),  sin(t * 0.41)) * 0.012, t) * 0.5 + 0.5;
+  float aB = waveSum(p, vec2(-cos(t * 0.41), -sin(t * 0.41)) * 0.012, t) * 0.5 + 0.5;
+
+  float hBase = uTime * 0.028;
+  float r = hsv2rgb(vec3(aR * 0.72 + hBase + 0.000, uSat, pow(aR, 0.48))).r;
+  float g = hsv2rgb(vec3(aG * 0.72 + hBase + 0.333, uSat, pow(aG, 0.48))).g;
+  float b = hsv2rgb(vec3(aB * 0.72 + hBase + 0.667, uSat, pow(aB, 0.48))).b;
+  vec3 col = vec3(r, g, b);
+
+  float vig = 1.0 - smoothstep(0.38, 0.82, rad) * (0.6 + 0.2 * sin(uTime * 0.61));
+  col *= vig;
+
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+function compile(type, src) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+    console.error('Shader error:', gl.getShaderInfoLog(s));
+  return s;
+}
+const prog = gl.createProgram();
+gl.attachShader(prog, compile(gl.VERTEX_SHADER,   VERT));
+gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+gl.linkProgram(prog);
+gl.useProgram(prog);
+
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+const aPos = gl.getAttribLocation(prog, 'aPos');
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+const U = {};
+['uTime','uFreq','uSpeed','uDrift','uSat','uSpread','uSources','uEyeShift','uRes'].forEach(n => {
+  U[n] = gl.getUniformLocation(prog, n);
+});
+
+const SLIDERS = [
+  { id: 's0', vid: 'v0', key: 'uSources', dec: 0 },
+  { id: 's1', vid: 'v1', key: 'uFreq',    dec: 1 },
+  { id: 's2', vid: 'v2', key: 'uSpeed',   dec: 1 },
+  { id: 's3', vid: 'v3', key: 'uDrift',   dec: 2 },
+  { id: 's4', vid: 'v4', key: 'uSat',     dec: 2 },
+  { id: 's5', vid: 'v5', key: 'uSpread',  dec: 2 },
+];
+const vals = {};
+SLIDERS.forEach(({ id, vid, key, dec }) => {
+  const sl  = document.getElementById(id);
+  const vEl = document.getElementById(vid);
+  vals[key] = parseFloat(sl.value);
+  sl.addEventListener('input', () => {
+    vals[key] = parseFloat(sl.value);
+    vEl.textContent = vals[key].toFixed(dec);
+  });
+});
+
+// Shared draw call used by both flat and XR loops
+function draw(t, vpW, vpH, eyeShift) {
+  gl.uniform1f(U.uTime,     t);
+  gl.uniform1f(U.uFreq,     vals.uFreq);
+  gl.uniform1f(U.uSpeed,    vals.uSpeed);
+  gl.uniform1f(U.uDrift,    vals.uDrift);
+  gl.uniform1f(U.uSat,      vals.uSat);
+  gl.uniform1f(U.uSpread,   vals.uSpread);
+  gl.uniform1f(U.uSources,  vals.uSources);
+  gl.uniform1f(U.uEyeShift, eyeShift);
+  gl.uniform2f(U.uRes, vpW, vpH);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+
+// Flat (non-VR) loop
+function flatLoop(ts) {
+  flatRafId = requestAnimationFrame(flatLoop);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.viewport(0, 0, canvas.width, canvas.height);
+  draw(ts * 0.001, canvas.width, canvas.height, 0);
+}
+flatRafId = requestAnimationFrame(flatLoop);
+
+// WebXR setup
+(async () => {
+  const slot = document.getElementById('vr-slot');
+  if (!navigator.xr) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+  const ok = await navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+  if (!ok) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+
+  const btn = document.createElement('button');
+  btn.id = 'vr-btn';
+  btn.textContent = 'Enter VR';
+  slot.appendChild(btn);
+
+  btn.addEventListener('click', async () => {
+    if (xrSession) { xrSession.end(); return; }
+
+    xrSession = await navigator.xr.requestSession('immersive-vr');
+    btn.textContent = 'Exit VR';
+
+    xrSession.addEventListener('end', () => {
+      xrSession = null;
+      btn.textContent = 'Enter VR';
+      flatRafId = requestAnimationFrame(flatLoop);
+    });
+
+    xrSession.updateRenderState({ baseLayer: new XRWebGLLayer(xrSession, gl) });
+    const refSpace = await xrSession.requestReferenceSpace('local');
+
+    cancelAnimationFrame(flatRafId);
+
+    function xrLoop(time, frame) {
+      xrSession.requestAnimationFrame(xrLoop);
+      const pose = frame.getViewerPose(refSpace);
+      if (!pose) return;
+
+      const layer = xrSession.renderState.baseLayer;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, layer.framebuffer);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+
+      const t = time * 0.001;
+      for (const view of pose.views) {
+        const vp = layer.getViewport(view);
+        gl.viewport(vp.x, vp.y, vp.width, vp.height);
+        // Shift pattern ~2% of viewport width per eye to create parallax depth in the interference pattern
+        const shift = view.eye === 'right' ? 0.02 : view.eye === 'left' ? -0.02 : 0;
+        draw(t, vp.width, vp.height, shift);
+      }
+    }
+    xrSession.requestAnimationFrame(xrLoop);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<title>AnythingLLM: Self-Hosted RAG and Chat for Local and Cloud LLMs</title>
+<meta name="description" content="AnythingLLM is a free, self-hosted platform for chatting with documents and running AI agents using any LLM. Docker install, workspace setup, RAG configuration, and common issues.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<link rel="canonical" href="https://joshuaopolko.com/anythingllm-self-hosted-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AnythingLLM: Self-Hosted RAG and Chat for Local and Cloud LLMs">
+<meta property="og:description" content="AnythingLLM is a free, self-hosted platform for chatting with documents and running AI agents using any LLM. Docker install, workspace setup, RAG configuration, and common issues.">
+<meta property="og:url" content="https://joshuaopolko.com/anythingllm-self-hosted-guide/">
+<meta property="og:site_name" content="Joshua Opolko">
+<meta property="article:published_time" content="2026-06-27T00:00:00+00:00">
+<meta property="article:modified_time" content="2026-06-27T00:00:00+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AnythingLLM: Self-Hosted RAG and Chat for Local and Cloud LLMs">
+<meta name="twitter:description" content="AnythingLLM is a free, self-hosted platform for chatting with documents and running AI agents using any LLM. Docker install, workspace setup, RAG configuration, and common issues.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/","name":"AnythingLLM: Self-Hosted RAG and Chat for Local and Cloud LLMs"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/#webpage","url":"https://joshuaopolko.com/anythingllm-self-hosted-guide/","name":"AnythingLLM: Self-Hosted RAG and Chat for Local and Cloud LLMs","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/#breadcrumb"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"Article","@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/#article","headline":"AnythingLLM: Self-Hosted RAG and Chat for Local and Cloud LLMs","description":"AnythingLLM is a free, self-hosted platform for chatting with documents and running AI agents using any LLM. Docker install, workspace setup, RAG configuration, and common issues.","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/#webpage"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"HowTo","@id":"https://joshuaopolko.com/anythingllm-self-hosted-guide/#howto","name":"How to self-host AnythingLLM","description":"Step-by-step guide to installing and running AnythingLLM on your own server or local machine.","step":[{"@type":"HowToStep","position":1,"name":"Choose your install method","text":"Decide between the desktop app for single-user local use or Docker for server and team deployments. Download the desktop installer from useanything.com, or install Docker if you need multi-user access or an always-on server."},{"@type":"HowToStep","position":2,"name":"Install Docker on your machine","text":"Install Docker on your server or local machine before running AnythingLLM via container. You need at least 2 GB of free RAM and 10 GB of disk space."},{"@type":"HowToStep","position":3,"name":"Create storage folder and env file","text":"On Linux or macOS, run mkdir -p $HOME/anythingllm and touch $HOME/anythingllm/.env to create a persistent storage directory and empty environment file. This folder holds all workspaces, documents, and settings across container restarts."},{"@type":"HowToStep","position":4,"name":"Start the AnythingLLM container","text":"Run docker run with the volume mount binding your storage folder to /app/server/storage inside the container. The -v flag is required; without it all data is wiped when the container restarts."},{"@type":"HowToStep","position":5,"name":"Open the web interface","text":"Once the container is running, open http://localhost:3001 in your browser to access the AnythingLLM setup wizard and complete initial configuration."},{"@type":"HowToStep","position":6,"name":"Connect an LLM provider","text":"Go to Settings, then LLM Preference, and select your provider from the list. For Ollama running on the same Linux host as Docker, use http://172.17.0.1:11434 as the base URL instead of localhost."},{"@type":"HowToStep","position":7,"name":"Configure an embedding model","text":"Go to Settings, then Embedding Preference, and choose a provider such as the built-in embedder or Ollama with nomic-embed-text. An embedding model must be configured before document chat will work."},{"@type":"HowToStep","position":8,"name":"Create a workspace and upload documents","text":"Click Add Workspace in the sidebar, then open the workspace and use the document manager to upload files. Drag documents from the left column to the right column to pin them to the workspace so they are searched during chat."}]}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=11">
+<script src="/assets/nav.js?v=3" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>AnythingLLM: Self-Hosted RAG and Chat for Local and Cloud LLMs</h1>
+  <div class="post-body">
+<h2>Key takeaways</h2>
+<ul>
+<li>AnythingLLM (version 1.15.0 as of this writing) is a free, MIT-licensed, self-hosted platform for chatting with documents and running AI agents using any LLM provider</li>
+<li>Docker is the recommended install method for servers and teams; the desktop app is a one-click option for single users on a personal machine</li>
+<li>Multi-user mode requires Docker. The desktop app is single-user only. Docker adds three access roles: Admin, Manager, and Default</li>
+<li>Workspaces are isolated environments, each with its own document library, system prompt, and optional LLM override. Documents pinned to one workspace are invisible to all others</li>
+<li>AnythingLLM supports 30+ LLM providers: Ollama, LM Studio, Local AI, OpenAI, Anthropic, Gemini, Groq, Mistral, AWS Bedrock, and more</li>
+<li>An embedding model must be configured before document chat works. If you skip this, uploads appear to succeed but the LLM has no documents to search</li>
+<li>When running in Docker on Linux, you cannot reach Ollama at localhost. Use 172.17.0.1 (or host.docker.internal on Mac/Windows) as the Ollama base URL instead</li>
+<li>Minimum requirements for Docker: 2 GB RAM and 10 GB of free disk space, with more needed for large document libraries or local model inference</li>
+</ul>
+<h2>How do I install AnythingLLM?</h2>
+<p>AnythingLLM offers three install paths: a desktop app, a Docker container, and a managed cloud service.</p>
+<p><strong>Desktop app (single user, no Docker needed)</strong></p>
+<p>Download the macOS, Windows, or Linux installer from useanything.com. The app bundles a built-in LLM engine, a CPU-based embedder, and a LanceDB vector store. Nothing else is required. The trade-off is that the desktop app supports only one user account and does not include embeddable chat widgets, user management, or white-labeling.</p>
+<p><strong>Docker (recommended for servers and teams)</strong></p>
+<p>Docker is the right choice for always-on server deployments, multi-user setups, or when you want to expose a chat interface to a team. You need Docker installed and at least 2 GB of free RAM.</p>
+<p>On Linux or macOS, create a storage folder and an empty <code>.env</code> file, then start the container:</p>
+<pre><code class="language-bash">export STORAGE_LOCATION=$HOME/anythingllm &amp;&amp; \
+mkdir -p $STORAGE_LOCATION &amp;&amp; \
+touch &quot;$STORAGE_LOCATION/.env&quot; &amp;&amp; \
+docker run -d -p 3001:3001 \
+  --cap-add SYS_ADMIN \
+  -v ${STORAGE_LOCATION}:/app/server/storage \
+  -v ${STORAGE_LOCATION}/.env:/app/server/.env \
+  -e STORAGE_DIR=&quot;/app/server/storage&quot; \
+  mintplexlabs/anythingllm
+</code></pre>
+<p>On Windows (PowerShell):</p>
+<pre><code class="language-powershell">$env:STORAGE_LOCATION=&quot;$HOME\Documents\anythingllm&quot;
+If(!(Test-Path $env:STORAGE_LOCATION)) {New-Item $env:STORAGE_LOCATION -ItemType Directory}
+If(!(Test-Path &quot;$env:STORAGE_LOCATION\.env&quot;)) {New-Item &quot;$env:STORAGE_LOCATION\.env&quot; -ItemType File}
+docker run -d -p 3001:3001 `
+  --cap-add SYS_ADMIN `
+  -v &quot;$env:STORAGE_LOCATION:/app/server/storage&quot; `
+  -v &quot;$env:STORAGE_LOCATION\.env:/app/server/.env&quot; `
+  -e STORAGE_DIR=&quot;/app/server/storage&quot; `
+  mintplexlabs/anythingllm
+</code></pre>
+<p>Open <code>http://localhost:3001</code> once the container is running. The volume mount (<code>-v</code>) is not optional. Without it, all your workspaces, documents, and settings are wiped every time the container restarts.</p>
+<p>For a longer-running deployment, Docker Compose is easier to manage:</p>
+<pre><code class="language-yaml">version: '3.8'
+services:
+  anythingllm:
+    image: mintplexlabs/anythingllm
+    container_name: anythingllm
+    ports:
+      - &quot;3001:3001&quot;
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - STORAGE_DIR=/app/server/storage
+      - JWT_SECRET=replace-this-with-a-long-random-string
+    volumes:
+      - anythingllm_storage:/app/server/storage
+    restart: always
+
+volumes:
+  anythingllm_storage:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /path/to/your/data/folder
+</code></pre>
+<p>Start it with <code>docker compose up -d</code>. Logs are available with <code>docker compose logs -f anythingllm</code>.</p>
+<h2>How do I connect AnythingLLM to a local model?</h2>
+<p>Go to Settings, then LLM Preference, and select your local provider from the list. Enter the base URL and AnythingLLM fetches available models automatically.</p>
+<p>For Ollama running on the same machine as the desktop app, the default URL <code>http://127.0.0.1:11434</code> works without changes. For Docker, <code>localhost</code> and <code>127.0.0.1</code> resolve inside the container, not to your host machine, so they will never find Ollama. Use <code>http://host.docker.internal:11434</code> on Mac or Windows. On Linux, use <code>http://172.17.0.1:11434</code> and add <code>--add-host=host.docker.internal:host-gateway</code> to your <code>docker run</code> command:</p>
+<pre><code class="language-bash">docker run -d -p 3001:3001 \
+  --cap-add SYS_ADMIN \
+  --add-host=host.docker.internal:host-gateway \
+  -v ${STORAGE_LOCATION}:/app/server/storage \
+  -v ${STORAGE_LOCATION}/.env:/app/server/.env \
+  -e STORAGE_DIR=&quot;/app/server/storage&quot; \
+  mintplexlabs/anythingllm
+</code></pre>
+<p>Before you change any AnythingLLM settings, verify Ollama is running by opening <code>http://127.0.0.1:11434</code> in your browser on the host. You should see plain text that says "Ollama is running." If that page does not load, the problem is with Ollama, not with AnythingLLM.</p>
+<p>Beyond Ollama, AnythingLLM supports over 30 providers. Local options include LM Studio, Local AI, and KoboldCPP. Cloud options include OpenAI, Anthropic, Google Gemini, Groq, Mistral, Cohere, Perplexity AI, Together AI, OpenRouter, Azure OpenAI, Hugging Face, and AWS Bedrock. You can also override the system-level LLM on a per-workspace basis, so a fast small model handles general chat while a larger model is reserved for deep document analysis in a separate workspace.</p>
+<h2>What is a workspace in AnythingLLM?</h2>
+<p>A workspace is an isolated chat environment with its own document library, system prompt, conversation history, and optional LLM override. Documents pinned to one workspace are not visible in any other workspace, and each workspace can be configured independently.</p>
+<p>A practical example: create one workspace for your product documentation, one for internal HR policies, and one for personal research notes. A team member who has access to the product workspace cannot see or search the HR documents unless you explicitly grant them access (in multi-user mode).</p>
+<p>Create a workspace from the left sidebar by clicking "Add workspace." After creating it, open the workspace settings to:
+- Write a custom system prompt that gives the workspace a specific role or persona
+- Select a different LLM provider or model for that workspace only
+- Adjust how aggressively AnythingLLM uses document context versus the model's general knowledge</p>
+<p>To add documents, open the workspace and click the document manager icon. Upload files from your computer or import from a URL, GitHub repository, or YouTube transcript. Uploaded files go to a staging area first. To make them searchable, move them from the left panel (uploaded) to the right panel (pinned to workspace). Only pinned documents are searched when you chat.</p>
+<h2>How does RAG work in AnythingLLM?</h2>
+<p>RAG (Retrieval-Augmented Generation) lets the LLM answer questions using your uploaded documents rather than relying only on its training data. When you upload a file, AnythingLLM breaks it into smaller chunks, runs each chunk through an embedding model to produce a vector, and stores those vectors in a database. When you send a chat message, your message is also converted to a vector, the most similar document chunks are retrieved, and those chunks are injected into the prompt alongside your question before it goes to the LLM.</p>
+<p>The embedding model is separate from the LLM and must be configured on its own. Go to Settings, then Embedding Preference. For quick local use, the built-in AnythingLLM embedder requires no additional setup. For better accuracy on larger document sets, use Ollama with a dedicated embedding model such as <code>nomic-embed-text</code>:</p>
+<pre><code class="language-bash">ollama pull nomic-embed-text
+</code></pre>
+<p>Then set the Ollama base URL in Embedding Preference to match your Ollama address (same networking rules as for the LLM apply). Cloud embedding options include OpenAI, Azure OpenAI, Cohere, and Voyage AI.</p>
+<p>Supported document types include PDF, DOCX, TXT, CSV, Markdown, and HTML files. When the LLM answers using a document, AnythingLLM shows a citation so you can trace the claim back to the original passage. If the LLM is not citing your documents at all, the most common cause is that the documents are uploaded but not pinned to the workspace.</p>
+<h2>How do I enable multi-user mode?</h2>
+<p>Multi-user mode is enabled in Settings under Security. It is available in the Docker version only. Toggle on "Multi-User Mode" and set an admin password when prompted.</p>
+<p>Three roles are available. Admin has full access to all settings, workspaces, users, and configuration. Manager can create workspaces and invite users but cannot change system-level settings such as the LLM provider or API keys. Default users can only access the workspaces they have been assigned to and cannot change any settings.</p>
+<p>To add a user, go to Settings, then Users, and click Invite User. Assign the user to one or more workspaces at creation time. Users log in at the same URL as the app with their own credentials.</p>
+<p>If you need the server to be accessible to remote users, place AnythingLLM behind a reverse proxy with HTTPS. A minimal Caddy configuration:</p>
+<pre><code>anythingllm.yourdomain.com {
+  reverse_proxy localhost:3001
+}
+</code></pre>
+<p>Caddy handles TLS certificates automatically via Let's Encrypt. Do not expose port 3001 directly to the internet without a TLS layer in front of it.</p>
+<h2>What can I do with AI agents in AnythingLLM?</h2>
+<p>Agents let the LLM use tools to complete tasks rather than just returning text. To start an agent session, type <code>@agent</code> at the beginning of your message in any workspace. AnythingLLM checks whether your chosen LLM supports tool use and activates agent mode if it does.</p>
+<p>Built-in agent skills include web browsing and scraping, searching your pinned documents, listing and summarizing documents in the workspace, reading and writing files, generating charts, and querying SQL databases. Integration skills for Gmail, Google Calendar, and Outlook are also included.</p>
+<p>Beyond built-in skills, you can extend agents in two ways. Agent Flows (a visual workflow builder in the interface) lets you chain tools together into a repeatable sequence without writing code. You can also connect tools via MCP (Model Context Protocol), the same standard used by Claude Desktop and other AI apps. Any MCP server you already have running can be connected to AnythingLLM agents.</p>
+<h2>Common problems and fixes</h2>
+<ol>
+<li>
+<p>Ollama shows "loading available models" forever
+What you see: The model dropdown in LLM Preference spins without showing any models, or shows "--loading available models--" with nothing below it.
+What it is: The Ollama URL points to the Docker container's own loopback address rather than the host machine. <code>localhost</code> and <code>127.0.0.1</code> inside the container refer to the container, not to your computer.
+The fix: Change the URL to <code>http://host.docker.internal:11434</code> on Mac or Windows, or <code>http://172.17.0.1:11434</code> on Linux. Before changing anything in AnythingLLM, open <code>http://127.0.0.1:11434</code> in your browser on the host and confirm you see "Ollama is running." If that page does not load, fix Ollama first.</p>
+</li>
+<li>
+<p>Documents upload with a green checkmark but the LLM ignores them
+What you see: Files upload without errors and appear in the document manager, but when you chat, the LLM answers from its training data and never cites anything from your files.
+What it is: Either no embedding model is configured (so the documents were stored but never indexed), or the document was left in the upload staging area and not pinned to the workspace.
+The fix: Go to Settings, then Embedding Preference, and choose a provider. Then open the workspace, click the document manager, and drag the document from the left column (uploaded) to the right column (pinned to this workspace). Only documents in the right column are searched during chat.</p>
+</li>
+<li>
+<p>Uploading a large PDF causes the job to freeze or the container to restart
+What you see: A large PDF (100+ pages) begins processing, shows a progress indicator for several minutes, then freezes or disappears. The container may restart silently.
+What it is: The embedding process holds the full document in memory during chunking. Files with hundreds of pages can exceed the memory available to the container.
+The fix: Split the PDF into segments of 50 pages or fewer before uploading. If you need to handle large files regularly, increase the container's memory limit by adding <code>--memory=4g</code> to your <code>docker run</code> command. Also confirm you have at least 10 GB of free disk space, since the vector store grows with each embedded document.</p>
+</li>
+<li>
+<p>Inference is very slow even with a capable GPU
+What you see: Every response from the LLM takes 30 seconds or more, even for short questions, despite the machine having a modern GPU.
+What it is: AnythingLLM does not run inference itself. The bottleneck is in Ollama (or whichever backend you are using). Ollama falls back to CPU if it cannot access the GPU, which happens when CUDA or ROCm drivers are not found or when Ollama was started without the right permissions.
+The fix: On the host machine, run <code>ollama run &lt;model-name&gt;</code> and watch the startup output. If it says "using CPU," the GPU is not being used. Review the Ollama GPU setup documentation for your operating system. Also check that the model fits in VRAM: a 7B parameter model typically needs around 5-6 GB of VRAM to run entirely in GPU memory.</p>
+</li>
+<li>
+<p>Permission denied errors on the storage volume on Linux
+What you see: The container starts but the logs show <code>EACCES: permission denied</code> when AnythingLLM tries to write to the storage directory.
+What it is: The AnythingLLM container process runs as UID 1000 by default. If the host storage directory was created by root or another user, the container cannot write to it.
+The fix: On your host machine, run <code>chown -R 1000:1000 ~/anythingllm</code> (replace the path with your actual <code>STORAGE_LOCATION</code>). Then restart the container. If you need to run the container as a different UID, add <code>-e UID=$(id -u) -e GID=$(id -g)</code> to your <code>docker run</code> command.</p>
+</li>
+</ol>
+<h2>Frequently asked questions</h2>
+<p><strong>Is AnythingLLM free and open source?</strong>
+Yes. AnythingLLM is MIT-licensed and the complete source code is available at github.com/Mintplex-Labs/anything-llm. The self-hosted version (Docker or desktop) has no usage caps, no paid tier, and no feature restrictions. A managed cloud version is available at cloud.useanything.com if you prefer not to run your own server, but self-hosting is fully free.</p>
+<p><strong>Does AnythingLLM support multiple users?</strong>
+Yes, in the Docker version. Enable multi-user mode in Settings under Security, then create accounts with Admin, Manager, or Default roles. The desktop app is single-user only and does not support additional accounts.</p>
+<p><strong>What LLMs does AnythingLLM support?</strong>
+More than 30 providers. Local options include Ollama, LM Studio, Local AI, KoboldCPP, and the built-in model that ships with the desktop app. Cloud options include OpenAI, Anthropic, Google Gemini, Groq, Mistral, Cohere, Perplexity AI, Together AI, OpenRouter, Azure OpenAI, Hugging Face, and AWS Bedrock. You can assign different providers at the system level, the workspace level, and the agent level.</p>
+<p><strong>What vector databases does AnythingLLM support?</strong>
+LanceDB is the default and runs embedded with no extra configuration. You can switch to Chroma, Milvus, Pinecone, Qdrant, Weaviate, or PostgreSQL with pgvector for larger deployments. Change the provider in Settings under Vector Database.</p>
+<p><strong>Can I embed a chat widget on my website?</strong>
+Yes, in the Docker version with multi-user mode enabled. Each workspace has an Embed option in its settings that generates an iframe snippet or a JavaScript script tag. The widget connects back to your AnythingLLM server, so the server must be reachable from wherever the page is hosted.</p>
+<h2>Resources</h2>
+<ul>
+<li><a href="https://github.com/Mintplex-Labs/anything-llm">AnythingLLM on GitHub</a>: full source code, issue tracker, changelogs, and Docker setup docs from Mintplex Labs</li>
+<li><a href="https://docs.anythingllm.com">Official AnythingLLM documentation</a>: install guides, LLM and embedder configuration, agent skills, and API reference</li>
+<li><a href="https://joshuaopolko.com/ollama/">Ollama setup guide</a>: how to run local models for AnythingLLM on your own hardware</li>
+<li><a href="https://joshuaopolko.com/dify-self-hosted-guide/">Dify guide</a>: alternative self-hosted AI platform with a visual workflow builder</li>
+</ul>
+<p>Last updated: June 27, 2026.</p>
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+</body>
+</html>

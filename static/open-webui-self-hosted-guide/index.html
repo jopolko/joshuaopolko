@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<title>Open WebUI: Install and Configure the Best Interface for Ollama and Local LLMs</title>
+<meta name="description" content="Open WebUI is the most popular self-hosted interface for Ollama and local LLMs. Docker install, Ollama connection, RAG setup, user management, and common issues.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<link rel="canonical" href="https://joshuaopolko.com/open-webui-self-hosted-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open WebUI: Install and Configure the Best Interface for Ollama and Local LLMs">
+<meta property="og:description" content="Open WebUI is the most popular self-hosted interface for Ollama and local LLMs. Docker install, Ollama connection, RAG setup, user management, and common issues.">
+<meta property="og:url" content="https://joshuaopolko.com/open-webui-self-hosted-guide/">
+<meta property="og:site_name" content="Joshua Opolko">
+<meta property="article:published_time" content="2026-06-27T00:00:00+00:00">
+<meta property="article:modified_time" content="2026-06-27T00:00:00+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Open WebUI: Install and Configure the Best Interface for Ollama and Local LLMs">
+<meta name="twitter:description" content="Open WebUI is the most popular self-hosted interface for Ollama and local LLMs. Docker install, Ollama connection, RAG setup, user management, and common issues.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/","name":"Open WebUI: Install and Configure the Best Interface for Ollama and Local LLMs"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/#webpage","url":"https://joshuaopolko.com/open-webui-self-hosted-guide/","name":"Open WebUI: Install and Configure the Best Interface for Ollama and Local LLMs","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/#breadcrumb"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"Article","@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/#article","headline":"Open WebUI: Install and Configure the Best Interface for Ollama and Local LLMs","description":"Open WebUI is the most popular self-hosted interface for Ollama and local LLMs. Docker install, Ollama connection, RAG setup, user management, and common issues.","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/#webpage"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"HowTo","@id":"https://joshuaopolko.com/open-webui-self-hosted-guide/#howto","name":"How to self-host Open WebUI","description":"Step-by-step guide to installing and running Open WebUI on your own server or local machine.","step":[{"@type":"HowToStep","position":1,"name":"Install Docker","text":"Docker is the recommended install method. Make sure Docker is installed and running on your machine before proceeding."},{"@type":"HowToStep","position":2,"name":"Run the Docker command","text":"Run the single Docker command to pull and start the Open WebUI container. The standalone image does not require a separate Ollama installation."},{"@type":"HowToStep","position":3,"name":"Open the web interface","text":"Open your browser and navigate to http://localhost:3000. Open WebUI is available within seconds of the container starting."},{"@type":"HowToStep","position":4,"name":"Create your admin account","text":"Complete the initial setup screen to create your administrator account. The first account on a new install automatically becomes the admin."},{"@type":"HowToStep","position":5,"name":"Connect to Ollama or an API","text":"Configure the connection to Ollama or an OpenAI-compatible API in Admin Panel, Settings, then Connections. On Linux use --network=host; on Mac or Windows use host.docker.internal."},{"@type":"HowToStep","position":6,"name":"Set a secret key for production","text":"Generate a WEBUI_SECRET_KEY with openssl and add it to your Docker command. Without it, all user sessions are invalidated on every container restart."}]}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=11">
+<script src="/assets/nav.js?v=3" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>Open WebUI: Install and Configure the Best Interface for Ollama and Local LLMs</h1>
+  <div class="post-body">
+<h2>Key takeaways</h2>
+<ul>
+<li>Open WebUI v0.9.6 installs in a single Docker command and is ready in under five minutes</li>
+<li>Docker is the recommended install method. A pip path is available for Python 3.11 or 3.12 (Python 3.13 is not yet supported)</li>
+<li>Ollama is optional. Open WebUI connects to any OpenAI-compatible API, including OpenAI, OpenRouter, LiteLLM, and local Ollama</li>
+<li>When Ollama runs on the same machine as the Docker container, use <code>host.docker.internal</code> on Mac/Windows or <code>--network=host</code> on Linux to avoid a "connection refused" error</li>
+<li>The first account you create becomes the admin. All later sign-ups create regular user accounts. Disable registration after setup to lock down a personal install</li>
+<li>Set <code>WEBUI_SECRET_KEY</code> in production so all user sessions survive container restarts and updates</li>
+<li>RAG (document chat) is built in. Upload PDFs, Word docs, and web pages to a Knowledge collection, then reference it in any chat with the <code>#</code> shortcut</li>
+<li>Open WebUI ships as a PWA, so you can install it to your desktop or phone home screen and it opens like a native app</li>
+</ul>
+<h2>How do I install Open WebUI?</h2>
+<p>Run a single Docker command and Open WebUI is available at <code>http://localhost:3000</code> within seconds. No existing Ollama installation is required for the standalone image.</p>
+<p><strong>Standalone (no bundled Ollama):</strong></p>
+<pre><code class="language-bash">docker run -d \
+  -p 3000:8080 \
+  -v open-webui:/app/backend/data \
+  --name open-webui \
+  --restart always \
+  ghcr.io/open-webui/open-webui:main
+</code></pre>
+<p><strong>Bundled with Ollama (CPU only):</strong></p>
+<pre><code class="language-bash">docker run -d \
+  -p 3000:8080 \
+  -v ollama:/root/.ollama \
+  -v open-webui:/app/backend/data \
+  --name open-webui \
+  --restart always \
+  ghcr.io/open-webui/open-webui:ollama
+</code></pre>
+<p><strong>Bundled with Ollama (NVIDIA GPU):</strong></p>
+<pre><code class="language-bash">docker run -d \
+  -p 3000:8080 \
+  --gpus=all \
+  -v ollama:/root/.ollama \
+  -v open-webui:/app/backend/data \
+  --name open-webui \
+  --restart always \
+  ghcr.io/open-webui/open-webui:ollama
+</code></pre>
+<p>After the container starts, open <code>http://localhost:3000</code> in your browser. The first screen asks you to create an account. That account becomes the site administrator.</p>
+<p>If you prefer pip over Docker, make sure you are on Python 3.11 or 3.12:</p>
+<pre><code class="language-bash">pip install open-webui
+open-webui serve
+</code></pre>
+<p>To update a Docker install, pull the new image and recreate the container. Your data is in the named volume <code>open-webui</code> and is preserved across updates:</p>
+<pre><code class="language-bash">docker pull ghcr.io/open-webui/open-webui:main
+docker stop open-webui &amp;&amp; docker rm open-webui
+# re-run your original docker run command
+</code></pre>
+<h2>How do I connect Open WebUI to Ollama?</h2>
+<p>If you used the bundled <code>:ollama</code> image, the connection is already configured. If Ollama is running separately on your host machine, set the <code>OLLAMA_BASE_URL</code> environment variable so the container knows where to find it. The reason: <code>localhost</code> inside a Docker container resolves to the container itself, not your host.</p>
+<p><strong>Mac or Windows:</strong></p>
+<pre><code class="language-bash">docker run -d \
+  -p 3000:8080 \
+  --add-host=host.docker.internal:host-gateway \
+  -e OLLAMA_BASE_URL=http://host.docker.internal:11434 \
+  -v open-webui:/app/backend/data \
+  --name open-webui \
+  --restart always \
+  ghcr.io/open-webui/open-webui:main
+</code></pre>
+<p><strong>Linux (use host networking):</strong></p>
+<pre><code class="language-bash">docker run -d \
+  --network=host \
+  -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
+  -v open-webui:/app/backend/data \
+  --name open-webui \
+  --restart always \
+  ghcr.io/open-webui/open-webui:main
+</code></pre>
+<p>With host networking the container shares the host's network stack, so Open WebUI binds to port 8080 directly. Access it at <code>http://localhost:8080</code> instead of 3000.</p>
+<p>To connect to a remote Ollama instance, use its IP address: <code>-e OLLAMA_BASE_URL=http://192.168.1.50:11434</code>.</p>
+<p>You can also add or change Ollama endpoints after setup: go to Admin Panel, Settings, then Connections. No restart required.</p>
+<h2>How do I use Open WebUI without Ollama?</h2>
+<p>Open WebUI works with any OpenAI-compatible API. Point it at OpenAI, OpenRouter, a LiteLLM proxy, or any other backend that implements the <code>/chat/completions</code> endpoint. Ollama is not required.</p>
+<p>Go to Admin Panel, Settings, then Connections and add a new OpenAI-type connection. For the real OpenAI API:</p>
+<ul>
+<li>Base URL: <code>https://api.openai.com/v1</code></li>
+<li>API Key: your OpenAI secret key</li>
+</ul>
+<p>Or pass these at container startup:</p>
+<pre><code class="language-bash">docker run -d \
+  -p 3000:8080 \
+  -e OPENAI_API_BASE_URL=https://api.openai.com/v1 \
+  -e OPENAI_API_KEY=sk-... \
+  -v open-webui:/app/backend/data \
+  --name open-webui \
+  --restart always \
+  ghcr.io/open-webui/open-webui:main
+</code></pre>
+<p>For a local LiteLLM proxy (which lets you front Anthropic, Google, and others behind an OpenAI-compatible layer):</p>
+<pre><code class="language-bash">-e OPENAI_API_BASE_URL=http://host.docker.internal:4000
+-e OPENAI_API_KEY=anything
+</code></pre>
+<p>Open WebUI supports multiple connections simultaneously. You can have local Ollama models and cloud GPT-4o in the same model picker and switch between them per conversation.</p>
+<h2>What can I do with Open WebUI?</h2>
+<p>Open WebUI is a full-featured self-hosted AI platform, not just a chat wrapper.</p>
+<p><strong>Chat and multi-model comparisons.</strong> Talk to any model, compare responses from two models side by side in a split view, and switch models mid-conversation without losing context.</p>
+<p><strong>Retrieval Augmented Generation.</strong> Upload PDFs, Word documents, spreadsheets, and text files. Open WebUI indexes them into a vector database and retrieves relevant chunks to pass to the model when you ask questions.</p>
+<p><strong>Web search integration.</strong> Connect to SearXNG, Brave Search, DuckDuckGo, Tavily, or 15+ other search providers. A globe icon in the chat bar lets users toggle web search per conversation.</p>
+<p><strong>Custom model presets and agents.</strong> Bundle a system prompt, a set of tools, and a knowledge base into a reusable "Model" in the Workspace. Share it with other users on your instance.</p>
+<p><strong>Team channels.</strong> Channels are shared spaces where multiple users can chat and tag specific models with <code>@model-name</code> to pull them into the conversation, with threading and access controls.</p>
+<p><strong>Open Terminal.</strong> The integrated code execution environment lets the model write code, run it, read the output, fix errors, and iterate, all inside the chat window.</p>
+<p><strong>MCP and tools.</strong> Connect Model Context Protocol servers for file system, calendar, browser, and other integrations.</p>
+<p><strong>Image generation.</strong> Wire up AUTOMATIC1111, ComfyUI, or DALL-E for image generation inside the same interface.</p>
+<p><strong>Voice.</strong> Dictate messages with speech-to-text and hear responses read back with text-to-speech.</p>
+<p><strong>PWA install.</strong> In Chrome, Edge, or Safari, click "Add to Home Screen" or the install icon in the address bar. It opens in a frameless window like a native application, on desktop or mobile.</p>
+<h2>How do I set up RAG in Open WebUI?</h2>
+<p>RAG works out of the box with no extra configuration for basic use. Upload a file directly in a chat or build a persistent Knowledge collection in the Workspace.</p>
+<p><strong>Quick file upload in chat:</strong></p>
+<ol>
+<li>Open a chat.</li>
+<li>Click the paperclip icon and upload a file. Supported formats include PDF, DOCX, TXT, and CSV.</li>
+<li>Ask questions. Open WebUI extracts the relevant passages and includes them in the model's context window.</li>
+</ol>
+<p><strong>Persistent Knowledge collections (recommended for reuse):</strong></p>
+<ol>
+<li>Go to Workspace, then Knowledge.</li>
+<li>Click "+ New Knowledge" and give it a name and description.</li>
+<li>Upload files or add URLs. Open WebUI fetches and indexes page content from URLs automatically.</li>
+<li>In any chat, type <code>#</code> followed by the knowledge base name to attach it to that conversation.</li>
+</ol>
+<p>The default vector store is ChromaDB, which runs inside the Open WebUI container with no extra setup. For larger document libraries, you can swap to Qdrant, PGVector, Milvus, Elasticsearch, or Pinecone via environment variables.</p>
+<p>Enable hybrid search for better accuracy on technical or keyword-heavy documents:</p>
+<pre><code class="language-bash">-e ENABLE_RAG_HYBRID_SEARCH=true
+</code></pre>
+<p>Hybrid search combines BM25 keyword matching with vector similarity, then re-ranks the merged results. On code, legal text, and product documentation it typically retrieves better passages than vector search alone.</p>
+<h2>How do I manage users and secure my instance?</h2>
+<p>The first account on a fresh install automatically becomes the administrator. Subsequent sign-ups create regular user accounts.</p>
+<p><strong>For a personal, single-user install,</strong> disable sign-up and the login screen entirely:</p>
+<pre><code class="language-bash">-e WEBUI_AUTH=False
+</code></pre>
+<p>Do not use this on a machine reachable from the public internet.</p>
+<p><strong>For a shared team install,</strong> set a stable <code>WEBUI_SECRET_KEY</code>. Without it, Open WebUI generates a random JWT signing key each time the container starts, which logs out all users on every restart or update.</p>
+<pre><code class="language-bash"># Generate a key once and store it somewhere safe
+openssl rand -base64 32
+
+# Add to your Docker run command or Compose file
+-e WEBUI_SECRET_KEY=your-generated-key-here
+</code></pre>
+<p>From the Admin Panel you can view and manage all registered users, approve or reject pending registrations, and share model presets and knowledge bases with specific users or roles. For larger teams, Open WebUI supports LDAP, OIDC/SSO, and SCIM 2.0 user provisioning.</p>
+<h2>Troubleshooting</h2>
+<ol>
+<li>
+<p>Open WebUI can't reach Ollama: "connection refused" or "connection error"
+What you see: A red "Connection error" banner at the top of the page, or the model picker shows no Ollama models.
+What it is: <code>localhost</code> inside the Docker container resolves to the container itself, not your host machine where Ollama is listening on port 11434.
+The fix: On Linux, add <code>--network=host</code> and set <code>OLLAMA_BASE_URL=http://127.0.0.1:11434</code>. On Mac or Windows, add <code>--add-host=host.docker.internal:host-gateway</code> and set <code>OLLAMA_BASE_URL=http://host.docker.internal:11434</code>.</p>
+</li>
+<li>
+<p>Model list is empty even though Ollama has models installed
+What you see: The model picker shows no local models, and <code>ollama list</code> on the host shows models correctly.
+What it is: Ollama may be bound to <code>127.0.0.1</code> only and not accepting connections from outside the host's loopback interface.
+The fix: Start Ollama with <code>OLLAMA_HOST=0.0.0.0 ollama serve</code>, or add that variable to your Ollama system service configuration and restart it.</p>
+</li>
+<li>
+<p>Chat responses display raw markdown symbols
+What you see: Responses appear as unformatted plain text with visible asterisks and hash symbols.
+What it is: If you are proxying Open WebUI behind nginx, the default response buffering breaks streaming output.
+The fix: Add these two lines to your nginx <code>location</code> block: <code>proxy_buffering off;</code> and <code>proxy_cache off;</code>.</p>
+</li>
+<li>
+<p>All users get logged out on every container restart
+What you see: Users are forced to log in again every time the container restarts or is updated.
+What it is: Open WebUI auto-generates a new JWT signing key at startup when <code>WEBUI_SECRET_KEY</code> is not set. Each new key invalidates all existing sessions.
+The fix: Generate a key once with <code>openssl rand -base64 32</code> and add <code>-e WEBUI_SECRET_KEY=your-key</code> to your Docker command or Compose file.</p>
+</li>
+<li>
+<p>RAG returns empty or irrelevant results
+What you see: The model says it has no information about the uploaded document, or answers questions about wrong content.
+What it is: The file may have failed to parse (common with scanned PDFs), or the chunk and embedding settings are not suited to your documents.
+The fix: Go to Admin Panel, Settings, then Documents and check for parsing errors. Enable hybrid search with <code>-e ENABLE_RAG_HYBRID_SEARCH=true</code>. For scanned PDFs, try switching the content extraction method to one with OCR support.</p>
+</li>
+</ol>
+<h2>Frequently asked questions</h2>
+<p><strong>Is Open WebUI free?</strong>
+Yes. Open WebUI is released under the MIT license and is free to self-host. Your costs are the server you run it on and any API charges from external providers you connect to. A managed cloud-hosted version is available at openwebui.com if you prefer not to manage your own server.</p>
+<p><strong>Does Open WebUI support multiple users?</strong>
+Yes. The first account created is the admin. All subsequent registrations are regular user accounts. Admins can approve or reject registrations, assign roles, and share resources. For enterprise deployments, LDAP, OIDC/SSO, and SCIM 2.0 provisioning let you manage users through an existing identity provider.</p>
+<p><strong>What is the difference between Open WebUI and Ollama?</strong>
+Ollama is the runtime that downloads and runs local language models on your machine. Open WebUI is the browser-based front end you use to chat with those models. Think of Ollama as the engine and Open WebUI as the dashboard. Open WebUI also connects to OpenAI, LiteLLM, OpenRouter, and any other OpenAI-compatible API, so it is not limited to Ollama.</p>
+<p><strong>Can I run Open WebUI on a Raspberry Pi or low-power hardware?</strong>
+Open WebUI itself is lightweight and runs fine on a Pi. The bottleneck is the LLM backend. On a Pi you would connect to a small Ollama model (1-3 billion parameters), which is slow but functional for personal use. For a faster experience on CPU-only hardware, a modern x86 machine with 16 GB of RAM handles 7B-parameter models at a usable speed.</p>
+<p><strong>Does Open WebUI work on mobile?</strong>
+Yes. The interface is fully responsive. You can also install it as a PWA from Chrome on Android or Safari on iOS by tapping "Add to Home Screen."</p>
+<h2>Resources</h2>
+<ul>
+<li><a href="https://github.com/open-webui/open-webui">Open WebUI on GitHub</a>: source code, releases, and issue tracker</li>
+<li><a href="https://docs.openwebui.com/">Official Open WebUI documentation</a>: install, configuration, and feature guides</li>
+<li><a href="https://joshuaopolko.com/ollama/">Ollama guide: run local models for Open WebUI</a>: install and configure Ollama on your machine</li>
+<li><a href="https://joshuaopolko.com/dify-self-hosted-guide/">Dify self-hosted guide</a>: alternative self-hosted AI platform with a visual workflow builder</li>
+</ul>
+<p>Last updated: June 27, 2026.</p>
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+</body>
+</html>

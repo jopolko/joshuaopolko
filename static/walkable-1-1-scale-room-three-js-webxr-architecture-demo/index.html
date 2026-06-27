@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>Walkable 1:1 Scale Pavilion: Architectural Daylighting Demo in Three.js WebXR</title>
+<meta name="description" content="Walk through a concrete-and-glass pavilion at true 1:1 scale in your browser. Drag the sun slider to sweep shadows across the polished concrete floor. Three.js WebXR, no install.">
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Walkable 1:1 Scale Pavilion: Architectural Daylighting Demo in Three.js WebXR">
+<meta property="og:description" content="Walk through a concrete-and-glass pavilion at true 1:1 scale. Drag the sun slider to sweep shadows across the polished concrete floor. Three.js WebXR, no install.">
+<meta property="og:url" content="https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">
+<meta property="og:site_name" content="Joshua Opolko">
+<meta property="og:image" content="https://joshuaopolko.com/assets/architectural-visualization-hero.jpg">
+<meta property="og:image:secure_url" content="https://joshuaopolko.com/assets/architectural-visualization-hero.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Concrete and glass pavilion with sun shadows on polished floor">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="article:published_time" content="2026-06-24T12:00:00+00:00">
+<meta property="article:modified_time" content="2026-06-26T12:00:00+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Walkable 1:1 Scale Pavilion: Architectural Daylighting Demo in Three.js WebXR">
+<meta name="twitter:description" content="Concrete-and-glass pavilion in WebXR. Drag the sun from dawn to dusk. Orbit on desktop or walk it on Meta Quest. Three.js r169, no install.">
+<meta name="twitter:image" content="https://joshuaopolko.com/assets/architectural-visualization-hero.jpg">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Joshua Opolko">
+<meta name="twitter:label2" content="Time to read">
+<meta name="twitter:data2" content="6 minutes">
+<link rel="canonical" href="https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"}},{"@type":"ImageObject","@id":"https://joshuaopolko.com/assets/architectural-visualization-hero.jpg","url":"https://joshuaopolko.com/assets/architectural-visualization-hero.jpg","width":"1200","height":"630"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/","name":"Walkable 1:1 Scale Pavilion: Architectural Daylighting Demo"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/#webpage","url":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/","name":"Walkable 1:1 Scale Pavilion: Architectural Daylighting Demo in Three.js WebXR","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"author":{"@id":"https://joshuaopolko.com/#person"},"breadcrumb":{"@id":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/#breadcrumb"},"inLanguage":"en-US","primaryImageOfPage":{"@id":"https://joshuaopolko.com/assets/architectural-visualization-hero.jpg"},"datePublished":"2026-06-24T12:00:00+00:00","dateModified":"2026-06-26T12:00:00+00:00","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"BlogPosting","@id":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/#article","headline":"Walkable 1:1 Scale Pavilion: Architectural Daylighting Demo in Three.js WebXR","description":"Walk through a concrete-and-glass pavilion at true 1:1 scale. Drag the sun slider to sweep shadows across the polished concrete floor. Three.js WebXR, no install.","datePublished":"2026-06-24T12:00:00+00:00","dateModified":"2026-06-26T12:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/#webpage"},"inLanguage":"en-US","image":{"@id":"https://joshuaopolko.com/assets/architectural-visualization-hero.jpg"},"keywords":"Three.js WebXR architecture demo, walkable 1:1 scale pavilion VR, architectural daylighting simulation browser, real-scale room walkthrough, sun shadow study WebGL","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this WebXR pavilion work on Meta Quest?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open in Meta Quest Browser on Quest 2, 3, or Pro and tap Enter VR. The pavilion appears at true 1:1 human scale: the ceiling is 3.2 metres above you, the concrete floor is at your feet, and the glazed south facade is full-height glass. You can orbit to walk around and through the building."}},{"@type":"Question","name":"How does the sun slider work?","acceptedAnswer":{"@type":"Answer","text":"The slider drives a Three.js DirectionalLight whose position is computed from solar azimuth and elevation equations for a northern-hemisphere mid-latitude site. Moving from 6 AM to 8 PM rotates the sun from east to west, changing shadow length, angle, and light colour temperature in real time."}},{"@type":"Question","name":"Can I load my own floor plan or room model?","acceptedAnswer":{"@type":"Answer","text":"Yes. Export from SketchUp, Revit, or ArchiCAD to GLTF and load with Three.js GLTFLoader. Or use the web-ifc-three IFCLoader for native IFC files. The WebXR session, VRButton, and sun study code here works unchanged with any geometry source."}},{"@type":"Question","name":"How does 1:1 scale change how you perceive the space?","acceptedAnswer":{"@type":"Answer","text":"At true scale the ceiling is above you rather than above a miniature. The overhang reads as an overhang, not a sliver. Window sill heights are at your hip. These spatial relationships are impossible to perceive from a floor plan or a 2D render, and they become immediately apparent in a 1:1 browser walkthrough."}}]}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7;--panel:#fff;--ink:#1b1a17;--ink2:#3f3d38;--muted:#7a766c;
+  --line:#e7e3da;--accent:#0e7186;--accent-ink:#114e5d;--code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav>ul>li>a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav>ul>li>a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub>a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;transition:transform .15s}
+.site-nav .has-sub:hover>a span,.site-nav .has-sub:focus-within>a span{transform:rotate(180deg)}
+.site-nav .has-sub>ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub>ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover>ul,.site-nav .has-sub:focus-within>ul{display:flex}
+.site-nav .has-sub>ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub>ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+.art-intro{max-width:var(--measure);margin:0 auto;padding:clamp(24px,4vw,44px) 22px 18px}
+.art-intro h1{font:600 clamp(24px,4.2vw,40px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .45em}
+
+#demo-wrap{
+  position:relative;width:100%;height:76vh;min-height:430px;max-height:900px;
+  background:#7a9ab0;overflow:hidden;
+}
+#demo-canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+
+#sun-ui{
+  position:absolute;bottom:58px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  z-index:8;background:rgba(0,0,0,.50);
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:11px 24px 13px;color:#fff;
+  font:600 13px/1 var(--sans);pointer-events:auto;white-space:nowrap;
+}
+#sun-slider{width:210px;accent-color:#f0c060;cursor:pointer}
+#sun-time{font-size:15px;letter-spacing:.02em}
+
+#demo-footer{
+  position:absolute;bottom:0;left:0;right:0;height:52px;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding:0 16px;gap:12px;z-index:7;
+  background:linear-gradient(transparent,rgba(0,0,0,.40));
+  pointer-events:none;
+}
+#demo-footer>*{pointer-events:auto}
+
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(24px,4vw,48px) 22px 80px}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+@media(max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav>ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav>ul>li>a{padding:9px 12px}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub>ul,.site-nav .has-sub:hover>ul,.site-nav .has-sub:focus-within>ul{display:none}
+  .site-nav .has-sub.open>ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+  #demo-wrap{height:60vw;min-height:260px}
+  #sun-slider{width:160px}
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+<script src="/assets/nav.js?v=6" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+
+<div class="art-intro">
+  <h1>Walkable 1:1 Scale Pavilion: Architectural Daylighting in Three.js WebXR</h1>
+  <p style="color:var(--muted);font:400 14px/1.5 var(--sans);margin:.1em 0 0">By Joshua Opolko &middot; June 2026</p>
+</div>
+
+<div id="demo-wrap">
+  <canvas id="demo-canvas"></canvas>
+  <div id="sun-ui">
+    <span id="sun-time">7:00 AM</span>
+    <input type="range" id="sun-slider" min="6" max="20" step="0.25" value="7">
+    <span style="font-size:11px;opacity:.6;letter-spacing:.03em">Drag to move the sun</span>
+  </div>
+  <div id="demo-footer"></div>
+</div>
+
+<main class="article">
+  <div class="post-body">
+
+  <div style="background:var(--code-bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:18px 22px;margin:0 0 1.8em">
+    <strong>What this is:</strong> a contemporary concrete-and-glass pavilion at true 1:1 metric scale, rendered in Three.js r169 directly in your browser. The building is 12&nbsp;m &times; 8&nbsp;m with a 3.2&nbsp;m ceiling, a fully glazed south facade with steel mullions, a cantilevered roof overhang, and a reflecting pool at the entrance. Drag the sun slider to sweep shadows across the polished concrete floor from dawn to dusk. On desktop: drag to orbit, scroll to zoom. On Meta Quest: tap <em>Enter VR</em>.
+  </div>
+
+  <h2>Why 1:1 scale changes everything</h2>
+  <p>Architectural drawings and 3D renders both suffer from the same perceptual failure: you look at them from the outside. A floor plan tells you a room is 12 by 8 metres, but that measurement carries no weight until you are standing inside it. A render shows you a space from a fixed camera angle, and you have no felt sense of how big the ceiling is relative to your own height.</p>
+  <p>At 1:1 scale in VR the ceiling in this demo is 3.2 metres above your head. Not above a miniature avatar. Above your head. The roof overhang reads as an overhang because you are standing under it. The glazed facade is full-height glass because you are a person standing in front of it. These are spatial relationships that humans assess through embodied experience, not through numbers on a drawing, and WebXR makes them accessible directly in a browser without an install.</p>
+  <p>For architectural design review, the implications are significant. Space-planning decisions that take multiple revision rounds in 2D become immediately apparent in a 1:1 walkthrough. A corridor that measures adequately on a plan can feel wrong the moment you are standing in it. A window sill height, a ceiling soffit, a stair headroom clearance: all of these self-reveal in VR in ways they simply do not on screen.</p>
+
+  <h2>The daylighting study</h2>
+  <p>The sun slider is the central feature of this demo. It drives a <code>DirectionalLight</code> whose position is calculated from solar azimuth and elevation equations for a northern-hemisphere mid-latitude site. Moving the slider from 6&nbsp;AM to 8&nbsp;PM rotates the sun from east to west through the southern sky, and three things happen simultaneously: shadow length changes (long at dawn and dusk, shortest at noon), shadow angle rotates (from northwest-pointing at dawn to due-north at noon to northeast-pointing at dusk), and light colour temperature shifts (warm amber at the edges of the day, cooler and brighter toward noon).</p>
+  <p>These are not abstract parameters. They are what a client experiences when they live in the building. The overhang is sized so that noon summer sun lands at the threshold of the glass and does not penetrate to the back wall, while lower-angle morning and afternoon sun reaches deep into the plan. Showing this in a browser, at human scale, in a minute of interaction, is something that traditionally requires Revit with Autodesk Insight or Rhinoceros with Ladybug installed, a rendered animation file, and a meeting to walk through it. It runs here in a script tag.</p>
+
+  <h2>Material setup (no textures)</h2>
+  <p>Every surface uses <code>MeshStandardMaterial</code> with only <code>color</code>, <code>roughness</code>, and <code>metalness</code>. No texture images, no UV maps, no external assets beyond Three.js itself. The polished concrete floor (roughness&nbsp;0.38, metalness&nbsp;0.04) catches long specular streaks from the sun at low angles, which is physically correct and which is what makes shadow lines read so clearly on it. Raw concrete walls (roughness&nbsp;0.88) absorb rather than redirect light. The glazing (roughness&nbsp;0.03, transparent, opacity&nbsp;0.20) lets the exterior ground plane and sky be visible through it without obscuring the interior.</p>
+
+  <h2>Building the sun study in Three.js</h2>
+  <pre><code>const sun = new THREE.DirectionalLight(0xfff5e0, 3.5);
+sun.castShadow = true;
+sun.shadow.mapSize.setScalar(2048);
+scene.add(sun);
+scene.add(sun.target);
+sun.target.position.set(6, 0, 4); // centre of floor plan
+
+function setSunTime(hour) {
+  const t = (hour - 6) / 14;            // 0 at 6 AM, 1 at 8 PM
+  const elev = Math.max(0.04, Math.sin(t * Math.PI)) * (68 * Math.PI / 180);
+  const azim = (t - 0.5) * Math.PI;     // -PI/2 east, 0 south, +PI/2 west
+
+  sun.position.set(
+    6  - Math.sin(azim) * Math.cos(elev) * 60,
+    Math.sin(elev) * 60,
+    4  - Math.cos(azim) * Math.cos(elev) * 60
+  );
+
+  // Warm amber at edges, cool white at noon
+  const warmth = 1 - Math.sin(t * Math.PI);
+  sun.color.setRGB(1.0, 1.0 - warmth * 0.14, 1.0 - warmth * 0.32);
+  sun.intensity = Math.max(0.2, Math.sin(t * Math.PI) * 3.8 + 0.4);
+}
+
+document.getElementById('sun-slider').addEventListener('input', e => {
+  setSunTime(parseFloat(e.target.value));
+});</code></pre>
+
+  <h2>Performance on Meta Quest browser</h2>
+  <p>The Quest browser WebXR target is 72&nbsp;Hz at 1832&nbsp;&times;&nbsp;1920 per eye. Shadow maps are the main budget item here. The scene uses a single shadow-casting <code>DirectionalLight</code> with a 2048&nbsp;&times;&nbsp;2048 PCFSoft map and a tightly fitted shadow frustum (20&nbsp;m &times; 20&nbsp;m, near&nbsp;1, far&nbsp;80). All other lights are non-shadow-casting hemisphere fill. This keeps the shadow pass to one draw call and runs stably on Quest 3. On Quest 2, drop the shadow map to 1024 if needed.</p>
+
+  <h2>Replacing the pavilion with your own model</h2>
+  <p>Swap the box geometry for <code>GLTFLoader</code> to load exports from SketchUp, Revit, or ArchiCAD. The <a href="https://github.com/IFCjs/web-ifc-three" rel="nofollow noopener" target="_blank">web-ifc-three</a> library adds native IFC loading. The sun study code is geometry-agnostic: the <code>setSunTime()</code> function works against any scene once the shadow-casting light and its target are placed correctly. See the <a href="/architectural-visualization/">architectural visualization guide</a> for the full pipeline from BIM software to browser-based WebXR review session.</p>
+
+  <h2>Frequently asked questions</h2>
+
+  <h3>Does this work on Meta Quest?</h3>
+  <p>Yes. Open this page in Meta Quest Browser on Quest 2, 3, or Pro. Tap the Enter VR button at the bottom right of the demo. The pavilion appears at true 1:1 scale. Orbit to walk around and through the building.</p>
+
+  <h3>How does the sun slider work technically?</h3>
+  <p>The slider value (6 to 20, representing 6&nbsp;AM to 8&nbsp;PM) drives solar azimuth and elevation calculations. The <code>DirectionalLight</code> position updates every time the slider moves, which re-triggers shadow map rendering for that frame. No animation loop is needed for the slider; the render loop runs continuously regardless.</p>
+
+  <h3>Can I load my own floor plan?</h3>
+  <p>Yes via <code>GLTFLoader</code> (SketchUp, Revit, ArchiCAD exports) or <code>IFCLoader</code> from web-ifc-three for native IFC. The sun study and WebXR code is geometry-agnostic.</p>
+
+  <h3>Why does 1:1 scale matter for architecture?</h3>
+  <p>At true scale, spatial decisions that are ambiguous on a floor plan become immediately apparent: whether a room feels large or cramped, whether a ceiling height is generous or oppressive, whether an overhang is long enough to do its job. These cannot be reliably perceived from drawings or renders. They require being inside the space at human scale.</p>
+
+  <p style="margin-top:2em;font-size:.92em;color:var(--muted)">Written by Joshua Opolko, who builds browser-based XR and writes about self-hosting, AI, and immersive technology at joshuaopolko.com. Pavilion dimensions follow a compact but generous single-storey proportion; furniture scale is realistic for the space. June 2026.</p>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { VRButton }      from 'three/addons/webxr/VRButton.js';
+
+// ── Renderer ──────────────────────────────────────────────
+const wrap   = document.getElementById('demo-wrap');
+const canvas = document.getElementById('demo-canvas');
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+renderer.shadowMap.enabled   = true;
+renderer.shadowMap.type      = THREE.PCFSoftShadowMap;
+renderer.toneMapping         = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+renderer.outputColorSpace    = THREE.SRGBColorSpace;
+renderer.xr.enabled          = true;
+
+// ── Scene ─────────────────────────────────────────────────
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x7a9ab0);
+scene.fog        = new THREE.Fog(0x8aafc8, 50, 100);
+
+// ── Camera: south of house looking north through glass ────
+const camera = new THREE.PerspectiveCamera(62, wrap.clientWidth / wrap.clientHeight, 0.05, 150);
+camera.position.set(6, 2.2, -9);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(6, 1.8, 3);
+controls.enableDamping  = true;
+controls.dampingFactor  = 0.06;
+controls.maxPolarAngle  = Math.PI * 0.84;
+controls.minDistance    = 1.0;
+controls.maxDistance    = 45;
+controls.update();
+
+// ── VRButton ──────────────────────────────────────────────
+const vrBtn = VRButton.createButton(renderer);
+Object.assign(vrBtn.style, {
+  position:'absolute', bottom:'10px', right:'14px', zIndex:'10',
+  border:'1px solid rgba(200,200,200,.30)', borderRadius:'8px',
+  padding:'11px 22px', background:'rgba(10,10,10,.82)', color:'#e8e4dc',
+  font:'700 12px/1 sans-serif', cursor:'pointer',
+  textTransform:'uppercase', letterSpacing:'.10em',
+  boxShadow:'0 0 14px rgba(0,0,0,.18)',
+});
+document.getElementById('demo-footer').appendChild(vrBtn);
+
+// ── Scroll-steal fix ──────────────────────────────────────
+let focused = false;
+canvas.addEventListener('mouseenter', () => { focused = true; });
+canvas.addEventListener('mouseleave', () => { focused = false; });
+canvas.addEventListener('wheel', e => {
+  focused ? e.preventDefault() : e.stopImmediatePropagation();
+}, { capture: true, passive: false });
+
+window.addEventListener('resize', () => {
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  camera.aspect = W / H;
+  camera.updateProjectionMatrix();
+  renderer.setSize(W, H);
+});
+
+// ── Material helper ───────────────────────────────────────
+const mat = (color, rough, metal = 0, extra = {}) =>
+  new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: metal, ...extra });
+
+const mFloor   = mat(0xb4b0a8, 0.38, 0.04);  // polished concrete
+const mWall    = mat(0xc4c0b8, 0.88);         // raw concrete
+const mRoof    = mat(0xb0aca4, 0.91);         // roof slab
+const mCeiling = mat(0xd09060, 0.72);         // oak ceiling slats
+const mSteel   = mat(0x303034, 0.30, 0.90);   // steel frames
+const mGlass   = mat(0x90b8cc, 0.03, 0.0,
+  { transparent: true, opacity: 0.20, side: THREE.DoubleSide });
+const mGround  = mat(0x787870, 0.96);         // compacted gravel/ground
+const mPool    = mat(0x4a7890, 0.04, 0.20,
+  { transparent: true, opacity: 0.80, side: THREE.DoubleSide });
+const mPly     = mat(0xd8c090, 0.80);         // plywood furniture
+const mDkPly   = mat(0x806040, 0.82);         // dark plywood legs
+const mCounter = mat(0xb8b4ae, 0.42, 0.02);   // polished concrete counter
+
+// ── Geometry helpers ──────────────────────────────────────
+const addBox = (w, h, d, m, x, y, z, cast = true) => {
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
+  mesh.position.set(x, y, z);
+  if (cast) mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+  return mesh;
+};
+
+// ── House dimensions ──────────────────────────────────────
+// x: 0-12 (12 m wide), z: 0-8 (8 m deep)
+// South glass facade at z=0, north wall at z=8
+// Floor y=0, ceiling y=3.2
+// Overhang extends 1.6 m south to z=-1.6
+
+const HW   = 12;   // house width
+const HD   = 8;    // house depth
+const HC   = 3.2;  // ceiling height
+const WT   = 0.28; // wall thickness
+const OVH  = 1.6;  // overhang depth south of facade
+
+// Ground
+{
+  const g = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), mGround);
+  g.rotation.x = -Math.PI / 2;
+  g.position.set(6, -0.01, 4);
+  g.receiveShadow = true;
+  scene.add(g);
+}
+
+// Floor slab (raised slightly above ground)
+addBox(HW, 0.16, HD, mFloor, HW/2, -0.08, HD/2);
+
+// Roof slab (overhangs south by OVH, east/west by 0.5)
+// z runs from -OVH to HD+0.3, centered at (-OVH + HD+0.3)/2
+const roofD = HD + OVH + 0.3;
+addBox(HW + 1.0, 0.22, roofD, mRoof, HW/2, HC + 0.11, (HD - OVH) / 2);
+
+// Oak ceiling inside (slightly below roof soffit)
+addBox(HW - WT * 2, 0.05, HD - WT, mCeiling, HW/2, HC - 0.03, HD/2 + WT/2);
+
+// North wall (solid)
+addBox(HW, HC, WT, mWall, HW/2, HC/2, HD + WT/2);
+
+// East wall: lower solid + strip window + upper solid
+addBox(WT, 1.90, HD, mWall, HW + WT/2, 0.95, HD/2);
+addBox(WT, 0.62, HD, mWall, HW + WT/2, HC - 0.31, HD/2);
+addBox(WT * 0.3, 0.52, HD * 0.55, mGlass, HW + WT/2, 2.30, HD/2); // strip window
+
+// West wall: same
+addBox(WT, 1.90, HD, mWall, -WT/2, 0.95, HD/2);
+addBox(WT, 0.62, HD, mWall, -WT/2, HC - 0.31, HD/2);
+addBox(WT * 0.3, 0.52, HD * 0.55, mGlass, -WT/2, 2.30, HD/2);
+
+// South facade: corner piers + glass panels + steel mullions
+addBox(0.38, HC, WT, mWall, 0.19, HC/2, 0);           // left pier
+addBox(0.38, HC, WT, mWall, HW - 0.19, HC/2, 0);      // right pier
+
+// 5 glazing bays across the remaining facade width
+const facadeW = HW - 0.38 * 2;
+const bayW    = facadeW / 5;
+for (let i = 0; i < 5; i++) {
+  const bx = 0.38 + i * bayW + bayW / 2;
+  addBox(bayW - 0.05, HC - 0.06, WT * 0.25, mGlass, bx, HC/2, 0);  // glass panel
+  if (i > 0) {
+    addBox(0.05, HC, WT, mSteel, 0.38 + i * bayW, HC/2, 0);         // vertical mullion
+  }
+}
+// Top + bottom rails
+addBox(facadeW, 0.06, WT, mSteel, HW/2, 0.03, 0);
+addBox(facadeW, 0.06, WT, mSteel, HW/2, HC - 0.03, 0);
+
+// ── Reflecting pool / terrace south of facade ─────────────
+// Raised terrace slab
+addBox(HW, 0.14, OVH - 0.2, mWall, HW/2, -0.13, -(OVH - 0.2)/2);
+// Water
+{
+  const wm = new THREE.Mesh(new THREE.PlaneGeometry(HW - 0.6, OVH - 0.45), mPool);
+  wm.rotation.x = -Math.PI / 2;
+  wm.position.set(HW/2, -0.04, -(OVH - 0.45)/2 - 0.05);
+  wm.receiveShadow = true;
+  scene.add(wm);
+}
+
+// ── Interior furniture ─────────────────────────────────────
+// Long concrete work surface along north wall
+addBox(9.0, 0.04, 0.75, mCounter, HW/2, 0.73, HD - 0.48);  // top
+addBox(9.0, 0.70, 0.06, mWall,    HW/2, 0.35, HD - 0.09);  // back
+
+// 3 simple chairs
+[2.5, 6.0, 9.5].forEach(cx => {
+  addBox(0.58, 0.04, 0.52, mPly,  cx, 0.44, HD - 1.85);    // seat
+  addBox(0.58, 0.72, 0.04, mPly,  cx, 0.84, HD - 1.62);    // back
+  [[-0.24, -0.22], [0.24, -0.22], [-0.24, 0.22], [0.24, 0.22]].forEach(([dx, dz]) => {
+    addBox(0.04, 0.44, 0.04, mDkPly, cx + dx, 0.22, HD - 1.85 + dz); // leg
+  });
+});
+
+// Kitchen counter at east end
+addBox(0.64, 0.88, 2.8, mWall,    HW - 0.64, 0.44, 5.4);  // body
+addBox(0.72, 0.04, 2.9, mCounter, HW - 0.60, 0.90, 5.4);  // top
+
+// ── Lighting ──────────────────────────────────────────────
+// Sky/ground bounce: keeps shadows from going pure black
+scene.add(new THREE.HemisphereLight(0xbbd4f0, 0x686058, 0.55));
+
+// Sun: the main event, driven by slider
+const sun = new THREE.DirectionalLight(0xfff5e0, 3.5);
+sun.castShadow = true;
+sun.shadow.mapSize.setScalar(2048);
+sun.shadow.camera.left   = -20;
+sun.shadow.camera.right  = 20;
+sun.shadow.camera.top    = 20;
+sun.shadow.camera.bottom = -10;
+sun.shadow.camera.near   = 1;
+sun.shadow.camera.far    = 80;
+sun.shadow.bias          = -0.0012;
+scene.add(sun);
+scene.add(sun.target);
+sun.target.position.set(HW/2, 0, HD/2);
+
+// Soft interior fill (non-shadow, simulates indirect bounce off ceiling)
+const fill = new THREE.DirectionalLight(0xe8f0ff, 0.35);
+fill.position.set(6, 10, 12);
+scene.add(fill);
+
+// ── Sun position + colour math ────────────────────────────
+function setSunTime(hour) {
+  const t    = (hour - 6) / 14;
+  const elev = Math.max(0.04, Math.sin(t * Math.PI)) * (68 * Math.PI / 180);
+  const azim = (t - 0.5) * Math.PI;
+
+  // Sun comes from south (-z), sweeping east (+x) to west (-x)
+  sun.position.set(
+    HW/2 - Math.sin(azim) * Math.cos(elev) * 60,
+    Math.sin(elev) * 60,
+    HD/2 - Math.cos(azim) * Math.cos(elev) * 60
+  );
+
+  // Warm amber at dawn/dusk, neutral white at noon
+  const warmth = 1 - Math.sin(t * Math.PI);
+  sun.color.setRGB(1.0, 1.0 - warmth * 0.14, 1.0 - warmth * 0.32);
+  sun.intensity = Math.max(0.2, Math.sin(t * Math.PI) * 3.8 + 0.4);
+
+  // Sky background shifts with time of day
+  const skyR = 0.45 + warmth * 0.30;
+  const skyG = 0.58 + warmth * 0.08;
+  const skyB = 0.70 - warmth * 0.28;
+  scene.background.setRGB(skyR, skyG, skyB);
+  scene.fog.color.setRGB(skyR * 1.05, skyG * 1.05, skyB * 1.05);
+}
+
+// ── Sun slider UI ─────────────────────────────────────────
+const slider    = document.getElementById('sun-slider');
+const timeLabel = document.getElementById('sun-time');
+
+function formatHour(h) {
+  const hh   = Math.floor(h);
+  const mm   = Math.round((h - hh) * 60);
+  const ampm = hh >= 12 ? 'PM' : 'AM';
+  const h12  = hh > 12 ? hh - 12 : (hh === 0 ? 12 : hh);
+  return h12 + ':' + String(mm).padStart(2, '0') + ' ' + ampm;
+}
+
+slider.addEventListener('input', () => {
+  const h = parseFloat(slider.value);
+  setSunTime(h);
+  timeLabel.textContent = formatHour(h);
+  autoRunning = false;
+});
+
+// ── Auto-advance from 7 AM to 10 AM on load ───────────────
+// Lets the visitor immediately see shadows sweep before touching anything
+let autoRunning    = true;
+let autoStartTime  = null;
+const AUTO_FROM    = 7.0;
+const AUTO_TO      = 10.0;
+const AUTO_MS      = 5000;
+
+setSunTime(AUTO_FROM);
+timeLabel.textContent = formatHour(AUTO_FROM);
+
+// ── Render loop ───────────────────────────────────────────
+renderer.setAnimationLoop(ts => {
+  if (autoRunning) {
+    if (autoStartTime === null) autoStartTime = ts;
+    const p = Math.min((ts - autoStartTime) / AUTO_MS, 1);
+    const e = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p; // ease in-out
+    const h = AUTO_FROM + (AUTO_TO - AUTO_FROM) * e;
+    setSunTime(h);
+    slider.value = h;
+    timeLabel.textContent = formatHour(h);
+    if (p >= 1) autoRunning = false;
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

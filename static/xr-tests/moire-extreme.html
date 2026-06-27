@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Moiré Extreme</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #000; overflow: hidden; }
+canvas { display: block; position: fixed; inset: 0; width: 100%; height: 100%; }
+#ui {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;
+  background: rgba(0,0,0,.52); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px; padding: 14px 24px;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  user-select: none;
+}
+label {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.42); font: 600 10px/1 monospace; letter-spacing: .10em;
+  text-transform: uppercase;
+}
+.val { color: #00ee99; font-size: 12px; }
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 108px; height: 3px;
+  background: rgba(255,255,255,.14); border-radius: 2px;
+  outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px;
+  border-radius: 50%; background: #00ee99; cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #00ee99; border: none; cursor: pointer;
+}
+#vr-btn {
+  background: rgba(0,238,153,.12); border: 1px solid rgba(0,238,153,.45);
+  color: #00ee99; font: 700 10px/1 monospace; letter-spacing: .12em;
+  text-transform: uppercase; padding: 9px 18px; border-radius: 8px;
+  cursor: pointer; transition: background .15s;
+}
+#vr-btn:hover { background: rgba(0,238,153,.25); }
+#vr-na { color: rgba(255,255,255,.28); font: 600 10px/1 monospace; letter-spacing: .08em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <label>Scale <span class="val" id="v0">30</span>
+    <input type="range" id="s0" min="4" max="60" step="1" value="30">
+  </label>
+  <label>Speed <span class="val" id="v1">0.15</span>
+    <input type="range" id="s1" min="0.01" max="2.00" step="0.01" value="0.15">
+  </label>
+  <label>Saturation <span class="val" id="v2">0.90</span>
+    <input type="range" id="s2" min="0.20" max="1.00" step="0.05" value="0.90">
+  </label>
+  <label>Layers <span class="val" id="v3">4</span>
+    <input type="range" id="s3" min="2" max="4" step="1" value="4">
+  </label>
+  <label>Warp <span class="val" id="v4">0.06</span>
+    <input type="range" id="s4" min="0.00" max="0.22" step="0.01" value="0.06">
+  </label>
+  <label>Chroma <span class="val" id="v5">0.018</span>
+    <input type="range" id="s5" min="0.000" max="0.060" step="0.002" value="0.018">
+  </label>
+  <div id="vr-slot"></div>
+</div>
+<script>
+const canvas = document.getElementById('c');
+const gl = canvas.getContext('webgl', { xrCompatible: true });
+if (!gl) { document.body.innerHTML = '<p style="color:#fff;padding:2em">WebGL not available</p>'; }
+
+let xrSession = null;
+let flatRafId  = null;
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  if (!xrSession) gl.viewport(0, 0, canvas.width, canvas.height);
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ── Vertex shader: sphere vertices carry their world-space direction ──────────
+const VERT = `
+attribute vec3 aPos;
+uniform mat4 uMVP;
+varying vec3 vDir;
+void main() {
+  vDir = aPos;
+  gl_Position = uMVP * vec4(aPos, 1.0);
+}
+`;
+
+// ── Fragment shader ────────────────────────────────────────────────────────────
+// UV is derived from the world-space direction so the pattern lives on the sphere.
+// Turning your head changes vDir → different p → head-tracking.
+const FRAG = `
+precision highp float;
+
+uniform float uTime, uScale, uSpeed, uSat, uLayers, uWarp, uChroma;
+varying vec3 vDir;
+
+#define PI  3.14159265359
+#define TAU 6.28318530718
+
+vec3 hsv2rgb(vec3 c) {
+  vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+  vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+  return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+vec2 rot(vec2 p, float a) {
+  float c = cos(a), s = sin(a);
+  return vec2(p.x*c - p.y*s, p.x*s + p.y*c);
+}
+
+float grid(vec2 p, float sc) {
+  return sin(p.x * sc * TAU) * sin(p.y * sc * TAU);
+}
+
+float moire(vec2 p) {
+  float t  = uTime;
+  float as = uSpeed;
+  float s  = uScale * (1.0 + 0.18 * sin(t * 0.13));
+
+  float g1 = grid(rot(p,  t * as * 0.300        ), s        );
+  float g2 = grid(rot(p,  t * as * -0.190 + 0.70), s * 1.037);
+  float m  = g1 * g2;
+
+  if (uLayers >= 3.0) {
+    float g3 = grid(rot(p,  t * as * 0.110 + 1.31), s * 0.618);
+    float g4 = grid(rot(p,  t * as * -0.290 + 0.50), s * 1.272);
+    m = m * 0.62 + g1 * g3 * 0.22 + g2 * g4 * 0.16;
+  }
+
+  if (uLayers >= 4.0) {
+    float g5 = grid(rot(p,  t * as * 0.070 + 2.09), s * 1.618);
+    float g6 = grid(rot(p,  t * as * -0.070 + 3.14), s * 0.786);
+    m = m * 0.72 + g5 * g6 * 0.17 + g1 * g5 * 0.11;
+  }
+
+  return m;
+}
+
+void main() {
+  // Equirectangular projection: map viewing direction to 2D moiré coordinates.
+  // phi=0/theta=0 → looking along -Z (forward), matches the flat version's centre.
+  vec3 dir    = normalize(vDir);
+  float phi   = atan(dir.x, -dir.z);                  // -PI..PI
+  float theta = asin(clamp(dir.y, -1.0, 1.0));        // -PI/2..PI/2
+  vec2 p = vec2(phi / PI, theta / (PI * 0.5)) * 0.5;  // ±0.5, same range as flat version
+
+  float rad0 = length(p);
+  float t    = uTime;
+
+  float raw = moire(p);
+
+  vec2 wp = p + vec2(
+    sin(raw * PI + t * 0.31) * uWarp,
+    cos(raw * PI - t * 0.37) * uWarp
+  );
+
+  vec2 offR =  rot(vec2(uChroma, 0.0),  t * 0.52);
+  vec2 offB =  rot(vec2(uChroma, 0.0), -t * 0.52 + PI);
+
+  float fG = moire(wp);
+  float fR = moire(wp + offR);
+  float fB = moire(wp + offB);
+
+  float aR = fR * 0.5 + 0.5;
+  float aG = fG * 0.5 + 0.5;
+  float aB = fB * 0.5 + 0.5;
+
+  float hBase = t * 0.034;
+  float r = hsv2rgb(vec3(aR * 0.68 + hBase + 0.000, uSat, pow(aR, 0.52))).r;
+  float g = hsv2rgb(vec3(aG * 0.68 + hBase + 0.333, uSat, pow(aG, 0.52))).g;
+  float b = hsv2rgb(vec3(aB * 0.68 + hBase + 0.667, uSat, pow(aB, 0.52))).b;
+  vec3 col = vec3(r, g, b);
+
+  float rings = sin(rad0 * uScale * 0.55 - t * 2.1) * 0.5 + 0.5;
+  col = mix(col, col * (0.72 + rings * 0.28), 0.28);
+
+  float vig = 1.0 - smoothstep(0.40, 0.88, rad0) * (0.54 + 0.22 * sin(t * 0.73));
+  col *= vig;
+
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+// ── Compile and link ───────────────────────────────────────────────────────────
+function compile(type, src) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+    console.error('Shader error:', gl.getShaderInfoLog(s));
+  return s;
+}
+const prog = gl.createProgram();
+gl.attachShader(prog, compile(gl.VERTEX_SHADER,   VERT));
+gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+gl.linkProgram(prog);
+if (!gl.getProgramParameter(prog, gl.LINK_STATUS))
+  console.error('Link error:', gl.getProgramInfoLog(prog));
+gl.useProgram(prog);
+
+// ── Inverted sphere geometry ───────────────────────────────────────────────────
+// Camera sits at origin inside the sphere. Inverted winding makes the inside visible.
+(function buildSphere() {
+  const STACKS = 32, SLICES = 32, R = 10;
+  const verts = [], idx = [];
+  for (let i = 0; i <= STACKS; i++) {
+    const phi = Math.PI * i / STACKS;
+    for (let j = 0; j <= SLICES; j++) {
+      const theta = 2 * Math.PI * j / SLICES;
+      verts.push(
+        R * Math.sin(phi) * Math.cos(theta),
+        R * Math.cos(phi),
+        R * Math.sin(phi) * Math.sin(theta)
+      );
+    }
+  }
+  for (let i = 0; i < STACKS; i++) {
+    for (let j = 0; j < SLICES; j++) {
+      const a = i * (SLICES + 1) + j, b = a + SLICES + 1;
+      idx.push(a, b, a + 1, b, b + 1, a + 1); // inverted winding
+    }
+  }
+  window._sphereCount = idx.length;
+
+  const vbo = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+
+  const ibo = gl.createBuffer();
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
+})();
+
+gl.disable(gl.CULL_FACE);
+
+const aPos = gl.getAttribLocation(prog, 'aPos');
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+
+// ── Uniform locations ──────────────────────────────────────────────────────────
+const U = {};
+['uTime','uScale','uSpeed','uSat','uLayers','uWarp','uChroma','uMVP'].forEach(n => {
+  U[n] = gl.getUniformLocation(prog, n);
+});
+
+// ── Slider wiring ──────────────────────────────────────────────────────────────
+const SLIDERS = [
+  { id: 's0', vid: 'v0', key: 'uScale',  dec: 0 },
+  { id: 's1', vid: 'v1', key: 'uSpeed',  dec: 2 },
+  { id: 's2', vid: 'v2', key: 'uSat',    dec: 2 },
+  { id: 's3', vid: 'v3', key: 'uLayers', dec: 0 },
+  { id: 's4', vid: 'v4', key: 'uWarp',   dec: 2 },
+  { id: 's5', vid: 'v5', key: 'uChroma', dec: 3 },
+];
+const vals = {};
+SLIDERS.forEach(({ id, vid, key, dec }) => {
+  const sl  = document.getElementById(id);
+  const vEl = document.getElementById(vid);
+  vals[key] = parseFloat(sl.value);
+  sl.addEventListener('input', () => {
+    vals[key] = parseFloat(sl.value);
+    vEl.textContent = vals[key].toFixed(dec);
+  });
+});
+
+// ── Matrix helpers ─────────────────────────────────────────────────────────────
+function perspective(fovY, aspect, near, far) {
+  const f = 1 / Math.tan(fovY * 0.5);
+  // Column-major, matching WebGL/WebXR convention
+  return new Float32Array([
+    f / aspect, 0, 0,                        0,
+    0,          f, 0,                        0,
+    0,          0, (far + near)/(near - far), -1,
+    0,          0, 2*far*near/(near - far),   0,
+  ]);
+}
+
+function mul4(a, b) {
+  const r = new Float32Array(16);
+  for (let i = 0; i < 4; i++)
+    for (let j = 0; j < 4; j++)
+      for (let k = 0; k < 4; k++)
+        r[i*4+j] += a[i*4+k] * b[k*4+j];
+  return r;
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────────
+function draw(t, mvp) {
+  gl.uniform1f(U.uTime,   t);
+  gl.uniform1f(U.uScale,  vals.uScale);
+  gl.uniform1f(U.uSpeed,  vals.uSpeed);
+  gl.uniform1f(U.uSat,    vals.uSat);
+  gl.uniform1f(U.uLayers, vals.uLayers);
+  gl.uniform1f(U.uWarp,   vals.uWarp);
+  gl.uniform1f(U.uChroma, vals.uChroma);
+  gl.uniformMatrix4fv(U.uMVP, false, mvp);
+  gl.drawElements(gl.TRIANGLES, window._sphereCount, gl.UNSIGNED_SHORT, 0);
+}
+
+function flatLoop(ts) {
+  flatRafId = requestAnimationFrame(flatLoop);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.viewport(0, 0, canvas.width, canvas.height);
+  // Identity view (no head rotation in flat mode) — MVP = projection only
+  draw(ts * 0.001, perspective(75 * Math.PI / 180, canvas.width / canvas.height, 0.1, 50));
+}
+flatRafId = requestAnimationFrame(flatLoop);
+
+// ── WebXR ──────────────────────────────────────────────────────────────────────
+(async () => {
+  const slot = document.getElementById('vr-slot');
+  if (!navigator.xr) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+  const ok = await navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+  if (!ok) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+
+  const btn = document.createElement('button');
+  btn.id = 'vr-btn';
+  btn.textContent = 'Enter VR';
+  slot.appendChild(btn);
+
+  btn.addEventListener('click', async () => {
+    if (xrSession) { xrSession.end(); return; }
+
+    xrSession = await navigator.xr.requestSession('immersive-vr');
+    btn.textContent = 'Exit VR';
+
+    xrSession.addEventListener('end', () => {
+      xrSession = null;
+      btn.textContent = 'Enter VR';
+      flatRafId = requestAnimationFrame(flatLoop);
+    });
+
+    xrSession.updateRenderState({ baseLayer: new XRWebGLLayer(xrSession, gl) });
+    const refSpace = await xrSession.requestReferenceSpace('local');
+    cancelAnimationFrame(flatRafId);
+
+    function xrLoop(time, frame) {
+      xrSession.requestAnimationFrame(xrLoop);
+      const pose = frame.getViewerPose(refSpace);
+      if (!pose) return;
+
+      const layer = xrSession.renderState.baseLayer;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, layer.framebuffer);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+      const t = time * 0.001;
+      for (const view of pose.views) {
+        const vp = layer.getViewport(view);
+        gl.viewport(vp.x, vp.y, vp.width, vp.height);
+        // MVP = projection * view — the view matrix encodes head rotation,
+        // so vDir in the fragment shader becomes head-relative world direction
+        draw(t, mul4(
+          new Float32Array(view.projectionMatrix),
+          new Float32Array(view.transform.inverse.matrix)
+        ));
+      }
+    }
+    xrSession.requestAnimationFrame(xrLoop);
+  });
+})();
+</script>
+</body>
+</html>

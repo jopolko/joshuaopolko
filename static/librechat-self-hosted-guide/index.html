@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#fbfaf7">
+<title>LibreChat: Self-Hosted ChatGPT Alternative With Multi-Provider AI Support</title>
+<meta name="description" content="LibreChat is a free, self-hosted ChatGPT alternative connecting OpenAI, Anthropic, Google Gemini, Ollama, and 10-plus other AI providers in one interface. Docker setup guide.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<link rel="canonical" href="https://joshuaopolko.com/librechat-self-hosted-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LibreChat: Self-Hosted ChatGPT Alternative With Multi-Provider AI Support">
+<meta property="og:description" content="LibreChat is a free, self-hosted ChatGPT alternative connecting OpenAI, Anthropic, Google Gemini, Ollama, and 10-plus other AI providers in one interface. Docker setup guide.">
+<meta property="og:url" content="https://joshuaopolko.com/librechat-self-hosted-guide/">
+<meta property="og:site_name" content="Joshua Opolko">
+<meta property="article:published_time" content="2026-06-27T00:00:00+00:00">
+<meta property="article:modified_time" content="2026-06-27T00:00:00+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LibreChat: Self-Hosted ChatGPT Alternative With Multi-Provider AI Support">
+<meta name="twitter:description" content="LibreChat is a free, self-hosted ChatGPT alternative connecting OpenAI, Anthropic, Google Gemini, Ollama, and 10-plus other AI providers in one interface. Docker setup guide.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/librechat-self-hosted-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/librechat-self-hosted-guide/","name":"LibreChat: Self-Hosted ChatGPT Alternative With Multi-Provider AI Support"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/librechat-self-hosted-guide/#webpage","url":"https://joshuaopolko.com/librechat-self-hosted-guide/","name":"LibreChat: Self-Hosted ChatGPT Alternative With Multi-Provider AI Support","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"inLanguage":"en-US","breadcrumb":{"@id":"https://joshuaopolko.com/librechat-self-hosted-guide/#breadcrumb"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"Article","@id":"https://joshuaopolko.com/librechat-self-hosted-guide/#article","headline":"LibreChat: Self-Hosted ChatGPT Alternative With Multi-Provider AI Support","description":"LibreChat is a free, self-hosted ChatGPT alternative connecting OpenAI, Anthropic, Google Gemini, Ollama, and 10-plus other AI providers in one interface. Docker setup guide.","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/librechat-self-hosted-guide/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/librechat-self-hosted-guide/#webpage"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"HowTo","@id":"https://joshuaopolko.com/librechat-self-hosted-guide/#howto","name":"How to self-host LibreChat","description":"Step-by-step guide to installing and running LibreChat on your own server or local machine.","step":[{"@type":"HowToStep","position":1,"name":"Install Docker and Git","text":"Ensure Docker 20.10 or later, Docker Compose v2, and Git are installed on your machine. At least 4 GB of RAM is required; 8 GB is recommended if you plan to run local models."},{"@type":"HowToStep","position":2,"name":"Clone the LibreChat repository","text":"Run git clone https://github.com/danny-avila/LibreChat.git to download the project, then change into the LibreChat directory."},{"@type":"HowToStep","position":3,"name":"Copy the environment file","text":"Run cp .env.example .env to create your local configuration file from the provided template. This file holds your API keys and app settings."},{"@type":"HowToStep","position":4,"name":"Start the Docker containers","text":"Run docker compose up -d to pull the required images and start LibreChat in the background. The first run takes a few minutes to download images."},{"@type":"HowToStep","position":5,"name":"Open LibreChat in your browser","text":"Navigate to http://localhost:3080 once the containers are running. The first account you register is automatically granted admin privileges."},{"@type":"HowToStep","position":6,"name":"Configure AI providers","text":"Create librechat.yaml in the project root and add your provider endpoints with API key references. Mount the file into the container via docker-compose.override.yml, then restart with docker compose down and docker compose up -d."}]}]}</script>
+<link rel="stylesheet" href="/assets/site.css?v=11">
+<script src="/assets/nav.js?v=3" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>LibreChat: Self-Hosted ChatGPT Alternative With Multi-Provider AI Support</h1>
+  <div class="post-body">
+<h2>Key takeaways</h2>
+<ul>
+<li>LibreChat is a free, open-source chat interface that connects OpenAI, Anthropic, Google Gemini, Ollama, Groq, Mistral, Cohere, OpenRouter, and more from a single UI</li>
+<li>Docker Compose is the recommended install method: clone the repo, copy <code>.env.example</code> to <code>.env</code>, and run <code>docker compose up -d</code>. The app runs at <code>http://localhost:3080</code></li>
+<li>All endpoint configuration lives in <code>librechat.yaml</code>; API keys stay in <code>.env</code> and are referenced by variable name</li>
+<li>User registration is controlled by the <code>ALLOW_REGISTRATION</code> environment variable, making it easy to lock down a private instance or open it to a team</li>
+<li>Local models via Ollama connect using <code>http://host.docker.internal:11434/v1/</code> as the base URL inside Docker. Ollama must listen on <code>0.0.0.0</code>, not <code>127.0.0.1</code></li>
+<li>Built-in features include file uploads, RAG (retrieval-augmented generation), a code interpreter, image generation, Artifacts, and MCP (Model Context Protocol) support</li>
+<li>The current stable release is v0.8.7 (June 24, 2026). The project has over 39,000 GitHub stars and releases roughly every two weeks</li>
+<li>Common gotchas: <code>.env</code> changes require a full <code>docker compose down &amp;&amp; up</code> restart; <code>librechat.yaml</code> must be explicitly mounted into the container via <code>docker-compose.override.yml</code></li>
+</ul>
+<h2>How do I install LibreChat?</h2>
+<p>Docker Compose is the primary install method and takes about five minutes. You clone the repository, copy the example environment file, and start the containers.</p>
+<p>Requirements: Docker 20.10+, Docker Compose v2, Git, and at least 4 GB RAM (8 GB recommended if you plan to run local models).</p>
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/danny-avila/LibreChat.git
+cd LibreChat
+
+# Copy the example environment file
+cp .env.example .env
+
+# Start LibreChat (pulls images on first run, takes a few minutes)
+docker compose up -d
+</code></pre>
+<p>Open <code>http://localhost:3080</code> once the containers are up. The first account you register becomes the admin.</p>
+<p>To stop or update:</p>
+<pre><code class="language-bash"># Stop
+docker compose down
+
+# Update to the latest release and restart
+docker compose pull &amp;&amp; docker compose up -d
+</code></pre>
+<p><strong>Apple Silicon (M1/M2/M3) note:</strong> The default MongoDB 7/8 image requires AVX CPU instructions that M-series chips lack. Before running <code>docker compose up</code>, create a <code>docker-compose.override.yml</code> in the project root:</p>
+<pre><code class="language-yaml">services:
+  mongodb:
+    image: mongo:4.4.18
+</code></pre>
+<p>Then start normally. The rest of the setup is identical.</p>
+<h2>How do I configure AI providers in LibreChat?</h2>
+<p>LibreChat reads AI provider configuration from <code>librechat.yaml</code> in the project root. Sensitive values like API keys go in <code>.env</code> and are referenced in the YAML by variable name.</p>
+<p><strong>Step 1:</strong> Create the config file:</p>
+<pre><code class="language-bash">touch librechat.yaml
+</code></pre>
+<p><strong>Step 2:</strong> Add your providers:</p>
+<pre><code class="language-yaml">version: 1.3.5
+cache: true
+
+endpoints:
+  openAI:
+    apiKey: &quot;${OPENAI_API_KEY}&quot;
+    models:
+      default: [&quot;gpt-4o&quot;, &quot;gpt-4o-mini&quot;, &quot;o1&quot;, &quot;o1-mini&quot;]
+      fetch: true
+
+  anthropic:
+    apiKey: &quot;${ANTHROPIC_API_KEY}&quot;
+    models:
+      default: [&quot;claude-opus-4-5&quot;, &quot;claude-sonnet-4-5&quot;, &quot;claude-haiku-3-5&quot;]
+
+  google:
+    apiKey: &quot;${GOOGLE_API_KEY}&quot;
+    models:
+      default: [&quot;gemini-2.5-pro&quot;, &quot;gemini-2.5-flash&quot;]
+      fetch: true
+
+  custom:
+    - name: &quot;Groq&quot;
+      apiKey: &quot;${GROQ_API_KEY}&quot;
+      baseURL: &quot;https://api.groq.com/openai/v1/&quot;
+      models:
+        default: [&quot;llama3-70b-8192&quot;, &quot;mixtral-8x7b-32768&quot;]
+        fetch: true
+      modelDisplayLabel: &quot;Groq&quot;
+
+    - name: &quot;OpenRouter&quot;
+      apiKey: &quot;${OPENROUTER_KEY}&quot;
+      baseURL: &quot;https://openrouter.ai/api/v1&quot;
+      models:
+        default: [&quot;meta-llama/llama-3-70b-instruct&quot;]
+        fetch: true
+      modelDisplayLabel: &quot;OpenRouter&quot;
+</code></pre>
+<p><strong>Step 3:</strong> Add the corresponding keys to <code>.env</code>:</p>
+<pre><code class="language-bash">OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+GOOGLE_API_KEY=...
+GROQ_API_KEY=...
+OPENROUTER_KEY=...
+</code></pre>
+<p><strong>Step 4:</strong> Mount <code>librechat.yaml</code> into the Docker container. Create <code>docker-compose.override.yml</code>:</p>
+<pre><code class="language-yaml">services:
+  api:
+    volumes:
+      - ./librechat.yaml:/app/librechat.yaml
+</code></pre>
+<p><strong>Step 5:</strong> Restart to apply changes:</p>
+<pre><code class="language-bash">docker compose down &amp;&amp; docker compose up -d
+</code></pre>
+<p>Check for YAML errors in the API logs if endpoints do not appear: <code>docker compose logs api</code>. LibreChat exits with code 1 on a config validation failure, so errors are easy to spot.</p>
+<h2>What can LibreChat do that ChatGPT can't?</h2>
+<p>LibreChat lets you switch between multiple AI providers in a single interface and compare them on the same prompt, which no commercial product offers out of the box.</p>
+<p><strong>Multi-provider switching.</strong> One UI covers OpenAI, Anthropic Claude, Google Gemini, Groq, Mistral, Cohere, OpenRouter, Ollama, Azure OpenAI, AWS Bedrock, and any OpenAI-compatible API. Switch providers from a dropdown mid-conversation without logging into separate services.</p>
+<p><strong>Local models with full privacy.</strong> Connect Ollama to run Llama 3, Mistral, Phi-3, CodeLlama, or any locally-running model. Conversations stay on your server and never touch an external API.</p>
+<p><strong>Agents and MCP support.</strong> LibreChat supports the Model Context Protocol, letting agents call external tools, databases, web search, and custom APIs. You can build agents with dynamic skills directly in the UI.</p>
+<p><strong>File uploads and RAG.</strong> Upload PDFs, Word documents, images, and spreadsheets. LibreChat indexes them using LangChain and PostgreSQL with PGVector. Ask questions across your documents with the model drawing on the content.</p>
+<p><strong>Code interpreter.</strong> Run Python code inside conversations without leaving the chat.</p>
+<p><strong>Artifacts.</strong> LibreChat renders interactive artifacts inline in the chat window, including React components, HTML pages, and SVG diagrams, similar to Claude's native artifact view.</p>
+<p><strong>Image generation.</strong> DALL-E 3, Stable Diffusion (via API), and other image providers work out of the box.</p>
+<p><strong>Full-text chat history search.</strong> Search across all your past conversations.</p>
+<p><strong>No per-seat subscription.</strong> You pay only for the API calls you make to external providers, or nothing at all when using local models.</p>
+<h2>How do I set up LibreChat for multiple users?</h2>
+<p>LibreChat supports multi-user setups out of the box. The first account registered automatically becomes the admin. You control who can sign up through environment variables in <code>.env</code>.</p>
+<p><strong>Open registration (anyone can create an account):</strong></p>
+<pre><code class="language-bash">ALLOW_REGISTRATION=true
+ALLOW_EMAIL_LOGIN=true
+</code></pre>
+<p><strong>Closed registration (admin creates accounts manually):</strong></p>
+<pre><code class="language-bash">ALLOW_REGISTRATION=false
+ALLOW_EMAIL_LOGIN=true
+</code></pre>
+<p>With registration closed, the admin can still add users via the built-in script:</p>
+<pre><code class="language-bash">docker compose exec api npm run create-user
+</code></pre>
+<p><strong>Social login via OAuth:</strong></p>
+<pre><code class="language-bash"># Google OAuth example
+GOOGLE_CLIENT_ID=your-client-id
+GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_CALLBACK_URL=https://your-domain.com/oauth/google/callback
+
+ALLOW_SOCIAL_LOGIN=true
+ALLOW_SOCIAL_REGISTRATION=true
+</code></pre>
+<p>LibreChat also supports GitHub, Discord, and any OpenID Connect provider including Azure AD and AWS Cognito. Each user gets their own conversation history. In the admin panel you can choose whether users supply their own API keys or use keys you provide centrally.</p>
+<h2>How do I add local models with Ollama?</h2>
+<p>Ollama connects to LibreChat through the OpenAI-compatible API that Ollama exposes on port 11434. Add an Ollama endpoint to <code>librechat.yaml</code> pointing to <code>http://host.docker.internal:11434/v1/</code>.</p>
+<p><strong>Step 1:</strong> Pull the models you want on the host machine:</p>
+<pre><code class="language-bash">ollama pull llama3
+ollama pull mistral
+ollama pull codellama
+</code></pre>
+<p><strong>Step 2:</strong> Make Ollama listen on all interfaces. On Linux with systemd, add this under <code>[Service]</code> in <code>/etc/systemd/system/ollama.service</code>:</p>
+<pre><code>Environment=&quot;OLLAMA_HOST=0.0.0.0&quot;
+</code></pre>
+<p>Then reload and restart:</p>
+<pre><code class="language-bash">sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart ollama
+</code></pre>
+<p><strong>Step 3:</strong> Add the Ollama endpoint to <code>librechat.yaml</code>:</p>
+<pre><code class="language-yaml">endpoints:
+  custom:
+    - name: &quot;Ollama&quot;
+      apiKey: &quot;ollama&quot;
+      baseURL: &quot;http://host.docker.internal:11434/v1/&quot;
+      models:
+        default: [&quot;llama3&quot;, &quot;mistral&quot;, &quot;codellama&quot;]
+        fetch: true
+      titleConvo: true
+      titleModel: &quot;current_model&quot;
+      modelDisplayLabel: &quot;Ollama&quot;
+</code></pre>
+<p>The <code>apiKey</code> field is required by the config schema but ignored by Ollama. Any placeholder string works. Setting <code>fetch: true</code> means LibreChat will auto-discover new models you pull without editing the config again.</p>
+<p><strong>Step 4:</strong> Restart LibreChat:</p>
+<pre><code class="language-bash">docker compose down &amp;&amp; docker compose up -d
+</code></pre>
+<h2>How do I expose LibreChat on the internet?</h2>
+<p>Put LibreChat behind a reverse proxy with HTTPS. A minimal Caddy configuration (Caddy handles TLS automatically via Let's Encrypt):</p>
+<pre><code>librechat.yourdomain.com {
+    reverse_proxy localhost:3080
+}
+</code></pre>
+<p>Or with Nginx (assuming Certbot has issued a certificate):</p>
+<pre><code class="language-nginx">server {
+    listen 443 ssl;
+    server_name librechat.yourdomain.com;
+
+    ssl_certificate /etc/letsencrypt/live/librechat.yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/librechat.yourdomain.com/privkey.pem;
+
+    location / {
+        proxy_pass http://localhost:3080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection &quot;upgrade&quot;;
+        proxy_set_header Host $host;
+    }
+}
+</code></pre>
+<p>Once behind HTTPS, update these in <code>.env</code> to match your public domain:</p>
+<pre><code class="language-bash">DOMAIN_SERVER=https://librechat.yourdomain.com
+DOMAIN_CLIENT=https://librechat.yourdomain.com
+</code></pre>
+<p>If this is a public-facing instance, set <code>ALLOW_REGISTRATION=false</code> unless you intend it to be open to anyone.</p>
+<h2>Common problems and fixes</h2>
+<ol>
+<li>
+<p>Models not appearing after configuring librechat.yaml
+What you see: The provider dropdown does not show your new endpoint after restarting.
+What it is: Either <code>librechat.yaml</code> is not mounted into the container, or there is a YAML syntax error that caused the API to reject the config on startup.
+The fix: Confirm the volume mount exists in <code>docker-compose.override.yml</code>, then check logs with <code>docker compose logs api</code>. LibreChat exits with code 1 on a validation failure and logs the specific error.</p>
+</li>
+<li>
+<p>Ollama models time out or return connection refused
+What you see: Selecting an Ollama model returns "connection refused" or the request hangs indefinitely.
+What it is: Ollama is only listening on <code>127.0.0.1</code> (localhost), which Docker containers cannot reach through <code>host.docker.internal</code>.
+The fix: Set <code>OLLAMA_HOST=0.0.0.0</code> and restart Ollama. Verify connectivity from inside the container: <code>docker compose exec api curl http://host.docker.internal:11434/api/tags</code>.</p>
+</li>
+<li>
+<p>MongoDB container exits on startup (AVX error or version mismatch)
+What you see: The <code>mongodb</code> container exits immediately. Logs mention missing AVX support or a <code>featureCompatibilityVersion</code> error.
+What it is: MongoDB 7+ requires AVX CPU instructions, which are absent on some virtual machines and all Apple Silicon Macs.
+The fix: Pin MongoDB to a compatible version in <code>docker-compose.override.yml</code> using <code>image: mongo:4.4.18</code>. For a version mismatch after an upgrade, back up and recreate the data volume with <code>docker compose down -v &amp;&amp; docker compose up -d</code> (this removes conversation history, so back up first).</p>
+</li>
+<li>
+<p>Port 3080 already in use
+What you see: Docker fails to start with "address already in use" on port 3080.
+What it is: Another application on the host is bound to that port.
+The fix: Change the host-side port in <code>docker-compose.override.yml</code>:</p>
+</li>
+</ol>
+<pre><code class="language-yaml">services:
+  api:
+    ports:
+      - &quot;3090:3080&quot;
+</code></pre>
+<p>Access LibreChat at <code>http://localhost:3090</code> instead.</p>
+<ol>
+<li>API key changes in .env are not picked up
+What you see: You add or update a key in <code>.env</code> but LibreChat still returns authentication errors for that provider.
+What it is: Docker Compose reads environment variables only at container start. A plain <code>docker compose restart</code> does not re-read <code>.env</code>.
+The fix: Always use <code>docker compose down &amp;&amp; docker compose up -d</code> after any <code>.env</code> change.</li>
+</ol>
+<h2>Frequently asked questions</h2>
+<p><strong>Is LibreChat free and open source?</strong>
+Yes. LibreChat is released under the MIT license and costs nothing to self-host. You pay only for the API usage of whichever external providers you connect. Local models via Ollama cost nothing beyond the hardware.</p>
+<p><strong>What AI providers does LibreChat support?</strong>
+Out of the box: OpenAI (GPT-4o, o1, GPT-5), Anthropic (Claude Haiku, Sonnet, Opus), Google Gemini, Azure OpenAI, AWS Bedrock, Groq, Mistral, Cohere, OpenRouter, and any OpenAI-compatible API including Ollama, LM Studio, and Together AI. New providers are added as custom endpoints in <code>librechat.yaml</code>.</p>
+<p><strong>What is the difference between LibreChat and Open WebUI?</strong>
+Both are self-hosted AI chat interfaces, but they focus on different things. LibreChat emphasizes connecting many cloud and local AI providers in one polished UI with enterprise-grade authentication, agents, MCP, and RAG. Open WebUI is more Ollama-native, with a larger community (140k+ GitHub stars versus LibreChat's 39k), stronger pipeline-based extensibility, and tighter team collaboration tools. LibreChat wins on multi-provider breadth; Open WebUI wins for users who primarily want a local-model-first setup.</p>
+<p><strong>Does LibreChat support RAG?</strong>
+Yes. Upload documents (PDF, DOCX, TXT, images, and more) into a conversation and LibreChat indexes them using LangChain backed by PostgreSQL with PGVector. A web search plugin is also available for pulling in live information.</p>
+<p><strong>Can I let users bring their own API keys?</strong>
+Yes. In the admin panel you can configure LibreChat to let each user enter their own API keys in their profile. Alternatively, supply keys centrally in <code>.env</code> and have all users share them.</p>
+<h2>Resources</h2>
+<ul>
+<li><a href="https://github.com/danny-avila/LibreChat">LibreChat on GitHub</a>: source code, releases, and Docker setup docs</li>
+<li><a href="https://www.librechat.ai/docs">Official LibreChat documentation</a>: install guides, provider configuration, agents, and API reference</li>
+<li><a href="https://joshuaopolko.com/ollama/">Ollama guide: add local models to LibreChat</a>: install and configure Ollama on your machine</li>
+</ul>
+<p>Last updated: June 27, 2026.</p>
+  </div>
+</main>
+<footer class="site-foot">
+  <p>&copy; Joshua Opolko</p>
+</footer>
+</body>
+</html>
