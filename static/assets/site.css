@@ -34,10 +34,11 @@ img{max-width:100%;height:auto}
 .site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
 .site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
   border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
-  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+  padding:6px;display:flex;flex-direction:column;z-index:40;margin-top:6px;
+  opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s}
 /* transparent bridge across the gap so moving the mouse down doesn't drop :hover */
 .site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
-.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:1;pointer-events:auto;transform:translateY(0)}
 .site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
 .site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
 
@@ -75,6 +76,16 @@ figure.hero{margin:0 0 1.8em}
 /* footer */
 .site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
   color:var(--muted);font:400 14px/1.6 var(--sans)}
+.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:28px}
+.foot-col ul{list-style:none;margin:0;padding:0}
+.foot-col li{margin:6px 0}
+.foot-col a{color:var(--muted);text-decoration:none;font-size:13px;line-height:1.5}
+.foot-col a:hover{color:var(--accent-ink)}
+.foot-hed{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.foot-copy{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:13px}
+.foot-copy a{color:var(--muted);text-decoration:none}
+@media(max-width:700px){.foot-cols{grid-template-columns:repeat(2,1fr);gap:24px}}
+@media(max-width:400px){.foot-cols{grid-template-columns:1fr}}
 
 @media (max-width:640px){
   body{font-size:18px}
@@ -87,11 +98,10 @@ figure.hero{margin:0 0 1.8em}
   .site-nav .has-sub.open > a span{transform:rotate(180deg)}
   /* dropdown opens as a full-width panel under the menu bar (tap-triggered) */
   .site-nav .has-sub{position:static}
-  .site-nav .has-sub > ul,
   .site-nav .has-sub:hover > ul,
-  .site-nav .has-sub:focus-within > ul{display:none}
-  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
-    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+  .site-nav .has-sub:focus-within > ul{opacity:0;pointer-events:none;transform:translateY(-4px)}
+  .site-nav .has-sub.open > ul{opacity:1;pointer-events:auto;transform:translateY(0);
+    position:absolute;left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
 }
 
 /* ---- homepage ---- */

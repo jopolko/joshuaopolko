@@ -7,6 +7,7 @@ Source of truth is static/ — edit HTML files directly or use new_page.py for n
 Usage:
   python3 build.py sitemap          # regenerate sitemap.xml + robots.txt from static/
   python3 build.py syncnav          # push NAV_ITEMS into the <nav> of every page (surgical, nav-only)
+  python3 build.py syncfooter       # push NAV_ITEMS link map into the <footer> of every page (surgical)
   python3 build.py retemplate       # re-apply PAGE_TMPL to all static pages (preserves SEO head + body)
 
 To add a page to the site-wide nav: edit NAV_ITEMS, run `syncnav`, then deploy changed pages.
@@ -27,30 +28,43 @@ NAV_ITEMS = [
         ("Kids Events",       "/kidsevents/"),
         ("HomeTurf",          "/hometurf/"),
     ]),
-    ("AI & GEO", "#", [
-        ("CrewAI",                  "/crewai-setup-production-guide/"),
+    ("Tools", "#", [
         ("Ollama",                  "/ollama/"),
+        ("Open WebUI",              "/open-webui-self-hosted-guide/"),
+        ("AnythingLLM",             "/anythingllm-self-hosted-guide/"),
+        ("LibreChat",               "/librechat-self-hosted-guide/"),
+        ("LiteLLM",                 "/litellm-proxy-guide/"),
         ("n8n",                     "/n8n-self-hosted-guide/"),
         ("Dify",                    "/dify-self-hosted-guide/"),
         ("Vane",                    "/perplexica-self-hosted-guide/"),
         ("SearXNG",                 "/searxng-self-hosted-guide/"),
         ("Agent Zero",              "/agent-zero/"),
+    ]),
+    ("AI & GEO", "#", [
+        ("CrewAI",                  "/crewai-setup-production-guide/"),
         ("Building JOSIE",          "/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/"),
         ("Site as AI Infrastructure","/ai-infrastructure/"),
         ("LLM-as-ETL",              "/llm-etl-architecture/"),
         ("GEO Field Manual",        "/geo-field-manual/"),
         ("GEO Observatory",         "/geo-observatory/"),
         ("GEO: AI Citation",        "/geo-ai-citation/"),
+        ("GEO Answers",             "/geo-answers/"),
         ("Claude SEO/GEO",          "/claude-seo/"),
         ("Claude Code Spec Workflow","/claude-code-specification-workflow-mcp/"),
+        ("Connector Creep",         "/connector-creep.html"),
+        ("Reverse Terraforming",    "/reverse-terraforming/"),
     ]),
     ("XR", "#", [
         ("Architectural Viz",  "/architectural-visualization/"),
+        ("Walkable 1:1 Room",   "/walkable-1-1-scale-room-three-js-webxr-architecture-demo/"),
         ("cyubeVR",            "/cyubevr/"),
         ("NeosVR",             "/neosvr/"),
         ("VR Visual Effects",  "/psychedelic-vr-visual-effects-meta-quest/"),
+        ("VR Therapy",         "/vr-healing/"),
+        ("VR Elderly Care",    "/revolutionizing-elderly-care-with-virtual-reality/"),
         ("Vision & the Brain", "/vision-dominates-half-your-brains-processing-power/"),
         ("XR in Military",     "/military-application/"),
+        ("Visual Tests",       "/xr-tests/"),
     ]),
     ("About", "/about/", []),
 ]
@@ -213,6 +227,69 @@ def write_robots():
         "Sitemap: https://joshuaopolko.com/sitemap.xml\n")
     print("  wrote robots.txt")
 
+NAV_DROP_CSS = (
+    '<style id="nav-drop">'
+    '.site-nav .has-sub > ul{display:flex;opacity:0;pointer-events:none;'
+    'transform:translateY(-4px);transition:opacity .15s,transform .15s}'
+    '.site-nav .has-sub:hover > ul,'
+    '.site-nav .has-sub:focus-within > ul{opacity:1;pointer-events:auto;transform:translateY(0)}'
+    '@media(max-width:640px){'
+    '.site-nav .has-sub:hover > ul,'
+    '.site-nav .has-sub:focus-within > ul{opacity:0;pointer-events:none;transform:translateY(-4px)}'
+    '.site-nav .has-sub.open > ul{opacity:1;pointer-events:auto;transform:translateY(0)}}'
+    '</style>'
+)
+
+FOOTER_CSS = (
+    '<style>'
+    '.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:28px}'
+    '.foot-col ul{list-style:none;margin:0;padding:0}'
+    '.foot-col li{margin:6px 0}'
+    '.foot-col a{color:var(--muted);text-decoration:none;font-size:13px;line-height:1.5}'
+    '.foot-col a:hover{color:var(--accent-ink)}'
+    '.foot-hed{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;'
+    'color:var(--accent);margin:0 0 12px}'
+    '.foot-copy{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:13px}'
+    '.foot-copy a{color:var(--muted);text-decoration:none}'
+    '@media(max-width:700px){.foot-cols{grid-template-columns:repeat(2,1fr);gap:24px}}'
+    '@media(max-width:400px){.foot-cols{grid-template-columns:1fr}}'
+    '</style>'
+)
+
+def footer_html():
+    return '<footer class="site-foot"><p>&copy; Joshua Opolko</p></footer>'
+
+FOOTER = footer_html()
+
+def sync_footer():
+    """Replace <footer class="site-foot">...</footer> in every static page and
+    inject footer CSS into <head> for pages that already have inlined CSS
+    (so they don't need a full retemplate to pick up the new column styles).
+
+    Idempotent: detects .foot-cols presence before injecting CSS.
+    """
+    foot_pat = re.compile(r'<footer class="site-foot">.*?</footer>', re.S)
+    targets = []
+    root = Path(OUT) / "index.html"
+    if root.exists():
+        targets.append(root)
+    for entry in sorted(Path(OUT).iterdir()):
+        if entry.is_dir() and (entry / "index.html").exists():
+            targets.append(entry / "index.html")
+        elif entry.is_file() and entry.suffix == ".html" and entry.name != "index.html":
+            targets.append(entry)
+    changed = []
+    for f in targets:
+        txt = f.read_text()
+        new = foot_pat.sub(lambda m: FOOTER, txt)
+        if ".foot-cols" not in new and "</head>" in new:
+            new = new.replace("</head>", FOOTER_CSS + "</head>", 1)
+        if new != txt:
+            f.write_text(new)
+            rel = str(f.relative_to(Path(OUT)))
+            changed.append(rel)
+    return changed
+
 def sync_nav():
     """Replace the <nav class="site-nav"> block in EVERY static page with NAV from NAV_ITEMS.
 
@@ -228,10 +305,15 @@ def sync_nav():
     for entry in sorted(Path(OUT).iterdir()):
         if entry.is_dir() and (entry / "index.html").exists():
             targets.append(entry / "index.html")
+    nav_css_pat = re.compile(r'<style id="nav-drop">.*?</style>', re.S)
     changed = []
     for f in targets:
         txt = f.read_text()
-        new = pat.sub(lambda m: NAV, txt)  # lambda avoids regex backref expansion in NAV
+        new = pat.sub(lambda m: NAV, txt)
+        if nav_css_pat.search(new):
+            new = nav_css_pat.sub(NAV_DROP_CSS, new)
+        elif '</head>' in new:
+            new = new.replace('</head>', NAV_DROP_CSS + '</head>', 1)
         if new != txt:
             f.write_text(new)
             rel = "index.html" if f.parent == Path(OUT) else f"{f.parent.name}/index.html"
@@ -269,6 +351,12 @@ if __name__ == "__main__":
         changed = sync_nav()
         for rel in changed:
             print(f"  nav synced: {rel}")
+        print(f"\nDone: {len(changed)} pages updated. (Edit NAV_ITEMS, rerun to propagate.)")
+
+    elif cmd == "syncfooter":
+        changed = sync_footer()
+        for rel in changed:
+            print(f"  footer synced: {rel}")
         print(f"\nDone: {len(changed)} pages updated. (Edit NAV_ITEMS, rerun to propagate.)")
 
     elif cmd == "retemplate":

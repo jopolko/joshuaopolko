@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>Connector Creep: Anthropic's Expanding Data Access Model</title>
+<meta name="description" content="A timeline of how Anthropic's products have expanded their data access surface from individual conversations to persistent organizational memory via Claude Tag.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Connector Creep: Anthropic's Expanding Data Access Model">
+<meta property="og:description" content="A timeline of how Anthropic's products have expanded their data access surface from individual conversations to persistent organizational memory via Claude Tag.">
+<meta property="og:url" content="https://joshuaopolko.com/connector-creep.html">
+<meta property="article:published_time" content="2026-06-27T00:00:00+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connector Creep: Anthropic's Expanding Data Access Model">
+<meta name="twitter:description" content="A timeline of how Anthropic's products have expanded their data access surface from individual conversations to persistent organizational memory via Claude Tag.">
+<link rel="canonical" href="https://joshuaopolko.com/connector-creep.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/","sameAs":["https://github.com/jopolko","https://x.com/JoshuaOpolko","https://www.linkedin.com/in/joshua-opolko/","https://www.reddit.com/user/JoshuaOpolko/"]},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/connector-creep.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/connector-creep.html","name":"Connector Creep"}}]},{"@type":"Article","@id":"https://joshuaopolko.com/connector-creep.html#article","headline":"Connector Creep: Anthropic's Expanding Data Access Model","description":"A timeline of how Anthropic's products have expanded their data access surface from individual conversations to persistent organizational memory via Claude Tag.","datePublished":"2026-06-27T00:00:00+00:00","dateModified":"2026-06-27T00:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"inLanguage":"en-US","mainEntityOfPage":{"@type":"WebPage","@id":"https://joshuaopolko.com/connector-creep.html"},"keywords":"Anthropic data access, Claude memory, Claude Tag, connector creep, AI lock-in, Claude Slack integration","articleSection":"AI Analysis","wordCount":1100},{"@type":"FAQPage","@id":"https://joshuaopolko.com/connector-creep.html#faq","mainEntity":[{"@type":"Question","name":"What is connector creep?","acceptedAnswer":{"@type":"Answer","text":"Connector creep describes the pattern where an AI product incrementally expands its data access surface across successive releases. Each step ships as a useful feature. Cumulatively they produce a level of access to personal and organizational data that no user explicitly authorized in a single moment."}},{"@type":"Question","name":"What does 'needs authentication' mean in Claude Code's integrations panel?","acceptedAnswer":{"@type":"Answer","text":"In Claude Code's integrations panel, Gmail, Google Calendar, and Google Drive appeared pre-listed with a warning triangle labeled 'needs authentication.' The user never connected these services. The accurate label would be 'not connected.' 'Needs authentication' implies a previously existing connection that lost authorization, prompting the user to fix something they never set up."}},{"@type":"Question","name":"What is Claude Tag and how does it affect organizational data?","acceptedAnswer":{"@type":"Answer","text":"Claude Tag, announced June 23, 2026, lets Slack workspace members invoke Claude via @Claude in any channel. When granted channel history access, Claude accumulates an ongoing model of organizational communication, decisions, and context. This context is not exportable and cannot be transferred to a competing AI provider."}},{"@type":"Question","name":"Can you export context accumulated by Claude Memory or Claude Tag?","acceptedAnswer":{"@type":"Answer","text":"There is currently no export mechanism for context accumulated through Claude Memory or Claude Tag. Unlike traditional enterprise software that stores structured data in exportable formats, Claude's accumulated context exists as model state within Anthropic's infrastructure and cannot be migrated to a competing AI provider."}}]}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-meta{font:400 14px/1 var(--sans);color:var(--muted);margin:0 0 2em;
+  display:flex;gap:18px;flex-wrap:wrap}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body blockquote cite{display:block;margin-top:.5em;font-style:normal;
+  font:400 14px/1.4 var(--sans);color:var(--muted)}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.post-body th{background:var(--code-bg);font:600 .96em var(--sans)}
+/* timeline */
+.timeline{border-left:2px solid var(--line);padding-left:1.5em;margin:0 0 1.4em}
+.tl-item{position:relative;margin-bottom:1.6em}
+.tl-item:last-child{margin-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-1.625em;top:.45em;
+  width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.tl-date{font:600 13px/1 var(--sans);color:var(--muted);margin-bottom:.25em}
+.tl-item h3{font:600 18px/1.3 var(--serif);margin:0 0 .35em}
+.tl-item p{margin:0;color:var(--ink2);font-size:.95em}
+/* mock ui */
+.mock-ui{background:#15130f;color:#ece3d1;border-radius:8px;
+  padding:0;margin:0 0 1.4em;overflow:hidden;font-size:13.5px;line-height:1.6;
+  font-family:var(--mono)}
+.mock-ui-bar{background:#1f1d19;padding:10px 14px;border-bottom:1px solid #2e2b25;
+  display:flex;align-items:center;gap:6px}
+.mock-ui-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.mock-ui-bar-title{font-size:11px;color:#6a6660;margin-left:6px}
+.mock-ui-section{padding:8px 14px 4px;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:#4a4840}
+.mock-ui-row{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 14px;border-top:1px solid #1e1c18}
+.mock-ui-svc{color:#9a9690}
+.mock-ui-badge{color:#f5a623;font-size:12px}
+.mock-label{font:400 12px/1 var(--sans);color:var(--muted);
+  margin:-.8em 0 .8em;font-style:italic}
+/* framing table override for clarity */
+.framing-table td:first-child{width:50%;font-weight:600}
+/* kicker */
+.kicker{margin-top:3em;padding-top:2em;border-top:1px solid var(--line);
+  font:600 clamp(18px,2.5vw,22px)/1.45 var(--serif);color:var(--ink)}
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+@media(max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px}
+  .site-nav > ul{flex-wrap:wrap;gap:5px}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > ul{position:absolute}
+}
+</style>
+<script src="/assets/nav.js?v=6" defer></script>
+<style>.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:28px}.foot-col ul{list-style:none;margin:0;padding:0}.foot-col li{margin:6px 0}.foot-col a{color:var(--muted);text-decoration:none;font-size:13px;line-height:1.5}.foot-col a:hover{color:var(--accent-ink)}.foot-hed{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}.foot-copy{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:13px}.foot-copy a{color:var(--muted);text-decoration:none}@media(max-width:700px){.foot-cols{grid-template-columns:repeat(2,1fr);gap:24px}}@media(max-width:400px){.foot-cols{grid-template-columns:1fr}}</style></head>
+<body>
+
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision &amp; the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+
+<main class="article">
+  <h1>Connector Creep: Anthropic's Expanding Data Access Model</h1>
+  <div class="post-meta">
+    <span>Joshua Opolko</span>
+    <span><time datetime="2026-06-27">June 27, 2026</time></span>
+    <span>Analysis</span>
+  </div>
+
+  <div class="post-body">
+
+<p>Anthropic has added data access capabilities to Claude products in five steps since 2023. Each feature ships with a clear user benefit. Taken together they describe a pattern: each release expands the surface of data Claude has access to, and some of that data becomes difficult to move away from once accumulated.</p>
+
+<h2>Key points</h2>
+
+<ul>
+<li><strong>Individual conversations (2023)</strong> are sent to Anthropic's servers under a standard hosted-service model, as disclosed in the terms of service.</li>
+<li><strong>Claude Memory (2024)</strong> turns a session-scoped tool into one that accumulates a personal profile over months: preferences, context, and prior conversation history.</li>
+<li><strong>Gmail, Google Calendar, and Google Drive connectors</strong> appeared in Claude Code's integrations panel without any user action, labeled as "&#9651; needs authentication" rather than "not connected."</li>
+<li><strong>Claude Tag (June 23, 2026)</strong> adds Claude as a persistent member of Slack workspaces, with access to channel history and ongoing organizational conversations.</li>
+<li><strong>Accumulated context is not exportable.</strong> Unlike structured enterprise data (CRM records, HR files), Claude's model context has no export format and cannot be migrated to a competing AI provider.</li>
+</ul>
+
+<h2>The timeline</h2>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-date">2023</div>
+    <h3>Individual conversations</h3>
+    <p>Claude.ai sends conversations to Anthropic's servers. Standard for any hosted AI service; disclosed in the terms of service.</p>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">2024</div>
+    <h3>Memory across sessions</h3>
+    <p>Claude Memory lets the assistant remember preferences, projects, and context between conversations. It also means a personal profile builds over months of use.</p>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">Early 2026</div>
+    <h3>Consumer connectors: Gmail, Google Calendar, Google Drive</h3>
+    <p>Three connector entries appeared in Claude Code's integrations panel without the user adding them. Each showed a warning prompting authentication. The user had not previously connected these services.</p>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">June 23, 2026</div>
+    <h3>Claude Tag for Slack</h3>
+    <p>Anthropic announced Claude Tag, which adds Claude as a persistent member of Slack workspaces. Organizations can grant Claude access to channel history, giving it an ongoing record of team communication and decisions.</p>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">The resulting position</div>
+    <h3>Context that cannot be exported</h3>
+    <p>An organization whose Claude has six months of channel history cannot transfer that context to a competing model. The switching cost is not contractual; it is the loss of accumulated organizational context.</p>
+  </div>
+</div>
+
+<h2>The connectors you did not add</h2>
+
+<p>In early 2026, Gmail, Google Calendar, and Google Drive appeared in Claude Code's integration panel. The user had not connected these services. Each entry showed a warning triangle labeled "needs authentication," as illustrated below.</p>
+
+<div class="mock-ui" role="img" aria-label="Illustrative mock of Claude Code integrations panel showing Gmail, Google Calendar, and Google Drive each labeled 'needs auth'">
+  <div class="mock-ui-bar">
+    <span class="mock-ui-dot" style="background:#e05050"></span>
+    <span class="mock-ui-dot" style="background:#e0a030"></span>
+    <span class="mock-ui-dot" style="background:#40a050"></span>
+    <span class="mock-ui-bar-title">Claude Code: Integrations</span>
+  </div>
+  <div class="mock-ui-section">Connected services</div>
+  <div class="mock-ui-row"><span class="mock-ui-svc">&#9993; Gmail</span><span class="mock-ui-badge">&#9651; needs auth</span></div>
+  <div class="mock-ui-row"><span class="mock-ui-svc">&#128197; Google Calendar</span><span class="mock-ui-badge">&#9651; needs auth</span></div>
+  <div class="mock-ui-row"><span class="mock-ui-svc">&#128193; Google Drive</span><span class="mock-ui-badge">&#9651; needs auth</span></div>
+</div>
+<p class="mock-label">Illustrative mock, not a screenshot.</p>
+
+<p>The framing matters. "Needs authentication" implies a previously existing connection that lost its authorization, like an expired OAuth token, prompting the user to fix something broken. "Not connected" accurately describes a service the user never authorized. Anthropic pre-populated the connector list and used error-state language to describe a status that was the result of a deliberate non-action.</p>
+
+<table class="framing-table">
+  <thead>
+    <tr><th>Label shown</th><th>What it implies</th><th>What is accurate</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&#9651; needs authentication</td>
+      <td>An existing connection has lost authorization and needs to be repaired</td>
+      <td>The user never connected this service</td>
+    </tr>
+    <tr>
+      <td>Not connected</td>
+      <td>This service is available but not yet authorized</td>
+      <td>Accurate description of the actual state</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If authorized, these connectors access full email history (Gmail), schedule and meeting patterns (Calendar), and documents the user shares with specific collaborators (Drive). The combination gives Claude a substantial picture of a user's professional life.</p>
+
+<h2>Claude Tag: persistent Slack membership</h2>
+
+<p>Claude Tag was announced June 23, 2026. It lets any Slack workspace member invoke Claude using <code>@Claude</code> in a channel. Administrators can grant Claude access to channel history, after which it accumulates ongoing context from team conversations.</p>
+
+<blockquote>
+  "once an organization's agents and monitoring run on Anthropic's managed infrastructure, switching costs increase significantly"
+  <cite>VentureBeat, analysis of Claude Tag launch, June 2026</cite>
+</blockquote>
+
+<p>The practical effect: a Claude with six months of a team's Slack history has context about decisions, priorities, personnel matters, and internal shorthand that is not captured in any formal knowledge base. That context cannot be exported or transferred to a competing model. Moving away from Claude means starting over.</p>
+
+<p>This differs from conventional enterprise software lock-in. Salesforce, Workday, and ServiceNow store structured records that can in principle be exported in standard formats (CSV, JSON, SQL). Claude's accumulated context exists as model state within Anthropic's infrastructure. There is no export schema because the "data" is not a record set.</p>
+
+<h2>What to watch for</h2>
+
+<ul>
+<li>When authenticating any Claude connector, note whether you are granting access to a service you actively chose to connect or one that appeared pre-listed.</li>
+<li>Claude Tag channel permissions determine what organizational context Claude accumulates. Narrower channel access means less context dependency over time.</li>
+<li>There is currently no mechanism to export context accumulated through Claude Memory or Claude Tag.</li>
+<li>The pattern described here is common in enterprise SaaS: each release makes the product more capable and more embedded. The question is whether the access expansion is proportionate to the disclosed use case.</li>
+</ul>
+
+<hr>
+
+<h2 id="faq">Questions</h2>
+
+<h3>What is connector creep?</h3>
+<p>Connector creep refers to the incremental expansion of an AI product's data access surface across successive product releases, where each step is presented as a discrete feature with a clear benefit, but the cumulative effect is access to a substantially wider range of personal or organizational data than any single disclosure described.</p>
+
+<h3>Can I opt out of Claude Memory?</h3>
+<p>Yes. Claude Memory can be disabled in Claude.ai account settings. Disabling it stops new memories from forming but does not delete existing ones. Anthropic provides a separate option to delete stored memories.</p>
+
+<h3>What data does Google Calendar give Claude access to?</h3>
+<p>When authorized, the Google Calendar connector gives Claude access to event titles, times, attendees, locations, and descriptions across your calendar history. This includes recurring meetings, one-on-one schedules, and any information entered in event fields.</p>
+
+<h3>Can organizations limit what Claude Tag accesses in Slack?</h3>
+<p>Administrators control which channels Claude Tag can access. Granting access only to specific project channels, rather than workspace-wide access, limits the scope of organizational context Claude accumulates.</p>
+
+<div class="kicker">
+  <p>"More useful" and "has access to everything about you" are the same sentence.</p>
+</div>
+
+  </div>
+</main>
+
+<footer class="site-foot"><p>&copy; Joshua Opolko</p></footer>
+
+</body>
+</html>
