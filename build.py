@@ -74,7 +74,6 @@ NAV_ITEMS = [
         ("VR Walkthroughs (AEC)","/vr-walkthrough-aec/"),
         ("VR Hardware Sizing",  "/vr-hardware-sizing-aec/"),
         ("cyubeVR",            "/cyubevr/"),
-        ("NeosVR",             "/neosvr/"),
         ("VR Visual Effects",  "/psychedelic-vr-visual-effects-meta-quest/"),
         ("VR Therapy",         "/vr-healing/"),
         ("VR Elderly Care",    "/revolutionizing-elderly-care-with-virtual-reality/"),
