@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>Self-Hosting n8n for LangChain AI Workflows: A Deployment Evaluation</title>
+  <meta content="Evaluating self-hosted n8n as a company LangChain platform: how the AI Agent nodes actually use LangChain, licensing, queue-mode scaling, resource sizing, data privacy, and when Flowise or Langflow fit better." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="Self-Hosting n8n for LangChain AI Workflows: A Deployment Evaluation" property="og:title"/>
+<meta content="Evaluating self-hosted n8n as a company LangChain platform: how the AI Agent nodes actually use LangChain, licensing, queue-mode scaling, resource sizing, data privacy, and when Flowise or Langflow fit better." property="og:description"/>
+<meta content="https://joshuaopolko.com/n8n-langchain-self-hosting/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="Tools" property="article:section"/>
+<meta content="2026-07-04T00:00:00+00:00" property="article:published_time"/>
+<meta content="2026-07-04T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Self-Hosting n8n for LangChain AI Workflows: A Deployment Evaluation" name="twitter:title"/>
+<meta content="How n8n's AI Agent nodes use LangChain, what self-hosting demands, and when a company should pick n8n over Flowise, Langflow, or Dify." name="twitter:description"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="10 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/n8n-langchain-self-hosting/" rel="canonical"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://joshuaopolko.com/#person",
+      "name": "Joshua Opolko",
+      "url": "https://joshuaopolko.com/",
+      "description": "Software developer and writer based in Toronto, specializing in AI tools, self-hosting, and immersive technology. Founder of NowServingTO.",
+      "sameAs": [
+        "https://github.com/jopolko",
+        "https://x.com/JoshuaOpolko",
+        "https://www.linkedin.com/in/joshua-opolko/",
+        "https://www.reddit.com/user/JoshuaOpolko/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://joshuaopolko.com/#website",
+      "url": "https://joshuaopolko.com/",
+      "name": "Joshua Opolko",
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://joshuaopolko.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/",
+            "name": "Self-Hosting n8n for LangChain AI Workflows"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/#webpage",
+      "url": "https://joshuaopolko.com/n8n-langchain-self-hosting/",
+      "name": "Self-Hosting n8n for LangChain AI Workflows: A Deployment Evaluation",
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/#website"
+      },
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/#breadcrumb"
+      },
+      "inLanguage": "en-US",
+      "datePublished": "2026-07-04T00:00:00+00:00",
+      "dateModified": "2026-07-04T00:00:00+00:00",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/#article",
+      "headline": "Self-Hosting n8n for LangChain AI Workflows: A Deployment Evaluation",
+      "description": "Evaluating self-hosted n8n as a company LangChain platform: how the AI Agent nodes actually use LangChain, licensing, queue-mode scaling, resource sizing, data privacy, and when Flowise or Langflow fit better.",
+      "datePublished": "2026-07-04T00:00:00+00:00",
+      "dateModified": "2026-07-04T00:00:00+00:00",
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/#webpage"
+      },
+      "inLanguage": "en-US",
+      "keywords": "n8n LangChain self-hosting, n8n deployment evaluation, n8n AI agent self-hosted, n8n company deployment, n8n queue mode, LangChain workflow automation",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      },
+      "wordCount": 1747
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://joshuaopolko.com/n8n-langchain-self-hosting/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does self-hosted n8n actually use LangChain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. n8n's AI capabilities (the AI Agent node, chain nodes, memory, vector store integrations, and the LangChain Code node) are built on LangChain.js and ship in the n8n-nodes-langchain package that is bundled with every self-hosted instance. Self-hosting n8n gives you a visual LangChain runtime without writing LangChain code, and the LangChain Code node exposes the underlying primitives when the visual nodes are not enough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is self-hosted n8n a good company platform for LangChain AI workflows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a strong fit when AI steps live inside broader business automations (webhooks, CRMs, databases, approvals) and the team wants visual workflows with code as an escape hatch. Evaluate four things before committing: the sustainable-use license (free self-hosting for internal use, but not for reselling n8n itself as a service), queue-mode architecture for scale (Redis plus Postgres plus worker containers), data privacy (everything can stay on your infrastructure, including models via Ollama or a LiteLLM proxy), and the fact that complex agent logic eventually wants the LangChain Code node or an external service."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What infrastructure does a production self-hosted n8n deployment need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A single Docker container with SQLite works for evaluation. Production means Postgres instead of SQLite, queue mode with Redis and one or more worker containers, a fixed N8N_ENCRYPTION_KEY managed as a secret, HTTPS behind a reverse proxy, and backups of the database plus the encryption key. A modest company deployment runs comfortably on 2-4 vCPUs and 4-8 GB of RAM; AI workloads shift the real load to the model provider, not to n8n itself."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should a company choose Flowise, Langflow, or Dify instead of n8n?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pick Flowise or Langflow when the product is the AI pipeline itself (chatbots, RAG apps) and you want purpose-built LangChain tooling with finer-grained control over chains and prompts. Pick Dify when you want an integrated LLM-app platform with built-in RAG, app hosting, and observability. Pick n8n when AI is one step among many in business automations that touch email, CRMs, spreadsheets, webhooks, and databases; nothing in the alternatives matches its 500-plus integration catalogue."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+
+/* header + nav */
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+/* article */
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+
+/* footer */
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+<script src="/assets/nav.js?v=6" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+<style id="nav-drop">.site-nav .has-sub > ul{display:flex;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s}.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:1;pointer-events:auto;transform:translateY(0)}@media(max-width:640px){.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:0;pointer-events:none;transform:translateY(-4px)}.site-nav .has-sub.open > ul{opacity:1;pointer-events:auto;transform:translateY(0)}}</style></head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>Self-Hosting n8n for LangChain AI Workflows: A Deployment Evaluation</h1>
+  <p style="color:var(--muted);font:400 14px/1.5 var(--sans);margin:.2em 0 1.4em">By Joshua Opolko &middot; Published July 4, 2026</p>
+  <div class="post-body">
+
+  <div style="background:var(--code-bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:18px 22px;margin:0 0 1.6em">
+    <strong>Short version:</strong> n8n's AI features are LangChain. The AI Agent node, chain nodes, memory, and vector store integrations are built on LangChain.js and ship with every self-hosted instance, so self-hosting n8n gives a company a visual LangChain runtime plus 500-odd business integrations, free under the sustainable-use license for internal use. It evaluates well when AI is one step inside broader automations, and poorly when the AI pipeline <em>is</em> the product; that's Flowise, Langflow, or Dify territory. Production means Postgres, queue mode with Redis workers, a pinned encryption key, and keeping model traffic on your own infrastructure via Ollama or a LiteLLM proxy.
+  </div>
+
+  <h2>Key takeaways</h2>
+  <ul>
+    <li><strong>n8n's AI layer is LangChain.js:</strong> the AI Agent, chain, memory, and vector store nodes come from n8n's bundled LangChain node package, and a LangChain Code node exposes the raw primitives when visual nodes run out.</li>
+    <li><strong>The license is the first gate:</strong> self-hosting is free for internal business use under the sustainable-use license; SSO, LDAP, environments, and log streaming sit behind the paid enterprise tier.</li>
+    <li><strong>Production shape is fixed:</strong> Postgres over SQLite, queue mode with Redis and workers for scale, pinned <code>N8N_ENCRYPTION_KEY</code>, HTTPS at a reverse proxy.</li>
+    <li><strong>AI hardly moves the hardware needle:</strong> n8n orchestrates; the tokens burn at the model provider. Keep it fully private by pointing the model nodes at Ollama or a LiteLLM proxy on your own boxes.</li>
+    <li><strong>Decision rule:</strong> AI inside business automations, pick n8n. AI pipeline as the product, pick a purpose-built LangChain tool.</li>
+  </ul>
+
+  <h2>What "n8n plus LangChain" actually means</h2>
+  <p>Companies evaluating this pairing often assume they'll be gluing two systems together. They won't: <strong>LangChain is already inside n8n</strong>. The advanced AI nodes that shipped with n8n 1.x (AI Agent, the LLM chain nodes, conversation memory, output parsers, vector store and embeddings integrations) are implemented on <a href="https://js.langchain.com/" rel="nofollow noopener" target="_blank">LangChain.js</a> and delivered through n8n's bundled LangChain node package. When you drag an AI Agent node onto the canvas and wire a model, memory, and tools into it, you are composing a LangChain agent visually.</p>
+  <p>Two consequences follow. First, the evaluation question is not "can n8n talk to LangChain" but "is a visual LangChain runtime with a giant integration catalogue the right shape for our AI workloads." Second, the ceiling is higher than the canvas suggests: the <strong>LangChain Code node</strong> lets you write LangChain.js directly inside a workflow, importing the same primitives the visual nodes use, so complex custom chains don't force you out of the platform on day one.</p>
+
+  <h2>The four things to evaluate before committing</h2>
+
+  <h3>1. Licensing</h3>
+  <p>n8n is not OSI open source; it ships under a <a href="https://docs.n8n.io/sustainable-use-license/" rel="nofollow noopener" target="_blank">sustainable-use license</a>. For the standard company case (self-hosting n8n to automate your own business, including AI workflows for internal teams) it is free with unlimited workflows and executions. What it forbids is reselling n8n itself as a hosted service. What it gates behind the paid enterprise tier: SSO/SAML, LDAP, multiple environments with Git-based deployment, log streaming, and external secrets integration. If your security team requires SSO on every internal tool, price that in before the pilot, not after.</p>
+
+  <h3>2. Deployment architecture</h3>
+  <p>The evaluation instance and the production instance are different animals:</p>
+  <table>
+    <thead><tr><th>Stage</th><th>Shape</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Evaluation</strong></td><td>Single Docker container, SQLite</td><td>Up in ten minutes; fine for a two-week pilot</td></tr>
+      <tr><td><strong>Small production</strong></td><td>Single container + Postgres</td><td>The minimum for anything a team depends on</td></tr>
+      <tr><td><strong>Scaled production</strong></td><td>Queue mode: main + Redis + N workers + Postgres</td><td>Webhook processors and workers scale horizontally; survives spiky load</td></tr>
+    </tbody>
+  </table>
+  <p>Non-negotiables at production: pin <code>N8N_ENCRYPTION_KEY</code> as a managed secret (it encrypts every stored credential; lose it and every credential is unrecoverable), terminate HTTPS at a reverse proxy, and back up Postgres together with that key. The full container setup, reverse proxy config, and upgrade discipline are covered step by step in the <a href="/n8n-self-hosted-guide/">main n8n self-hosting guide</a>.</p>
+
+  <h3>3. Data privacy, the actual reason companies self-host</h3>
+  <p>Self-hosting n8n keeps workflow data, credentials, and execution logs on your infrastructure. But an AI workflow leaks by default in a different place: the model call. An AI Agent node pointed at a cloud API ships your prompts, and whatever workflow data you templated into them, to that provider. The self-hosted answer has two tiers:</p>
+  <ul>
+    <li><strong>Fully private:</strong> point n8n's model nodes at <a href="/ollama/">Ollama</a> on your own GPU box. Nothing leaves the network. Model quality tops out at what open-weight models deliver, which in 2026 is genuinely good for classification, extraction, and internal RAG.</li>
+    <li><strong>Controlled egress:</strong> route every model call through a <a href="/litellm-proxy-guide/">LiteLLM proxy</a>. You get one OpenAI-compatible endpoint for all providers, per-team API keys, spend caps, logging, and a single choke point your security team can audit. n8n treats it as just another OpenAI-compatible model.</li>
+  </ul>
+  <p>This split (orchestrator private, model traffic governed) is the architecture most evaluations converge on, and it is the same pattern I run in production for <a href="/llm-etl-architecture/">an LLM-as-ETL pipeline</a>.</p>
+
+  <h3>4. Where the canvas ends</h3>
+  <p>Visual workflows are the selling point and the trap. Straightforward agent patterns (a tool-using agent over a vector store, a classification chain, a summarize-and-route flow) build in an afternoon and stay legible. Deeply custom logic (multi-agent orchestration, elaborate retrieval strategies, custom reranking) turns into node spaghetti. The honest evaluation criterion: if more than roughly a third of your planned AI logic needs the LangChain Code node, the visual layer is costing you more than it gives, and a code-first stack or a purpose-built tool fits better.</p>
+
+  <h2>Sizing: what the hardware evaluation misses</h2>
+  <p>Teams consistently overspec n8n and underspec everything around it. n8n itself is a Node.js orchestrator: <strong>2-4 vCPUs and 4-8 GB RAM</strong> runs a serious company instance, and queue-mode workers scale out rather than up. AI workflows barely change that, because the heavy compute happens wherever the model runs. What actually needs sizing:</p>
+  <ul>
+    <li><strong>The model host</strong>, if self-hosting models: GPU memory for the model you pick (an Ollama box, sized separately).</li>
+    <li><strong>Postgres</strong>: execution data grows fast with busy AI workflows (prompts and responses are stored in execution logs). Set data-pruning retention early; it's one environment variable and saves a disk incident later.</li>
+    <li><strong>The vector store</strong>, if doing RAG: Qdrant, pgvector, or similar, sized by embedding count, not by n8n's needs.</li>
+  </ul>
+
+  <h2>n8n vs the purpose-built LangChain tools</h2>
+  <table>
+    <thead><tr><th>Tool</th><th>Built for</th><th>Choose it when</th></tr></thead>
+    <tbody>
+      <tr><td><strong>n8n</strong></td><td>Business automation with AI steps inside</td><td>The workflow touches email, CRMs, sheets, webhooks, databases, and an LLM; one platform should own all of it</td></tr>
+      <tr><td><strong>Flowise</strong></td><td>Visual LangChain app builder</td><td>The AI pipeline is the product (chatbot, RAG app) and you want LangChain-native control</td></tr>
+      <tr><td><strong>Langflow</strong></td><td>Visual LangChain (Python) prototyping</td><td>Python-first team iterating on chain and agent designs before productionizing</td></tr>
+      <tr><td><strong>Dify</strong></td><td>Integrated LLM-app platform</td><td>You want RAG, app hosting, and observability in one self-hosted box; see the <a href="/dify-self-hosted-guide/">Dify guide</a></td></tr>
+      <tr><td><strong>LangChain in code</strong></td><td>Full control</td><td>Engineering team, complex agents, CI/CD; the visual layer would only be in the way</td></tr>
+    </tbody>
+  </table>
+  <p>The pattern in real deployments: companies run n8n <em>and</em> one of the others, with n8n owning the business-facing automations and calling the specialized AI service over HTTP when a pipeline outgrows the canvas. That is a feature of the architecture, not a failure of the evaluation. For n8n against general-purpose workflow rivals, see <a href="/n8n-vs-windmill/">n8n vs Windmill</a>.</p>
+
+  <h2>A two-week evaluation plan that actually answers the question</h2>
+  <ol>
+    <li><strong>Days 1-2:</strong> single-container n8n with Postgres, behind your reverse proxy. Wire one model provider through LiteLLM even in the pilot, so the governance story gets tested, not assumed.</li>
+    <li><strong>Days 3-7:</strong> build the two workflows you actually plan to run, not demos. One business automation with an AI step (classify, extract, summarize), one agent with a tool and memory. Have the intended maintainers build them, not the strongest engineer.</li>
+    <li><strong>Days 8-10:</strong> break things. Kill the container mid-execution, restore Postgres from backup, rotate a credential, upgrade the n8n version. The operational story is the evaluation.</li>
+    <li><strong>Days 11-14:</strong> decide against the four gates above: license fit, architecture fit, privacy posture, canvas ceiling. If more than one gate is uncomfortable, run the comparison table before committing.</li>
+  </ol>
+
+  <h2>Frequently asked questions</h2>
+  <h3>Does self-hosted n8n actually use LangChain?</h3>
+  <p>Yes. The AI Agent node, chain nodes, memory, output parsers, and vector store integrations are built on LangChain.js and ship with every self-hosted n8n instance via the bundled LangChain node package. The LangChain Code node additionally exposes the underlying primitives for custom chains, so the visual nodes are a starting point rather than a ceiling.</p>
+  <h3>Is self-hosted n8n free for company use?</h3>
+  <p>Yes for internal business automation, under n8n's sustainable-use license, with unlimited workflows and executions. You cannot resell n8n itself as a service, and enterprise features (SSO/SAML, LDAP, environments, log streaming, external secrets) require the paid tier. If SSO is mandatory for internal tools at your company, include that cost in the evaluation.</p>
+  <h3>What does a production self-hosted n8n deployment look like?</h3>
+  <p>Postgres instead of SQLite, queue mode with Redis and worker containers for scale, a pinned N8N_ENCRYPTION_KEY stored as a managed secret, HTTPS at a reverse proxy, execution-data pruning configured, and backups covering both the database and the encryption key. n8n itself runs comfortably on 2-4 vCPUs and 4-8 GB RAM; model hosting and vector stores are sized separately.</p>
+  <h3>Can n8n AI workflows run fully on-premise with no cloud model calls?</h3>
+  <p>Yes. Point the model nodes at Ollama running on your own hardware, or route through a self-hosted LiteLLM proxy when you need multiple providers behind one governed, OpenAI-compatible endpoint. The orchestrator, credentials, execution data, and model traffic then all stay on infrastructure you control.</p>
+  <h3>When is n8n the wrong choice for LangChain workloads?</h3>
+  <p>When the AI pipeline is the product rather than a step in a business process, when most planned logic would live in the LangChain Code node anyway, or when an engineering team wants CI/CD-managed code rather than visual workflows. Flowise, Langflow, Dify, or plain LangChain in code fit those cases better, and hybrid deployments (n8n calling a specialized AI service) are common and sane.</p>
+
+  <p style="margin-top:2em;font-size:.92em;color:var(--muted)">Written by Joshua Opolko. I self-host n8n alongside Ollama, LiteLLM, and Dify, and run a production LLM pipeline (Claude Haiku classification and web-search verification) that powers a public directory site. License terms and enterprise feature gating are as published by n8n and verified July 2026; confirm current terms with n8n before purchase decisions.</p>
+
+  <nav class="related-guides" aria-label="Related"><h2>Related</h2><ul><li><a href="/n8n-self-hosted-guide/">n8n self-hosted guide</a>, the full container, reverse proxy, and hardening walkthrough.</li><li><a href="/n8n-vs-windmill/">n8n vs Windmill</a>, how n8n stacks against a code-first workflow rival.</li><li><a href="/litellm-proxy-guide/">LiteLLM proxy guide</a>, the governed model-gateway pattern this evaluation recommends.</li><li><a href="/ollama/">Ollama</a>, fully private model hosting for the no-egress tier.</li><li><a href="/llm-etl-architecture/">LLM-as-ETL architecture</a>, a production case study of LLM steps inside a data pipeline.</li></ul></nav>
+  </div>
+</main>
+<footer class="site-foot"><p>&copy; Joshua Opolko</p></footer>
+</body>
+</html>

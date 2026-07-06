@@ -1,0 +1,14 @@
+# ai.txt - AI agent permissions for joshuaopolko.com
+# Format: https://aitxt.io
+
+User-agent: *
+Allow: /
+
+Training: allowed
+Search: allowed
+Summary: allowed
+Citation: allowed
+
+Owner: Joshua Opolko
+Contact: mjopolko@gmail.com
+Site: https://joshuaopolko.com

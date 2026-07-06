@@ -37,7 +37,175 @@
 <meta content="Time to read" name="twitter:label2"/>
 <meta content="11 minutes" name="twitter:data2"/>
 <link href="https://joshuaopolko.com/crewai-setup-production-guide/" rel="canonical"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"}},{"@type":"ImageObject","@id":"https://joshuaopolko.com/assets/crewai-hero.jpg","url":"https://joshuaopolko.com/assets/crewai-hero.jpg","width":"1200","height":"630"},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/crewai-setup-production-guide/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/","name":"CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/crewai-setup-production-guide/#webpage","url":"https://joshuaopolko.com/crewai-setup-production-guide/","name":"CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"author":{"@id":"https://joshuaopolko.com/#person"},"breadcrumb":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/#breadcrumb"},"inLanguage":"en-US","primaryImageOfPage":{"@id":"https://joshuaopolko.com/assets/crewai-hero.jpg"},"datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"BlogPosting","@id":"https://joshuaopolko.com/crewai-setup-production-guide/#article","headline":"CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives","description":"Install CrewAI in 2026 with the exact uv and pip commands, then fix the production problems people actually hit: runaway tool-calling loops, slow crews, black-box prompts, memory at scale, and choosing between CrewAI, LangGraph, AutoGen/AG2, Agno and PydanticAI.","datePublished":"2026-06-13T16:00:00+00:00","dateModified":"2026-06-13T16:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/crewai-setup-production-guide/#webpage"},"inLanguage":"en-US","image":{"@id":"https://joshuaopolko.com/assets/crewai-hero.jpg"},"keywords":"crewai, crewai setup, crewai install, crewai vs langgraph, crewai production, crewai observability, multi-agent framework, ai agents 2026","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"HowTo","@id":"https://joshuaopolko.com/crewai-setup-production-guide/#howto","name":"How to self-host CrewAI","description":"Step-by-step guide to installing and running CrewAI on your own server or local machine.","step":[{"@type":"HowToStep","position":1,"name":"Check Python version","text":"Verify you have Python 3.10 or higher (and below 3.14) installed by running python3 --version in your terminal."},{"@type":"HowToStep","position":2,"name":"Install uv package manager","text":"Run the uv installer script for macOS or Linux, or use the PowerShell command on Windows, to get Astral's uv dependency manager."},{"@type":"HowToStep","position":3,"name":"Install the CrewAI CLI","text":"Run uv tool install crewai to install the CrewAI command-line tool, then run uv tool update-shell if the crewai command is not found on your PATH."},{"@type":"HowToStep","position":4,"name":"Scaffold a new crew project","text":"Run crewai create crew my_first_crew to generate a project directory with agents.yaml, tasks.yaml, crew.py, and a .env file for your keys."},{"@type":"HowToStep","position":5,"name":"Add your API key","text":"Open the generated .env file and set your model provider key, for example OPENAI_API_KEY and MODEL=gpt-4o, for any supported provider."},{"@type":"HowToStep","position":6,"name":"Install project dependencies","text":"Run crewai install inside the project directory to create the local environment and install all required packages."},{"@type":"HowToStep","position":7,"name":"Run the crew","text":"Execute crewai run to start the crew and confirm everything is working correctly."}]}]}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://joshuaopolko.com/#person",
+      "name": "Joshua Opolko",
+      "url": "https://joshuaopolko.com/",
+      "description": "Software developer and writer based in Toronto, specializing in AI tools, self-hosting, and immersive technology. Founder of NowServingTO.",
+      "sameAs": [
+        "https://github.com/jopolko",
+        "https://x.com/JoshuaOpolko",
+        "https://www.linkedin.com/in/joshua-opolko/",
+        "https://www.reddit.com/user/JoshuaOpolko/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://joshuaopolko.com/#website",
+      "url": "https://joshuaopolko.com/",
+      "name": "Joshua Opolko",
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://joshuaopolko.com/assets/crewai-hero.jpg",
+      "url": "https://joshuaopolko.com/assets/crewai-hero.jpg",
+      "width": "1200",
+      "height": "630"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://joshuaopolko.com/crewai-setup-production-guide/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://joshuaopolko.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://joshuaopolko.com/crewai-setup-production-guide/",
+            "name": "CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joshuaopolko.com/crewai-setup-production-guide/#webpage",
+      "url": "https://joshuaopolko.com/crewai-setup-production-guide/",
+      "name": "CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives",
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/#website"
+      },
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://joshuaopolko.com/crewai-setup-production-guide/#breadcrumb"
+      },
+      "inLanguage": "en-US",
+      "primaryImageOfPage": {
+        "@id": "https://joshuaopolko.com/assets/crewai-hero.jpg"
+      },
+      "datePublished": "2026-06-13T16:00:00+00:00",
+      "dateModified": "2026-06-13T16:00:00+00:00",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://joshuaopolko.com/crewai-setup-production-guide/#article",
+      "headline": "CrewAI Setup Guide and Production Fixes (2026): Install, Observability, Alternatives",
+      "description": "Install CrewAI in 2026 with the exact uv and pip commands, then fix the production problems people actually hit: runaway tool-calling loops, slow crews, black-box prompts, memory at scale, and choosing between CrewAI, LangGraph, AutoGen/AG2, Agno and PydanticAI.",
+      "datePublished": "2026-06-13T16:00:00+00:00",
+      "dateModified": "2026-06-13T16:00:00+00:00",
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/crewai-setup-production-guide/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://joshuaopolko.com/crewai-setup-production-guide/#webpage"
+      },
+      "inLanguage": "en-US",
+      "image": {
+        "@id": "https://joshuaopolko.com/assets/crewai-hero.jpg"
+      },
+      "keywords": "crewai, crewai setup, crewai install, crewai vs langgraph, crewai production, crewai observability, multi-agent framework, ai agents 2026",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      },
+      "wordCount": 2561
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://joshuaopolko.com/crewai-setup-production-guide/#howto",
+      "name": "How to self-host CrewAI",
+      "description": "Step-by-step guide to installing and running CrewAI on your own server or local machine.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Check Python version",
+          "text": "Verify you have Python 3.10 or higher (and below 3.14) installed by running python3 --version in your terminal."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Install uv package manager",
+          "text": "Run the uv installer script for macOS or Linux, or use the PowerShell command on Windows, to get Astral's uv dependency manager."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Install the CrewAI CLI",
+          "text": "Run uv tool install crewai to install the CrewAI command-line tool, then run uv tool update-shell if the crewai command is not found on your PATH."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Scaffold a new crew project",
+          "text": "Run crewai create crew my_first_crew to generate a project directory with agents.yaml, tasks.yaml, crew.py, and a .env file for your keys."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Add your API key",
+          "text": "Open the generated .env file and set your model provider key, for example OPENAI_API_KEY and MODEL=gpt-4o, for any supported provider."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Install project dependencies",
+          "text": "Run crewai install inside the project directory to create the local environment and install all required packages."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 7,
+          "name": "Run the crew",
+          "text": "Execute crewai run to start the crew and confirm everything is working correctly."
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
@@ -132,7 +300,7 @@ figure.hero{margin:0 0 1.8em}
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>CrewAI Setup Guide and Production Fixes (2026): Install, Observability, and Alternatives</h1>

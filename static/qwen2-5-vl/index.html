@@ -30,7 +30,158 @@
 <meta content="Time to read" name="twitter:label2"/>
 <meta content="8 minutes" name="twitter:data2"/>
 <link href="https://joshuaopolko.com/qwen2-5-vl/" rel="canonical"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/"},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"}},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/qwen2-5-vl/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/qwen2-5-vl/","name":"Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/qwen2-5-vl/#webpage","url":"https://joshuaopolko.com/qwen2-5-vl/","name":"Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"author":{"@id":"https://joshuaopolko.com/#person"},"breadcrumb":{"@id":"https://joshuaopolko.com/qwen2-5-vl/#breadcrumb"},"inLanguage":"en-US","datePublished":"2026-06-27T12:00:00+00:00","dateModified":"2026-06-27T12:00:00+00:00","speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"BlogPosting","@id":"https://joshuaopolko.com/qwen2-5-vl/#article","headline":"Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs","description":"Qwen2.5-VL reads real-world text from images through pure visual inference, no external database. Run the 7B model on a gaming GPU. OCRBench 864 vs GPT-4o-mini 785. First-person results.","datePublished":"2026-06-27T12:00:00+00:00","dateModified":"2026-06-27T12:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/qwen2-5-vl/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/qwen2-5-vl/#webpage"},"inLanguage":"en-US","keywords":"qwen2.5-vl, local vision model, vision language model, ocr local, run vision model locally, qwen vision, ollama vision, license plate ocr"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Qwen2.5-VL?","acceptedAnswer":{"@type":"Answer","text":"Qwen2.5-VL is a vision-language model released by Alibaba's Qwen team in January 2025. It comes in 3B, 7B, and 72B parameter sizes and is licensed Apache 2.0. It reads and reasons about images without any external database or specialized OCR pipeline, using only what it learned during training."}},{"@type":"Question","name":"Can Qwen2.5-VL read license plates?","acceptedAnswer":{"@type":"Answer","text":"Yes. Qwen2.5-VL can read license plate numbers, serial numbers, street signs, and other real-world text directly from images. It does not look up a plate database — it recognizes the characters visually, the same way a person would. The 7B model handles this reliably."}},{"@type":"Question","name":"How does Qwen2.5-VL compare to GPT-4o mini on text recognition?","acceptedAnswer":{"@type":"Answer","text":"Qwen2.5-VL 7B scores 864 on OCRBench versus GPT-4o-mini's 785. On DocVQA, it scores 95.7% versus MiniCPM-o 2.6's 93%. It outperforms GPT-4o-mini on document and scene text tasks while running locally at zero API cost."}},{"@type":"Question","name":"What GPU do you need to run Qwen2.5-VL locally?","acceptedAnswer":{"@type":"Answer","text":"The 3B model needs about 3GB of VRAM and runs on most recent gaming GPUs. The 7B model needs 5-6GB of VRAM — an RTX 3060 12GB or RTX 2080 is comfortable. The 72B model needs roughly 45GB of VRAM and requires a high-end workstation or multi-GPU setup."}},{"@type":"Question","name":"How do you run Qwen2.5-VL with Ollama?","acceptedAnswer":{"@type":"Answer","text":"Run: ollama run qwen2.5-vl:7b to pull and start the 7B model. To pass an image, use the Ollama API with a base64-encoded image in the messages array, or use Open WebUI which has built-in image upload."}},{"@type":"Question","name":"Is Qwen2.5-VL free to use commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes. Qwen2.5-VL is released under the Apache 2.0 license, which permits commercial use. All three size variants (3B, 7B, 72B) carry the same license."}}]}]}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://joshuaopolko.com/#person",
+      "name": "Joshua Opolko",
+      "url": "https://joshuaopolko.com/",
+      "description": "Software developer and writer based in Toronto, specializing in AI tools, self-hosting, and immersive technology. Founder of NowServingTO.",
+      "sameAs": [
+        "https://github.com/jopolko",
+        "https://x.com/JoshuaOpolko",
+        "https://www.linkedin.com/in/joshua-opolko/",
+        "https://www.reddit.com/user/JoshuaOpolko/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://joshuaopolko.com/#website",
+      "url": "https://joshuaopolko.com/",
+      "name": "Joshua Opolko",
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://joshuaopolko.com/qwen2-5-vl/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://joshuaopolko.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://joshuaopolko.com/qwen2-5-vl/",
+            "name": "Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joshuaopolko.com/qwen2-5-vl/#webpage",
+      "url": "https://joshuaopolko.com/qwen2-5-vl/",
+      "name": "Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs",
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/#website"
+      },
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://joshuaopolko.com/qwen2-5-vl/#breadcrumb"
+      },
+      "inLanguage": "en-US",
+      "datePublished": "2026-06-27T12:00:00+00:00",
+      "dateModified": "2026-06-27T12:00:00+00:00",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://joshuaopolko.com/qwen2-5-vl/#article",
+      "headline": "Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs",
+      "description": "Qwen2.5-VL reads real-world text from images through pure visual inference, no external database. Run the 7B model on a gaming GPU. OCRBench 864 vs GPT-4o-mini 785. First-person results.",
+      "datePublished": "2026-06-27T12:00:00+00:00",
+      "dateModified": "2026-06-27T12:00:00+00:00",
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/qwen2-5-vl/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://joshuaopolko.com/qwen2-5-vl/#webpage"
+      },
+      "inLanguage": "en-US",
+      "keywords": "qwen2.5-vl, local vision model, vision language model, ocr local, run vision model locally, qwen vision, ollama vision, license plate ocr",
+      "wordCount": 2051
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Qwen2.5-VL?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Qwen2.5-VL is a vision-language model released by Alibaba's Qwen team in January 2025. It comes in 3B, 7B, and 72B parameter sizes and is licensed Apache 2.0. It reads and reasons about images without any external database or specialized OCR pipeline, using only what it learned during training."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Qwen2.5-VL read license plates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Qwen2.5-VL can read license plate numbers, serial numbers, street signs, and other real-world text directly from images. It does not look up a plate database — it recognizes the characters visually, the same way a person would. The 7B model handles this reliably."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Qwen2.5-VL compare to GPT-4o mini on text recognition?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Qwen2.5-VL 7B scores 864 on OCRBench versus GPT-4o-mini's 785. On DocVQA, it scores 95.7% versus MiniCPM-o 2.6's 93%. It outperforms GPT-4o-mini on document and scene text tasks while running locally at zero API cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What GPU do you need to run Qwen2.5-VL locally?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 3B model needs about 3GB of VRAM and runs on most recent gaming GPUs. The 7B model needs 5-6GB of VRAM — an RTX 3060 12GB or RTX 2080 is comfortable. The 72B model needs roughly 45GB of VRAM and requires a high-end workstation or multi-GPU setup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you run Qwen2.5-VL with Ollama?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Run: ollama run qwen2.5-vl:7b to pull and start the 7B model. To pass an image, use the Ollama API with a base64-encoded image in the messages array, or use Open WebUI which has built-in image upload."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Qwen2.5-VL free to use commercially?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Qwen2.5-VL is released under the Apache 2.0 license, which permits commercial use. All three size variants (3B, 7B, 72B) carry the same license."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
@@ -131,7 +282,7 @@ img{max-width:100%;height:auto}
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/walkable-1-1-scale-room-three-js-webxr-architecture-demo/">Walkable 1:1 Room</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1 class="post-title">Qwen2.5-VL: The Local Vision Model That Reads License Plates, Serial Numbers, and Street Signs</h1>

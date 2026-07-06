@@ -9,10 +9,11 @@ Usage:
   python3 build.py syncnav          # push NAV_ITEMS into the <nav> of every page (surgical, nav-only)
   python3 build.py syncfooter       # push NAV_ITEMS link map into the <footer> of every page (surgical)
   python3 build.py retemplate       # re-apply PAGE_TMPL to all static pages (preserves SEO head + body)
+  python3 build.py schema_fix       # inject Person description/sameAs, wordCount, og:image across all pages
 
 To add a page to the site-wide nav: edit NAV_ITEMS, run `syncnav`, then deploy changed pages.
 """
-import re, os, sys, html, urllib.parse, datetime
+import re, os, sys, html, urllib.parse, datetime, json
 from pathlib import Path
 from bs4 import BeautifulSoup
 import inline_css  # inlines site.css so fresh builds aren't render-blocking
@@ -20,6 +21,17 @@ import inline_css  # inlines site.css so fresh builds aren't render-blocking
 SITE = "https://joshuaopolko.com"
 OUT  = str(Path(__file__).resolve().parent / "static")
 UA   = {"User-Agent": "Mozilla/5.0"}
+
+# Canonical Person entity fields added to every page that references #person.
+PERSON_ID          = "https://joshuaopolko.com/#person"
+PERSON_DESCRIPTION = ("Software developer and writer based in Toronto, specializing in "
+                      "AI tools, self-hosting, and immersive technology. Founder of NowServingTO.")
+PERSON_SAME_AS     = [
+    "https://github.com/jopolko",
+    "https://x.com/JoshuaOpolko",
+    "https://www.linkedin.com/in/joshua-opolko/",
+    "https://www.reddit.com/user/JoshuaOpolko/",
+]
 
 # ---- navigation (hardcoded — edit here when adding pages to the menu) ----
 NAV_ITEMS = [
@@ -35,12 +47,14 @@ NAV_ITEMS = [
         ("LibreChat",               "/librechat-self-hosted-guide/"),
         ("LiteLLM",                 "/litellm-proxy-guide/"),
         ("n8n",                     "/n8n-self-hosted-guide/"),
+        ("n8n + LangChain",         "/n8n-langchain-self-hosting/"),
         ("Dify",                    "/dify-self-hosted-guide/"),
         ("Vane",                    "/perplexica-self-hosted-guide/"),
         ("SearXNG",                 "/searxng-self-hosted-guide/"),
         ("Agent Zero",              "/agent-zero/"),
     ]),
     ("AI & GEO", "#", [
+        ("AI Readiness Scan",       "/aiscan/"),
         ("CrewAI",                  "/crewai-setup-production-guide/"),
         ("Building JOSIE",          "/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/"),
         ("Site as AI Infrastructure","/ai-infrastructure/"),
@@ -56,7 +70,9 @@ NAV_ITEMS = [
     ]),
     ("XR", "#", [
         ("Architectural Viz",  "/architectural-visualization/"),
-        ("Walkable 1:1 Room",   "/walkable-1-1-scale-room-three-js-webxr-architecture-demo/"),
+        ("VR for Growing Teams","/vr-visualization-growing-teams/"),
+        ("VR Walkthroughs (AEC)","/vr-walkthrough-aec/"),
+        ("VR Hardware Sizing",  "/vr-hardware-sizing-aec/"),
         ("cyubeVR",            "/cyubevr/"),
         ("NeosVR",             "/neosvr/"),
         ("VR Visual Effects",  "/psychedelic-vr-visual-effects-meta-quest/"),
@@ -176,6 +192,7 @@ STATIC_URLS = [
     ("https://joshuaopolko.com/kidsevents/methodology/",  "daily"),
     ("https://joshuaopolko.com/hometurf/",                "weekly"),
     ("https://joshuaopolko.com/geo-observatory/",         "daily"),
+    ("https://joshuaopolko.com/aiscan/",                   "weekly"),
 ]
 
 def write_sitemap():
@@ -339,6 +356,132 @@ def retemplate_one(path):
     open(fpath, "w").write(page)
     return True
 
+_SCHEMA_PAT = re.compile(
+    r'(<script[^>]+type="application/ld\+json"[^>]*>)(.*?)(</script>)',
+    re.DOTALL
+)
+
+def _body_word_count(txt):
+    soup = BeautifulSoup(txt, "html.parser")
+    region = soup.find(class_="post-body") or soup.find("main")
+    if not region:
+        return None
+    return len(region.get_text(separator=" ").split())
+
+def schema_fix():
+    """Surgical pass over every static page:
+    - Person nodes missing description or sameAs get them injected.
+    - Article/BlogPosting nodes missing wordCount get a word count from the page body.
+    - Pages missing og:image get it derived from any schema ImageObject on the same page.
+    Pages with no image at all (no schema ImageObject) are reported for manual follow-up.
+    """
+    targets = []
+    root = Path(OUT) / "index.html"
+    if root.exists():
+        targets.append(root)
+    for entry in sorted(Path(OUT).iterdir()):
+        if entry.is_dir() and (entry / "index.html").exists():
+            targets.append(entry / "index.html")
+
+    changed = []
+    needs_og_image = []
+    person_fixed = wc_fixed = og_fixed = 0
+
+    for f in targets:
+        txt = f.read_text()
+        wc = _body_word_count(txt)
+
+        p_delta = [0]
+        w_delta = [0]
+
+        def fix_block(m, _wc=wc, _pd=p_delta, _wd=w_delta):
+            open_tag, content, close_tag = m.group(1), m.group(2), m.group(3)
+            try:
+                data = json.loads(content)
+            except json.JSONDecodeError:
+                return m.group(0)
+
+            block_changed = False
+            if isinstance(data, dict) and "@graph" in data:
+                for node in data["@graph"]:
+                    if node.get("@type") == "Person" and node.get("@id") == PERSON_ID:
+                        if "description" not in node:
+                            node["description"] = PERSON_DESCRIPTION
+                            block_changed = True
+                            _pd[0] += 1
+                        if "sameAs" not in node:
+                            node["sameAs"] = PERSON_SAME_AS
+                            block_changed = True
+                    if node.get("@type") in ("Article", "BlogPosting") and "wordCount" not in node and _wc:
+                        node["wordCount"] = _wc
+                        block_changed = True
+                        _wd[0] += 1
+
+            if block_changed:
+                return open_tag + "\n" + json.dumps(data, indent=2, ensure_ascii=False) + "\n" + close_tag
+            return m.group(0)
+
+        new_txt = _SCHEMA_PAT.sub(fix_block, txt)
+        person_fixed += p_delta[0]
+        wc_fixed += w_delta[0]
+
+        # og:image: add from schema ImageObject if the page has no og:image yet.
+        if not re.search(r"og:image", new_txt, re.IGNORECASE):
+            img_url = img_w = img_h = None
+            for m in _SCHEMA_PAT.finditer(new_txt):
+                try:
+                    data = json.loads(m.group(2))
+                    if isinstance(data, dict) and "@graph" in data:
+                        for node in data["@graph"]:
+                            if node.get("@type") == "ImageObject":
+                                img_url = node.get("url")
+                                img_w = node.get("width")
+                                img_h = node.get("height")
+                                break
+                except json.JSONDecodeError:
+                    pass
+                if img_url:
+                    break
+
+            if img_url:
+                tags = [
+                    f'<meta content="{img_url}" property="og:image"/>',
+                    f'<meta content="{img_url}" property="og:image:secure_url"/>',
+                ]
+                if img_w:
+                    tags.append(f'<meta content="{img_w}" property="og:image:width"/>')
+                if img_h:
+                    tags.append(f'<meta content="{img_h}" property="og:image:height"/>')
+                tags.append(f'<meta content="{img_url}" name="twitter:image"/>')
+                insert = "\n".join(tags) + "\n"
+
+                # Place after the last og:/twitter: meta in <head>, else before </head>.
+                last_og = None
+                for m in re.finditer(r'<meta[^>]+(?:property|name)="(?:og:|twitter:)[^"]*"[^>]*>', new_txt):
+                    last_og = m
+                if last_og:
+                    pos = last_og.end()
+                    new_txt = new_txt[:pos] + "\n" + insert + new_txt[pos:]
+                else:
+                    new_txt = new_txt.replace("</head>", insert + "</head>", 1)
+
+                og_fixed += 1
+            else:
+                slug = f.parent.name if f.parent != Path(OUT) else "index"
+                needs_og_image.append(slug)
+
+        if new_txt != txt:
+            f.write_text(new_txt)
+            slug = f.parent.name if f.parent != Path(OUT) else "index"
+            changed.append(slug)
+
+    return changed, needs_og_image, {
+        "person_fixed": person_fixed,
+        "wc_fixed": wc_fixed,
+        "og_fixed": og_fixed,
+    }
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     cmd = sys.argv[1] if sys.argv[1:] else "help"
@@ -376,6 +519,19 @@ if __name__ == "__main__":
         write_sitemap()
         write_robots()
         print(f"\nDone: {done} pages retemplated")
+
+    elif cmd == "schema_fix":
+        changed, needs_og, stats = schema_fix()
+        for slug in changed:
+            print(f"  fixed: {slug}")
+        if needs_og:
+            print(f"\nNeeds manual og:image ({len(needs_og)} pages — no image asset found):")
+            for slug in needs_og:
+                print(f"  {slug}")
+        print(f"\nDone: {len(changed)} files updated")
+        print(f"  Person description/sameAs: {stats['person_fixed']} nodes")
+        print(f"  wordCount: {stats['wc_fixed']} articles")
+        print(f"  og:image from schema ImageObject: {stats['og_fixed']} pages")
 
     else:
         print(__doc__)

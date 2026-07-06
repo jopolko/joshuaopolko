@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, Servers</title>
+  <meta content="Exactly how many workstations, GPUs, servers, and headsets a 30-person AEC firm needs for VR rendering, with worked bills of materials for the three deployment models and scaling rules for 10 and 50 seats." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, Servers" property="og:title"/>
+<meta content="Exactly how many workstations, GPUs, servers, and headsets a 30-person AEC firm needs for VR rendering, with worked bills of materials for the three deployment models and scaling rules for 10 and 50 seats." property="og:description"/>
+<meta content="https://joshuaopolko.com/vr-hardware-sizing-aec/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="XR" property="article:section"/>
+<meta content="https://joshuaopolko.com/assets/architectural-visualization-hero.jpg" property="og:image"/>
+<meta content="https://joshuaopolko.com/assets/architectural-visualization-hero.jpg" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="A photorealistic render of a modern multi-storey concrete-and-glass building at golden hour" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="2026-07-02T00:00:00+00:00" property="article:published_time"/>
+<meta content="2026-07-02T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, Servers" name="twitter:title"/>
+<meta content="How many workstations, GPUs, servers, and headsets a 30-person AEC firm actually needs for VR, with worked bills of materials per deployment model." name="twitter:description"/>
+<meta content="https://joshuaopolko.com/assets/architectural-visualization-hero.jpg" name="twitter:image"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="10 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/vr-hardware-sizing-aec/" rel="canonical"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://joshuaopolko.com/#person",
+      "name": "Joshua Opolko",
+      "url": "https://joshuaopolko.com/",
+      "description": "Software developer and writer based in Toronto, specializing in AI tools, self-hosting, and immersive technology. Founder of NowServingTO.",
+      "sameAs": [
+        "https://github.com/jopolko",
+        "https://x.com/JoshuaOpolko",
+        "https://www.linkedin.com/in/joshua-opolko/",
+        "https://www.reddit.com/user/JoshuaOpolko/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://joshuaopolko.com/#website",
+      "url": "https://joshuaopolko.com/",
+      "name": "Joshua Opolko",
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://joshuaopolko.com/assets/architectural-visualization-hero.jpg",
+      "url": "https://joshuaopolko.com/assets/architectural-visualization-hero.jpg",
+      "width": "1200",
+      "height": "630"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://joshuaopolko.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/",
+            "name": "VR Hardware Sizing for a 30-Person Architecture Firm"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/#webpage",
+      "url": "https://joshuaopolko.com/vr-hardware-sizing-aec/",
+      "name": "VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, Servers",
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/#website"
+      },
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/#breadcrumb"
+      },
+      "inLanguage": "en-US",
+      "primaryImageOfPage": {
+        "@id": "https://joshuaopolko.com/assets/architectural-visualization-hero.jpg"
+      },
+      "datePublished": "2026-07-02T00:00:00+00:00",
+      "dateModified": "2026-07-02T00:00:00+00:00",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/#article",
+      "headline": "VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, Servers",
+      "description": "Exactly how many workstations, GPUs, servers, and headsets a 30-person AEC firm needs for VR rendering, with worked bills of materials for the three deployment models and scaling rules for 10 and 50 seats.",
+      "datePublished": "2026-07-02T00:00:00+00:00",
+      "dateModified": "2026-07-02T00:00:00+00:00",
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "isPartOf": {
+        "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/#webpage"
+      },
+      "inLanguage": "en-US",
+      "image": {
+        "@id": "https://joshuaopolko.com/assets/architectural-visualization-hero.jpg"
+      },
+      "keywords": "VR hardware sizing architecture firm, how many GPUs VR rendering team, VR workstation requirements AEC, VR server requirements architecture, Enscape GPU requirements, VR headset fleet sizing",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      },
+      "wordCount": 1879
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://joshuaopolko.com/vr-hardware-sizing-aec/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many VR-capable workstations does a 30-person architecture firm need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Six to ten, not thirty. In a typical 30-person studio only 20 to 30 percent of seats author real-time visualization; the rest do production BIM work that runs fine on standard workstations. Kit 6 to 10 seats with RTX 4070 Super class GPUs or better, give 1 or 2 power seats an RTX 4090 or RTX 6000 Ada class card for the heaviest models, and leave the remaining 20 or so seats on standard BIM hardware."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you need a server for architectural VR rendering?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually no. In-app tools like Enscape and Twinmotion render on the local workstation GPU. Streaming platforms like Resolve and Autodesk Workshop XR do their processing in the vendor's cloud, so you buy subscriptions rather than servers. The main case for owning a server is Nvidia Omniverse (which requires a Nucleus server for scene collaboration) or a self-hosted pixel-streaming setup, and both are program-scale choices rather than 30-person defaults."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What GPU do you need for Enscape or Twinmotion VR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For comfortable VR on typical architectural models in 2026, an RTX 4070 Super with 12 GB of VRAM is the sensible floor for authoring seats, with 16 GB or more (RTX 4080 Super or RTX 4090) strongly recommended for large or federated models. VRAM is usually the binding constraint before raw compute, because a heavy BIM scene that exceeds video memory drops frames no matter how fast the GPU core is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does it cost to equip a 30-person AEC firm for VR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As an indicative 2026 range: a workstation-tethered deployment (8 viz seats upgraded, 4 headsets, licenses) lands roughly in the 40 to 70 thousand US dollar range in year one. A streaming deployment shifts money from GPUs to subscriptions: standard workstations stay, and you pay per-seat platform fees plus a managed headset fleet. Numbers vary with street prices and license negotiations, so treat published figures as scoping estimates, not quotes."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+
+/* header + nav */
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+/* article */
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:.5em}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+
+/* footer */
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+<script src="/assets/nav.js?v=6" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+<style id="nav-drop">.site-nav .has-sub > ul{display:flex;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s}.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:1;pointer-events:auto;transform:translateY(0)}@media(max-width:640px){.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:0;pointer-events:none;transform:translateY(-4px)}.site-nav .has-sub.open > ul{opacity:1;pointer-events:auto;transform:translateY(0)}}</style></head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/neosvr/">NeosVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, and Servers</h1>
+  <p style="color:var(--muted);font:400 14px/1.5 var(--sans);margin:.2em 0 1.4em">By Joshua Opolko &middot; Published July 2, 2026</p>
+  <div class="post-body">
+
+  <div style="background:var(--code-bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:18px 22px;margin:0 0 1.6em">
+    <strong>Short version:</strong> A 30-person architecture firm does not need 30 VR workstations. It needs 6 to 10 visualization-capable seats (RTX 4070 Super class or better), 1 or 2 power seats (RTX 4090 or RTX 6000 Ada class) for the heaviest models, 4 to 6 Meta Quest 3 headsets under device management, solid Wi-Fi 6E, and in most cases <strong>no server at all</strong>. Enscape and Twinmotion render on the local GPU; Resolve and Workshop XR render in the vendor's cloud. The only common reason to buy a server is Nvidia Omniverse or self-hosted pixel streaming, and neither is a 30-person default.
+  </div>
+
+  <h2>Key takeaways</h2>
+  <ul>
+    <li><strong>Size by role, not headcount:</strong> in a typical 30-person studio only 20-30% of seats author real-time visualization; the rest are production BIM seats that need no GPU upgrade.</li>
+    <li><strong>VRAM before compute:</strong> for architectural VR the binding constraint is usually video memory, not GPU core speed. 12 GB is the floor for authoring seats, 16-24 GB for large or federated models.</li>
+    <li><strong>You probably need zero servers:</strong> workstation-tethered tools render locally; streaming platforms render in the vendor's cloud. Owning GPU servers is an Omniverse or self-hosted-streaming decision.</li>
+    <li><strong>Headsets are the cheap part:</strong> 4-6 Quest 3 units covers a 30-person firm; the network they stream over matters more than the headsets themselves.</li>
+    <li><strong>Indicative year-one budget:</strong> roughly $40k-$70k USD for a workstation-tethered fit-out, with streaming deployments shifting spend from GPUs to subscriptions. Treat all published numbers as scoping estimates.</li>
+  </ul>
+
+  <h2>The sizing mistake everyone makes</h2>
+  <p>The reflex when a firm decides to "do VR" is to spec a VR-ready workstation for every architect. That triples the hardware budget and most of it sits idle, because VR splits the studio into three roles with very different hardware needs:</p>
+  <ul>
+    <li><strong>Production BIM seats (roughly 18-22 of 30):</strong> Revit, Archicad, drafting, documentation. A standard BIM workstation with a mid-range professional GPU handles this. These seats join VR reviews as viewers via a mirrored screen or a standalone headset; they never render VR themselves. No upgrade needed.</li>
+    <li><strong>Visualization-capable seats (6-10 of 30):</strong> the people who run <a href="https://www.enscape3d.com/" rel="nofollow noopener" target="_blank">Enscape</a> or Twinmotion, prepare models for review, and host tethered sessions. These need the real GPUs.</li>
+    <li><strong>Power seats (1-2 of 30):</strong> the dedicated visualization specialist or pipeline owner working with the largest federated models, marketing renders, and the master template. Worth the flagship card.</li>
+  </ul>
+  <p>The 20-30% ratio holds surprisingly well across studios; what varies is which projects those seats sit on. If your firm's structure is different (for example, a dedicated viz department serving all teams), redistribute the same total rather than scaling everything up. Which people fill these roles, and who owns the pipeline, is covered in the <a href="/vr-visualization-growing-teams/">growing-teams playbook</a>.</p>
+
+  <h2>GPU spec: VRAM is the binding constraint</h2>
+  <p>Architectural VR has an unusual performance profile: the scenes are huge (a federated BIM model carries far more geometry than a typical game level) but the shading is comparatively simple. The practical consequence is that <strong>video memory runs out before compute does</strong>. A heavy Revit model through Enscape at VR resolution can exceed 12 GB of VRAM, and when a scene spills out of video memory the frame rate collapses no matter how fast the GPU core is. Since a stable sustained frame rate is the whole comfort budget in VR (the <a href="https://developers.meta.com/horizon/documentation/unreal/unreal-change-display-refresh-rate/" rel="nofollow noopener" target="_blank">Quest 3</a> targets 72 Hz minimum), buy VRAM first.</p>
+  <table>
+    <thead><tr><th>Seat</th><th>GPU class (2026)</th><th>VRAM</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Production BIM</td><td>Existing mid-range / professional card</td><td>8 GB fine</td><td>Never renders VR; no upgrade</td></tr>
+      <tr><td>Visualization seat</td><td>RTX 4070 Super / 4070 Ti Super or newer equivalent</td><td>12-16 GB</td><td>Comfortable VR on typical project models</td></tr>
+      <tr><td>Power seat</td><td>RTX 4090 or RTX 6000 Ada class</td><td>24-48 GB</td><td>Federated models, marketing renders, template work</td></tr>
+    </tbody>
+  </table>
+  <p>Two notes that save money. First, CPU matters less than people assume: real-time archviz is GPU-bound, and any current 8-core workstation CPU with 64 GB of system RAM keeps up. Second, do not buy "VR-ready" marketing bundles; a standard workstation with the right GPU, RAM, and an NVMe drive is the same machine at a better price.</p>
+
+  <h2>The three deployment models, sized for 30 people</h2>
+  <p>Everything above assumed you know where rendering happens. That choice, more than any component spec, sets the bill of materials. The <a href="/architectural-visualization/">main guide</a> covers the tool landscape in detail; here is what each pattern means in hardware for a 30-person firm.</p>
+
+  <h3>Model A: workstation-tethered (Enscape / Twinmotion)</h3>
+  <p>Rendering happens on the visualization seats' own GPUs; headsets connect by Link cable or Air Link. This is the default for a first serious deployment.</p>
+  <table>
+    <thead><tr><th>Item</th><th>Qty</th><th>Indicative 2026 street price (USD)</th></tr></thead>
+    <tbody>
+      <tr><td>GPU upgrade, viz seats (RTX 4070 Super class)</td><td>8</td><td>$600-$800 each</td></tr>
+      <tr><td>Power workstation (RTX 4090 class, 128 GB RAM)</td><td>1-2</td><td>$4,500-$7,000 each</td></tr>
+      <tr><td>Meta Quest 3 + Link cables + spare batteries</td><td>4-6</td><td>$550-$700 each</td></tr>
+      <tr><td>Device management (Quest for Business or MDM)</td><td>fleet</td><td>low hundreds/yr</td></tr>
+      <tr><td>Enscape or Twinmotion licenses</td><td>8-10 seats</td><td>vendor pricing; per-seat annual</td></tr>
+      <tr><td>Servers</td><td><strong>0</strong></td><td>$0</td></tr>
+    </tbody>
+  </table>
+  <p>Year-one total lands roughly in the <strong>$40k-$70k</strong> band depending on how many workstations need full replacement versus a GPU swap. The recurring cost is licenses plus a two-to-three-year hardware refresh cycle.</p>
+
+  <h3>Model B: streaming platform (Resolve / Workshop XR)</h3>
+  <p>Rendering and model processing happen in the vendor's cloud; headsets are self-contained. Hardware spend drops sharply and becomes subscription spend.</p>
+  <table>
+    <thead><tr><th>Item</th><th>Qty</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Workstation upgrades</td><td><strong>0</strong></td><td>Existing BIM machines are fine; processing is server-side</td></tr>
+      <tr><td>Meta Quest 3 under MDM</td><td>6-8</td><td>More headsets than Model A because they are the whole delivery mechanism</td></tr>
+      <tr><td><a href="https://www.resolvebim.com/" rel="nofollow noopener" target="_blank">Resolve</a> or <a href="https://www.autodesk.com/products/workshop-xr/overview" rel="nofollow noopener" target="_blank">Workshop XR</a> subscription</td><td>per seat/project</td><td>The dominant cost line; negotiate on committed seats</td></tr>
+      <tr><td>Wi-Fi 6E access points, review room + studio</td><td>2-4</td><td>Streaming quality is a network property, see below</td></tr>
+      <tr><td>Servers</td><td><strong>0</strong></td><td>Cloud-hosted by the vendor</td></tr>
+    </tbody>
+  </table>
+  <p>This is the right shape when reviewers are spread across offices or firms, or when your federated models are too heavy for single-GPU rendering anyway. Keep one or two Model-A visualization seats regardless; someone still has to author materials and marketing output locally.</p>
+
+  <h3>Model C: self-hosted (Omniverse / pixel streaming)</h3>
+  <p>The only model where you actually buy servers, and at 30 people it needs a specific justification: a digital-twin strategy, multi-tool live scene composition, or a data-sovereignty requirement that rules out vendor clouds.</p>
+  <table>
+    <thead><tr><th>Item</th><th>Qty</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Nucleus server (Omniverse)</td><td>1</td><td>Standard rack server; the scene database, not a render box</td></tr>
+      <tr><td>GPU render/streaming server (2-4x L40S or RTX 6000 Ada class)</td><td>0-1</td><td>Only if centrally rendering or pixel-streaming to thin clients</td></tr>
+      <tr><td>RTX workstations at authoring seats</td><td>6-10</td><td>RTX 4070+ per Omniverse author seat, same as Model A viz seats</td></tr>
+      <tr><td>10 GbE backbone to authoring seats</td><td>1 switch tier</td><td>USD scene sync is chatty; the office LAN becomes part of the pipeline</td></tr>
+    </tbody>
+  </table>
+  <p>A GPU server with four professional cards is a five-figure line item on its own, before power and cooling. For a 30-person firm wanting VR design review, Model C is almost always more machine than the problem needs; it earns its cost when visualization is one output of a broader simulation or twin platform.</p>
+
+  <h2>The network: the component nobody budgets</h2>
+  <p>Air Link, Resolve streaming, and casting the headset view to the review-room TV all ride the wireless network, and a congested office Wi-Fi will make a $70k deployment feel broken. The fixes are cheap relative to everything else:</p>
+  <ul>
+    <li><strong>Dedicated Wi-Fi 6E (or Wi-Fi 7) SSID for headsets</strong>, on 6 GHz where the spectrum is clean, with an access point in the review room itself.</li>
+    <li><strong>Wired backbone:</strong> gigabit is fine for Model A and B; step to 2.5-10 GbE between authoring seats and storage when models are shared over the LAN, and always for Model C.</li>
+    <li><strong>A review room</strong> with the access point, a TV for the mirrored view, 3 by 4 metres of clear floor, and a charging shelf. This room does more for adoption than any single hardware purchase, because sessions stop depending on desk geography. How to actually run the sessions is covered in the <a href="/vr-walkthrough-aec/">walkthrough guide</a>.</li>
+  </ul>
+
+  <h2>Scaling the numbers to 10 or 50 people</h2>
+  <ul>
+    <li><strong>10-person studio:</strong> 2-3 viz seats, no power seat (the best viz machine doubles as it), 2 headsets, Model A only. Year one lands in the low five figures.</li>
+    <li><strong>30-person firm:</strong> the worked example above. This is also the size where the pipeline needs a named owner; hardware without ownership decays, as the <a href="/vr-visualization-growing-teams/">growing-teams playbook</a> covers.</li>
+    <li><strong>50-person firm, multi-office:</strong> the ratios hold (12-15 viz seats, 2-3 power seats) but the deployment model usually flips to B, because cross-office review is now the norm and duplicating tethered setups per office costs more than the subscriptions. This is also where enterprise platforms (Bentley iTwin, Omniverse) enter the conversation, covered in the <a href="/architectural-visualization/">main guide's enterprise section</a>.</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <h3>How many VR-capable workstations does a 30-person architecture firm need?</h3>
+  <p>Six to ten, not thirty. Only the 20-30% of seats that author real-time visualization need RTX 4070 Super class GPUs or better; one or two power seats get an RTX 4090 or RTX 6000 Ada class card for the heaviest models, and the remaining production BIM seats need no upgrade because they join reviews as viewers, not renderers.</p>
+  <h3>How many GPUs and servers do you need for VR rendering on a 30-person team?</h3>
+  <p>Eight to ten discrete GPU upgrades and, in most deployments, zero servers. Enscape and Twinmotion render on the local workstation GPU; Resolve and Autodesk Workshop XR render in the vendor's cloud. Servers enter the picture only with Nvidia Omniverse (a Nucleus scene server, plus optionally a multi-GPU render server) or self-hosted pixel streaming, both of which are specialist choices at this size.</p>
+  <h3>What GPU do you need for Enscape or Twinmotion in VR?</h3>
+  <p>An RTX 4070 Super with 12 GB of VRAM is the sensible 2026 floor for an authoring seat, with 16-24 GB (RTX 4080 Super, RTX 4090) recommended for large or federated models. VRAM is usually the binding constraint before core speed: a scene that spills out of video memory drops frames regardless of GPU compute, and dropped frames are what make VR uncomfortable.</p>
+  <h3>What does it cost to equip a 30-person AEC firm for VR?</h3>
+  <p>Indicatively, $40k-$70k USD in year one for a workstation-tethered deployment (8 GPU upgrades, 1-2 power workstations, 4-6 managed headsets, licenses). A streaming deployment trades most of the GPU spend for per-seat subscriptions and a slightly larger headset fleet. All figures are scoping estimates at 2026 street prices, not quotes; license costs in particular vary with negotiation.</p>
+  <h3>Do you need special networking for VR in an architecture office?</h3>
+  <p>A dedicated Wi-Fi 6E SSID for headsets with an access point in the review room, and a wired gigabit backbone (2.5-10 GbE if large models are shared over the LAN or you run Omniverse). Wireless streaming quality is the most common cause of "VR feels broken" complaints in otherwise well-specified deployments.</p>
+
+  <p style="margin-top:2em;font-size:.92em;color:var(--muted)">Written by Joshua Opolko. I have provided technical support for Adobe, Nvidia, Unreal Engine, and Twinmotion deployments at legal and architectural firms. Hardware classes and prices are indicative 2026 street figures for scoping, not quotes; vendor license pricing changes frequently and should be confirmed directly. Tool status verified July 2026.</p>
+
+  <nav class="related-guides" aria-label="Related"><h2>Related</h2><ul><li><a href="/architectural-visualization/">VR in architectural visualization</a>, the full BIM-to-VR pipeline, tool landscape, and per-tool infrastructure table.</li><li><a href="/vr-visualization-growing-teams/">Scaling VR visualization in growing teams</a>, who owns the pipeline the hardware serves.</li><li><a href="/vr-walkthrough-aec/">VR walkthrough solutions for AEC firms</a>, what to do with the kit once it is racked.</li></ul></nav>
+  </div>
+</main>
+<footer class="site-foot"><p>&copy; Joshua Opolko</p></footer>
+</body>
+</html>
