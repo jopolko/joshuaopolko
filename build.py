@@ -13,7 +13,7 @@ Usage:
 
 To add a page to the site-wide nav: edit NAV_ITEMS, run `syncnav`, then deploy changed pages.
 """
-import re, os, sys, html, urllib.parse, datetime, json
+import re, os, sys, html, urllib.parse, datetime, json, subprocess
 from pathlib import Path
 from bs4 import BeautifulSoup
 import inline_css  # inlines site.css so fresh builds aren't render-blocking
@@ -194,6 +194,39 @@ STATIC_URLS = [
     ("https://joshuaopolko.com/aiscan/",                   "weekly"),
 ]
 
+def _content_date(idx: Path) -> str:
+    """Return the best lastmod date for a page as YYYY-MM-DD.
+
+    Priority:
+    1. dateModified from JSON-LD (explicitly maintained, immune to nav/template rebuilds)
+    2. datePublished from JSON-LD
+    3. git first-commit date (stable across bulk commits like syncnav/schema_fix)
+    4. mtime (last resort)
+    """
+    try:
+        text = idx.read_text(encoding="utf-8", errors="replace")
+        for field in ("dateModified", "datePublished"):
+            m = re.search(rf'"{field}"\s*:\s*"(\d{{4}}-\d{{2}}-\d{{2}})', text)
+            if m:
+                return m.group(1)
+    except Exception:
+        pass
+
+    try:
+        result = subprocess.run(
+            ["git", "log", "--diff-filter=A", "--follow", "--format=%ci", "--", str(idx)],
+            capture_output=True, text=True,
+            cwd=Path(__file__).resolve().parent,
+        )
+        line = result.stdout.strip().splitlines()
+        if line:
+            return line[-1][:10]
+    except Exception:
+        pass
+
+    return datetime.date.fromtimestamp(idx.stat().st_mtime).isoformat()
+
+
 def write_sitemap():
     today = datetime.date.today().isoformat()
     # Discover all slug directories in static/ that have an index.html.
@@ -207,14 +240,13 @@ def write_sitemap():
         url = f"{SITE}/{slug}/"
         if slug in SITEMAP_EXCLUDE or not _sitemap_eligible(idx, url):
             skipped.append(slug); continue
-        mtime = datetime.date.fromtimestamp(idx.stat().st_mtime).isoformat()
-        links_mod.append((url, mtime))
+        links_mod.append((url, _content_date(idx)))
     if skipped:
         print(f"  sitemap: skipped {len(skipped)} (noindex/canonical/excluded): {', '.join(sorted(skipped))}")
     # Root
     root_idx = Path(OUT) / "index.html"
     if root_idx.exists():
-        links_mod.insert(0, (SITE + "/", datetime.date.fromtimestamp(root_idx.stat().st_mtime).isoformat()))
+        links_mod.insert(0, (SITE + "/", _content_date(root_idx)))
 
     urls = "\n".join(
         f"  <url><loc>{html.escape(l)}</loc><lastmod>{m}</lastmod></url>"
