@@ -6,12 +6,14 @@ Source of truth is static/ — edit HTML files directly or use new_page.py for n
 
 Usage:
   python3 build.py sitemap          # regenerate sitemap.xml + robots.txt from static/
+  python3 build.py deploy           # regenerate sitemap + robots, then scp both to VPS
   python3 build.py syncnav          # push NAV_ITEMS into the <nav> of every page (surgical, nav-only)
   python3 build.py syncfooter       # push NAV_ITEMS link map into the <footer> of every page (surgical)
   python3 build.py retemplate       # re-apply PAGE_TMPL to all static pages (preserves SEO head + body)
   python3 build.py schema_fix       # inject Person description/sameAs, wordCount, og:image across all pages
 
 To add a page to the site-wide nav: edit NAV_ITEMS, run `syncnav`, then deploy changed pages.
+After adding or editing any page, run `python3 build.py deploy` to push a fresh sitemap to prod.
 """
 import re, os, sys, html, urllib.parse, datetime, json, subprocess
 from pathlib import Path
@@ -520,6 +522,27 @@ if __name__ == "__main__":
     if cmd == "sitemap":
         write_sitemap()
         write_robots()
+
+    elif cmd == "deploy":
+        # Dates come from dateModified in JSON-LD, not mtime, so this is safe
+        # to run after syncnav/retemplate without clobbering lastmod dates.
+        write_sitemap()
+        write_robots()
+        VPS = "john@143.110.236.86"
+        VPS_PORT = "34522"
+        VPS_DIR = "/var/www/joshua-static"
+        for fname in ("sitemap.xml", "robots.txt"):
+            src = os.path.join(OUT, fname)
+            dest = f"{VPS}:{VPS_DIR}/{fname}"
+            print(f"  scp {fname} -> {dest}")
+            result = subprocess.run(
+                ["scp", "-P", VPS_PORT, src, dest],
+                capture_output=True, text=True,
+            )
+            if result.returncode != 0:
+                print(f"  ERROR: {result.stderr.strip()}")
+                sys.exit(1)
+        print("Done.")
 
     elif cmd == "syncnav":
         changed = sync_nav()
