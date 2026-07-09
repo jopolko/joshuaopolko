@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lorenz Tunnel</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #000; overflow: hidden; }
+canvas { display: block; position: fixed; inset: 0; width: 100%; height: 100%; }
+#ui {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center;
+  background: rgba(0,0,0,.52); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px; padding: 14px 24px;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  user-select: none;
+}
+label {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.42); font: 600 10px/1 monospace; letter-spacing: .10em;
+  text-transform: uppercase;
+}
+.val { color: #00ee99; font-size: 12px; }
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 108px; height: 3px;
+  background: rgba(255,255,255,.14); border-radius: 2px;
+  outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px;
+  border-radius: 50%; background: #00ee99; cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #00ee99; border: none; cursor: pointer;
+}
+#vr-btn {
+  background: rgba(0,238,153,.12); border: 1px solid rgba(0,238,153,.45);
+  color: #00ee99; font: 700 10px/1 monospace; letter-spacing: .12em;
+  text-transform: uppercase; padding: 9px 18px; border-radius: 8px;
+  cursor: pointer; transition: background .15s;
+}
+#vr-btn:hover { background: rgba(0,238,153,.25); }
+#vr-na { color: rgba(255,255,255,.28); font: 600 10px/1 monospace; letter-spacing: .08em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <label>Rush <span class="val" id="v-rush">0.25</span>
+    <input type="range" id="s-rush" min="0.05" max="2.0" step="0.05" value="0.25">
+  </label>
+  <label>Sectors <span class="val" id="v-sym">8</span>
+    <input type="range" id="s-sym" min="2" max="14" step="1" value="8">
+  </label>
+  <label>Travel <span class="val" id="v-travel">0.5</span>
+    <input type="range" id="s-travel" min="0.0" max="2.0" step="0.1" value="0.5">
+  </label>
+  <div id="vr-slot"></div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+// ── Lorenz attractor (same integration as Energy Spine) ───────────────────────
+function buildLorenzCurve() {
+  const sigma = 10, rho = 28, beta = 8 / 3, dt = 0.004;
+  let x = 0.1, y = 0, z = 20;
+  for (let i = 0; i < 2000; i++) {
+    x += sigma * (y - x) * dt;
+    y += (x * (rho - z) - y) * dt;
+    z += (x * y - beta * z) * dt;
+  }
+  const pts = [];
+  for (let i = 0; i < 8000; i++) {
+    x += sigma * (y - x) * dt;
+    y += (x * (rho - z) - y) * dt;
+    z += (x * y - beta * z) * dt;
+    if (i % 2 === 0) pts.push(new THREE.Vector3(x, z, y));
+  }
+  const box = new THREE.Box3().setFromPoints(pts);
+  const center = new THREE.Vector3();
+  box.getCenter(center);
+  const span = box.getSize(new THREE.Vector3());
+  const scale = 6 / Math.max(span.x, span.y, span.z);
+  pts.forEach(p => p.sub(center).multiplyScalar(scale));
+  return new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.5);
+}
+
+// ── Shared vertex shader ──────────────────────────────────────────────────────
+const VERT = /* glsl */`
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewDir;
+  void main() {
+    vUv     = uv;
+    vNormal = normalize(normalMatrix * normal);
+    vec4 wp = modelMatrix * vec4(position, 1.0);
+    vViewDir = normalize(cameraPosition - wp.xyz);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+// ── Tunnel walls fragment shader ──────────────────────────────────────────────
+// Combines the infinite-tunnel depth-cue technique (rings looping via mod)
+// with the Lorenz Energy Spine techniques (sine wave along arc-length, scan
+// pulse packets via fract, expansion joints, Fresnel rim glow).
+// uv.y runs 0->1 along arc-length; uv.x runs 0->1 around circumference.
+const TUNNEL_FRAG = /* glsl */`
+  #define PI 3.14159265359
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewDir;
+  uniform float uTime;
+  uniform float uLen;
+  uniform float uRushSpeed;
+  uniform float uSymmetry;
+
+  vec3 hsv2rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+  }
+
+  void main() {
+    float arcLen    = vUv.y * uLen;
+    float circAngle = vUv.x * 2.0 * PI;
+
+    // Depth-cue rings: mod creates looping forward rush (infinite tunnel technique)
+    float depth = mod(arcLen / 5.0 - uTime * uRushSpeed, 1.0);
+
+    // Angular sectors around the tube (infinite tunnel's symmetry parameter)
+    float ta = mod(circAngle / (PI / uSymmetry), 1.0);
+
+    // Energy spine: sine wave racing along arc-length (Lorenz technique)
+    float spine = sin(arcLen * 0.9 - uTime * 5.0) * 0.5 + 0.5;
+    spine = pow(spine, 3.0);
+
+    // Scan pulse packets (Lorenz technique)
+    float sp   = fract(arcLen / 10.0 - uTime * uRushSpeed * 0.9);
+    float scan = pow(max(0.0, 1.0 - sp * 10.0), 1.5);
+
+    // Expansion joints: dark rhythm seams every 8 arc units
+    float joint = 1.0 - step(fract(arcLen / 8.0), 0.04) * 0.7;
+
+    // Stripe + ring interference (infinite tunnel technique on the 3D tube surface)
+    float s1 = sin(ta * 28.0 + uTime * 0.5) * 0.5 + 0.5;
+    float s2 = sin(depth * 22.0 - uTime * 2.0) * 0.5 + 0.5;
+    float pf = sin(arcLen * 14.0 - uTime * 6.0) * 0.5 + 0.5;
+    float pattern = s1 * s2 * pf + (1.0 - s1) * (1.0 - s2) * (1.0 - pf) * 0.3;
+
+    // Fresnel rim glow (Lorenz technique)
+    float rim = pow(1.0 - max(0.0, dot(vNormal, vViewDir)), 2.5);
+
+    // Hue from depth (tunnel cycling) and arc position (spine drifting)
+    vec3 tunnelCol = hsv2rgb(vec3(depth * 0.55 + uTime * 0.07, 0.97, 1.0));
+    vec3 spineCol  = hsv2rgb(vec3(arcLen * 0.015 + uTime * 0.05, 0.9, 1.0));
+
+    vec3 result  = tunnelCol * pattern * 1.4;
+    result      += spineCol * spine * 0.45;
+    result      += tunnelCol * scan * 2.5;
+    result      += spineCol * rim * 0.6;
+    result      *= joint;
+
+    gl_FragColor = vec4(result, 1.0);
+  }
+`;
+
+// ── Center spine fragment shader ──────────────────────────────────────────────
+// Thin glowing thread running through the tunnel center, visible ahead of
+// you as you drift forward. Pure Lorenz Energy Spine technique.
+const SPINE_FRAG = /* glsl */`
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewDir;
+  uniform float uTime;
+  uniform float uLen;
+  uniform float uRushSpeed;
+
+  vec3 hsv2rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+  }
+
+  void main() {
+    float d    = vUv.y * uLen;
+    float spine = pow(sin(d * 0.9 - uTime * 5.0) * 0.5 + 0.5, 2.0);
+    float scan  = pow(max(0.0, 1.0 - fract(d / 10.0 - uTime * uRushSpeed * 0.9) * 12.0), 1.5);
+    float rim   = pow(1.0 - max(0.0, dot(vNormal, vViewDir)), 2.0);
+    float h     = sin(d * 0.012 + uTime * 0.07) * 0.5 + 0.5;
+    vec3  col   = hsv2rgb(vec3(h * 0.6 + uTime * 0.05, 0.97, 1.0));
+    vec3 result = col * (0.1 + spine * 0.7);
+    result += col * scan * 3.5;
+    result += col * rim * 0.9;
+    gl_FragColor = vec4(result, 1.0);
+  }
+`;
+
+// ── Scene ─────────────────────────────────────────────────────────────────────
+const canvas   = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.NoToneMapping;
+renderer.xr.enabled  = true;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000204);
+scene.fog        = new THREE.FogExp2(0x000204, 0.038);
+
+const camera = new THREE.PerspectiveCamera(85, innerWidth / innerHeight, 0.01, 80);
+
+// Camera rig: move this along the curve. Camera sits at local origin inside it.
+// In VR, the XR head-tracking offset is applied on top of the rig's world pose,
+// so the user feels positioned inside the tunnel looking forward.
+const rig = new THREE.Group();
+rig.add(camera);
+scene.add(rig);
+
+// ── Sliders ───────────────────────────────────────────────────────────────────
+const state = { rush: 0.25, symmetry: 8, travel: 0.5 };
+[
+  ['s-rush',   'v-rush',   'rush',     2],
+  ['s-sym',    'v-sym',    'symmetry', 0],
+  ['s-travel', 'v-travel', 'travel',   1],
+].forEach(([sid, vid, key, dec]) => {
+  const sl = document.getElementById(sid);
+  const vl = document.getElementById(vid);
+  sl.addEventListener('input', () => {
+    state[key] = parseFloat(sl.value);
+    vl.textContent = state[key].toFixed(dec);
+  });
+});
+
+// ── Geometry ──────────────────────────────────────────────────────────────────
+const curve    = buildLorenzCurve();
+const curveLen = curve.getLength();
+
+// Tunnel walls: large tube rendered from inside (BackSide). The camera flies
+// through the center. Radius 0.28 keeps clear of adjacent Lorenz loops.
+const tunnelGeo = new THREE.TubeGeometry(curve, 2500, 0.28, 16, false);
+const tunnelMat = new THREE.ShaderMaterial({
+  vertexShader: VERT,
+  fragmentShader: TUNNEL_FRAG,
+  uniforms: {
+    uTime:      { value: 0 },
+    uLen:       { value: curveLen },
+    uRushSpeed: { value: 0.25 },
+    uSymmetry:  { value: 8.0 },
+  },
+  side: THREE.BackSide,
+});
+scene.add(new THREE.Mesh(tunnelGeo, tunnelMat));
+
+// Glowing center spine: thin thread you follow as you drift forward
+const spineGeo = new THREE.TubeGeometry(curve, 3500, 0.022, 8, false);
+const spineMat = new THREE.ShaderMaterial({
+  vertexShader: VERT,
+  fragmentShader: SPINE_FRAG,
+  uniforms: {
+    uTime:      { value: 0 },
+    uLen:       { value: curveLen },
+    uRushSpeed: { value: 0.25 },
+  },
+  transparent: true,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+  side: THREE.DoubleSide,
+});
+scene.add(new THREE.Mesh(spineGeo, spineMat));
+
+// ── WebXR ─────────────────────────────────────────────────────────────────────
+(async () => {
+  const slot = document.getElementById('vr-slot');
+  if (!navigator.xr) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+  const ok = await navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+  if (!ok) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+  const btn = document.createElement('button');
+  btn.id = 'vr-btn';
+  btn.textContent = 'Enter VR';
+  slot.appendChild(btn);
+  btn.addEventListener('click', async () => {
+    const session = await navigator.xr.requestSession('immersive-vr', {
+      optionalFeatures: ['local-floor', 'bounded-floor'],
+    });
+    btn.textContent = 'Exit VR';
+    session.addEventListener('end', () => { btn.textContent = 'Enter VR'; });
+    await renderer.xr.setSession(session);
+  });
+})();
+
+// ── Animation loop ────────────────────────────────────────────────────────────
+let camT  = 0;
+let prevT = 0;
+const clock   = new THREE.Clock();
+const aheadPt = new THREE.Vector3();
+
+renderer.setAnimationLoop(() => {
+  const t  = clock.getElapsedTime();
+  const dt = t - prevT;
+  prevT = t;
+
+  // Advance camera position along curve; wrap with a clean reset
+  camT += dt * state.travel * 0.012;
+  if (camT > 0.99) camT = 0;
+
+  const lookaheadT = Math.min(camT + 0.006, 0.99);
+  const pos = curve.getPoint(camT);
+  curve.getPoint(lookaheadT, aheadPt);
+
+  // Orient rig: faces the direction of travel along the curve.
+  // lookAt uses world-up (0,1,0) so no roll; safe for VR comfort.
+  rig.position.copy(pos);
+  rig.lookAt(aheadPt);
+
+  tunnelMat.uniforms.uTime.value      = t;
+  tunnelMat.uniforms.uRushSpeed.value = state.rush;
+  tunnelMat.uniforms.uSymmetry.value  = state.symmetry;
+  spineMat.uniforms.uTime.value       = t;
+  spineMat.uniforms.uRushSpeed.value  = state.rush;
+
+  renderer.render(scene, camera);
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

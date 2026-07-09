@@ -53,9 +53,31 @@
   <h1>XR Visual Tests</h1>
   <div class="post-body">
 
-<p>Two WebGL moiré interference demos. Use the sliders to explore the parameter space. On a Meta Quest, open the demo full screen and tap <strong>Enter VR</strong> to go immersive.</p>
+<p>WebGL and Three.js visual experiments. Use the sliders to explore the parameter space. On a Meta Quest, open the demo full screen and tap <strong>Enter VR</strong> to go immersive.</p>
 
 <div class="demo-grid">
+
+  <div class="demo-card">
+    <h2>Lorenz Energy Spine</h2>
+    <p>A Lorenz strange attractor rendered as a Three.js tube, lit by animated shaders: a sine wave racing along the arc-length (energy spine), discrete scan pulse packets, and Fresnel rim glow. Geometry-backed bloom, no post-processing filter. A counter-pulse in orange-violet runs the same path at the golden ratio frequency in reverse.</p>
+    <div class="demo-actions">
+      <a href="/xr-tests/attractor.html" target="_blank">Open full screen</a>
+    </div>
+    <iframe src="/xr-tests/attractor.html" class="demo-frame"
+            allow="xr-spatial-tracking; fullscreen"
+            title="Lorenz Energy Spine"></iframe>
+  </div>
+
+  <div class="demo-card">
+    <h2>Interference Tubes</h2>
+    <p>Five tubes on the same Lorenz path, each with a different colour, travel direction, and frequency (golden-ratio spaced). All rendered additive: where scan pulses from opposing tubes coincide on screen, their brightness adds — producing bright flares that drift, split, and reform without ever repeating. Chromatic aberration in flat mode.</p>
+    <div class="demo-actions">
+      <a href="/xr-tests/interference.html" target="_blank">Open full screen</a>
+    </div>
+    <iframe src="/xr-tests/interference.html" class="demo-frame"
+            allow="xr-spatial-tracking; fullscreen"
+            title="Interference Tubes"></iframe>
+  </div>
 
   <div class="demo-card">
     <h2>Moiré Extreme</h2>
@@ -77,6 +99,17 @@
     <iframe src="/xr-tests/moire-wave.html" class="demo-frame"
             allow="xr-spatial-tracking; fullscreen"
             title="Wave Interference"></iframe>
+  </div>
+
+  <div class="demo-card">
+    <h2>Lorenz Tunnel</h2>
+    <p>The Lorenz strange attractor path becomes a tunnel you drift through. Depth-cue rings from the Infinite Tunnel technique line the inside of the tube and rush toward you continuously via a looping mod. The energy spine and scan pulse packets from Lorenz Energy Spine run along the glowing center thread ahead. Angular sectors kaleidoscope the rings around the circumference. Travel and Rush are independent sliders so you can drift slowly through fast rings or race through a calm tube.</p>
+    <div class="demo-actions">
+      <a href="/xr-tests/lorenz-tunnel.html" target="_blank">Open full screen</a>
+    </div>
+    <iframe src="/xr-tests/lorenz-tunnel.html" class="demo-frame"
+            allow="xr-spatial-tracking; fullscreen"
+            title="Lorenz Tunnel"></iframe>
   </div>
 
 </div>
