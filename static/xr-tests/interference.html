@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lorenz Interference Tubes</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #000; overflow: hidden; }
+canvas { display: block; position: fixed; inset: 0; width: 100%; height: 100%; }
+#ui {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center;
+  background: rgba(0,0,0,.52); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px; padding: 14px 24px;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  user-select: none;
+}
+label {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.42); font: 600 10px/1 monospace; letter-spacing: .10em;
+  text-transform: uppercase;
+}
+.val { color: #00ee99; font-size: 12px; }
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 108px; height: 3px;
+  background: rgba(255,255,255,.14); border-radius: 2px;
+  outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px;
+  border-radius: 50%; background: #00ee99; cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #00ee99; border: none; cursor: pointer;
+}
+#vr-btn {
+  background: rgba(0,238,153,.12); border: 1px solid rgba(0,238,153,.45);
+  color: #00ee99; font: 700 10px/1 monospace; letter-spacing: .12em;
+  text-transform: uppercase; padding: 9px 18px; border-radius: 8px;
+  cursor: pointer; transition: background .15s;
+}
+#vr-btn:hover { background: rgba(0,238,153,.25); }
+#vr-na { color: rgba(255,255,255,.28); font: 600 10px/1 monospace; letter-spacing: .08em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <label>Speed <span class="val" id="v-speed">1.00</span>
+    <input type="range" id="s-speed" min="0.10" max="4.00" step="0.10" value="1.00">
+  </label>
+  <label>Detuning <span class="val" id="v-detune">1.62</span>
+    <input type="range" id="s-detune" min="1.00" max="3.00" step="0.01" value="1.62">
+  </label>
+  <label>Layers <span class="val" id="v-layers">5</span>
+    <input type="range" id="s-layers" min="1" max="5" step="1" value="5">
+  </label>
+  <label>Chroma <span class="val" id="v-chroma">0.030</span>
+    <input type="range" id="s-chroma" min="0.000" max="0.060" step="0.002" value="0.030">
+  </label>
+  <div id="vr-slot"></div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass }     from 'three/addons/postprocessing/RenderPass.js';
+import { ShaderPass }     from 'three/addons/postprocessing/ShaderPass.js';
+
+// ── Lorenz attractor (same as attractor.html) ─────────────────────────────────
+function buildLorenzCurve() {
+  const sigma = 10, rho = 28, beta = 8 / 3, dt = 0.004;
+  let x = 0.1, y = 0, z = 20;
+  for (let i = 0; i < 2000; i++) {
+    x += sigma * (y - x) * dt;
+    y += (x * (rho - z) - y) * dt;
+    z += (x * y - beta * z) * dt;
+  }
+  const pts = [];
+  for (let i = 0; i < 8000; i++) {
+    x += sigma * (y - x) * dt;
+    y += (x * (rho - z) - y) * dt;
+    z += (x * y - beta * z) * dt;
+    if (i % 2 === 0) pts.push(new THREE.Vector3(x, z, y));
+  }
+  const box = new THREE.Box3().setFromPoints(pts);
+  const center = new THREE.Vector3();
+  box.getCenter(center);
+  const span = box.getSize(new THREE.Vector3());
+  const scale = 6 / Math.max(span.x, span.y, span.z);
+  pts.forEach(p => p.sub(center).multiplyScalar(scale));
+  return new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.5);
+}
+
+// ── Vertex shader ─────────────────────────────────────────────────────────────
+const VERT = /* glsl */`
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewDir;
+
+  void main() {
+    vUv     = uv;
+    vNormal = normalize(normalMatrix * normal);
+    vec4 worldPos = modelMatrix * vec4(position, 1.0);
+    vViewDir = normalize(cameraPosition - worldPos.xyz);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+// ── Interference tube shader ──────────────────────────────────────────────────
+// Each tube runs the same energy spine + scan pulse logic, but with its own
+// uDir (travel direction) and uFreq (frequency multiplier).
+//
+// The interference effect is purely visual and emergent:
+//   - All tubes use THREE.AdditiveBlending
+//   - Where a scan pulse from tube A coincides on-screen with a scan pulse
+//     from tube B, their brightness adds together → superbright flare
+//   - Because the frequencies are incommensurable (golden-ratio spaced), the
+//     coincidences drift, merge, and separate — never repeating the same pattern
+
+const TUBE_FRAG = /* glsl */`
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewDir;
+
+  uniform float uTime;
+  uniform float uLen;
+  uniform float uSpeed;
+  uniform vec3  uColor;
+  uniform float uDir;
+  uniform float uFreq;
+
+  void main() {
+    float d = vUv.y * uLen;
+    float eff = uSpeed * uDir * uFreq;
+
+    // Energy spine
+    float spine = sin(d * 0.4 - uTime * 5.0 * eff);
+    spine = spine * 0.5 + 0.5;
+    spine = pow(spine, 2.0);
+
+    // Scan pulse
+    float sp   = fract(d / 20.0 - uTime * 0.22 * eff);
+    float scan = pow(max(0.0, 1.0 - sp * 14.0), 1.5);
+
+    // Expansion joints
+    float joint = 1.0 - step(fract(d / 12.0), 0.05) * 0.75;
+
+    // Rhythm bands
+    float band = step(fract(d / 5.0), 0.12) * 0.10;
+
+    // Fresnel rim glow
+    float rim = pow(1.0 - max(0.0, dot(vNormal, vViewDir)), 2.5);
+
+    vec3 col = uColor * (0.08 + spine * 0.5 + band);
+    col += uColor * scan * 2.5;
+    col += uColor * rim * 0.8;
+    col *= joint;
+
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+// ── Halo shader ───────────────────────────────────────────────────────────────
+// Each core tube gets a wider additive-blended halo around it.
+// The halos from different tubes overlap freely, so interference is visible
+// even when the cores themselves don't cross.
+
+const HALO_FRAG = /* glsl */`
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewDir;
+
+  uniform float uTime;
+  uniform float uLen;
+  uniform float uSpeed;
+  uniform vec3  uColor;
+  uniform float uDir;
+  uniform float uFreq;
+
+  void main() {
+    float d = vUv.y * uLen;
+    float eff = uSpeed * uDir * uFreq;
+
+    float spine = sin(d * 0.4 - uTime * 5.0 * eff) * 0.5 + 0.5;
+    float scan  = pow(max(0.0, 1.0 - fract(d / 20.0 - uTime * 0.22 * eff) * 14.0), 1.5);
+    float rim   = pow(1.0 - max(0.0, dot(vNormal, vViewDir)), 3.0);
+
+    float a = (spine * 0.10 + scan * 0.30 + rim * 0.25) * 0.22;
+    gl_FragColor = vec4(uColor, a);
+  }
+`;
+
+// ── Post-processing: JuicePass-lite ──────────────────────────────────────────
+// Inspired by slipstream's JuicePass:
+//   Chromatic aberration: red/green/blue channels offset radially toward edges.
+//   The center 30% of the screen stays sharp (preserves readability).
+//   Vignette: soft edge darkening pulls focus to the glowing structure.
+//
+// Note: EffectComposer only runs in flat (non-VR) mode. In VR, Three.js renders
+// directly to the XR framebuffer which can't be post-processed this way.
+
+const JUICE_FRAG = /* glsl */`
+  uniform sampler2D tDiffuse;
+  uniform float uChroma;
+  varying vec2 vUv;
+
+  void main() {
+    vec2 center  = vec2(0.5);
+    vec2 toEdge  = vUv - center;
+    float dist   = length(toEdge);
+
+    // Chroma offset: zero inside radius 0.30, ramps outward
+    float chroma = max(0.0, dist - 0.30) * uChroma * 3.5;
+
+    float r = texture2D(tDiffuse, vUv + toEdge * chroma * 1.5).r;
+    float g = texture2D(tDiffuse, vUv                        ).g;
+    float b = texture2D(tDiffuse, vUv - toEdge * chroma      ).b;
+
+    // Vignette
+    float vig = 1.0 - pow(dist * 1.6, 2.8);
+    vig = clamp(vig, 0.0, 1.0);
+
+    gl_FragColor = vec4(vec3(r, g, b) * vig, 1.0);
+  }
+`;
+
+// ── Scene setup ───────────────────────────────────────────────────────────────
+const canvas   = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.NoToneMapping;
+renderer.xr.enabled  = true;
+
+const scene  = new THREE.Scene();
+scene.background = new THREE.Color(0x000205);
+
+const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.01, 200);
+camera.position.set(7, 4, 8);  // angled view so the nested tubes read as depth, not flat loops
+
+const rig = new THREE.Group();
+scene.add(rig);
+rig.add(camera);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0, 0);
+controls.enableDamping   = true;
+controls.autoRotate      = true;
+controls.autoRotateSpeed = 0.7;
+
+const _rayGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,-2)]);
+const _rayMat = new THREE.LineBasicMaterial({ color: 0x00ee99, transparent: true, opacity: 0.5 });
+[0, 1].forEach(i => { const c = renderer.xr.getController(i); c.add(new THREE.Line(_rayGeo, _rayMat)); scene.add(c); });
+
+// ── Post-processing composer (flat mode only) ─────────────────────────────────
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const juicePass = new ShaderPass({
+  uniforms: {
+    tDiffuse: { value: null },
+    uChroma:  { value: 0.030 },
+  },
+  vertexShader: /* glsl */`
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: JUICE_FRAG,
+});
+composer.addPass(juicePass);
+
+// ── Slider state ──────────────────────────────────────────────────────────────
+const state = { speed: 1.0, detune: 1.62, layers: 5, chroma: 0.030 };
+[
+  ['s-speed',  'v-speed',  'speed',  2],
+  ['s-detune', 'v-detune', 'detune', 2],
+  ['s-layers', 'v-layers', 'layers', 0],
+  ['s-chroma', 'v-chroma', 'chroma', 3],
+].forEach(([sid, vid, key, dec]) => {
+  const sl = document.getElementById(sid);
+  const vl = document.getElementById(vid);
+  sl.addEventListener('input', () => {
+    state[key] = parseFloat(sl.value);
+    vl.textContent = state[key].toFixed(dec);
+  });
+});
+
+// ── Build all tube layers ─────────────────────────────────────────────────────
+// 5 tubes on the SAME Lorenz path, each with:
+//   - Different core radius (nested halos overlap → interference visible)
+//   - Alternating travel direction (odd=forward, even=backward)
+//   - Frequency = detune ^ layer_index (golden-ratio-like spacing by default)
+// All rendered additive: overlapping pulses ADD their brightness.
+
+const curve    = buildLorenzCurve();
+const curveLen = curve.getLength();
+
+const LAYER_DEF = [
+  // [color hex, direction, core radius, radial segments]
+  [0x00ffff, +1.0, 0.022, 8],
+  [0xff00ff, -1.0, 0.034, 7],
+  [0xff6600, +1.0, 0.050, 7],
+  [0x0088ff, -1.0, 0.070, 6],
+  [0xffffff, +1.0, 0.095, 6],
+];
+
+const tubeMeshes = [];
+const haloMeshes = [];
+const tubeMats   = [];
+const haloMats   = [];
+
+LAYER_DEF.forEach(([hex, dir, coreR, radSeg], i) => {
+  const col  = new THREE.Color(hex);
+  const freq = Math.pow(state.detune, i);  // frequency ramps up each layer
+
+  // Core tube
+  const geo = new THREE.TubeGeometry(curve, 4000, coreR, radSeg, false);
+  const mat = new THREE.ShaderMaterial({
+    vertexShader: VERT, fragmentShader: TUBE_FRAG,
+    uniforms: {
+      uTime:  { value: 0 },   uLen:   { value: curveLen },
+      uSpeed: { value: 1.0 }, uColor: { value: col },
+      uDir:   { value: dir }, uFreq:  { value: freq },
+    },
+    transparent: true, blending: THREE.AdditiveBlending,
+    depthWrite: false,  side: THREE.DoubleSide,
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  scene.add(mesh);
+  tubeMeshes.push(mesh);
+  tubeMats.push(mat);
+
+  // Halo (5x tube radius, fewer segments)
+  const hGeo = new THREE.TubeGeometry(curve, 1000, coreR * 5, radSeg - 2, false);
+  const hMat = new THREE.ShaderMaterial({
+    vertexShader: VERT, fragmentShader: HALO_FRAG,
+    uniforms: {
+      uTime:  { value: 0 },   uLen:   { value: curveLen },
+      uSpeed: { value: 1.0 }, uColor: { value: col },
+      uDir:   { value: dir }, uFreq:  { value: freq },
+    },
+    transparent: true, blending: THREE.AdditiveBlending,
+    depthWrite: false,  side: THREE.DoubleSide,
+  });
+  const hMesh = new THREE.Mesh(hGeo, hMat);
+  scene.add(hMesh);
+  haloMeshes.push(hMesh);
+  haloMats.push(hMat);
+});
+
+const allMats = [...tubeMats, ...haloMats];
+
+// ── WebXR ─────────────────────────────────────────────────────────────────────
+(async () => {
+  const slot = document.getElementById('vr-slot');
+  if (!navigator.xr) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+  const ok = await navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+  if (!ok) { slot.innerHTML = '<span id="vr-na">VR not available</span>'; return; }
+
+  const btn = document.createElement('button');
+  btn.id = 'vr-btn';
+  btn.textContent = 'Enter VR';
+  slot.appendChild(btn);
+
+  btn.addEventListener('click', async () => {
+    const session = await navigator.xr.requestSession('immersive-vr', {
+      optionalFeatures: ['local-floor', 'bounded-floor'],
+    });
+    btn.textContent = 'Exit VR';
+    session.addEventListener('end', () => { btn.textContent = 'Enter VR'; });
+    await renderer.xr.setSession(session);
+  });
+})();
+
+// ── Animation loop ────────────────────────────────────────────────────────────
+const clock = new THREE.Clock();
+let _prevT = 0, _snapCD = false, _prevA = false, _prevB = false;
+
+renderer.setAnimationLoop(() => {
+  const t      = clock.getElapsedTime();
+  const dt     = t - _prevT;
+  _prevT       = t;
+  const detune = state.detune;
+  const inVR   = renderer.xr.isPresenting;
+
+  tubeMats.forEach((mat, i) => {
+    mat.uniforms.uTime.value  = t;
+    mat.uniforms.uSpeed.value = state.speed;
+    mat.uniforms.uFreq.value  = Math.pow(detune, i);
+  });
+  haloMats.forEach((mat, i) => {
+    mat.uniforms.uTime.value  = t;
+    mat.uniforms.uSpeed.value = state.speed;
+    mat.uniforms.uFreq.value  = Math.pow(detune, i);
+  });
+
+  const visible = Math.round(state.layers);
+  tubeMeshes.forEach((m, i) => { m.visible = i < visible; });
+  haloMeshes.forEach((m, i) => { m.visible = i < visible; });
+
+  juicePass.uniforms.uChroma.value = state.chroma;
+
+  if (!inVR) {
+    controls.update();
+  } else {
+    // Quest 2/3: left stick fly, right stick snap-turn, A=speed up, B=speed down
+    const session = renderer.xr.getSession();
+    if (session) {
+      for (const src of session.inputSources) {
+        if (!src.gamepad) continue;
+        const ax = src.gamepad.axes;
+        const bt = src.gamepad.buttons;
+        if (src.handedness === 'left') {
+          const lx = Math.abs(ax[0]) > 0.12 ? ax[0] : 0;
+          const ly = Math.abs(ax[1]) > 0.12 ? ax[1] : 0;
+          if (lx || ly) {
+            const fwd = new THREE.Vector3();
+            renderer.xr.getCamera().getWorldDirection(fwd);
+            fwd.y = 0;
+            if (fwd.lengthSq() < 0.001) fwd.set(0, 0, -1);
+            fwd.normalize();
+            const rgt = new THREE.Vector3().crossVectors(fwd, new THREE.Vector3(0, 1, 0));
+            rig.position.addScaledVector(fwd, -ly * dt * 3);
+            rig.position.addScaledVector(rgt,  lx * dt * 3);
+          }
+        }
+        if (src.handedness === 'right') {
+          const rx = ax[0];
+          if (Math.abs(rx) > 0.7 && !_snapCD) {
+            rig.rotateY(-Math.sign(rx) * Math.PI / 4);
+            _snapCD = true;
+          } else if (Math.abs(rx) < 0.3) {
+            _snapCD = false;
+          }
+          const a = bt[4]?.pressed, b = bt[5]?.pressed;
+          if (a && !_prevA) state.speed = Math.min(5, state.speed + 0.25);
+          if (b && !_prevB) state.speed = Math.max(0.1, state.speed - 0.25);
+          _prevA = !!a; _prevB = !!b;
+        }
+      }
+    }
+  }
+
+  if (inVR) {
+    renderer.render(scene, camera);
+  } else {
+    composer.render();
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+  composer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

@@ -303,13 +303,44 @@ scene.add(new THREE.Mesh(spineGeo, spineMat));
 // ── Animation loop ────────────────────────────────────────────────────────────
 let camT  = 0;
 let prevT = 0;
+let _prevA = false, _prevB = false;
 const clock   = new THREE.Clock();
 const aheadPt = new THREE.Vector3();
+
+// Quest controller rays
+const _rayGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,-2)]);
+const _rayMat = new THREE.LineBasicMaterial({ color: 0x00ee99, transparent: true, opacity: 0.5 });
+[0, 1].forEach(i => { const c = renderer.xr.getController(i); c.add(new THREE.Line(_rayGeo, _rayMat)); scene.add(c); });
 
 renderer.setAnimationLoop(() => {
   const t  = clock.getElapsedTime();
   const dt = t - prevT;
   prevT = t;
+
+  // Quest 2/3: left stick Y = travel speed, right stick Y = rush speed,
+  // A = more symmetry sectors, B = fewer.
+  if (renderer.xr.isPresenting) {
+    const session = renderer.xr.getSession();
+    if (session) {
+      for (const src of session.inputSources) {
+        if (!src.gamepad) continue;
+        const ax = src.gamepad.axes;
+        const bt = src.gamepad.buttons;
+        if (src.handedness === 'left') {
+          const ly = Math.abs(ax[1]) > 0.12 ? ax[1] : 0;
+          if (ly) state.travel = Math.max(0.1, Math.min(2.0, state.travel - ly * dt * 1.5));
+        }
+        if (src.handedness === 'right') {
+          const ry = Math.abs(ax[1]) > 0.12 ? ax[1] : 0;
+          if (ry) state.rush = Math.max(0.05, Math.min(1.5, state.rush - ry * dt * 1.0));
+          const a = bt[4]?.pressed, b = bt[5]?.pressed;
+          if (a && !_prevA) state.symmetry = Math.min(16, state.symmetry + 2);
+          if (b && !_prevB) state.symmetry = Math.max(2, state.symmetry - 2);
+          _prevA = !!a; _prevB = !!b;
+        }
+      }
+    }
+  }
 
   // Advance camera position along curve; wrap with a clean reset
   camT += dt * state.travel * 0.012;
@@ -319,8 +350,6 @@ renderer.setAnimationLoop(() => {
   const pos = curve.getPoint(camT);
   curve.getPoint(lookaheadT, aheadPt);
 
-  // Orient rig: faces the direction of travel along the curve.
-  // lookAt uses world-up (0,1,0) so no roll; safe for VR comfort.
   rig.position.copy(pos);
   rig.lookAt(aheadPt);
 

@@ -206,6 +206,32 @@ SLIDERS.forEach(({ id, vid, key, dec }) => {
   });
 });
 
+// Canvas drag: horizontal = Frequency, vertical = Speed (desktop / mobile parity with VR controller)
+{
+  let _drag = false, _px = 0, _py = 0;
+  const _clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const _syncSlider = (id, vid, val, dec) => {
+    document.getElementById(id).value = val;
+    document.getElementById(vid).textContent = val.toFixed(dec);
+  };
+  canvas.addEventListener('pointerdown', e => {
+    if (e.target !== canvas) return;
+    _drag = true; _px = e.clientX; _py = e.clientY;
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener('pointermove', e => {
+    if (!_drag) return;
+    const dx = e.clientX - _px, dy = e.clientY - _py;
+    _px = e.clientX; _py = e.clientY;
+    vals.uFreq  = _clamp(vals.uFreq  + dx * 28 / innerWidth,  4, 32);
+    vals.uSpeed = _clamp(vals.uSpeed - dy * 2.9 / innerHeight, 0.1, 3.0);
+    _syncSlider('s1', 'v1', vals.uFreq,  1);
+    _syncSlider('s2', 'v2', vals.uSpeed, 1);
+  });
+  canvas.addEventListener('pointerup',     () => { _drag = false; });
+  canvas.addEventListener('pointercancel', () => { _drag = false; });
+}
+
 // Shared draw call used by both flat and XR loops
 function draw(t, vpW, vpH, eyeShift) {
   gl.uniform1f(U.uTime,     t);
@@ -258,20 +284,44 @@ flatRafId = requestAnimationFrame(flatLoop);
 
     cancelAnimationFrame(flatRafId);
 
+    let _xrPrevT = 0, _xrPrevA = false, _xrPrevB = false;
+    const _clampXR = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
     function xrLoop(time, frame) {
       xrSession.requestAnimationFrame(xrLoop);
       const pose = frame.getViewerPose(refSpace);
       if (!pose) return;
 
+      const t  = time * 0.001;
+      const dt = Math.min(t - _xrPrevT, 0.1);
+      _xrPrevT = t;
+
+      // Quest 2/3 controls: right stick X=Frequency, right stick Y=Speed,
+      // left stick X=Drift, A=more sources, B=fewer sources.
+      for (const src of xrSession.inputSources) {
+        if (!src.gamepad) continue;
+        const ax = src.gamepad.axes;
+        const bt = src.gamepad.buttons;
+        if (src.handedness === 'right') {
+          if (Math.abs(ax[0]) > 0.12) vals.uFreq  = _clampXR(vals.uFreq  + ax[0] * dt * 14, 4, 32);
+          if (Math.abs(ax[1]) > 0.12) vals.uSpeed = _clampXR(vals.uSpeed - ax[1] * dt * 1.5, 0.1, 3.0);
+        }
+        if (src.handedness === 'left') {
+          if (Math.abs(ax[0]) > 0.12) vals.uDrift = _clampXR(vals.uDrift + ax[0] * dt * 0.4, 0, 0.8);
+          const a = bt[4]?.pressed, b = bt[5]?.pressed;
+          if (a && !_xrPrevA) vals.uSources = Math.min(8, vals.uSources + 1);
+          if (b && !_xrPrevB) vals.uSources = Math.max(2, vals.uSources - 1);
+          _xrPrevA = !!a; _xrPrevB = !!b;
+        }
+      }
+
       const layer = xrSession.renderState.baseLayer;
       gl.bindFramebuffer(gl.FRAMEBUFFER, layer.framebuffer);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
-      const t = time * 0.001;
       for (const view of pose.views) {
         const vp = layer.getViewport(view);
         gl.viewport(vp.x, vp.y, vp.width, vp.height);
-        // Shift pattern ~2% of viewport width per eye to create parallax depth in the interference pattern
         const shift = view.eye === 'right' ? 0.02 : view.eye === 'left' ? -0.02 : 0;
         draw(t, vp.width, vp.height, shift);
       }
