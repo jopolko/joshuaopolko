@@ -10,6 +10,7 @@
 <link rel="manifest" href="/site.webmanifest?v=6">
 <meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<meta name="indexnow-key" content="e6dd8a9584e84721834940b6d57564b6">
 <title>Joshua Opolko: AI Systems, GEO &amp; Toronto Data Tools</title>
   <meta content="Builds AI systems and Toronto data tools, runs generative-engine-optimization experiments, and prototypes in VR." name="description"/>
   <meta content="website" property="og:type"/>
@@ -175,15 +176,16 @@ figure.hero{margin:0 0 1.8em}
   @media(max-width:560px){.obs-stats{gap:14px 22px}.obs-stat b{font-size:23px}}
   </style>
   <div class="obs-feature">
-    <span class="obs-kicker">Server logs &middot; rebuilt nightly</span>
+    <span class="obs-kicker">Server logs + GSC + Bing WMT &middot; rebuilt nightly</span>
     <h2 class="obs-title">Which AIs are reading this site, and what they fetch</h2>
-    <p class="obs-sub">Every AI assistant and search crawler that hits joshuaopolko.com lands in the raw server logs. The <strong>GEO Observatory</strong> reads them back: who fetches what, which pages get pulled into live answers, and whether the bot is the real thing or an impostor wearing its name.</p>
+    <p class="obs-sub">Every AI assistant and search crawler that hits joshuaopolko.com lands in the raw server logs. The <strong>GEO Observatory</strong> reads them back: who fetches what, which pages get pulled into live answers, and whether the bot is the real thing or an impostor wearing its name. Human clicks come from Google Search Console; AI answer citations from Bing Webmaster Tools.</p>
     <div class="obs-stats">
-      <div class="obs-stat"><b id="obs-live">1,980</b><span>AI live-fetches</span><i class="obs-wk" id="obs-live-wk">+1,109 this week</i></div>
-      <div class="obs-stat"><b id="obs-ai">4,035</b><span>AI crawler hits</span><i class="obs-wk" id="obs-ai-wk">+2,032 this week</i></div>
-      <div class="obs-stat"><b id="obs-ver">1,255</b><span>verified real bots</span><i class="obs-wk" id="obs-ver-wk">+1,255 this week</i></div>
-      <div class="obs-stat"><b id="obs-gsc">0</b><span>clicks from search</span><i class="obs-wk" id="obs-gsc-wk"></i></div>
-      <div class="obs-stat"><b id="obs-ref">0</b><span>clicks via AI</span><i class="obs-wk" id="obs-ref-wk"></i></div>
+      <div class="obs-stat"><b id="obs-live">2,511</b><span>AI live-fetches</span><i class="obs-wk" id="obs-live-wk">+2,256 this week</i></div>
+      <div class="obs-stat"><b id="obs-ai">3,905</b><span>AI crawler hits</span><i class="obs-wk" id="obs-ai-wk">+3,459 this week</i></div>
+      <div class="obs-stat"><b id="obs-ver">3,724</b><span>verified real bots</span><i class="obs-wk" id="obs-ver-wk">+3,330 this week</i></div>
+      <div class="obs-stat"><b id="obs-gsc">75</b><span>clicks from search (GSC)</span><i class="obs-wk" id="obs-gsc-wk"></i></div>
+      <div class="obs-stat"><b id="obs-ref">104</b><span>clicks via AI</span><i class="obs-wk" id="obs-ref-wk">+20 this week</i></div>
+      <div class="obs-stat" id="obs-cite-wrap" style="display:none"><b id="obs-cite">0</b><span>AI citations (Bing WMT)</span><i class="obs-wk" id="obs-cite-wk"></i></div>
     </div>
     <a class="obs-cta" href="/geo-observatory/">Open the GEO Observatory &rarr;</a>
   </div>
@@ -198,6 +200,11 @@ figure.hero{margin:0 0 1.8em}
       function wk(id,v){var e=document.getElementById(id);if(e)e.textContent=(v>0?'+'+Number(v).toLocaleString()+' this week':'');}
       wk('obs-live-wk',w.live);wk('obs-ai-wk',w.ai);wk('obs-ver-wk',w.vok);
       wk('obs-ref-wk',t.referrals7d);
+      if(t.aiCitations!=null){
+        var cw=document.getElementById('obs-cite-wrap');if(cw)cw.style.display='';
+        set('obs-cite',t.aiCitations);
+        wk('obs-cite-wk',t.aiCitationsWk);
+      }
     }).catch(function(){});
   })();
   </script>
