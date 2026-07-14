@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://joshuaopolko.com/</loc><lastmod>2026-07-06</lastmod></url>
   <url><loc>https://joshuaopolko.com/about/</loc><lastmod>2026-06-09</lastmod></url>
+  <url><loc>https://joshuaopolko.com/abuse-structure/</loc><lastmod>2026-06-11</lastmod></url>
   <url><loc>https://joshuaopolko.com/agent-zero/</loc><lastmod>2026-06-27</lastmod></url>
   <url><loc>https://joshuaopolko.com/ai-code-generation-claude-vs-gemini-a-developers-real-world-comparison/</loc><lastmod>2026-06-15</lastmod></url>
   <url><loc>https://joshuaopolko.com/ai-crawler-report/</loc><lastmod>2026-06-27</lastmod></url>
@@ -12,6 +13,8 @@
   <url><loc>https://joshuaopolko.com/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/</loc><lastmod>2026-06-09</lastmod></url>
 <url><loc>https://joshuaopolko.com/child-abuse-in-religious-communities-what-the-research-shows/</loc><lastmod>2026-06-18</lastmod></url>
   <url><loc>https://joshuaopolko.com/claude-code-specification-workflow-mcp/</loc><lastmod>2026-06-15</lastmod></url>
+  <url><loc>https://joshuaopolko.com/claude-fable-5-issues-fixes/</loc><lastmod>2026-06-11</lastmod></url>
+  <url><loc>https://joshuaopolko.com/claude-seo/</loc><lastmod>2026-06-11</lastmod></url>
   <url><loc>https://joshuaopolko.com/crewai-setup-production-guide/</loc><lastmod>2026-06-13</lastmod></url>
   <url><loc>https://joshuaopolko.com/cyubevr/</loc><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joshuaopolko.com/d-lusion-rubberduck/</loc><lastmod>2026-07-06</lastmod></url>
@@ -37,6 +40,7 @@
   <url><loc>https://joshuaopolko.com/n8n-langchain-self-hosting/</loc><lastmod>2026-07-04</lastmod></url>
   <url><loc>https://joshuaopolko.com/n8n-self-hosted-guide/</loc><lastmod>2026-06-13</lastmod></url>
   <url><loc>https://joshuaopolko.com/n8n-vs-windmill/</loc><lastmod>2026-06-20</lastmod></url>
+  <url><loc>https://joshuaopolko.com/neosvr/</loc><lastmod>2026-06-11</lastmod></url>
   <url><loc>https://joshuaopolko.com/ollama/</loc><lastmod>2026-06-13</lastmod></url>
   <url><loc>https://joshuaopolko.com/open-source-or-closed/</loc><lastmod>2026-06-09</lastmod></url>
   <url><loc>https://joshuaopolko.com/open-webui-self-hosted-guide/</loc><lastmod>2026-06-27</lastmod></url>
@@ -51,11 +55,13 @@
   <url><loc>https://joshuaopolko.com/sony-acid/</loc><lastmod>2026-06-09</lastmod></url>
   <url><loc>https://joshuaopolko.com/terror-management-and-religious-control-how-death-anxiety-drives-authoritarian-belief/</loc><lastmod>2026-06-09</lastmod></url>
 <url><loc>https://joshuaopolko.com/the-princess-and-the-pea-when-physical-restriction-mimics-psychological-disorders/</loc><lastmod>2026-06-09</lastmod></url>
+  <url><loc>https://joshuaopolko.com/three-js-pattern/</loc><lastmod>2026-06-11</lastmod></url>
   <url><loc>https://joshuaopolko.com/vision-dominates-half-your-brains-processing-power/</loc><lastmod>2026-06-22</lastmod></url>
   <url><loc>https://joshuaopolko.com/vr-hardware-sizing-aec/</loc><lastmod>2026-07-02</lastmod></url>
   <url><loc>https://joshuaopolko.com/vr-healing/</loc><lastmod>2026-06-09</lastmod></url>
   <url><loc>https://joshuaopolko.com/vr-visualization-growing-teams/</loc><lastmod>2026-07-02</lastmod></url>
   <url><loc>https://joshuaopolko.com/vr-walkthrough-aec/</loc><lastmod>2026-07-02</lastmod></url>
+  <url><loc>https://joshuaopolko.com/walkable-1-1-scale-room-three-js-webxr-architecture-demo/</loc><lastmod>2026-07-06</lastmod></url>
   <url><loc>https://joshuaopolko.com/xr-tests/</loc><lastmod>2026-06-27</lastmod></url>
   <url><loc>https://joshuaopolko.com/kidsevents/</loc><lastmod>2026-07-06</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://joshuaopolko.com/kidsevents/free-museum-days/</loc><lastmod>2026-07-06</lastmod><changefreq>daily</changefreq></url>
