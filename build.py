@@ -57,6 +57,8 @@ NAV_ITEMS = [
     ]),
     ("AI & GEO", "#", [
         ("AI Readiness Scan",       "/aiscan/"),
+        ("AI Cost Maturity",        "/ai-cost-maturity/"),
+        ("Copilot Prompt Injection", "/copilot-prompt-injection/"),
         ("CrewAI",                  "/crewai-setup-production-guide/"),
         ("Building JOSIE",          "/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/"),
         ("Site as AI Infrastructure","/ai-infrastructure/"),
@@ -81,6 +83,11 @@ NAV_ITEMS = [
         ("VR Elderly Care",    "/revolutionizing-elderly-care-with-virtual-reality/"),
         ("Vision & the Brain", "/vision-dominates-half-your-brains-processing-power/"),
         ("XR in Military",     "/military-application/"),
+        ("VR Surgical Training","/vr-surgical-training/"),
+        ("VR Anatomy Education","/vr-anatomy-education/"),
+        ("VR Safety Training",  "/vr-industrial-safety-training/"),
+        ("VR Drug Discovery",   "/vr-drug-discovery/"),
+        ("VR Courtroom Evidence","/vr-courtroom-evidence/"),
         ("Visual Tests",       "/xr-tests/"),
     ]),
     ("About", "/about/", []),
@@ -347,7 +354,7 @@ def sync_nav():
     untouched. This is how you add a page to the site-wide nav: edit NAV_ITEMS above,
     then run `python3 build.py syncnav`. Idempotent.
     """
-    pat = re.compile(r'<nav class="site-nav".*?</nav>', re.S)
+    pat = re.compile(r'<nav\b[^>]*class="site-nav"[^>]*>.*?</nav>', re.S)
     targets = []
     root = Path(OUT) / "index.html"
     if root.exists():
