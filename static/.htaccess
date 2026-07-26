@@ -6,6 +6,11 @@ Options -Indexes +FollowSymLinks
   RewriteEngine On
   RewriteCond %{HTTP_HOST} ^www\.joshuaopolko\.com$ [NC]
   RewriteRule ^(.*)$ https://joshuaopolko.com/$1 [R=301,L]
+
+  # WordPress date-based permalinks still indexed by Google (/index.php/YYYY/MM/DD/slug/)
+  RewriteRule ^index\.php/\d{4}/\d{2}/\d{2}/([^/]+)/?$ /$1/ [R=301,L]
+  # WordPress page/category permalinks (/index.php/slug/)
+  RewriteRule ^index\.php/(.+?)/?$ /$1/ [R=301,L]
 </IfModule>
 DirectoryIndex index.html index.php
 
@@ -46,6 +51,11 @@ ErrorDocument 410 /404.html
 
   # Retired stub - a few unfinished thoughts, deliberately removed (2026-06-18). 410 Gone.
   RedirectMatch 410 ^/abuse-structure/?$
+
+  # Retired analysis pieces, deliberately removed (2026-07-26). Neither drew
+  # search clicks or AI citations; the homepage slots now carry live stats. 410 Gone.
+  RedirectMatch 410 ^/copilot-prompt-injection/?$
+  RedirectMatch 410 ^/local-llm-browser-strategy/?$
 </IfModule>
 
 # Long cache for static assets; HTML stays fresh
@@ -53,4 +63,14 @@ ErrorDocument 410 /404.html
   <FilesMatch "\.(css|js|png|jpe?g|gif|svg|webp|woff2?)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
+
+  # Agent discovery: advertise API catalog and llms.txt on all HTML responses
+  <FilesMatch "\.html$">
+    Header always set Link '</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="describedby"'
+  </FilesMatch>
+
+  # Correct MIME type for api-catalog (RFC 9727)
+  <Files "api-catalog">
+    Header always set Content-Type "application/linkset+json; charset=utf-8"
+  </Files>
 </IfModule>
