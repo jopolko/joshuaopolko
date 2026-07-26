@@ -58,7 +58,6 @@ NAV_ITEMS = [
     ("AI & GEO", "#", [
         ("AI Readiness Scan",       "/aiscan/"),
         ("AI Cost Maturity",        "/ai-cost-maturity/"),
-        ("Copilot Prompt Injection", "/copilot-prompt-injection/"),
         ("CrewAI",                  "/crewai-setup-production-guide/"),
         ("Building JOSIE",          "/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/"),
         ("Site as AI Infrastructure","/ai-infrastructure/"),

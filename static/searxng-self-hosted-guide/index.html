@@ -11,16 +11,16 @@
 <meta name="theme-color" content="#16273f">
 <meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
 <title>SearXNG Self-Hosted Setup (2026): Your Own Private Metasearch Engine</title>
-  <meta content="Self-host SearXNG in 2026 with the exact Docker Compose commands, learn how its 262-engine metasearch stops Google from profiling you, and why this 32k-star project still wins." name="description"/>
+  <meta content="Self-host SearXNG in 2026: Docker Compose setup, how 262-engine metasearch stops Google from profiling you, and why this 32k-star project still wins." name="description"/>
   <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
   <meta content="searxng, searxng setup, searxng docker, self-hosted search engine, private metasearch, degoogle, searxng vs google, searxng vs duckduckgo" name="keywords">
 <meta content="en_US" property="og:locale">
 <meta content="article" property="og:type">
 <meta content="SearXNG Self-Hosted Guide (2026): Run Your Own Private Metasearch Engine" property="og:title"/>
-<meta content="Self-host SearXNG in 2026 with the exact Docker commands, plus how its metasearch design quietly makes you un-profilable: 262 upstream engines, no tracking, no ads, no fingerprint." property="og:description"/>
+<meta content="Self-host SearXNG in 2026: Docker Compose setup, how 262-engine metasearch stops Google from profiling you, and why this 32k-star project still wins." property="og:description"/>
 <meta content="https://joshuaopolko.com/searxng-self-hosted-guide/" property="og:url"/>
 <meta content="Joshua Opolko" property="og:site_name"/>
-<meta content="2026-06-13T16:00:00+00:00" property="og:updated_time"/>
+<meta content="2026-07-06T12:00:00+00:00" property="og:updated_time"/>
 <meta content="https://joshuaopolko.com/assets/searxng-hero.jpg" property="og:image"/>
 <meta content="https://joshuaopolko.com/assets/searxng-hero.jpg" property="og:image:secure_url"/>
 <meta content="1200" property="og:image:width"/>
@@ -28,10 +28,10 @@
 <meta content="A single glowing lantern under a protective glass dome on a dark foggy plain with distant search-engine lights on the horizon, representing private SearXNG metasearch" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="2026-06-13T16:00:00+00:00" property="article:published_time"/>
-<meta content="2026-06-13T16:00:00+00:00" property="article:modified_time"/>
+<meta content="2026-07-06T12:00:00+00:00" property="article:modified_time"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="SearXNG Self-Hosted Setup (2026): Your Own Private Metasearch Engine" name="twitter:title"/>
-<meta content="The exact 2026 Docker commands to self-host SearXNG, plus why no single engine can profile you through it." name="twitter:description"/>
+<meta content="Self-host SearXNG in 2026: Docker Compose setup, how 262-engine metasearch stops Google from profiling you, and why this 32k-star project still wins." name="twitter:description"/>
 <meta content="https://joshuaopolko.com/assets/searxng-hero.jpg" name="twitter:image"/>
 <meta content="Written by" name="twitter:label1"/>
 <meta content="Joshua Opolko" name="twitter:data1"/>
@@ -112,7 +112,7 @@
         "@id": "https://joshuaopolko.com/assets/searxng-hero.jpg"
       },
       "datePublished": "2026-06-13T16:00:00+00:00",
-      "dateModified": "2026-06-13T16:00:00+00:00",
+      "dateModified": "2026-07-06T12:00:00+00:00",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -127,7 +127,7 @@
       "headline": "SearXNG Self-Hosted Guide (2026): Run Your Own Private Metasearch Engine",
       "description": "Self-host SearXNG in 2026 with the exact Docker commands, plus how its metasearch design quietly makes you un-profilable: 262 upstream engines, no tracking, no ads, no fingerprint.",
       "datePublished": "2026-06-13T16:00:00+00:00",
-      "dateModified": "2026-06-13T16:00:00+00:00",
+      "dateModified": "2026-07-06T12:00:00+00:00",
       "author": {
         "@id": "https://joshuaopolko.com/#person"
       },
@@ -137,6 +137,7 @@
       "isPartOf": {
         "@id": "https://joshuaopolko.com/searxng-self-hosted-guide/#webpage"
       },
+
       "mainEntityOfPage": {
         "@id": "https://joshuaopolko.com/searxng-self-hosted-guide/#webpage"
       },
@@ -274,6 +275,8 @@ figure.hero{margin:0 0 1.8em}
 
 @media (max-width:640px){
   body{font-size:18px}
+  .post-body table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .post-body th{white-space:nowrap}
   .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
   .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
   .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
@@ -295,7 +298,7 @@ figure.hero{margin:0 0 1.8em}
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/ai-cost-maturity/">AI Cost Maturity</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/vr-surgical-training/">VR Surgical Training</a></li><li><a href="/vr-anatomy-education/">VR Anatomy Education</a></li><li><a href="/vr-industrial-safety-training/">VR Safety Training</a></li><li><a href="/vr-drug-discovery/">VR Drug Discovery</a></li><li><a href="/vr-courtroom-evidence/">VR Courtroom Evidence</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>SearXNG Self-Hosted Setup (2026): Your Own Private Metasearch Engine</h1>
@@ -334,7 +337,7 @@ figure.hero{margin:0 0 1.8em}
 
 <h2>Quick start: the Docker Compose path (2026)</h2>
 
-<p>The fastest supported install in 2026 is the official Docker Compose path, which pulls a single <code>docker-compose.yml</code> and an environment file straight from the repo (<a href="https://docs.searxng.org/admin/installation-docker.html" target="_blank" rel="noopener">SearXNG installation docs</a>, 2026). You need Docker with the Compose plugin and about two minutes. Copy-paste this:</p>
+<p>SearXNG can be self-hosted in under 10 minutes on any machine running Docker. The fastest supported path in 2026 is the official Docker Compose install, which pulls a single <code>docker-compose.yml</code> and an environment file straight from the repo (<a href="https://docs.searxng.org/admin/installation-docker.html" target="_blank" rel="noopener">SearXNG installation docs</a>, 2026). You need Docker with the Compose plugin and about two minutes. Copy-paste this:</p>
 
 <pre><code># 1. Make a working directory and drop into it
 mkdir -p ./searxng/ &amp;&amp; cd ./searxng/
@@ -387,7 +390,7 @@ docker run --name searxng -d \
 
 <p>Visit <code>http://localhost:8888</code>, kick the tires, and <code>docker container stop searxng &amp;&amp; docker container rm searxng</code> when you're done. The mounted <code>./config/</code> survives, so your tweaks carry over if you bring it back. Prefer building from source? <code>git clone</code> the main repo and run <code>make container</code>, but for almost everyone the published image is the right call.</p>
 
-<h2>SearXNG vs Google vs DuckDuckGo vs Whoogle</h2>
+<h2>SearXNG vs Google vs DuckDuckGo vs Startpage</h2>
 
 <p>Privacy-respecting search is a crowded shelf, and the differences are real. The question that actually matters is <em>who sees your identity</em> and <em>whether you control the box</em>. Here's the honest 2026 comparison.</p>
 
@@ -399,11 +402,11 @@ docker run --name searxng -d \
 <tr><td><strong>SearXNG (self-hosted)</strong></td><td>Only your own server</td><td>No, no index, no account, no profile</td><td>Up to 262 upstream engines, merged</td><td>Yes (this guide)</td><td>None</td></tr>
 <tr><td><strong>Google</strong></td><td>Google, fully, tied to your account</td><td>Yes, that's the business model</td><td>Own index</td><td>No</td><td>Many</td></tr>
 <tr><td><strong>DuckDuckGo</strong></td><td>DuckDuckGo (trust their no-log policy)</td><td>Claims no profiling; you're trusting a third party</td><td>Mostly Bing, plus its own crawler</td><td>No</td><td>Yes (non-targeted)</td></tr>
-<tr><td><strong>Whoogle / Startpage</strong></td><td>The proxy operator</td><td>Proxied Google results; no personal profile</td><td>Google (proxied)</td><td>Whoogle: yes &middot; Startpage: no</td><td>Startpage: optional</td></tr>
+<tr><td><strong>Startpage</strong></td><td>The proxy operator</td><td>Proxied Google results; no personal profile</td><td>Google (proxied)</td><td>No</td><td>Yes (non-targeted)</td></tr>
 </tbody>
 </table>
 
-<p>The pattern is clear. DuckDuckGo and Startpage ask you to <em>trust a company</em> not to log you. Self-hosted SearXNG (and Whoogle) ask you to trust <em>yourself</em>, because you own the only machine that ever sees the query. For a degoogling purist, that distinction is the whole point.</p>
+<p>The defining difference is who holds the logs: self-hosted SearXNG means only you can see your queries, while DuckDuckGo and Startpage require trusting a third party's privacy policy. DuckDuckGo and Startpage ask you to <em>trust a company</em> not to log you. Self-hosted SearXNG asks you to trust <em>yourself</em>, because you own the only machine that ever sees the query. For a degoogling purist, that distinction is the whole point.</p>
 
 <h2>Should you self-host or use a public instance?</h2>
 
@@ -439,6 +442,18 @@ docker run --name searxng -d \
 
 <p>Use one of the roughly 70 public instances for casual, low-stakes searches and crowd cover; self-host a private instance for your daily driver so no operator can log you. A private instance sends every query from your one IP, so pair it with a VPN or Tor for outbound anonymity (<a href="https://docs.searxng.org/" target="_blank" rel="noopener">SearXNG docs</a>, 2026).</p>
 
+<h3>Why install SearXNG with Docker instead of directly on the OS?</h3>
+
+<p>Docker is the officially maintained path and handles the Redis dependency automatically. Updating is one command (<code>docker compose pull && docker compose up -d</code>), the container is isolated from your system Python and packages, and removal is clean. A native install requires manually setting up a Python virtualenv, installing system packages, configuring Redis separately, and writing your own process manager config (a systemd unit or equivalent). For most setups, Docker is strictly simpler. The only reasons to go native are if Docker is unavailable on your machine, you're on very constrained hardware where the daemon overhead matters, or you already manage Redis and prefer controlling everything yourself.</p>
+
+<h3>How do I install SearXNG?</h3>
+
+<p>The fastest path is the official Docker Compose install: pull the <code>docker-compose.yml</code> and <code>.env.example</code> files from the repo's <code>container/</code> directory, copy the env file, set your hostname, and run <code>docker compose up -d</code>. The instance is available at <code>http://localhost:8080</code> within a minute or two. Before exposing it to the internet, replace the default <code>ultrasecretkey</code> value in <code>settings.yml</code> with a real random key (<code>openssl rand -hex 32</code>) and put a reverse proxy with TLS in front of the container. Note: the old <code>searxng-docker</code> helper repository was archived on March 28, 2026; use the <code>container/</code> files from the main repo instead. The complete commands are in the Quick Start section above.</p>
+
+<h3>How does SearXNG compare to DuckDuckGo?</h3>
+
+<p>The core difference is who holds the logs. DuckDuckGo is a company you trust not to record your searches; self-hosted SearXNG is infrastructure you own, so no third party ever sees your queries. DuckDuckGo pulls most results from Bing plus its own crawler; SearXNG aggregates up to 262 upstream engines (including Bing, Google, Brave, and many more) and merges them. DuckDuckGo requires no setup. SearXNG requires Docker and about ten minutes, in exchange for search results that never leave your control.</p>
+
 <hr/>
 
 <h2>Resources</h2>
@@ -453,7 +468,7 @@ docker run --name searxng -d \
 <li><a href="/ollama/">Ollama</a>, run local models privately, the same own-your-stack philosophy</li>
 </ul>
 
-<p><em>Last updated: June 13, 2026.</em></p>
+<p><em>Last updated: July 6, 2026.</em></p>
 
 <p><em>Josh writes about self-hosted tooling, AI agents, and GEO, and runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto's newest restaurants.</em></p>
 
@@ -504,6 +519,30 @@ docker run --name searxng -d \
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Use one of the roughly 70 public instances for casual, low-stakes searches and crowd cover; self-host a private instance for your daily driver so no operator can log you. A private instance sends every query from your one IP, so pair it with a VPN or Tor for outbound anonymity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why install SearXNG with Docker instead of directly on the operating system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Docker is the officially maintained path and handles the Redis dependency automatically. Updating is one command (docker compose pull && docker compose up -d), the container is isolated from your system Python and packages, and removal is clean. A native install requires manually setting up a Python virtualenv, installing system packages, configuring Redis separately, and writing your own process manager config. For most setups, Docker is strictly simpler. The only reasons to go native are if Docker is unavailable, you are on very constrained hardware, or you already manage Redis and prefer controlling everything yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I install SearXNG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The fastest path is the official Docker Compose install: pull the docker-compose.yml and .env.example files from the repo's container/ directory, copy the env file, set your hostname, and run docker compose up -d. The instance is available at http://localhost:8080 within a minute or two. Before exposing it to the internet, replace the default ultrasecretkey value in settings.yml with a real random key (openssl rand -hex 32) and put a reverse proxy with TLS in front of the container. Note: the old searxng-docker helper repository was archived on March 28, 2026; use the container/ files from the main repo instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does SearXNG compare to DuckDuckGo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The core difference is who holds the logs. DuckDuckGo is a company you trust not to record your searches; self-hosted SearXNG is infrastructure you own, so no third party ever sees your queries. DuckDuckGo pulls most results from Bing plus its own crawler; SearXNG aggregates up to 262 upstream engines including Bing, Google, and Brave, and merges them. DuckDuckGo requires no setup. SearXNG requires Docker and about ten minutes, in exchange for search results that never leave your control."
       }
     }
   ]

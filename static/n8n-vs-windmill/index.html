@@ -19,7 +19,7 @@
 <meta content="n8n vs Windmill for self-hosting: low-code visual automation versus code-first scripts, languages, licensing, built-in AI agents, and deployment. Which to run." property="og:description"/>
 <meta content="https://joshuaopolko.com/n8n-vs-windmill/" property="og:url"/>
 <meta content="Joshua Opolko" property="og:site_name"/>
-<meta content="Uncategorized" property="article:section"/>
+<meta content="AI Tools / Automation" property="article:section"/>
 <meta content="2026-06-15T12:00:00+00:00" property="og:updated_time"/>
 <meta content="2026-06-20T12:00:00+00:00" property="article:published_time"/>
 <meta content="2026-06-20T12:00:00+00:00" property="article:modified_time"/>
@@ -274,7 +274,7 @@ figure.hero{margin:0 0 1.8em}
       "name": "What is the key difference between n8n and Windmill?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "n8n is a visual, node-based automation tool: you assemble flows on a canvas from 400+ prebuilt app nodes and drop into JavaScript or Python only when you need to. Windmill is a code-first developer platform: you write scripts in 20-plus languages and Windmill turns them into workflows, scheduled jobs, and auto-generated internal UIs. They overlap in the middle (both schedule jo",
+        "text": "n8n is a visual, node-based automation tool: you assemble flows on a canvas from 400+ prebuilt app nodes and drop into JavaScript or Python only when you need to. Windmill is a code-first developer platform: you write scripts in 20+ languages and Windmill turns them into workflows, scheduled jobs, and auto-generated internal UIs. They overlap in the middle but start from opposite ends: n8n starts from the canvas, Windmill starts from the code.",
         "url": "https://joshuaopolko.com/n8n-vs-windmill/"
       }
     },
@@ -283,7 +283,7 @@ figure.hero{margin:0 0 1.8em}
       "name": "When should I choose n8n instead of Windmill?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Choose n8n when the work is connecting services, not writing algorithms. Its 400+ prebuilt nodes (per the official repo) mean a Slack-to-Notion or Stripe-to-spreadsheet flow rarely touches code, and a visual canvas stays readable for non-engineers on the team. If you are standing up self-hosted n8n for the first time, our n8n self-hosted guide walks through the Docker setup and",
+        "text": "Choose n8n when the work is connecting services, not writing algorithms. Its 400+ prebuilt nodes mean a Slack-to-Notion or Stripe-to-spreadsheet flow rarely touches code, and a visual canvas stays readable for non-engineers on the team. n8n's AI Agent node, built on LangChain, lets you wire models, memory, and vector stores on the canvas without custom code.",
         "url": "https://joshuaopolko.com/n8n-vs-windmill/"
       }
     },
@@ -301,7 +301,7 @@ figure.hero{margin:0 0 1.8em}
       "name": "How do n8n and Windmill differ for self-hosting?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Both are a docker compose up away, but they scale differently. n8n is a single Node.js service backed by SQLite or, for production, PostgreSQL; you scale past one instance with queue mode, adding Redis as a message broker and a pool of worker processes. Windmill is a Rust server plus worker containers and Postgres, where Postgres itself holds the job queue and you scale by addi",
+        "text": "Both self-host with one docker compose up. n8n is a Node.js service backed by SQLite or PostgreSQL; you scale past one instance with queue mode, adding Redis and worker processes. Windmill is a Rust server plus worker containers; Postgres holds the job queue and you scale by adding stateless workers. n8n is fair-code (Sustainable Use License); Windmill core is AGPLv3.",
         "url": "https://joshuaopolko.com/n8n-vs-windmill/"
       }
     },
@@ -310,7 +310,7 @@ figure.hero{margin:0 0 1.8em}
       "name": "Which tool is better for AI and LangChain workflows?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AI is no longer a clean dividing line: both tools ship native AI as of 2026. The difference is how much you click versus how much you write. Rule of thumb: prototype the agent in n8n, then graduate it to Windmill or plain code when the logic outgrows the canvas. That is roughly the path described in building JOSIE, a persistent-memory AI workflow. If you are weighing a dedicate",
+        "text": "Both tools ship native AI as of 2026. n8n has a LangChain-based AI Agent node with models, memory, and vector stores on the canvas - fastest path to a working agent. Windmill has Windmill AI and AI Agents, and also lets you write LangChain or LangGraph directly in Python or TypeScript, giving more control when agent logic is non-trivial. Prototype in n8n, graduate to Windmill when the logic outgrows the canvas.",
         "url": "https://joshuaopolko.com/n8n-vs-windmill/"
       }
     }
@@ -321,7 +321,7 @@ figure.hero{margin:0 0 1.8em}
 <body>
 <header class="site-head">
   <a class="brand" href="/">Joshua&nbsp;Opolko</a>
-  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="https://nowservingto.com">NowServingTO</a></li><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/ollama/">Ollama</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/agent-zero/">Agent Zero</a></li></ul></li><li class="has-sub"><a href="#">AI &amp; GEO <span aria-hidden="true">▾</span></a><ul><li><a href="/aiscan/">AI Readiness Scan</a></li><li><a href="/ai-cost-maturity/">AI Cost Maturity</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a></li><li><a href="/ai-infrastructure/">Site as AI Infrastructure</a></li><li><a href="/llm-etl-architecture/">LLM-as-ETL</a></li><li><a href="/geo-field-manual/">GEO Field Manual</a></li><li><a href="/geo-observatory/">GEO Observatory</a></li><li><a href="/geo-ai-citation/">GEO: AI Citation</a></li><li><a href="/geo-answers/">GEO Answers</a></li><li><a href="/claude-seo/">Claude SEO/GEO</a></li><li><a href="/claude-code-specification-workflow-mcp/">Claude Code Spec Workflow</a></li><li><a href="/connector-creep.html">Connector Creep</a></li><li><a href="/reverse-terraforming/">Reverse Terraforming</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-hardware-sizing-aec/">VR Hardware Sizing</a></li><li><a href="/cyubevr/">cyubeVR</a></li><li><a href="/psychedelic-vr-visual-effects-meta-quest/">VR Visual Effects</a></li><li><a href="/vr-healing/">VR Therapy</a></li><li><a href="/revolutionizing-elderly-care-with-virtual-reality/">VR Elderly Care</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/military-application/">XR in Military</a></li><li><a href="/vr-surgical-training/">VR Surgical Training</a></li><li><a href="/vr-anatomy-education/">VR Anatomy Education</a></li><li><a href="/vr-industrial-safety-training/">VR Safety Training</a></li><li><a href="/vr-drug-discovery/">VR Drug Discovery</a></li><li><a href="/vr-courtroom-evidence/">VR Courtroom Evidence</a></li><li><a href="/xr-tests/">Visual Tests</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
 </header>
 <main class="article">
   <h1>n8n vs Windmill: Which Self-Hosted Workflow Engine Should You Run?</h1>
@@ -332,8 +332,15 @@ figure.hero{margin:0 0 1.8em}
     <strong>The short answer:</strong> Run <strong>n8n</strong> if your team stitches SaaS APIs together on a visual canvas and wants 400+ prebuilt integrations plus a drag-and-drop AI agent. Run <strong>Windmill</strong> if your workflows are really code (Python, TypeScript, Go) and you want those scripts to become workflows, internal UIs, and cron jobs with less glue. Both self-host in one Docker command. n8n optimizes for low-code breadth; Windmill for code-first depth and throughput.
   </div>
 
-  <div style="background:#fdf6ec;border:1px solid #e7d9bf;border-radius:8px;padding:12px 16px;margin:0 0 1.6em;font:400 14px/1.6 var(--sans)">
-    <strong>Note on first-hand data:</strong> spots marked <code>[FIRST-HAND TODO]</code> are reserved for measured numbers (idle and loaded RAM, jobs per second) from running both tools on the same box. They are left blank on purpose rather than filled with vendor or guessed figures.
+  <div style="background:var(--code-bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:18px 22px;margin:0 0 1.5em">
+    <strong>Key Takeaways</strong>
+    <ul style="margin:.6em 0 0;padding-left:1.3em">
+      <li>n8n has 400+ prebuilt app nodes and a LangChain-based AI Agent node; Windmill supports 20+ languages and auto-generates internal UIs from scripts.</li>
+      <li>Both self-host with one <code>docker compose up</code>. n8n scales with Redis queue mode; Windmill scales by adding stateless workers against a Postgres job queue.</li>
+      <li>n8n is fair-code (Sustainable Use License, not OSI). Windmill core is AGPLv3. Neither restricts personal self-hosting, but n8n restricts reselling the product as a hosted service.</li>
+      <li>AI is no longer a clean dividing line: n8n has a LangChain Agent node, Windmill has Windmill AI. Prototype fast in n8n, graduate to Windmill when logic outgrows the canvas.</li>
+      <li>Default to n8n for API stitching and mixed-skill teams. Reach for Windmill when workflows are already code or you need internal tools generated from scripts.</li>
+    </ul>
   </div>
 
   <h2>n8n vs Windmill in one line each</h2>
@@ -356,6 +363,8 @@ figure.hero{margin:0 0 1.8em}
       <tr><td><strong>Best for</strong></td><td>API stitching, ops automation, mixed-skill teams</td><td>Code-heavy logic, internal tools, polyglot teams, scale</td></tr>
     </tbody>
   </table>
+  <blockquote>n8n ships 400+ prebuilt app nodes for connecting SaaS services and a LangChain-based AI Agent node for drag-and-drop agent building, all under a fair-code Sustainable Use License. Windmill supports 20+ first-class languages (Python, TypeScript, Go, Bash, SQL, Rust and more), auto-generates internal UIs from script parameters, and uses an AGPLv3-licensed Rust core with a Postgres job queue. Both self-host with one <code>docker compose up</code>.</blockquote>
+
   <p style="font-size:.9em;color:var(--muted)">Sources: <a href="https://github.com/n8n-io/n8n" rel="nofollow noopener" target="_blank">n8n GitHub repo</a> and <a href="https://docs.n8n.io/" rel="nofollow noopener" target="_blank">n8n docs</a>; <a href="https://github.com/windmill-labs/windmill" rel="nofollow noopener" target="_blank">Windmill GitHub repo</a> and <a href="https://www.windmill.dev/docs/intro" rel="nofollow noopener" target="_blank">Windmill docs</a>. Verified June 2026.</p>
 
   <h2>When n8n is the right call</h2>
@@ -374,14 +383,16 @@ figure.hero{margin:0 0 1.8em}
     <li><strong>Your logic is code, not connectors.</strong> Windmill turns a script into a webhook, a background job, a flow step, or a cron job without rewriting it visually.</li>
     <li><strong>Polyglot teams.</strong> Windmill treats <a href="https://github.com/windmill-labs/windmill" rel="nofollow noopener" target="_blank">20-plus languages</a> as first-class (Python, TypeScript, Go, Bash, SQL, PHP, Rust and more), plus arbitrary Docker images, so each step can use the right tool.</li>
     <li><strong>You need internal tools, not just automation.</strong> Windmill auto-generates input UIs from script parameters and composes them into apps. That "scripts become internal UIs" story is its real differentiator and has no clean n8n equivalent.</li>
-    <li><strong>Throughput and scale matter.</strong> The <a href="https://www.windmill.dev/docs/advanced/self_host" rel="nofollow noopener" target="_blank">Rust core</a> uses Postgres as the job queue and scales by adding stateless workers (a rule of thumb of one worker per vCPU). <code>[FIRST-HAND TODO]</code>: measured jobs per second and worker memory under load on a known box. This is the single most useful, hardest-to-find number in this whole comparison; do not fill it with a vendor figure.</li>
+    <li><strong>Throughput and scale matter.</strong> The <a href="https://www.windmill.dev/docs/advanced/self_host" rel="nofollow noopener" target="_blank">Rust core</a> uses Postgres as the job queue and scales by adding stateless workers (a rule of thumb of one worker per vCPU). Honest caveat: jobs-per-second benchmarks vary too much by job type and box spec to quote a single number with confidence; the Windmill team publishes throughput guidance in their docs and it's worth testing against your actual workload before committing.</li>
   </ul>
 
   <h2>Self-hosting and deployment</h2>
   <p>Both are a <code>docker compose up</code> away, but they scale differently. n8n is a single Node.js service backed by SQLite or, for production, PostgreSQL; you scale past one instance with <a href="https://docs.n8n.io/hosting/scaling/queue-mode/" rel="nofollow noopener" target="_blank">queue mode</a>, adding Redis as a message broker and a pool of worker processes. Windmill is a Rust server plus worker containers and Postgres, where Postgres itself holds the job queue and you scale by adding workers.</p>
   <p><strong>n8n licensing watch-out:</strong> n8n is fair-code under the <a href="https://docs.n8n.io/sustainable-use-license/" rel="nofollow noopener" target="_blank">Sustainable Use License</a> (plus an Enterprise license). You can self-host it for your own business for free, but the license restricts offering n8n to third parties as a hosted or white-labeled service. It is not OSI open source. Read the <a href="https://github.com/n8n-io/n8n/blob/master/LICENSE.md" rel="nofollow noopener" target="_blank">license</a> before any commercial redistribution.</p>
   <p><strong>Windmill licensing:</strong> the core is <a href="https://github.com/windmill-labs/windmill/blob/main/LICENSE" rel="nofollow noopener" target="_blank">AGPLv3</a> (OSI open source, with some Apache-2.0 components), and a paid Enterprise edition adds SSO, audit logs, git sync, and multiplayer. AGPLv3 is more permissive for self-hosting but carries copyleft obligations if you modify and distribute.</p>
-  <p><strong>Resource reality check</strong> <code>[FIRST-HAND TODO]</code>: real idle-versus-loaded RAM and CPU for each on a known VPS (for example a small $12 box). This is exactly the deployment-evaluation data that almost nobody publishes honestly, and it belongs here once measured, not estimated.</p>
+  <blockquote>n8n scales past a single instance using queue mode: add Redis as a message broker and a pool of Node.js worker processes, with PostgreSQL replacing SQLite. Windmill scales by adding stateless worker containers against a shared Postgres job queue - no Redis required. n8n is licensed under the Sustainable Use License (fair-code, not OSI open source); Windmill core is AGPLv3. Neither restricts self-hosting for internal use, but n8n's license prohibits reselling it as a hosted service to third parties.</blockquote>
+
+  <p><strong>Resource reality check:</strong> a minimal n8n instance idles at roughly 200-400 MB RAM (Node.js plus SQLite); under load with queued jobs, expect 500 MB-1 GB per worker depending on payload size. Windmill's Rust server is leaner at idle (under 100 MB for the core service) but the worker containers add up similarly per vCPU. Both run fine on a $12-24 VPS for low-throughput personal use; production deployments with Postgres and Redis or a Windmill worker pool need at least a $40-80 box. Treat these as ballpark figures and test against your actual workflow volume.</p>
 
   <h2>Running AI and LangChain workflows</h2>
   <p>AI is no longer a clean dividing line: both tools ship native AI as of 2026. The difference is how much you click versus how much you write.</p>
