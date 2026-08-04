@@ -34,7 +34,153 @@
 <meta name="twitter:description" content="6 psychedelic VR visual effects with live Three.js WebGL demos. Quest, Pico 4, Valve Index, Varjo, Pimax — any WebXR browser. Enter VR on every demo.">
 <meta name="twitter:image" content="https://joshuaopolko.com/assets/2025/09/Gemini_Generated_Image_pq1c5tpq1c5tpq1c.webp">
 <link href="https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/" rel="canonical">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com","sameAs":["https://www.linkedin.com/in/joshuaopolko/","https://github.com/jopolko","https://nowservingto.com","https://twitter.com/jopolko"]},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"}},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/","name":"VR Visual Effects That Exploit the Visual Cortex"}}]},{"@type":"BlogPosting","@id":"https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#richSnippet","headline":"VR Visual Effects That Exploit the Visual Cortex: 4 Psychedelic Techniques with Live Demos","description":"4 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.","keywords":"psychedelic VR, visual cortex, Three.js WebXR, GLSL shaders, browser VR, Meta Quest, Pico 4 VR, Varjo WebXR, SteamVR browser, Valve Index WebXR, Pimax WebXR, trippy VR effects, VR visual effects, WebGL demos, infinite tunnel","datePublished":"2025-09-08T02:24:08+00:00","dateModified":"2026-06-23T00:00:00+00:00","wordCount":2800,"author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"about":[{"@type":"Thing","name":"Psychedelic VR","sameAs":"https://www.wikidata.org/wiki/Q170072"},{"@type":"Thing","name":"Visual cortex","sameAs":"https://www.wikidata.org/wiki/Q41791"},{"@type":"Thing","name":"WebGL","sameAs":"https://www.wikidata.org/wiki/Q320896"}],"speakable":{"@type":"SpeakableSpecification","cssSelector":[".post-title",".post-body > p"]}},{"@type":"FAQPage","@id":"https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#faq","mainEntity":[{"@type":"Question","name":"What makes VR visual effects psychedelic?","acceptedAnswer":{"@type":"Answer","text":"Psychedelic VR effects work by simultaneously overwhelming multiple visual cortex processing streams: motion detection (MT/V5), color processing (V4), scale-invariant pattern recognition, and temporal integration. The visual cortex dedicates 50-55% of the cerebral cortex to vision, making it highly susceptible to calibrated perceptual overload that exceeds its capacity to form stable representations."}},{"@type":"Question","name":"Can I run these VR effects in the browser without Unity?","acceptedAnswer":{"@type":"Answer","text":"Yes. Three.js r169 with ShaderMaterial exposes raw GLSL control and supports the WebXR Device API, which runs natively in Meta Quest Browser. All 4 demos on this page initialize lazily as you scroll. On a Quest, click the Enter VR button below any demo to enter an immersive-VR session with full head tracking and stereo rendering."}},{"@type":"Question","name":"How do I enter VR from the browser on Meta Quest?","acceptedAnswer":{"@type":"Answer","text":"Open this page in Meta Quest Browser. Scroll to any demo and tap the Enter VR button that appears below the canvas. The browser requests permission for an immersive-vr session via the WebXR Device API. The demo renders in full stereo at the Quest's native refresh rate. Press the menu button to exit."}},{"@type":"Question","name":"What is the performance budget for psychedelic VR on Meta Quest?","acceptedAnswer":{"@type":"Answer","text":"Quest 3 targets 90Hz (11.1ms frame budget); Quest 2 targets 72Hz (13.9ms). Fullscreen GLSL fragment shaders typically cost 2-5ms. GPU particles cost 1-3ms. Running 3-4 combined effects requires adaptive quality: monitor frame time and reduce shader iteration counts if the budget is exceeded."}},{"@type":"Question","name":"Which visual effects cause the strongest perceptual response in VR?","acceptedAnswer":{"@type":"Answer","text":"Infinite tunnel effects are consistently the strongest because they exploit the looming response, vergence-accommodation conflict, and forward self-motion signals simultaneously. Combining any two techniques produces the most intense perceptual response within a safe frame budget."}},{"@type":"Question","name":"Which VR headsets can run these WebXR demos?","acceptedAnswer":{"@type":"Answer","text":"Any headset with a WebXR-capable browser can run these demos. Meta Quest 2, 3, 3S, and Pro work natively via Meta Quest Browser. Pico 4 and Pico 4 Ultra work via Pico Browser with the same Enter VR flow. PC VR headsets including Valve Index, HTC Vive Pro 2, HP Reverb G2, Varjo XR-4, and Pimax Crystal work by opening Chrome or Edge on the connected Windows PC while SteamVR is running — WebXR routes automatically through SteamVR's OpenXR runtime with full stereo rendering and head tracking. Apple Vision Pro does not support immersive-vr WebXR sessions in Safari."}}]}]}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Person",
+        "Organization"
+      ],
+      "@id": "https://joshuaopolko.com/#person",
+      "name": "Joshua Opolko",
+      "url": "https://joshuaopolko.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/joshuaopolko/",
+        "https://github.com/jopolko",
+        "https://nowservingto.com",
+        "https://twitter.com/jopolko"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://joshuaopolko.com/#website",
+      "url": "https://joshuaopolko.com",
+      "name": "Joshua Opolko",
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://joshuaopolko.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/",
+            "name": "VR Visual Effects That Exploit the Visual Cortex"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#richSnippet",
+      "headline": "VR Visual Effects That Exploit the Visual Cortex: 4 Psychedelic Techniques with Live Demos",
+      "description": "4 psychedelic VR visual effects designed to exploit visual cortex mechanisms, each with a live interactive Three.js WebGL demo and Enter VR button for Meta Quest.",
+      "keywords": "psychedelic VR, visual cortex, Three.js WebXR, GLSL shaders, browser VR, Meta Quest, Pico 4 VR, Varjo WebXR, SteamVR browser, Valve Index WebXR, Pimax WebXR, trippy VR effects, VR visual effects, WebGL demos, infinite tunnel",
+      "datePublished": "2025-09-08T02:24:08+00:00",
+      "dateModified": "2026-06-23T00:00:00+00:00",
+      "wordCount": 2800,
+      "author": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "publisher": {
+        "@id": "https://joshuaopolko.com/#person"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Psychedelic VR",
+          "sameAs": "https://www.wikidata.org/wiki/Q170072"
+        },
+        {
+          "@type": "Thing",
+          "name": "Visual cortex",
+          "sameAs": "https://www.wikidata.org/wiki/Q41791"
+        },
+        {
+          "@type": "Thing",
+          "name": "WebGL",
+          "sameAs": "https://www.wikidata.org/wiki/Q320896"
+        }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".post-title",
+          ".post-body > p"
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://joshuaopolko.com/psychedelic-vr-visual-effects-meta-quest/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What makes VR visual effects psychedelic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Psychedelic VR effects work by simultaneously overwhelming multiple visual cortex processing streams: motion detection in MT/V5, color processing in V4, scale-invariant pattern recognition, and temporal integration. The visual cortex dedicates 50-55% of the cerebral cortex to vision, making it highly susceptible to calibrated perceptual overload. See the full neuroscience breakdown."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I run these VR effects in the browser without Unity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Three.js with ShaderMaterial exposes raw GLSL and supports the WebXR Device API natively in Meta Quest Browser. All 4 demos on this page are self-contained. On Quest, open this page in the browser, scroll to any demo, and tap Enter VR to start an immersive-VR session with stereo rendering and head tracking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I enter VR from the browser on Meta Quest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open this page in Meta Quest Browser. Scroll to any demo and tap the Enter VR button below the canvas. The browser requests permission for an immersive-vr session via the WebXR Device API. The demo renders in full stereo at the Quest's native refresh rate (72Hz on Quest 2, 90Hz on Quest 3). Press the menu button to exit and return to the page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the performance budget for psychedelic VR on Meta Quest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quest 3 targets 90Hz (11.1ms frame budget); Quest 2 targets 72Hz (13.9ms). Fullscreen GLSL fragment shaders cost 2-5ms. GPU particles cost 1-3ms. Running 3-4 combined effects is feasible with adaptive quality reducing shader iteration counts at runtime when frame time exceeds 11ms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which visual effects cause the strongest perceptual response in VR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Infinite tunnel effects are consistently the strongest because they exploit the looming response, vergence-accommodation conflict, and forward self-motion signals simultaneously. Combining any two techniques produces the most intense perceptual response within a safe frame budget."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which VR headsets can run these WebXR demos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Any headset with a WebXR-capable browser. Meta Quest 2, 3, 3S, and Pro work natively via Meta Quest Browser. Pico 4 and Pico 4 Ultra work via Pico Browser with the same Enter VR flow. PC VR headsets including Valve Index, HTC Vive Pro 2, HP Reverb G2, Varjo XR-4, and Pimax Crystal work by opening Chrome or Edge on the connected Windows PC while SteamVR is running: WebXR routes automatically through SteamVR's OpenXR runtime with full stereo rendering and head tracking. The shaders are fragment-bound, so higher-resolution headsets like Varjo and Pimax resolve finer interference and tunnel detail at no additional GPU geometry cost. Apple Vision Pro does not currently support immersive-vr WebXR sessions in Safari."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --bg:#fbfaf7;--panel:#fff;--ink:#1b1a17;--ink2:#3f3d38;--muted:#7a766c;

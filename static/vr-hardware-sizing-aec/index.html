@@ -27,7 +27,7 @@
 <meta content="A photorealistic render of a modern multi-storey concrete-and-glass building at golden hour" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="2026-07-02T00:00:00+00:00" property="article:published_time"/>
-<meta content="2026-07-19T00:00:00+00:00" property="article:modified_time"/>
+<meta content="2026-08-04T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, Servers" name="twitter:title"/>
 <meta content="Exactly how many workstations, GPUs, servers, and headsets a 30-person AEC firm needs for VR rendering, with bills of materials for three deployment models." name="twitter:description"/>
@@ -111,7 +111,7 @@
         "@id": "https://joshuaopolko.com/assets/architectural-visualization-hero.jpg"
       },
       "datePublished": "2026-07-02T00:00:00+00:00",
-      "dateModified": "2026-07-19T00:00:00+00:00",
+      "dateModified": "2026-08-04T00:00:00+00:00",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -126,7 +126,7 @@
       "headline": "VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, Servers",
       "description": "Exactly how many workstations, GPUs, servers, and headsets a 30-person AEC firm needs for VR rendering, with worked bills of materials for the three deployment models and scaling rules for 10 and 50 seats.",
       "datePublished": "2026-07-02T00:00:00+00:00",
-      "dateModified": "2026-07-19T00:00:00+00:00",
+      "dateModified": "2026-08-04T00:00:00+00:00",
       "author": {
         "@id": "https://joshuaopolko.com/#person"
       },
@@ -162,23 +162,23 @@
           "name": "How many VR-capable workstations does a 30-person architecture firm need?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Six to ten, not thirty. In a typical 30-person studio only 20 to 30 percent of seats author real-time visualization; the rest do production BIM work that runs fine on standard workstations. Kit 6 to 10 seats with RTX 4070 Super class GPUs or better, give 1 or 2 power seats an RTX 4090 or RTX 6000 Ada class card for the heaviest models, and leave the remaining 20 or so seats on standard BIM hardware."
+            "text": "Six to ten, not thirty. Only the 20-30% of seats that author real-time visualization need RTX 4070 Super class GPUs or better; one or two power seats get an RTX 4090 or RTX 6000 Ada class card for the heaviest models, and the remaining production BIM seats need no upgrade because they join reviews as viewers, not renderers."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you need a server for architectural VR rendering?",
+          "name": "How many GPUs and servers do you need for VR rendering on a 30-person team?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually no. In-app tools like Enscape and Twinmotion render on the local workstation GPU. Streaming platforms like Resolve and Autodesk Workshop XR do their processing in the vendor's cloud, so you buy subscriptions rather than servers. The main case for owning a server is Nvidia Omniverse (which requires a Nucleus server for scene collaboration) or a self-hosted pixel-streaming setup, and both are program-scale choices rather than 30-person defaults."
+            "text": "Eight to ten discrete GPU upgrades and, in most deployments, zero servers. Enscape and Twinmotion render on the local workstation GPU; Resolve and Autodesk Workshop XR render in the vendor's cloud. Servers enter the picture only with Nvidia Omniverse (a Nucleus scene server, plus optionally a multi-GPU render server) or self-hosted pixel streaming, both of which are specialist choices at this size."
           }
         },
         {
           "@type": "Question",
-          "name": "What GPU do you need for Enscape or Twinmotion VR?",
+          "name": "What GPU do you need for Enscape or Twinmotion in VR?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For comfortable VR on typical architectural models in 2026, an RTX 4070 Super with 12 GB of VRAM is the sensible floor for authoring seats, with 16 GB or more (RTX 4080 Super or RTX 4090) strongly recommended for large or federated models. VRAM is usually the binding constraint before raw compute, because a heavy BIM scene that exceeds video memory drops frames no matter how fast the GPU core is."
+            "text": "An RTX 4070 Super with 12 GB of VRAM is the sensible 2026 floor for an authoring seat, with 16-24 GB (RTX 4080 Super, RTX 4090) recommended for large or federated models. VRAM is usually the binding constraint before core speed: a scene that spills out of video memory drops frames regardless of GPU compute, and dropped frames are what make VR uncomfortable."
           }
         },
         {
@@ -186,7 +186,15 @@
           "name": "What does it cost to equip a 30-person AEC firm for VR?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "As an indicative 2026 range: a workstation-tethered deployment (8 viz seats upgraded, 4 headsets, licenses) lands roughly in the 40 to 70 thousand US dollar range in year one. A streaming deployment shifts money from GPUs to subscriptions: standard workstations stay, and you pay per-seat platform fees plus a managed headset fleet. Numbers vary with street prices and license negotiations, so treat published figures as scoping estimates, not quotes."
+            "text": "Indicatively, $40k-$70k USD in year one for a workstation-tethered deployment (8 GPU upgrades, 1-2 power workstations, 4-6 managed headsets, licenses). A streaming deployment trades most of the GPU spend for per-seat subscriptions and a slightly larger headset fleet. All figures are scoping estimates at 2026 street prices, not quotes; license costs in particular vary with negotiation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you need special networking for VR in an architecture office?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A dedicated Wi-Fi 6E SSID for headsets with an access point in the review room, and a wired gigabit backbone (2.5-10 GbE if large models are shared over the LAN or you run Omniverse). Wireless streaming quality is the most common cause of \"VR feels broken\" complaints in otherwise well-specified deployments."
           }
         }
       ]
@@ -291,7 +299,7 @@ figure.hero{margin:0 0 1.8em}
 </header>
 <main class="article">
   <h1>VR Hardware Sizing for a 30-Person Architecture Firm: Workstations, GPUs, and Servers</h1>
-  <p style="color:var(--muted);font:400 14px/1.5 var(--sans);margin:.2em 0 1.4em">By Joshua Opolko &middot; Updated July 19, 2026</p>
+  <p style="color:var(--muted);font:400 14px/1.5 var(--sans);margin:.2em 0 1.4em">By Joshua Opolko &middot; Updated August 4, 2026</p>
   <div class="post-body">
   <figure class="hero"><img src="/assets/architectural-visualization-hero.jpg" alt="Photorealistic render of a modern glass-and-concrete office building at golden hour, used to illustrate AEC VR visualization" width="1200" height="630" loading="eager"></figure>
 
@@ -309,7 +317,7 @@ figure.hero{margin:0 0 1.8em}
   </ul>
 
   <h2>The sizing mistake everyone makes</h2>
-  <p>The reflex when a firm decides to "do VR" is to spec a VR-ready workstation for every architect. That triples the hardware budget and most of it sits idle, because VR splits the studio into three roles with very different hardware needs:</p>
+  <p>The reflex when a firm decides to "do VR" is to spec a VR-ready workstation for every architect. That triples the hardware budget, and most of it sits idle. Why: VR splits the studio into three roles with very different hardware needs.</p>
   <ul>
     <li><strong>Production BIM seats (roughly 18-22 of 30):</strong> Revit, Archicad, drafting, documentation. A standard BIM workstation with a mid-range professional GPU handles this. These seats join VR reviews as viewers via a mirrored screen or a standalone headset; they never render VR themselves. No upgrade needed.</li>
     <li><strong>Visualization-capable seats (6-10 of 30):</strong> the people who run <a href="https://www.enscape3d.com/" rel="nofollow noopener" target="_blank">Enscape</a> or Twinmotion, prepare models for review, and host tethered sessions. These need the real GPUs.</li>
@@ -318,7 +326,7 @@ figure.hero{margin:0 0 1.8em}
   <p>The 20-30% ratio holds surprisingly well across studios; what varies is which projects those seats sit on. If your firm's structure is different (for example, a dedicated viz department serving all teams), redistribute the same total rather than scaling everything up. Which people fill these roles, and who owns the pipeline, is covered in the <a href="/vr-visualization-growing-teams/">growing-teams playbook</a>.</p>
 
   <h2>GPU spec: VRAM is the binding constraint</h2>
-  <p>Architectural VR has an unusual performance profile: the scenes are huge (a federated BIM model carries far more geometry than a typical game level) but the shading is comparatively simple. The practical consequence is that <strong>video memory runs out before compute does</strong>. A heavy Revit model through Enscape at VR resolution can exceed 12 GB of VRAM, and when a scene spills out of video memory the frame rate collapses no matter how fast the GPU core is. Since a stable sustained frame rate is the whole comfort budget in VR (the <a href="https://developers.meta.com/horizon/documentation/unreal/unreal-change-display-refresh-rate/" rel="nofollow noopener" target="_blank">Quest 3</a> targets 72 Hz minimum), buy VRAM first.</p>
+  <p>Architectural VR has an unusual performance profile. The scenes are huge, since a federated BIM model carries far more geometry than a typical game level, but the shading is comparatively simple. The practical consequence: <strong>video memory runs out before compute does</strong>. A heavy Revit model through Enscape at VR resolution can exceed 12 GB of VRAM, and when a scene spills out of video memory the frame rate collapses no matter how fast the GPU core is. A stable sustained frame rate is the whole comfort budget in VR (the <a href="https://developers.meta.com/horizon/documentation/unreal/unreal-change-display-refresh-rate/" rel="nofollow noopener" target="_blank">Quest 3</a> targets 72 Hz minimum). Buy VRAM first.</p>
   <table>
     <thead><tr><th>Seat</th><th>GPU class (2026)</th><th>VRAM</th><th>Why</th></tr></thead>
     <tbody>
@@ -327,7 +335,7 @@ figure.hero{margin:0 0 1.8em}
       <tr><td>Power seat</td><td>RTX 4090 or RTX 6000 Ada class</td><td>24-48 GB</td><td>Federated models, marketing renders, template work</td></tr>
     </tbody>
   </table>
-  <p>Two notes that save money. First, CPU matters less than people assume: real-time archviz is GPU-bound, and any current 8-core workstation CPU with 64 GB of system RAM keeps up. Second, do not buy "VR-ready" marketing bundles; a standard workstation with the right GPU, RAM, and an NVMe drive is the same machine at a better price.</p>
+  <p>Two notes save money here. First: CPU matters less than people assume, since real-time archviz is GPU-bound and any current 8-core workstation CPU with 64 GB of system RAM keeps up. Second, skip "VR-ready" marketing bundles. A standard workstation with the right GPU, RAM, and an NVMe drive is the same machine at a better price.</p>
 
   <blockquote>For comfortable architectural VR in 2026, an RTX 4070 Super with 12 GB of VRAM is the floor for visualization seats. VRAM is the binding constraint before compute: a BIM scene that exceeds video memory drops frames regardless of GPU core speed, and dropped frames are what make VR headsets uncomfortable. Move to 16-24 GB for large or federated models.</blockquote>
 
@@ -376,7 +384,7 @@ figure.hero{margin:0 0 1.8em}
       <tr><td>10 GbE backbone to authoring seats</td><td>1 switch tier</td><td>USD scene sync is chatty; the office LAN becomes part of the pipeline</td></tr>
     </tbody>
   </table>
-  <p>A GPU server with four professional cards is a five-figure line item on its own, before power and cooling. For a 30-person firm wanting VR design review, Model C is almost always more machine than the problem needs; it earns its cost when visualization is one output of a broader simulation or twin platform.</p>
+  <p>A GPU server with four professional cards is a five-figure line item on its own, before power and cooling. For a 30-person firm wanting VR design review, that's almost always more machine than the problem needs. Model C earns its cost only when visualization is one output of a broader simulation or twin platform, not the goal itself.</p>
 
   <h2>The network: the component nobody budgets</h2>
   <p>Air Link, Resolve streaming, and casting the headset view to the review-room TV all ride the wireless network, and a congested office Wi-Fi will make a $70k deployment feel broken. The fixes are cheap relative to everything else:</p>
