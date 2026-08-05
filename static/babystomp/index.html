@@ -59987,7 +59987,12 @@ const TMP_COLOR = new THREE.Color();
 // How often the director interrupts the shift, and how the draw is weighted.
 // The gap shortens as the levels climb, so a late shift is genuinely more
 // eventful rather than just faster.
-const EVENT_FIRST = 9;       // seconds into a level before the first one
+// 9 put the first banner inside the opening fifteen seconds of every level,
+// before the player has even settled into the shift; on level 1 the only
+// gift in the table then fired more often than not. The opening stretch now
+// belongs to the babies alone.
+const EVENT_FIRST = 20;      // seconds into a level before the first one; the
+                             // 0.8x jitter floor keeps even the earliest at 16
 // 15/8 put a lottery event on the mat every ten seconds or so by mid-game,
 // and the gift half of the table is yet another source of toys and buffs on
 // top of the drop budget. Slowed as part of the third "too many drops" pass:
@@ -60609,17 +60614,20 @@ const PIN_MAX = 9;         // where the ladder stops escalating
 
 // ---- how long a toy waits on the mat ----------------------------------------
 //
-// Twelve seconds, fourteen through a thumb, with the last five blinking.
+// Eighteen seconds, twenty through a thumb, with the last five blinking.
 //
 // The budget is: about a second and a half to NOTICE it while watching babies,
 // then decide, then travel. A mouse crosses the pen instantly and a pad has to
 // be swept, which is the same reason TOUCH_TUNE exists, hence the extra two.
-// That leaves roughly seven unhurried seconds and then a five second warning -
-// long enough to finish the stomp you are in and then go, short enough that
-// ignoring one is a real loss. For comparison a bottle lives 9.5 seconds and
-// that one is meant to be a scramble.
-const PICKUP_LIFE = 12;
-const PICKUP_LIFE_TOUCH = 14;
+// Was 12/14, and a traced level-1 session showed why that was too tight now
+// that drops are rare: the level's first teddy landed mid-fight and blinked
+// out uncollected ten seconds later, which players report as an "empty drop".
+// With only ~2 toys budgeted per level, a toy the player never got a real
+// chance at is a much bigger loss than it was when the next one was 15
+// seconds away. For comparison a bottle lives 9.5 seconds and that one is
+// meant to be a scramble.
+const PICKUP_LIFE = 18;
+const PICKUP_LIFE_TOUCH = 20;
 const PICKUP_BLINK = 5;
 // How long a newly landed toy strobes. Long enough to catch an eye that was
 // somewhere else, short enough not to become part of the furniture.
@@ -61742,6 +61750,9 @@ class Game {
     this.fwCurtain = 0;
 
     this.timeLeft = def.time;
+    // Counts up, unaffected by borrowed time, so "how far into the shift are
+    // we" has one honest answer even after a SECOND WIND inflates timeLeft.
+    this.levelElapsed = 0;
     this.powerDropsThisLevel = 0;
     this.naps = 0;
     this.escapes = 0;
@@ -63104,6 +63115,12 @@ class Game {
     this.huddleScan = 0;
     if (this._findHuddle()) return;
 
+    // No consolation toys in the opening stretch of a level. Even a genuinely
+    // idle player (the swing-reset above already exempts anyone stomping) has
+    // not been struggling fifteen seconds in, they are still looking around;
+    // a bear landing that early reads as clutter, not as help.
+    if (this.levelElapsed < 15) return;
+
     // Nothing close enough. Put a toy on the mat instead, near the crowd so
     // it is on the way rather than a detour.
     let x = rand(-ARENA.x * 0.6, ARENA.x * 0.6);
@@ -64311,6 +64328,11 @@ class Game {
   }
 
   _resolveStomp(x, z) {
+    // A swing IS activity. The director's quiet clock used to read only the
+    // mat (huddle, bottles, pickups, surge), so a player calmly stomping
+    // singles counted as idle and was handed a consolation teddy 6.5 seconds
+    // into level 1. Any stomp, hit or miss, means somebody is at the wheel.
+    this.quietT = 0;
     const charged = this.boot.userData.charged || 0;
     const r = charged > 0 ? this.chargedRadius(charged) : this.bootRadius;
     const pan = clamp(x / ARENA.x, -1, 1);
@@ -66036,7 +66058,13 @@ class Game {
   // spurt to an empty mat.
   _eventPossible(id) {
     const crowd = this.babies.filter((b) => !b.userData.dying).length;
-    if (id === 'bombstorm') return this.bombsUnlocked;
+    // ...and not onto a mat already carrying a pile of them: spawnBomb gives
+    // up when it cannot find a clear tile, and an announced storm that
+    // places nothing is an empty drop.
+    if (id === 'bombstorm') {
+      return this.bombsUnlocked
+        && this.bombs.filter((r) => !r.userData.spent).length < 4;
+    }
     // Gated on rewardPowerDrops (never Mega, see the getter), and on enough
     // of a pool to actually deliver what the event promises: toyrain hands
     // out 4 toys and reads as a con if they are all the same one thing,
@@ -66050,9 +66078,13 @@ class Game {
         && this.powerDropBudget - this.powerDropsThisLevel >= 2;
     }
     if (id === 'stocktake') return this.rewardPowerDrops.length >= 1;
-    // A teddy guard already held means this event has nothing to give: it
-    // used to fire anyway and announce a gift that changed nothing.
-    if (id === 'hazardpay') return !this.guard;
+    // Needs a droppable teddy (no guard already held, no bear already on the
+    // mat) and budget headroom: the event now pays with a real drop, so it
+    // spends from the same per-level toy budget as everything else.
+    if (id === 'hazardpay') {
+      return this._canDropPower(POWERUPS.teddy)
+        && this.powerDropBudget - this.powerDropsThisLevel >= 1;
+    }
     if (id === 'delivery') return this.buffsUnlocked;
     if (id === 'masspanic') return crowd >= 4;
     if (id === 'lullabydrop') return crowd >= 2 && !this.lullabies.length;
@@ -66085,17 +66117,17 @@ class Game {
           }, i * 260);
         }
         break;
-      case 'hazardpay': {
-        this.guard = true;
-        this._renderGuard();
-        const add = this._borrowTime(Math.min(3, this.clockBank));
-        this.clockBank -= add;
-        this._flashClock(add);
-        if (this.bombsUnlocked) for (let k = 0; k < 2; k++) this.spawnBomb();
-        this.text.pop(add > 0 ? `TEDDY +${add.toFixed(0)}s` : 'TEDDY', this.bootPos.x, 2.2, this.bootPos.z,
-          { color: '#f5c9a0', scale: 1, life: 1.5, vy: 2.6 });
+      // A teddy parachuted onto the mat, not a guard granted straight into
+      // the HUD. The direct grant was the game's one remaining invisible
+      // gift: a full-screen HAZARD PAY banner and then nothing landing
+      // anywhere the player actually looks, which is indistinguishable from
+      // a broken drop (a traced level-1 session showed it firing at 9
+      // seconds in). Collecting the bear grants the guard the way a teddy
+      // always does, and the forced drop is delivered synchronously here so
+      // the eligibility check below cannot go stale before it lands.
+      case 'hazardpay':
+        this.dropPickup(...spot(), 'teddy');
         break;
-      }
       case 'bombstorm':
         // Five of them, straight onto the grid, spread out over a second and a
         // half so the mat visibly fills up rather than blinking.
@@ -67255,6 +67287,7 @@ class Game {
 
   _updateClock(dt) {
     this.timeLeft -= dt;
+    this.levelElapsed += dt;
 
     // Ticked here rather than on each kill so the "by 20 seconds regardless"
     // guarantee holds even for a player who has not landed a stomp yet.
