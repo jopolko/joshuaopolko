@@ -1173,6 +1173,87 @@
   }
   .rulechip span { font-size: 12.5px; opacity: .88; font-weight: 600; }
 
+  /* ---- mastery objectives on the level card ---------------------------- */
+  /* Quieter than the mutator chips directly above by design. A rule changes
+     what the level IS and has to be read now; an objective is an invitation
+     to be read whenever. Same reason they sit below. */
+  #introchal {
+    margin-top: 12px; display: flex; flex-direction: column; gap: 6px;
+  }
+  #introchal.hidden, #hazard.hidden { display: none; }
+  .chalchip {
+    display: flex; gap: 9px; align-items: center; text-align: left;
+    background: rgba(0,0,0,.22); border: 2px solid rgba(255,255,255,.12);
+    border-radius: 12px; padding: 7px 12px;
+  }
+  .chalchip.won { border-color: rgba(110,231,183,.6); background: rgba(110,231,183,.14); }
+  .chalchip .ic { font-size: 17px; min-width: 20px; text-align: center; }
+  .chalchip b { display: block; font-size: 13px; font-weight: 900; letter-spacing: .08em; }
+  .chalchip.won b { color: var(--mint); }
+  .chalchip i { font-style: normal; font-size: 11.5px; opacity: .72; font-weight: 600; }
+
+  /* ---- hazard pay ------------------------------------------------------ */
+  /* The board of curses. Reads as a wanted poster rather than as a shop,
+     because everything on it makes the shift worse and the pitch is the
+     money, not the item. */
+  #hazard {
+    margin-top: 14px; border-top: 2px dashed rgba(255,255,255,.18); padding-top: 12px;
+  }
+  #hazhead {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px; margin-bottom: 9px;
+  }
+  #hazhead > span {
+    font-size: 13px; font-weight: 900; letter-spacing: .12em; opacity: .9;
+  }
+  #hazhead i {
+    display: block; font-style: normal; font-size: 11px; font-weight: 600;
+    letter-spacing: 0; opacity: .6; text-transform: none;
+  }
+  #hazmult {
+    font-size: 15px; font-weight: 900; letter-spacing: .06em;
+    color: rgba(255,255,255,.45); white-space: nowrap;
+  }
+  #hazmult.on { color: var(--gold); }
+  /* A grid rather than a flex row, for the same reason the upgrade cards are
+     one: minmax(0,1fr) columns cannot overflow a narrow phone by
+     construction, and every previous attempt at a row here slid off the
+     side. See the upgrade-card notes in the README. */
+  #hazlist {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px;
+  }
+  @media (max-width: 420px) { #hazlist { grid-template-columns: minmax(0, 1fr); } }
+  .hazchip {
+    position: relative; text-align: left; cursor: pointer; font: inherit;
+    color: inherit; background: rgba(0,0,0,.26);
+    border: 2px solid rgba(255,255,255,.14); border-radius: 12px;
+    padding: 7px 10px; display: block; transition: border-color .12s, background .12s;
+  }
+  /* Both lines keep clear of the pay badge in the top-right corner. Without
+     the reserved gutter a long label (SUGAR IN THE WATER) runs underneath it
+     and the two read as one garbled word. */
+  .hazchip b {
+    display: block; font-size: 12px; font-weight: 900; letter-spacing: .07em;
+    padding-right: 42px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .hazchip span {
+    display: block; font-size: 10.5px; opacity: .66; font-weight: 600;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .hazchip i {
+    position: absolute; top: 6px; right: 8px; font-style: normal;
+    font-size: 11px; font-weight: 900; color: var(--gold); opacity: .8;
+  }
+  .hazchip.on {
+    background: linear-gradient(180deg, rgba(255,93,143,.3), rgba(255,209,102,.16));
+    border-color: rgba(255,93,143,.75);
+  }
+  .hazchip.on b { color: #ffd166; }
+  /* Taken as far as the board allows: the rest stay visible (so the player
+     can see what they passed up) but stop advertising themselves. */
+  .hazchip.full { opacity: .38; cursor: default; }
+
   /* ---- results --------------------------------------------------------- */
 
   #result h2 { margin: -2px 0 2px; font-size: clamp(13px, 2.4vw, 18px); opacity: .85; }
@@ -1233,6 +1314,80 @@
     box-shadow: 0 0 14px -2px rgba(255,209,102,.85);
   }
   #upgrades.rich #upgtitle b { animation: pulse .6s infinite alternate; }
+
+  /* ---- the rack -------------------------------------------------------- */
+  #rackbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin: 0 2px 6px;
+    font-size: 11px; letter-spacing: .12em; font-weight: 800; opacity: .82;
+  }
+  #rackbar b { color: var(--gold); font-size: 13px; letter-spacing: 0; }
+  .btn.tiny {
+    font-size: 10.5px; padding: 4px 9px; border-radius: 10px;
+    letter-spacing: .06em; min-width: 0;
+  }
+  .btn.tiny:disabled { opacity: .35; cursor: default; }
+  .btn.tiny.can { box-shadow: 0 0 12px -2px rgba(255,209,102,.9); }
+  /* Owned but not worn. Greyed rather than hidden, because the card is also
+     how the player discovers the rank is theirs and merely switched off. */
+  .upg.off { opacity: .44; filter: saturate(.35); }
+  .upg.worn { border-color: rgba(110,231,183,.75); }
+  /* In the rank row rather than floated over the corner: absolutely
+     positioned, it sat on top of the centred card name and turned BOOT into
+     "BOO". The rank row is the one line with spare width. */
+  .upg .rank { display: flex; align-items: center; justify-content: center; gap: 5px; }
+  .upg .wear {
+    font-size: 8px; font-weight: 900; letter-spacing: .06em;
+    padding: 1px 5px; border-radius: 999px; line-height: 1.5;
+  }
+  .upg.worn .wear { background: var(--mint); color: var(--ink); }
+  .upg.off .wear { background: rgba(255,255,255,.2); color: #fff; }
+
+  /* ---- hazard payout, objectives and the ledger ------------------------ */
+  #hazpaid {
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+    justify-content: center; margin: 6px 0 2px; padding: 6px 12px;
+    background: linear-gradient(180deg, rgba(255,93,143,.22), rgba(255,209,102,.12));
+    border: 2px solid rgba(255,93,143,.5); border-radius: 14px;
+  }
+  #hazpaid.hidden, #chalresult.hidden, #ledgerbox.hidden, #dailyshare.hidden { display: none; }
+  #hazpaid b { color: var(--gold); font-size: 14px; letter-spacing: .08em; }
+  #hazpaid span { font-size: 11px; opacity: .72; font-weight: 600; }
+  #hazpaid i { font-style: normal; font-size: 15px; font-weight: 900; color: var(--mint); }
+
+  #chalresult { display: flex; flex-direction: column; gap: 4px; margin: 6px 0 2px; }
+  .chalrow {
+    display: flex; align-items: center; gap: 8px; text-align: left;
+    padding: 5px 10px; border-radius: 10px; background: rgba(0,0,0,.24);
+    border: 2px solid rgba(255,255,255,.1);
+  }
+  .chalrow.won { border-color: rgba(110,231,183,.55); background: rgba(110,231,183,.13); }
+  /* Banked for the first time tonight. The only one worth a colour: a row
+     that says DONE on every replay forever stops being news immediately. */
+  .chalrow.fresh { border-color: var(--gold); background: rgba(255,209,102,.18); }
+  .chalrow .ic { font-size: 14px; min-width: 18px; text-align: center; }
+  .chalrow b { font-size: 11.5px; font-weight: 900; letter-spacing: .08em; flex: 1; }
+  .chalrow i {
+    font-style: normal; font-size: 10px; font-weight: 800; opacity: .7;
+    letter-spacing: .06em;
+  }
+  .chalrow.fresh i { color: var(--gold); opacity: 1; }
+
+  #ledgerbox {
+    display: flex; align-items: baseline; justify-content: center; gap: 10px;
+    margin: 4px 0 0; padding: 5px 10px; border-radius: 12px;
+    background: rgba(139,92,246,.16); border: 2px solid rgba(139,92,246,.45);
+  }
+  #ledgerbox b { font-size: 11px; letter-spacing: .14em; color: #c4b5fd; }
+  #ledgerbox .off { font-size: 11px; font-weight: 700; color: var(--mint); }
+  #ledgerbox i { font-style: normal; font-size: 11px; font-weight: 700; opacity: .8; }
+
+  #dailyshare { margin: 6px 0 2px; display: flex; flex-direction: column; gap: 5px; align-items: center; }
+  #dailyline { font-size: 11.5px; font-weight: 700; opacity: .85; white-space: pre-line; }
+  #dailytag { margin-top: 6px; font-size: 11px; opacity: .8; line-height: 1.5; }
+  #dailytag b { color: var(--gold); letter-spacing: .06em; }
+  #dailytag span { display: block; font-weight: 700; opacity: .7; }
+  #dailytag i { font-style: normal; display: block; opacity: .6; }
 
   /* What the player is walking into the next level with: ranks bought, plus
      whatever is on the toy belt. Shown on the results card and again on the
@@ -2043,6 +2198,11 @@
           title="Casual pacing: slower arrivals, smaller crowds, more slack before the nap meter fills (C)">EASY</button>
       </div>
       <button class="btn" id="btnstart">STOMP!</button>
+      <!-- One shift a day, the same one for everybody: same level, same
+           curses, same babies in the same order. The reason to come back
+           tomorrow rather than only tonight. -->
+      <button class="btn alt" id="btndaily">DAILY SHIFT</button>
+      <div id="dailytag"></div>
       <div class="fine">They are made of rubber. They bounce. They love it.</div>
     </div>
   </div>
@@ -2059,6 +2219,21 @@
       </div>
       <div id="intronew" class="hidden"></div>
       <div id="introrules" class="hidden"></div>
+      <!-- The three objectives this level asks for, on top of its three
+           stars. Stars say "score more"; these say "play differently". -->
+      <div id="introchal" class="hidden"></div>
+      <!-- HAZARD PAY. A draft of CURSES, not buffs: every other game offers
+           you a way to get stronger here, which makes the choice evaporate
+           after a few picks. Ways to make the shift worse stay interesting
+           forever, and they give the twelve mutators a life beyond the one
+           level each was authored onto. -->
+      <div id="hazard" class="hidden">
+        <div id="hazhead">
+          <span>HAZARD PAY<i>take a curse, take a cut</i></span>
+          <b id="hazmult">NO HAZARD PAY</b>
+        </div>
+        <div id="hazlist"></div>
+      </div>
       <!-- The card used to time out after 2.5 seconds, which is not long
            enough to read a new toy and a changed rule, and is far too long
            when you already know the level. The player decides. -->
@@ -2117,12 +2292,33 @@
            it is holding - a lifetime record across every run, not a meter for
            this one. Labelled now: it used to read as "how far into this
            level am I", which it was never answering. -->
+      <!-- What the shift paid on top, and which objectives were banked. Above
+           the journey map because both are about the level just played, and
+           the map is about every level. -->
+      <div id="hazpaid" class="hidden"></div>
+      <div id="chalresult" class="hidden"></div>
+      <div id="dailyshare" class="hidden">
+        <div id="dailyline"></div>
+        <button class="btn ghost" id="btnshare">Copy result</button>
+      </div>
       <div id="journeylabel">YOUR BEST, ALL 31 LEVELS</div>
       <div id="journeymap"></div>
+      <!-- THE LEDGER: what is still out there. Only ever shown when the
+           number is above zero, because "0 at large" is a row that says
+           nothing on every single card until the player first leaks one. -->
+      <div id="ledgerbox" class="hidden"></div>
       <!-- The reason to care about stars, so it gets the loudest block on the
            card rather than a strip at the bottom that reads as a footer. -->
       <div id="upgrades">
         <div id="upgtitle">BOOT UPGRADES<b id="starsfree">0</b>★ TO SPEND</div>
+        <!-- THE RACK. Owning a rank and wearing it are different things now:
+             the five upgrades total 92 stars against the ~180 the game can
+             hand out, so buying used to END and every level after it played
+             the same. Slots are what is scarce instead. -->
+        <div id="rackbar">
+          <span id="racklabel">ON THE BOOT <b id="rackcount">0/3</b></span>
+          <button class="btn tiny" id="btnslot">+1 SLOT</button>
+        </div>
         <div id="upglist"></div>
       </div>
       <!-- One button, as wide as the card. Only ever one of these is showing:
@@ -61569,6 +61765,68 @@ return { GLTFLoader };
 })();
 
 
+// ===== js/rng.js =====
+const __m_rng = (function () {
+// One source of randomness for everything that changes what happens.
+//
+// The DAILY SHIFT needs two players on opposite sides of the world to get the
+// same babies in the same order out of the same level, which `Math.random()`
+// cannot promise. Everything gameplay-affecting in main.js and entities.js
+// therefore calls `rng()` instead, and the daily swaps what sits behind it.
+//
+// `rng` is a stable const wrapper around a private binding rather than a
+// mutable export, because build.py rewrites `import { rng }` into a
+// destructure of the module's returned object - it captures the value once,
+// so a reassigned export would leave every module holding the old function.
+// The indirection costs one call and makes the seeded mode work in both the
+// module build and the bundle.
+//
+// fx.js and audio.js deliberately keep Math.random. Confetti jitter and
+// oscillator detune do not change the outcome of a shift, and routing them
+// through the seeded stream would mean every cosmetic tweak silently
+// reshuffles a daily that was supposed to be fixed.
+
+let _next = Math.random;
+
+const rng = () => _next();
+
+// mulberry32: small, fast, and good enough for spawn tables. The exact
+// generator is part of the daily's contract - changing it rerolls every
+// outstanding daily - so it is spelled out here rather than pulled in.
+function mulberry32(a) {
+  return function () {
+    a |= 0;
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// An independent stream. The daily's PLAN (which level, which curses) has to
+// be derivable without disturbing the gameplay stream - the title screen
+// wants to name today's shift before a seeded run has started, and drawing
+// the plan from the live generator would shift every spawn that follows.
+function makeRng(seed) { return mulberry32(seed | 0); }
+
+function seedRng(seed) { _next = mulberry32(seed | 0); }
+function unseedRng() { _next = Math.random; }
+function rngSeeded() { return _next !== Math.random; }
+
+// A string to a 32-bit seed (FNV-1a). Used to turn a date into a shift.
+function hashSeed(str) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+return { rng, makeRng, seedRng, unseedRng, rngSeeded, hashSeed };
+})();
+
+
 // ===== js/sfx_data.js =====
 const __m_sfx_data = (function () {
 // GENERATED by tools/baby_clips.py -- do not edit by hand.
@@ -64018,6 +64276,27 @@ const UPGRADES = [
 ];
 
 // ---------------------------------------------------------------------------
+// THE BOOT RACK: bought is not the same as worn
+//
+// The five upgrades above total 92 stars. The sixty levels the game can hand
+// out total about 180, so a player finishes buying the game around level 30
+// and every star after that buys nothing - the back half of the content pays
+// in a dead currency. And because all five are strictly-good stat ranks with
+// no opportunity cost, a maxed boot makes every remaining level play the same.
+//
+// So purchases stay permanent and the RACK is what is scarce. You own every
+// rank you paid for; you take a few of them to work. Buying more widens the
+// collection rather than ending the game, and the decision - which is the
+// part that was missing - comes back every single level, because the right
+// kit for GIANTS is not the right kit for NO CHARGE.
+//
+// Three slots to start: enough that the first choice is a real one, few
+// enough that the fourth is worth 18 stars.
+const RACK_BASE = 3;
+const RACK_SLOT_COST = [18, 30];
+const RACK_MAX = RACK_BASE + RACK_SLOT_COST.length;
+
+// ---------------------------------------------------------------------------
 // Mutators
 //
 // The unit of content past level 11. A mutator is one changed rule, not a new
@@ -64071,6 +64350,161 @@ const RULES = {
     label: 'LIGHTS OUT', blurb: 'Only the glowing things show you anything.',
   },
 };
+
+// ---------------------------------------------------------------------------
+// HAZARD PAY
+//
+// Every mutator above was authored onto exactly one level, shown once, and
+// then never seen again - which is a poor return on the most valuable content
+// in the game. `pay` lets the player take one deliberately, anywhere, for a
+// cut of the score.
+//
+// It is a DRAFT OF CURSES, not of buffs, and that is the whole point. The
+// ordinary roguelite offer ("pick one of three upgrades") makes the player
+// stronger and the level easier, and the interesting decision evaporates a
+// few picks in. Offering only ways to make the shift worse keeps the decision
+// permanently live, and it fits a game about clocking on for a bad job.
+//
+// The numbers are ordered by how much they actually take away, which is not
+// the same as how loud they sound. Removing a verb the player leans on (the
+// charge, the bomb) is worth far more than adding chaos on top of one they
+// still have, because the chaos is survivable with the full kit and the
+// removal is not. FULL TANK and SUDDEN SURGE pay nothing at all - they are
+// gifts, and they are draftable only so the board is not a wall of pain.
+const HAZARD_PAY = {
+  noCharge: 0.75,     // the biggest thing the player owns, gone
+  glassBoot: 0.70,    // one whiff ends it; priced on the heart rate, not the odds
+  noBombs: 0.45,
+  powerLock: 0.45,
+  lightsOut: 0.35,
+  giants: 0.35,
+  greased: 0.30,
+  sugarWater: 0.30,
+  bottleFlood: 0.20,
+  oneBand: 0.15,      // huddles constantly: a curse that is nearly a kindness
+  noDecay: 0,
+  suddenSurge: 0,
+};
+
+// FIVE ON THE BOARD, TAKE TWO.
+//
+// The first build offered all eleven eligible curses at once. Two things were
+// wrong with it and they were the same thing: the list overflowed the level
+// card and clipped mid-row, and eleven options is not a decision, it is a
+// catalogue. A draft is interesting exactly when something has to be left
+// behind, which needs a short board and a limit below it.
+//
+// The board is redrawn on every attempt, so a retry is also a reroll and the
+// same level does not present the same two temptations forever.
+const HAZARD_BOARD = 5;
+const HAZARD_MAX_PICKS = 2;
+
+// The cap is a safety net rather than an active constraint - two picks cannot
+// exceed 2.45 - but it stays, because the multiplier feeds the per-level best
+// that stars are derived from, and anything that can inflate that arbitrarily
+// turns a beaten level into a star printer and ends the upgrade ladder in one
+// sitting.
+const HAZARD_CAP = 2.5;
+
+// ---------------------------------------------------------------------------
+// MASTERY CHALLENGES
+//
+// Three named objectives per level, on top of the three stars. Stars ask
+// "score more"; these ask "play differently", which is the axis a score
+// threshold cannot reach - a player grinding one level for stars repeats the
+// same shift, and a player chasing NO BOMBS plays a genuinely different one.
+//
+// Every test reads state the level already tracked to run its own HUD. None
+// of this required new bookkeeping in the hot path, which is deliberate:
+// an objective system that needs its own counters threaded through scoring
+// is one that drifts out of sync with the scoring.
+//
+// `ok` keeps an objective off levels where it would be free or impossible.
+// A NO BOMBS badge on a NO BOMBS level is a participation trophy, and asking
+// for a 20-chain on a level that never puts twenty babies on the mat is the
+// system lying about what is achievable.
+const CHALLENGES = {
+  flawless: {
+    label: 'NOT ONE', icon: '\u{1F6AA}', hint: 'Finish with zero escapes.',
+    test: (s) => s.escapes === 0,
+  },
+  nobomb: {
+    label: 'BOOT ONLY', icon: '\u{1F4A3}', hint: 'Clear the shift without a bomb.',
+    test: (s) => s.bombsUsed === 0,
+    ok: (lv) => !(lv.rules || []).includes('noBombs'),
+  },
+  godboot: {
+    label: 'CLEAN SWING', icon: '\u{2728}', hint: 'Land a GODBOOT.',
+    test: (s) => s.godboots > 0,
+    ok: (lv) => !(lv.rules || []).includes('noCharge'),
+  },
+  crowd: {
+    label: 'BIG FOOT', icon: '\u{1F45F}', hint: 'Catch six in one stomp.',
+    test: (s) => s.bestMulti >= 6,
+    // Six at once needs six on the mat with room to spare on both counts.
+    ok: (lv) => lv.maxAlive >= 12 && !(lv.rules || []).includes('noCharge'),
+  },
+  combo: {
+    label: 'ON A ROLL', icon: '\u{1F525}', hint: 'Reach a 20 combo.',
+    test: (s) => s.bestCombo >= 20,
+    ok: (lv) => lv.maxAlive >= 10,
+  },
+  perfect: {
+    label: 'DEAD CENTRE', icon: '\u{1F3AF}', hint: 'Land five PERFECTs.',
+    test: (s) => s.perfects >= 5,
+  },
+  huddles: {
+    label: 'HERD THEM', icon: '\u{1F308}', hint: 'Collect three huddles.',
+    test: (s) => s.patterns >= 3,
+    // Huddles need colour bands, and the armoured/sleeper levels carry few.
+    ok: (lv, i) => i >= 1,
+  },
+  accurate: {
+    label: 'NO WASTE', icon: '\u{1F3AF}', hint: 'Connect with 85% of swings.',
+    // A floor on swings, or three lucky taps is a perfect record.
+    test: (s) => s.swings >= 12 && s.hits / s.swings >= 0.85,
+  },
+};
+
+// The rotation. Each level takes the first three that are legal for it,
+// starting at an offset derived from the level number, so neighbouring levels
+// ask for different things and any given level always asks for the same three.
+// A level def may name its own `challenges` array to override this entirely.
+const CHALLENGE_ROTA = ['flawless', 'nobomb', 'combo', 'godboot', 'perfect',
+  'crowd', 'huddles', 'accurate'];
+
+function challengesFor(index, lvl) {
+  if (lvl && lvl.challenges) return lvl.challenges.slice(0, 3);
+  const out = [];
+  for (let n = 0; n < CHALLENGE_ROTA.length && out.length < 3; n++) {
+    const id = CHALLENGE_ROTA[(index * 3 + n) % CHALLENGE_ROTA.length];
+    if (out.includes(id)) continue;
+    const c = CHALLENGES[id];
+    if (c.ok && !c.ok(lvl || {}, index)) continue;
+    out.push(id);
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
+// THE LEDGER: babies that got away
+//
+// An escape used to cost the Nap Meter, the combo and a slice of STOMP POWER,
+// and then the level ended and it had never happened. Nothing in this game
+// carried a consequence out of the shift it occurred in.
+//
+// Escapes are now banked. They come back - as veterans, marked, faster, worth
+// more - and stomping one strikes it off the books. It is a debt, and a debt
+// is the most reliable reason anybody has ever had to come back tomorrow.
+//
+// Both numbers are load-bearing and were chosen against the same failure the
+// TIME_BANK and CLOCK_BANK notes describe. LEDGER_CAP stops a bad night
+// compounding into an unplayable one: without it a player who leaks twelve
+// babies on level 9 meets them all on level 10 and leaks twenty. LEDGER_RATE
+// is the share of a level's arrivals allowed to be veterans, so the debt is
+// paid down over several shifts rather than dumped on the next one.
+const LEDGER_CAP = 12;
+const LEDGER_RATE = 0.22;
 
 // How many hand-authored levels there are, for anything that needs to say how
 // far through the game a player is. Derived, never typed: the number changes
@@ -64774,13 +65208,14 @@ const CLEAR_LINES = [
   'That was frankly upsetting to watch. Well done.',
 ];
 
-return { LEVELS, UPGRADES, RULES, LEVEL_COUNT, endlessLevel, levelAt, THEMES, themeAt, BOMB_LEVEL, UNLOCKS, EVENTS, QUAKE_SHOUTS, MULTI_SHOUTS, STREAK_SHOUTS, CHAIN_SHOUTS, POWER_SHOUTS, SURGE_SHOUTS, PATTERN_SHOUTS, HUDDLE_CALLS, GOLDEN_SHOUTS, DESTINY_SHOUTS, HIT_WORDS, MISS_WORDS, SURVIVE_SHOUTS, FLAWLESS_SHOUTS, ESCAPE_WORDS, FAKE_ADS, PIN_SHOUTS, TICKER, FAIL_LINES, CLEAR_LINES };
+return { LEVELS, UPGRADES, RACK_BASE, RACK_SLOT_COST, RACK_MAX, RULES, HAZARD_PAY, HAZARD_BOARD, HAZARD_MAX_PICKS, HAZARD_CAP, CHALLENGES, challengesFor, LEDGER_CAP, LEDGER_RATE, LEVEL_COUNT, endlessLevel, levelAt, THEMES, themeAt, BOMB_LEVEL, UNLOCKS, EVENTS, QUAKE_SHOUTS, MULTI_SHOUTS, STREAK_SHOUTS, CHAIN_SHOUTS, POWER_SHOUTS, SURGE_SHOUTS, PATTERN_SHOUTS, HUDDLE_CALLS, GOLDEN_SHOUTS, DESTINY_SHOUTS, HIT_WORDS, MISS_WORDS, SURVIVE_SHOUTS, FLAWLESS_SHOUTS, ESCAPE_WORDS, FAKE_ADS, PIN_SHOUTS, TICKER, FAIL_LINES, CLEAR_LINES };
 })();
 
 
 // ===== js/entities.js =====
 const __m_entities = (function () {
 const THREE = __THREE;
+const { rng } = __m_rng;
 const { GLTFLoader } = __m_GLTFLoader;
 const { clone } = __m_SkeletonUtils;
 // Deliberately not aliased on the line above - the standalone-build script
@@ -65032,6 +65467,25 @@ const BABY_TYPES = {
     tint: 0xff7a1a, wander: 3.2, hot: true, bonus: true, trail: true,
     life: 30,
   },
+  // ---- the ones that got away
+  //
+  // Not a new mechanic: an ordinary crawler that has done this before. It is
+  // spawned from the persistent ledger (see LEDGER_CAP in levels.js) rather
+  // than from the level's own mix, so it is the only thing on the mat that
+  // the previous shift put there.
+  //
+  // Deliberately beatable. It is quick and it is worth a lot, but it has no
+  // armour, no blink and no gimmick, because a debt the player cannot clear
+  // is not a hook, it is a punishment - and the entire value of the ledger is
+  // that the number goes down when you play well.
+  //
+  // Banded like any crawler (see `banded` below), so it can join a huddle.
+  // That is the point: the ledger raises the stakes of a pattern rather than
+  // sitting outside the systems the player already knows.
+  veteran: {
+    id: 'veteran', name: 'REPEAT OFFENDER', score: 1200, speed: 2.2, scale: 1.04,
+    tint: 0x8b5cf6, wander: 1.9, veteran: true, trail: true,
+  },
   helmet: {
     // The boot simply does not work on this one. A mat quake or a sliding
     // block does. It exists to stop stomping being the answer to everything.
@@ -65259,7 +65713,7 @@ function inflateGeometry(geo, amount) {
 const DRAGON_SCALE_MIN = 1.05;
 const DRAGON_SCALE_MAX = 1.45;
 
-const dragonRand = (lo, hi) => lo + Math.random() * (hi - lo);
+const dragonRand = (lo, hi) => lo + rng() * (hi - lo);
 
 // Weighted so most dragons carry a visible marking - a totally plain hide
 // is the exception, the way it is for most real reptiles. Spots and
@@ -65270,7 +65724,7 @@ const PATTERN_TYPES = ['spots', 'diamond', 'plain'];
 const PATTERN_WEIGHTS = [0.49, 0.37, 0.14];
 
 function pickPattern() {
-  const r = Math.random();
+  const r = rng();
   let acc = 0;
   for (let i = 0; i < PATTERN_TYPES.length; i++) {
     acc += PATTERN_WEIGHTS[i];
@@ -65350,9 +65804,9 @@ function paintHide(geometry, baseHex, patternType) {
   // Marking tone: almost always a shade of the dragon's own hue (a real
   // animal's spots and stripes are nearly always kin to its base colour),
   // occasionally a genuinely different hue for the odd standout individual.
-  const exotic = Math.random() < 0.16;
+  const exotic = rng() < 0.16;
   const markHue = exotic ? (hsl.h + dragonRand(0.12, 0.32)) % 1 : hsl.h;
-  const darker = Math.random() < 0.6;
+  const darker = rng() < 0.6;
   const mark = new THREE.Color().setHSL(
     markHue,
     Math.min(1, hsl.s + dragonRand(-0.05, 0.2)),
@@ -65387,7 +65841,7 @@ function makeDragonBaby(typeId) {
   // procedural onesie did - the whole hide takes it instead. `null` (normal,
   // bounce) falls back to a random hide tone, same roll the procedural skin
   // used.
-  const hideHex = type.tint ?? HIDE[(Math.random() * HIDE.length) | 0];
+  const hideHex = type.tint ?? HIDE[(rng() * HIDE.length) | 0];
   // Golden stays free of a marking pattern - the whole point of gold is that
   // it reads as solid metal from across the arena, same reasoning the
   // procedural build's all-gold skin already used.
@@ -65654,18 +66108,18 @@ function makeBaby(typeId) {
 
   const skin = type.tint && type.golden
     ? 0xffe066
-    : HIDE[(Math.random() * HIDE.length) | 0];
+    : HIDE[(rng() * HIDE.length) | 0];
   const skinMat = softMat(skin);
   // Ten scale colours rather than five, for the same reason as everything else
   // in this block: the babies that do not carry a huddle band are the ones the
   // player sees most of, and they were coming in five flavours.
   const SCALES = [0xff9ec4, 0x9ee7ff, 0xc4b5fd, 0xa7f3d0, 0xfed7aa,
     0xfca5a5, 0x86efac, 0xfde68a, 0xbfdbfe, 0xf9a8d4];
-  const onesieColor = type.tint ?? SCALES[(Math.random() * SCALES.length) | 0];
+  const onesieColor = type.tint ?? SCALES[(rng() * SCALES.length) | 0];
 
   // One set of rolls per baby, used everywhere below so a baby is consistently
   // itself for its whole short life.
-  const roll = (lo, hi) => lo + Math.random() * (hi - lo);
+  const roll = (lo, hi) => lo + rng() * (hi - lo);
   const build = roll(BUILD_MIN, BUILD_MAX);
   const stature = roll(STATURE_MIN, STATURE_MAX);
   const headSize = roll(HEAD_MIN, HEAD_MAX);
@@ -65687,7 +66141,7 @@ function makeBaby(typeId) {
   // hard hat or a sleeper inside the pattern would make it a trap rather
   // than an opportunity.
   const banded = !type.golden && !type.forbidden && !type.armored && !type.boss;
-  const band = banded ? BANDS[(Math.random() * BANDS.length) | 0] : null;
+  const band = banded ? BANDS[(rng() * BANDS.length) | 0] : null;
 
   const diaper = new THREE.Mesh(GEO.body, softMat(
     type.golden ? 0xfff8dc : band ? band.hex : BELLY));
@@ -65803,11 +66257,11 @@ function makeBaby(typeId) {
   snout.receiveShadow = true;
   head.add(snout);
 
-  const hornMat = softMat(HORN[(Math.random() * HORN.length) | 0]);
+  const hornMat = softMat(HORN[(rng() * HORN.length) | 0]);
   // ...and about one in six has none at all: too young for one yet. One roll
   // for the pair, not two, so a dragon is never caught with one horn in and
   // one horn skipped.
-  const hasHorns = Math.random() > 0.16;
+  const hasHorns = rng() > 0.16;
   for (const sx of [-1, 1]) {
     const horn = new THREE.Mesh(GEO.horn, hornMat);
     horn.visible = hasHorns;
@@ -65853,7 +66307,7 @@ function makeBaby(typeId) {
   // Cosmetic accessories on a minority of babies. Purely for the moment where
   // you notice one is wearing a top hat.
   let acc = null;
-  const r = Math.random();
+  const r = rng();
   if (type.golden) {
     acc = new THREE.Group();
     const crown = new THREE.Mesh(GEO.crown, softMat(0xffcc00, { side: THREE.DoubleSide }));
@@ -66530,7 +66984,7 @@ function makePowerup(id) {
   g.add(shade);
 
   g.userData = {
-    def, core, halo, beacon, clock, shade, spin: built.spin, t: Math.random() * 6,
+    def, core, halo, beacon, clock, shade, spin: built.spin, t: rng() * 6,
   };
   return g;
 }
@@ -66592,7 +67046,7 @@ function makeBottle() {
 
   g.scale.setScalar(1.25);
   g.userData = {
-    halo, t: Math.random() * 6, life: 0,
+    halo, t: rng() * 6, life: 0,
     mats: [body.material, milk.material, collar.material, teat.material, halo.material],
   };
   return g;
@@ -66804,7 +67258,7 @@ function playmatTexture(pastels) {
   for (let y = 0; y < cells; y++) {
     for (let x = 0; x < cells; x++) {
       const base = pastels[(x + y * 3 + ((x * y) % 2)) % pastels.length];
-      g.fillStyle = shade(base, 0.94 + Math.random() * 0.12);
+      g.fillStyle = shade(base, 0.94 + rng() * 0.12);
       g.fillRect(x * cw, y * cw, cw, cw);
       // Foam-mat jigsaw seam.
       g.strokeStyle = 'rgba(255,255,255,0.9)';
@@ -66815,17 +67269,17 @@ function playmatTexture(pastels) {
       // of dots, a corner stripe or nothing at all.
       g.save();
       g.translate(x * cw + cw / 2, y * cw + cw / 2);
-      g.rotate((Math.random() - 0.5) * 0.5);
-      const roll = Math.random();
+      g.rotate((rng() - 0.5) * 0.5);
+      const roll = rng();
       g.fillStyle = 'rgba(140,130,170,0.07)';
       g.strokeStyle = 'rgba(140,130,170,0.07)';
       if (roll < 0.52) {
-        g.font = `900 ${cw * (0.3 + Math.random() * 0.14)}px "Trebuchet MS", system-ui, sans-serif`;
+        g.font = `900 ${cw * (0.3 + rng() * 0.14)}px "Trebuchet MS", system-ui, sans-serif`;
         g.textAlign = 'center';
         g.textBaseline = 'middle';
-        g.fillText(glyphs[(Math.random() * glyphs.length) | 0], 0, 0);
+        g.fillText(glyphs[(rng() * glyphs.length) | 0], 0, 0);
       } else if (roll < 0.72) {
-        const n = 4 + ((Math.random() * 3) | 0);
+        const n = 4 + ((rng() * 3) | 0);
         for (let k = 0; k < n; k++) {
           const a = (k / n) * Math.PI * 2;
           g.beginPath();
@@ -66944,10 +67398,10 @@ function makePlayroom(scene, bounds, palette = {}) {
     // Foam blocks are hand-laid by a tired adult, not extruded: each one sits a
     // little taller or shorter and a little askew. The colour cycle stays
     // deliberate, because the kerb is the border and has to read as a border.
-    const h = 0.9 + Math.random() * 0.3;
+    const h = 0.9 + rng() * 0.3;
     place(kerbMesh, i, x, (kerbShape.half + (i % 2) * 0.04) * h, z, 1,
-      (Math.random() - 0.5) * 0.14, 0, foam[i % foam.length],
-      0.98 + Math.random() * 0.06, h, 0.98 + Math.random() * 0.06);
+      (rng() - 0.5) * 0.14, 0, foam[i % foam.length],
+      0.98 + rng() * 0.06, h, 0.98 + rng() * 0.06);
   });
   kerbMesh.instanceMatrix.needsUpdate = true;
   room.add(kerbMesh);
@@ -67054,6 +67508,7 @@ return { toonMat, softMat, addRimLight, BANDS, BABY_TYPES, makeSwagger, preloadD
 const __m_main = (function () {
 const THREE = __THREE;
 const { AudioKit } = __m_audio;
+const { rng, seedRng, unseedRng, hashSeed, makeRng } = __m_rng;
 const { Confetti, Shockwaves, FloatingText, RatingPop, CameraShake, TilePops, TileGlow, PostFX } = __m_fx;
 const { makeBaby, makeBoot, makePowerup, makePlayroom, makeBomb, makeSwagger, makeBottle, makeBuffAura, makeBubbleShield, makeBossAmmo, makeCharm, makeRescueToy, addRimLight, BABY_TYPES, POWERUPS, BABY_BUFFS, BANDS, MAT_TILE, snapToTile, preloadDragonModel, wakeDragonWalk, isDragonReady, } = __m_entities;
 
@@ -67062,7 +67517,7 @@ const { makeBaby, makeBoot, makePowerup, makePlayroom, makeBomb, makeSwagger, ma
 // this resolves, so nothing has to block on it and a slow/failed fetch never
 // breaks a spawn - see entities.js.
 preloadDragonModel();
-const { levelAt, LEVEL_COUNT, HIT_WORDS, MISS_WORDS, TICKER, SURVIVE_SHOUTS, FLAWLESS_SHOUTS, FAKE_ADS, QUAKE_SHOUTS, MULTI_SHOUTS, STREAK_SHOUTS, POWER_SHOUTS, SURGE_SHOUTS, PATTERN_SHOUTS, HUDDLE_CALLS, CHAIN_SHOUTS, GOLDEN_SHOUTS, DESTINY_SHOUTS, ESCAPE_WORDS, BOMB_LEVEL, RULES, UNLOCKS, UPGRADES, THEMES, themeAt, PIN_SHOUTS, EVENTS, } = __m_levels;
+const { levelAt, LEVEL_COUNT, HIT_WORDS, MISS_WORDS, TICKER, SURVIVE_SHOUTS, FLAWLESS_SHOUTS, FAKE_ADS, QUAKE_SHOUTS, MULTI_SHOUTS, STREAK_SHOUTS, POWER_SHOUTS, SURGE_SHOUTS, PATTERN_SHOUTS, HUDDLE_CALLS, CHAIN_SHOUTS, GOLDEN_SHOUTS, DESTINY_SHOUTS, ESCAPE_WORDS, BOMB_LEVEL, RULES, UNLOCKS, UPGRADES, THEMES, themeAt, HAZARD_PAY, HAZARD_MAX_PICKS, HAZARD_CAP, HAZARD_BOARD, CHALLENGES, challengesFor, LEDGER_CAP, LEDGER_RATE, RACK_BASE, RACK_SLOT_COST, RACK_MAX, PIN_SHOUTS, EVENTS, } = __m_levels;
 
 const $ = (id) => document.getElementById(id);
 
@@ -67189,8 +67644,8 @@ function toon(el, text, jitter = 1) {
     el.appendChild(w);
   }
 }
-const rand = (a, b) => a + Math.random() * (b - a);
-const pick = (arr) => arr[(Math.random() * arr.length) | 0];
+const rand = (a, b) => a + rng() * (b - a);
+const pick = (arr) => arr[(rng() * arr.length) | 0];
 // Weighted alternative for anything carrying a `weight` (defaults to 1), with
 // one soft anti-repeat: whatever id matches `avoidId` gets its weight cut
 // rather than banned outright, so the same toy can still land twice in a row
@@ -67199,7 +67654,7 @@ function pickWeighted(defs, avoidId) {
   const weights = defs.map((d) => (d.weight ?? 1) * (d.id === avoidId ? 0.25 : 1));
   let total = 0;
   for (const w of weights) total += w;
-  let r = Math.random() * total;
+  let r = rng() * total;
   for (let i = 0; i < defs.length; i++) {
     r -= weights[i];
     if (r <= 0) return defs[i];
@@ -68635,6 +69090,22 @@ class Game {
     this.best = Number(store.get('babystomp.best', 0)) || 0;
     this.casual = store.get('babystomp.casual', '0') === '1';
 
+    // HAZARD PAY: curses the player took for this level, chosen on the intro
+    // card. Initialised here rather than in beginLevel because `rule()` is
+    // read by the title screen's ambient babies, which run before any level
+    // exists - the same trap the powerTier/NaN note in the README describes.
+    this.drafted = new Set();
+    this.hazardLocked = 1;
+    // THE LEDGER: babies that got away, across every session.
+    this.ledger = clamp(Number(store.get('babystomp.ledger', 0)) || 0, 0, LEDGER_CAP);
+    this.vetsOut = 0;          // veterans currently on the mat
+    this.vetsKilled = 0;       // ...and struck off this level
+    this.bombsUsed = 0;
+    this.daily = null;         // set only while a DAILY SHIFT is being played
+    this.dealRng = null;       // dedicated arrival stream; only a daily sets it
+    this.challenges = [];
+    this.challengeWon = [];
+
     this._loadUpgrades();
     this._initRenderer();
     this._initScene();
@@ -69052,6 +69523,11 @@ class Game {
       surgefill: $('surgefill'), surgenext: $('surgenext'),
       surgeglow: $('surgeglow'), sparks: $('sparks'),
       upglist: $('upglist'), starsfree: $('starsfree'),
+      rackbar: $('rackbar'), rackcount: $('rackcount'), btnslot: $('btnslot'),
+      introchal: $('introchal'), hazard: $('hazard'), hazlist: $('hazlist'),
+      hazmult: $('hazmult'), hazpaid: $('hazpaid'), chalresult: $('chalresult'),
+      ledgerbox: $('ledgerbox'), dailyshare: $('dailyshare'),
+      dailyline: $('dailyline'), dailytag: $('dailytag'),
       combobox: $('combobox'), combonum: $('combonum'), multi: $('multi'),
       combofill: $('combotimerfill'), shout: $('shout'), powerups: $('powerups'),
       broodbox: $('broodbox'), broodnum: $('broodnum'),
@@ -69087,6 +69563,9 @@ class Game {
     this.ui.ticker.textContent = TICKER[0];
 
     $('btnstart').onclick = () => this.startRun();
+    $('btndaily').onclick = () => this.startDaily();
+    $('btnslot').onclick = () => this.buySlot();
+    $('btnshare').onclick = (e) => this._copyShare(e.currentTarget);
     $('btnnext').onclick = () => this.nextLevel();
     $('btngo').onclick = () => this.startLevel();
     $('btnretry').onclick = () => this.retryLevel();
@@ -69445,6 +69924,11 @@ class Game {
 
   startRun() {
     this.audio.unlock();
+    // Any ordinary run leaves the daily behind, seed included. Missing this
+    // is the quiet failure the whole seeded-RNG change invites: the stream
+    // stays fixed, every career run afterwards deals the identical level 1,
+    // and nothing anywhere throws.
+    this._endDaily();
     this.score = 0;
     this.levelIndex = 0;
     this.runStomps = 0;
@@ -69457,6 +69941,83 @@ class Game {
     this.destiny = 0;
     this.destinyReady = false;
     this.beginLevel();
+  }
+
+  // ---- THE DAILY SHIFT ----------------------------------------------------
+  //
+  // One level, the same one for everybody, with the same curses on it and the
+  // same babies arriving in the same order. Everything gameplay-affecting
+  // already runs through rng() (see js/rng.js), so the whole feature is a
+  // seed, a fixed board, and the discipline not to let anything unseeded
+  // decide anything - which is why the ledger and the rack are both switched
+  // off for it. A daily whose difficulty depends on how badly you played last
+  // night is not the same shift as anybody else's.
+
+  // UTC, so the day rolls over at the same instant everywhere and two players
+  // comparing scores are never a day apart.
+  static dayKey(d = new Date()) {
+    return d.toISOString().slice(0, 10);
+  }
+
+  dailyPlan(key = Game.dayKey()) {
+    const seed = hashSeed('smushlings/' + key);
+    const r = makeRng(seed);
+    // Drawn from the levels the game has actually authored - an endless
+    // level is procedurally scaled and makes a poor fixed challenge.
+    const index = Math.floor(r() * LEVEL_COUNT);
+    const lvl = levelAt(index);
+    const own = (lvl.rules || []);
+    const pool = Object.keys(HAZARD_PAY)
+      .filter((id) => RULES[id] && !own.includes(id) && HAZARD_PAY[id] > 0)
+      .sort();
+    // Two, always: enough to change the shift, few enough that the level is
+    // still recognisably itself.
+    const picks = [];
+    while (picks.length < 2 && pool.length) {
+      picks.push(pool.splice(Math.floor(r() * pool.length), 1)[0]);
+    }
+    return { key, seed, index, picks };
+  }
+
+  startDaily() {
+    const plan = this.dailyPlan();
+    this.audio.unlock();
+    this.score = 0;
+    this._displayScore = 0;
+    this.runStomps = 0;
+    this.runBestCombo = 0;
+    this.destiny = 0;
+    this.destinyReady = false;
+    this.daily = plan;
+    this.levelIndex = plan.index;
+    seedRng(plan.seed);
+    this.beginLevel();
+    // beginLevel leaves `drafted` alone while a daily is running, so the
+    // board is set here, after it, where it cannot be cleared by a retry.
+    this.drafted = new Set(plan.picks);
+    this._renderHazard();
+  }
+
+  _dailyKeyFor(what) { return `babystomp.daily.${this.daily.key}.${what}`; }
+
+  _saveDaily() {
+    const prev = Number(store.get(this._dailyKeyFor('score'), 0)) || 0;
+    const now = Math.round(this.score);
+    if (now > prev) store.set(this._dailyKeyFor('score'), String(now));
+    const runs = (Number(store.get(this._dailyKeyFor('runs'), 0)) || 0) + 1;
+    store.set(this._dailyKeyFor('runs'), String(runs));
+  }
+
+  // A line to paste somewhere. No URL and no auto-post: the game has no
+  // server to verify a score against, so this is a brag, not a leaderboard,
+  // and it should be honest about being one.
+  dailyShareText() {
+    if (!this.daily) return '';
+    const names = this.daily.picks.map((id) => RULES[id].label).join(' + ');
+    const lvl = levelAt(this.daily.index);
+    return `SMUSHLINGS daily ${this.daily.key}\n`
+      + `${lvl.name} — ${names}\n`
+      + `${Math.round(this.score).toLocaleString()} points`;
   }
 
   beginLevel() {
@@ -69505,6 +70066,19 @@ class Game {
     this.perfects = 0;
     this.timeBank = TIME_BANK;
     this.clockBank = CLOCK_BANK;
+    this.bombsUsed = 0;
+    this.vetsOut = 0;
+    this.vetsKilled = 0;
+    // The draft is per level and always starts empty: a curse carried
+    // silently into the next shift is a rule the player never agreed to.
+    // The daily sets its own board back up immediately after this.
+    if (!this.daily) this.drafted = new Set();
+    this.hazardLocked = 1;
+    this.challenges = challengesFor(this.levelIndex, lvl);
+    this.challengeWon = this.challenges.map(() => false);
+    // Needs `this.level` set (hazardOffer reads its rules), so it happens
+    // here rather than with the rest of the per-level reset above.
+    this._rollHazardBoard();
     // HEAD START: you no longer begin every level as a beginner.
     this.power = this.rank('start') * (1 / POWER_TIERS);
     this.charging = false;
@@ -69528,13 +70102,12 @@ class Game {
     this.bestChain = 0;
     this.bestSurge = 0;
     this._lastSurge = -1;
-    if (def.rules && def.rules.includes('suddenSurge')) {
-      // Handed the top of the ladder and a long fuse. _advanceSurge refuses
-      // to touch it, so this is the entire supply for the level.
-      this.surge = SURGE_MAX;
-      this.surgeT = this.surgeMaxT = 16;
-      this.bestSurge = SURGE_MAX;
-    }
+    // SUDDEN SURGE used to be applied here, which was fine while a mutator
+    // could only come from the level def. It is a rule that has to be SET UP
+    // rather than merely read, and the draft is not locked in until the
+    // player leaves the intro card - so it moved to startLevel(), the first
+    // moment `rule()` can answer for both sources. Nothing else in RULES has
+    // this shape; everything else is read where it is enforced.
     this.patterns = 0;
     this.huddle = null;
     this.huddleScan = 0;
@@ -69633,6 +70206,9 @@ class Game {
     }
     u.introrules.classList.toggle('hidden', !u.introrules.childElementCount);
 
+    this._renderChallenges();
+    this._renderHazard();
+
     // Restart the button's fill for this card.
     this._rushSaid = false;
     this._hotDip = false;
@@ -69672,25 +70248,132 @@ class Game {
 
   }
 
+  // The three objectives this level is asking for, and which of them this
+  // player has already banked on a previous attempt.
+  _renderChallenges() {
+    const host = this.ui.introchal;
+    if (!host) return;
+    const done = this.challengeMask(this.levelIndex);
+    host.innerHTML = '';
+    this.challenges.forEach((id, i) => {
+      const c = CHALLENGES[id];
+      if (!c) return;
+      const el = document.createElement('div');
+      el.className = 'chalchip' + ((done >> i) & 1 ? ' won' : '');
+      el.innerHTML = `<span class="ic">${(done >> i) & 1 ? '✔' : c.icon}</span>`
+        + `<span><b>${c.label}</b><i>${c.hint}</i></span>`;
+      host.appendChild(el);
+    });
+    host.classList.toggle('hidden', !host.childElementCount);
+  }
+
+  // The board of curses. Tapping one takes it; the multiplier under the
+  // button is the whole pitch and updates as they are taken.
+  _renderHazard() {
+    const host = this.ui.hazlist;
+    if (!host) return;
+    const box = this.ui.hazard;
+    // Nothing to draft on the very first level: the player has not yet been
+    // shown a single rule, so a board of twelve of them is noise. It opens
+    // once HUDDLES have landed and the game has admitted rules exist.
+    const open = this.levelIndex >= 1 && !this.daily;
+    if (box) box.classList.toggle('hidden', !open && !this.daily);
+    if (this.daily) {
+      // The daily's board is fixed and shown as a statement, not a menu.
+      if (this.ui.hazmult) {
+        this.ui.hazmult.textContent = `×${this.hazardMult.toFixed(2)} DAILY`;
+      }
+    } else if (this.ui.hazmult) {
+      const m = this.hazardMult;
+      this.ui.hazmult.textContent = m > 1
+        ? `×${m.toFixed(2)} HAZARD PAY`
+        : 'NO HAZARD PAY';
+      this.ui.hazmult.classList.toggle('on', m > 1);
+    }
+    if (!open && !this.daily) return;
+
+    host.innerHTML = '';
+    const full = this.drafted.size >= HAZARD_MAX_PICKS;
+    // The daily's two curses are shown whether or not tonight's board rolled
+    // them: they are the shift, not an offer.
+    const board = this.daily ? [...this.drafted] : (this.hazardBoard || []);
+    for (const id of board) {
+      const r = RULES[id];
+      const pay = HAZARD_PAY[id] || 0;
+      const on = this.drafted.has(id);
+      const el = document.createElement('button');
+      el.className = 'hazchip' + (on ? ' on' : '') + (!on && full ? ' full' : '');
+      el.innerHTML = `<b>${r.label}</b><span>${r.blurb}</span>`
+        + `<i>${pay > 0 ? '+' + Math.round(pay * 100) + '%' : 'FREE'}</i>`;
+      if (!this.daily) el.addEventListener('click', () => this.toggleHazard(id));
+      host.appendChild(el);
+    }
+  }
+
   // Leaving the level card is now the player's call. Nothing on that card is
   // repeated anywhere in play, so a timer was the game deciding how fast you
   // read a new toy, a new kind of baby and a changed rule.
   startLevel() {
     if (this.state !== 'intro') return;
     this.audio.unlock();
+    // The draft closes here. Locked into its own field rather than read off
+    // `drafted` later, because the score multiplier has to be the one the
+    // player agreed to on the card even if something clears the set mid-level.
+    this.hazardLocked = this.hazardMult;
+    // The arrival stream is (re)armed HERE rather than in startDaily, for the
+    // same reason the draft is locked here: beginLevel's consumption varies
+    // (see applyTheme's early return) and a retry has to deal the same shift
+    // as the first attempt, not carry on from wherever it stopped.
+    this.dealRng = this.daily ? makeRng(this.daily.seed ^ 0x5bf03635) : null;
+    // SUDDEN SURGE is the one mutator that is set up rather than read (see
+    // beginLevel), and this is the first point where a drafted copy of it is
+    // visible to `rule()`.
+    if (this.rule('suddenSurge')) {
+      this.surge = SURGE_MAX;
+      this.surgeT = this.surgeMaxT = 16;
+      this.bestSurge = SURGE_MAX;
+    }
+    this._renderPowerups();
     this.setState('playing');
     this.shout(this.level.name, '#ffd166');
   }
 
-  nextLevel() { this.levelIndex++; this.beginLevel(); }
+  // A daily is one shift, not a career. There is nowhere for NEXT to go.
+  nextLevel() {
+    if (this.daily) { this.toTitle(); return; }
+    this.levelIndex++;
+    this.beginLevel();
+  }
 
   retryLevel() {
     this.score = this.scoreAtLevelStart;
     this._displayScore = this.score;
+    // Re-seeding is what makes a retry the SAME shift rather than merely the
+    // same level. Without it the second attempt runs off wherever the first
+    // one left the generator, and the daily quietly stops being fixed after
+    // one go - visible to nobody, since it still looks like a plausible level.
+    if (this.daily) {
+      this.score = 0;
+      this._displayScore = 0;
+      seedRng(this.daily.seed);
+      this.beginLevel();
+      this.drafted = new Set(this.daily.picks);
+      this._renderHazard();
+      return;
+    }
     this.beginLevel();
   }
 
+  _endDaily() {
+    if (!this.daily) return;
+    this.daily = null;
+    this.drafted = new Set();
+    this.dealRng = null;
+    unseedRng();
+  }
+
   toTitle() {
+    this._endDaily();
     this.clearWorld();
     this.setState('title');
     this.ui.hud.classList.add('hidden');
@@ -69709,9 +70392,20 @@ class Game {
     const bonus = spare * 600 + this.bestCombo * 40 + this.perfects * 150
       + (this.wowCount || 0) * 500;
     this.score += bonus + (flawless ? 3000 : 0);
+
+    // HAZARD PAY lands on what THIS LEVEL earned, not on the running total.
+    // `score` is cumulative across a run, so multiplying it would pay the
+    // curse out over every level already banked - a 2x taken on level 9 would
+    // silently double levels 1 through 8 as well.
+    const earned = this.score - this.scoreAtLevelStart;
+    this.hazardPaid = Math.round(earned * (this.hazardLocked - 1));
+    this.score = this.scoreAtLevelStart + earned * this.hazardLocked;
+
+    this.newChallenges = this._scoreChallenges();
     this.runBestCombo = Math.max(this.runBestCombo, this.bestCombo);
     this._saveBest();
     this._saveLevelBest();
+    if (this.daily) this._saveDaily();
 
     const u = this.ui;
     const pool = flawless ? FLAWLESS_SHOUTS : SURVIVE_SHOUTS;
@@ -69728,7 +70422,10 @@ class Game {
     // Says where you are going, not just that you are going: the level number
     // is the only progress read the game has, and the results card is the one
     // screen where a player is actually looking at it.
-    u.btnnext.textContent = `LEVEL ${this.levelIndex + 2} \u25B8`;
+    // A daily has no level after it, so the button says where it actually
+    // goes. Promising LEVEL 14 and returning to the title is the card lying.
+    u.btnnext.textContent = this.daily
+      ? 'DONE \u25B8' : `LEVEL ${this.levelIndex + 2} \u25B8`;
     // Before the card, not after: the card reads the curtain timer to decide
     // whether to wait, so it has to be set by the time the card goes up.
     this.fireworks();
@@ -69738,6 +70435,12 @@ class Game {
 
   gameOver() {
     if (this.state !== 'playing') return;
+    // A failed shift still banks its objectives. Several of them (BOOT ONLY,
+    // DEAD CENTRE) are about how you played rather than whether you survived,
+    // and withholding one the player demonstrably achieved because the Nap
+    // Meter filled afterwards reads as the game welching.
+    this.newChallenges = this._scoreChallenges();
+    this.hazardPaid = 0;
     this.runBestCombo = Math.max(this.runBestCombo, this.bestCombo);
     const isBest = this._saveBest();
     const u = this.ui;
@@ -69785,6 +70488,58 @@ class Game {
     this.ui.adsub.textContent = ad.sub;
   }
 
+  // ---- MASTERY ------------------------------------------------------------
+
+  // A bitmask per level, one bit per objective slot. Stored as a mask rather
+  // than a list of ids so a future edit to the rotation cannot resurrect a
+  // badge for an objective the level no longer asks for.
+  challengeMask(i) { return Number(store.get(`babystomp.ch${i}`, 0)) || 0; }
+
+  // Everything an objective can ask about, gathered once. Kept as a snapshot
+  // rather than handing the tests the whole Game, so a test can never reach
+  // into the simulation and an objective stays a pure read.
+  _challengeStats() {
+    return {
+      escapes: this.escapes, bombsUsed: this.bombsUsed,
+      godboots: this.godboots, bestMulti: this.bestMulti,
+      bestCombo: this.bestCombo, perfects: this.perfects,
+      patterns: this.patterns, swings: this.swings, hits: this.hits,
+    };
+  }
+
+  // Only ever adds bits. An objective banked on an earlier attempt is not
+  // taken away because tonight's run did it differently - the badge records
+  // that the player has done it, not that they did it most recently.
+  _scoreChallenges() {
+    const stats = this._challengeStats();
+    const before = this.challengeMask(this.levelIndex);
+    let mask = before;
+    this.challengeWon = this.challenges.map((id, i) => {
+      const c = CHALLENGES[id];
+      const won = !!(c && c.test(stats));
+      if (won) mask |= (1 << i);
+      return won;
+    });
+    if (mask !== before) store.set(`babystomp.ch${this.levelIndex}`, String(mask));
+    // What is NEW tonight, which is the only part worth celebrating.
+    return this.challenges.map((id, i) => this.challengeWon[i] && !((before >> i) & 1));
+  }
+
+  // ---- THE LEDGER ---------------------------------------------------------
+
+  _saveLedger() {
+    this.ledger = clamp(Math.round(this.ledger), 0, LEDGER_CAP);
+    store.set('babystomp.ledger', String(this.ledger));
+  }
+
+  // How many veterans this level may put on the mat. A share of the debt,
+  // not the whole of it, so a bad night is paid down over several shifts
+  // rather than dumped entire on the next one.
+  get vetBudget() {
+    if (this.daily) return 0;   // everyone's daily must contain the same babies
+    return Math.min(this.ledger, Math.ceil(this.level.maxAlive * LEDGER_RATE));
+  }
+
   // Stars are the reason to replay a level you already survived.
   _starsFor(score) {
     const t = this.level.stars || [Infinity, Infinity, Infinity];
@@ -69799,6 +70554,91 @@ class Game {
     return stars;
   }
 
+  // What the curses paid, as a line rather than folded silently into the
+  // total. A multiplier the player agreed to and then cannot see the effect
+  // of is indistinguishable from one that did not apply.
+  _renderHazardPaid() {
+    const el = this.ui.hazpaid;
+    if (!el) return;
+    const paid = this.hazardPaid || 0;
+    const on = paid > 0 && this.hazardLocked > 1;
+    el.classList.toggle('hidden', !on);
+    if (!on) return;
+    const names = [...this.drafted].map((id) => RULES[id].label).join(' · ');
+    el.innerHTML = `<b>HAZARD PAY ×${this.hazardLocked.toFixed(2)}</b>`
+      + `<span>${names}</span>`
+      + `<i>+${Math.round(paid).toLocaleString()}</i>`;
+  }
+
+  _renderChallengeResult() {
+    const el = this.ui.chalresult;
+    if (!el) return;
+    el.innerHTML = '';
+    const fresh = this.newChallenges || [];
+    this.challenges.forEach((id, i) => {
+      const c = CHALLENGES[id];
+      if (!c) return;
+      const won = this.challengeWon[i];
+      const row = document.createElement('div');
+      row.className = 'chalrow' + (won ? ' won' : '') + (fresh[i] ? ' fresh' : '');
+      row.innerHTML = `<span class="ic">${won ? '✔' : c.icon}</span>`
+        + `<b>${c.label}</b>`
+        + `<i>${fresh[i] ? 'NEW' : won ? 'DONE' : c.hint}</i>`;
+      el.appendChild(row);
+    });
+    el.classList.toggle('hidden', !el.childElementCount);
+  }
+
+  _renderLedger() {
+    const el = this.ui.ledgerbox;
+    if (!el) return;
+    const n = this.ledger;
+    const struck = this.vetsKilled || 0;
+    el.classList.toggle('hidden', n === 0 && struck === 0);
+    if (n === 0 && struck === 0) return;
+    el.innerHTML = `<b>THE LEDGER</b>`
+      + (struck ? `<span class="off">${struck} struck off</span>` : '')
+      + `<i>${n} still at large</i>`;
+  }
+
+  _renderDailyShare() {
+    const box = this.ui.dailyshare;
+    if (!box) return;
+    box.classList.toggle('hidden', !this.daily);
+    if (!this.daily) return;
+    const best = Number(store.get(this._dailyKeyFor('score'), 0)) || 0;
+    this.ui.dailyline.textContent =
+      `DAILY ${this.daily.key} — today's best ${best.toLocaleString()}`;
+  }
+
+  // Clipboard only, with the text left on screen as the fallback. There is no
+  // share sheet here on purpose: navigator.share is absent on most desktop
+  // browsers and throws outside a user gesture on some mobile ones, and a
+  // button that silently does nothing is worse than one that copies.
+  _copyShare(btn) {
+    const text = this.dailyShareText();
+    const done = () => { if (btn) btn.textContent = 'Copied'; };
+    try {
+      navigator.clipboard.writeText(text).then(done, () => {
+        this.ui.dailyline.textContent = text;
+      });
+    } catch {
+      this.ui.dailyline.textContent = text;
+    }
+  }
+
+  // Today's shift, named on the title screen so the button is an invitation
+  // rather than a mystery.
+  _renderDailyTag() {
+    const el = this.ui.dailytag;
+    if (!el) return;
+    const plan = this.dailyPlan();
+    const best = Number(store.get(`babystomp.daily.${plan.key}.score`, 0)) || 0;
+    const names = plan.picks.map((id) => RULES[id].label).join(' + ');
+    el.innerHTML = `<b>${levelAt(plan.index).name}</b><span>${names}</span>`
+      + (best ? `<i>best ${best.toLocaleString()}</i>` : '');
+  }
+
   _showResult() {
     // The shift is over. Nothing should still be counting down behind the
     // card, and a surge vignette framing the results screen reads as a bug.
@@ -69808,6 +70648,10 @@ class Game {
     toon(this.ui.rlevel, `LEVEL ${this.levelIndex + 1}`);
     this._renderJourneyMap();
     this._showFakeAd();
+    this._renderHazardPaid();
+    this._renderChallengeResult();
+    this._renderLedger();
+    this._renderDailyShare();
     this._renderUpgrades();
     this.setState('result');
     // The world has already stopped; only the card is waiting.
@@ -69848,6 +70692,10 @@ class Game {
       u.banner.classList.remove('on');
     }
     u.title.classList.toggle('hidden', s !== 'title');
+    // Named on arrival rather than at construction: the day can roll over
+    // while the tab is left open overnight, and a stale shift name on the
+    // button is a promise the game will not keep.
+    if (s === 'title') this._renderDailyTag();
     u.intro.classList.toggle('hidden', s !== 'intro');
     u.result.classList.toggle('hidden', s !== 'result');
     u.pause.classList.toggle('hidden', s !== 'paused');
@@ -69898,6 +70746,7 @@ class Game {
     for (const m of this.lullabies) this.scene.remove(m);
     for (const a of this.bossAmmo || []) this._disposeBossAmmo(a);
     this.babies.length = 0;
+    this.vetsOut = 0;
     this.pickups.length = 0;
     this.bombs.length = 0;
     this.bottles.length = 0;
@@ -69932,15 +70781,40 @@ class Game {
   // layered on top of it here instead of edited into all thirty-one). Rolled
   // before the mix, at flat odds once unlocked, so it shows up as a variety
   // rather than displacing anything the level actually asked for.
+  // Arrivals draw from their OWN generator, not the shared one.
+  //
+  // Seeding the shared stream is not enough to make a daily deal the same
+  // babies twice, and the two reasons are both invisible. `applyTheme`
+  // early-returns when the theme has not changed, so beginLevel consumes a
+  // DIFFERENT number of draws depending on which level ran before it; and the
+  // number of rng calls between one arrival and the next depends on frame
+  // timing, which is not the same on two machines. Either one silently
+  // reshuffles everything downstream.
+  //
+  // A dedicated stream for the spawn table fixes both: the Nth arrival is the
+  // Nth draw from it no matter what else happened in between, or how fast the
+  // frames came. Exact spawn TIMES still drift by a frame - the sim is not
+  // fixed-timestep and this change does not pretend otherwise - but the deal
+  // itself is identical for everybody, which is what a shared challenge needs.
+  _deal() { return (this.dealRng || rng)(); }
+
   _pickType(wild = null) {
     const def = this.level;
-    if (def.goldenChance && Math.random() < def.goldenChance) return 'golden';
+    // THE LEDGER gets first refusal on an arrival. Checked before the golden
+    // roll and before the level's own mix, because a veteran is not part of
+    // the level's cast - it is last night's cast, and it is capped by
+    // `vetBudget` rather than by anything the level def says.
+    if (this.ledger > 0 && this.vetsOut < this.vetBudget
+      && this._deal() < LEDGER_RATE) {
+      return 'veteran';
+    }
+    if (def.goldenChance && this._deal() < def.goldenChance) return 'golden';
     if (wild === 'bounce' && this.levelIndex >= BOUNCE_LEVEL
-      && Math.random() < BOUNCE_CHANCE) return 'bounce';
+      && this._deal() < BOUNCE_CHANCE) return 'bounce';
     const entries = Object.entries(def.mix);
     let total = 0;
     for (const [, w] of entries) total += w;
-    let r = Math.random() * total;
+    let r = this._deal() * total;
     for (const [id, w] of entries) { r -= w; if (r <= 0) return id; }
     return 'normal';
   }
@@ -69966,7 +70840,11 @@ class Game {
     const p = this.levelIndex === HUDDLE_LEVEL
       ? 0.92
       : BAND_CLUMP * clamp(1 - alive.length / BAND_CLUMP_FADE, 0, 1);
-    if (!alive.length || Math.random() > p) return pick(BANDS);
+    // Also off the deal stream: a diaper colour decides whether a huddle can
+    // form, so it is part of what arrives, not decoration.
+    if (!alive.length || this._deal() > p) {
+      return BANDS[(this._deal() * BANDS.length) | 0];
+    }
     const counts = new Array(BANDS.length).fill(0);
     for (const b of alive) counts[b.userData.band.id]++;
     let top = 0;
@@ -69978,6 +70856,9 @@ class Game {
     const type = BABY_TYPES[typeId];
     const b = makeBaby(typeId);
     const d = b.userData;
+    // Counted on the way out as well (kill, escape, clearWorld), so the mat
+    // census stays honest however the veteran leaves.
+    if (type.veteran) this.vetsOut++;
 
     // makeBaby picks a band uniformly; the arrival rule overrides it here,
     // where the rest of the mat is visible.
@@ -70004,7 +70885,7 @@ class Game {
       this.rings.spawn(x, z, 2.2, 0xc4b5fd, 0.5);
     } else {
       // Crawl in from a random edge, aimed roughly at the middle.
-      const side = (Math.random() * 4) | 0;
+      const side = (rng() * 4) | 0;
       const pad = 2.2;
       if (side === 0) b.position.set(-ARENA.x - pad, 0, rand(ARENA.zMin, ARENA.zMax));
       else if (side === 1) b.position.set(ARENA.x + pad, 0, rand(ARENA.zMin, ARENA.zMax));
@@ -70025,7 +70906,7 @@ class Game {
     d.armour = type.armourHits ?? ARMOUR_HITS;
     d.congaTo = null;
     d.congaT = 0;
-    d.phase = Math.random() * 10;
+    d.phase = rng() * 10;
     d.turnTimer = rand(0.5, 1.6);
     d.age = 0;
     d.lifespan = (type.life ?? 11) * rand(0.85, 1.15);
@@ -70054,9 +70935,9 @@ class Game {
     d.voice = clamp(1 - (d.baseScale - 1) * 0.55 - ((d.build || 1) - 1) * 1.15
       + rand(-0.06, 0.06), 0.78, 1.22);
     d.voiceClip = 1 + (d.voice - 1) * 0.55;
-    d.hopPhase = Math.random() * 6;
+    d.hopPhase = rng() * 6;
     d.vis = 1;
-    d.blinkPhase = Math.random() * 6;
+    d.blinkPhase = rng() * 6;
 
     // Cache every material so ninjas can fade, hits can flash, and the whole
     // set can be disposed when the baby leaves. Each baby owns its materials,
@@ -70089,7 +70970,7 @@ class Game {
       if (this.rule('sugarWater')) this._giveBuff(b, 'sugar', true);
       else if (this.rule('giants')) this._giveBuff(b, 'growth', true);
     }
-    if (Math.random() < 0.5) this.audio.coo(b.position.x / ARENA.x, 0.7, d.voice);
+    if (rng() < 0.5) this.audio.coo(b.position.x / ARENA.x, 0.7, d.voice);
     return b;
   }
 
@@ -70511,11 +71392,11 @@ class Game {
     const wob = 1 + Math.sin(t * 16) * 0.06;
     b.scale.set(d.baseScale / wob, d.baseScale * wob, d.baseScale / wob);
 
-    if (Math.random() < dt * 5) {
+    if (rng() < dt * 5) {
       this.confetti.burst(b.position.x + rand(-0.4, 0.4), 1.5, b.position.z + 0.3, 1,
         { spread: 1.4, up: 1.8, size: 220, colors: [0x7dd3fc, 0xffffff] });
     }
-    if (Math.random() < dt * 0.9) {
+    if (rng() < dt * 0.9) {
       this.audio.babyCry(clamp(b.position.x / ARENA.x, -1, 1), 0.55, d.voiceClip || 1);
     }
     // A ring on the mat, pulsing at the rate the noise carries.
@@ -70781,7 +71662,7 @@ class Game {
     let z = rand(ARENA.zMin * 0.6, ARENA.zMax * 0.6);
     const live = this.babies.filter((b) => !b.userData.dying && b.userData.entered);
     if (live.length) {
-      const pick3 = live[(Math.random() * live.length) | 0];
+      const pick3 = live[(rng() * live.length) | 0];
       x = clamp(pick3.position.x + rand(-3, 3), -ARENA.x + 1, ARENA.x - 1);
       z = clamp(pick3.position.z + rand(-3, 3), ARENA.zMin + 1, ARENA.zMax - 1);
     }
@@ -71189,9 +72070,83 @@ class Game {
     for (const u of UPGRADES) {
       this.upg[u.id] = clamp(Number(store.get('babystomp.upg.' + u.id, 0)) || 0, 0, u.ranks);
     }
+    this.rackBought = clamp(Number(store.get('babystomp.rack', 0)) || 0,
+      0, RACK_SLOT_COST.length);
+    const owned = UPGRADES.filter((u) => this.upg[u.id] > 0).map((u) => u.id);
+
+    const saved = store.get('babystomp.equip', null);
+    if (saved === null) {
+      // FIRST RUN UNDER THE RACK. A returning player bought these outright
+      // under the old rules, and taking four of them away on launch day is a
+      // patch that reads as theft however it is worded. They keep everything
+      // they already own: enough slots are granted free to wear all of it,
+      // and the rack only starts costing stars for ranks bought from here on.
+      this.rackBought = clamp(Math.max(this.rackBought, owned.length - RACK_BASE),
+        0, RACK_SLOT_COST.length);
+      store.set('babystomp.rack', String(this.rackBought));
+      this.equipped = new Set(owned.slice(0, this.rackSlots));
+      this._saveEquip();
+    } else {
+      this.equipped = new Set(saved.split(',').filter(Boolean)
+        .filter((id) => UPGRADES.some((u) => u.id === id)));
+      // A slot count that shrank (or a save hand-edited) must never leave more
+      // worn than the rack holds, because `rank()` reads the set directly and
+      // would quietly hand out upgrades the player is not entitled to.
+      while (this.equipped.size > this.rackSlots) {
+        this.equipped.delete([...this.equipped][this.equipped.size - 1]);
+      }
+      // A rank bought while the rack has room should not need a second click
+      // in a second place before it does anything.
+      for (const id of owned) {
+        if (this.equipped.size >= this.rackSlots) break;
+        this.equipped.add(id);
+      }
+      this._saveEquip();
+    }
   }
 
-  rank(id) { return (this.upg && this.upg[id]) || 0; }
+  get rackSlots() { return RACK_BASE + (this.rackBought || 0); }
+
+  _saveEquip() { store.set('babystomp.equip', [...this.equipped].join(',')); }
+
+  // Owning a rank and wearing it are now different things - see RACK_BASE in
+  // levels.js. Everything that reads an upgrade goes through here, so the
+  // rack needs enforcing in exactly one place.
+  rank(id) {
+    if (!this.upg || !this.equipped || !this.equipped.has(id)) return 0;
+    return this.upg[id] || 0;
+  }
+
+  // What the player owns regardless of what is on the boot tonight. The rack
+  // UI needs this; nothing in the simulation may use it.
+  owned(id) { return (this.upg && this.upg[id]) || 0; }
+
+  toggleEquip(id) {
+    if (!this.owned(id)) return false;
+    if (this.equipped.has(id)) this.equipped.delete(id);
+    else if (this.equipped.size < this.rackSlots) this.equipped.add(id);
+    else return false;
+    this._saveEquip();
+    this.audio.ding(0);
+    this._renderUpgrades();
+    return true;
+  }
+
+  get rackCost() {
+    return this.rackBought < RACK_SLOT_COST.length
+      ? RACK_SLOT_COST[this.rackBought] : Infinity;
+  }
+
+  buySlot() {
+    if (this.rackBought >= RACK_SLOT_COST.length) return false;
+    const cost = this.rackCost;
+    if (this.starsFree < cost) return false;
+    this.rackBought++;
+    store.set('babystomp.rack', String(this.rackBought));
+    this.audio.fanfare();
+    this._renderUpgrades();
+    return true;
+  }
 
   // ---- WHAT THE PLAYER HAS BEEN GIVEN SO FAR -----------------------------
   // Level 1 is a tap and nothing else. Every verb arrives on a level that
@@ -71262,9 +72217,13 @@ class Game {
 
   get starsSpent() {
     let n = 0;
+    // `owned`, not `rank`: taking a rank off the boot must not refund it.
+    // Reading the worn set here would hand the player their stars back every
+    // time they unequipped something, which is an infinite supply.
     for (const u of UPGRADES) {
-      for (let r = 0; r < this.rank(u.id); r++) n += u.cost[r];
+      for (let r = 0; r < this.owned(u.id); r++) n += u.cost[r];
     }
+    for (let s = 0; s < (this.rackBought || 0); s++) n += RACK_SLOT_COST[s];
     return n;
   }
 
@@ -71272,10 +72231,19 @@ class Game {
 
   buyUpgrade(id) {
     const def = UPGRADES.find((u) => u.id === id);
-    const at = this.rank(id);
+    // `owned`, not `rank`. Buying is about the collection, not about what is
+    // currently on the boot: gating the shop on the worn set would make a
+    // rank you are not wearing unbuyable and stall the ladder at three lines.
+    const at = this.owned(id);
     if (!def || at >= def.ranks || this.starsFree < def.cost[at]) return false;
     this.upg[id] = at + 1;
     store.set('babystomp.upg.' + id, String(at + 1));
+    // A first rank goes straight on the boot if there is room, so buying
+    // something and seeing nothing change is not the first thing that happens.
+    if (at === 0 && this.equipped.size < this.rackSlots) {
+      this.equipped.add(id);
+      this._saveEquip();
+    }
     this.audio.fanfare();
     this._renderUpgrades();
     return true;
@@ -71286,8 +72254,91 @@ class Game {
   // a changed rule, and a rule lives where it is enforced: keeping them as
   // flags means each one is a single condition inside the system it affects,
   // and nothing has to be undone when the level ends.
+  // A mutator is in force if the level authored it OR the player drafted it.
+  //
+  // This is the whole of HAZARD PAY on the simulation side. It works because
+  // every mutator was already written as a condition read at the point it is
+  // enforced rather than as setup applied when the level begins - so there is
+  // no state to unwind, and a rule the player adds behaves exactly like one
+  // the level shipped with.
   rule(id) {
+    if (this.drafted && this.drafted.has(id)) return true;
     return !!(this.level && this.level.rules && this.level.rules.includes(id));
+  }
+
+  // Everything in force, authored and drafted, for anything that has to
+  // DISPLAY the rules rather than test one. The status strip must show a
+  // drafted curse for the same reason it shows an authored one: a rule the
+  // player cannot see reads as the game breaking.
+  get activeRules() {
+    const own = (this.level && this.level.rules) || [];
+    return [...own, ...[...(this.drafted || [])].filter((r) => !own.includes(r))];
+  }
+
+  // What the board is paying tonight. Capped, because this multiplies the
+  // per-level best that stars are derived from - see HAZARD_CAP.
+  get hazardMult() {
+    let m = 1;
+    for (const id of this.drafted || []) m += (HAZARD_PAY[id] || 0);
+    return Math.min(m, HAZARD_CAP);
+  }
+
+  // Everything that COULD be drafted here. A level's own mutators are never
+  // eligible: you cannot be paid extra for a rule you were going to play
+  // under anyway.
+  get hazardOffer() {
+    const own = (this.level && this.level.rules) || [];
+    return Object.keys(HAZARD_PAY).filter((id) => RULES[id] && !own.includes(id));
+  }
+
+  // Tonight's board: five of them, drawn fresh for each attempt.
+  //
+  // Not a flat shuffle. Split at the median and guarantee two from the
+  // expensive half, because a board that happens to deal five cheap curses is
+  // a board with nothing on it worth thinking about - and the whole mechanic
+  // is the moment where the money is tempting enough to hurt.
+  _rollHazardBoard() {
+    const pool = this.hazardOffer.slice()
+      .sort((a, b) => HAZARD_PAY[b] - HAZARD_PAY[a]);
+    const half = Math.ceil(pool.length / 2);
+    const rich = pool.slice(0, half);
+    const rest = pool.slice(half);
+    const take = (arr, n) => {
+      const out = [];
+      const copy = arr.slice();
+      while (out.length < n && copy.length) {
+        out.push(copy.splice((rng() * copy.length) | 0, 1)[0]);
+      }
+      return out;
+    };
+    const board = [...take(rich, 2), ...take(rest, HAZARD_BOARD - 2)];
+    // Short pools (a level carrying several of these already) top up from
+    // whatever is left rather than showing a board with gaps in it.
+    for (const id of pool) {
+      if (board.length >= HAZARD_BOARD) break;
+      if (!board.includes(id)) board.push(id);
+    }
+    // Shuffled again so the two expensive ones are not always first.
+    for (let i = board.length - 1; i > 0; i--) {
+      const j = (rng() * (i + 1)) | 0;
+      [board[i], board[j]] = [board[j], board[i]];
+    }
+    this.hazardBoard = board;
+  }
+
+  toggleHazard(id) {
+    if (this.state !== 'intro') return false;
+    if (this.daily) return false;          // the daily's board is fixed for everyone
+    // Only what is actually on tonight's board. Without this the multiplier
+    // can be driven by curses the player was never offered and the level is
+    // not playing under - which is what the score is then paid against.
+    if (!(this.hazardBoard || []).includes(id)) return false;
+    if (this.drafted.has(id)) this.drafted.delete(id);
+    else if (this.drafted.size < HAZARD_MAX_PICKS) this.drafted.add(id);
+    else return false;
+    this.audio.ding(0);
+    this._renderHazard();
+    return true;
   }
 
   // Wider on touch, because aim precision is worse through a thumb.
@@ -72469,7 +73520,7 @@ class Game {
     // Toys thrown out of the pattern, in its own colour so the burst reads as
     // "that group" rather than as generic confetti.
     for (let i = 0; i < 3; i++) {
-      const a = Math.random() * Math.PI * 2;
+      const a = rng() * Math.PI * 2;
       this.confetti.burst(x + Math.cos(a) * 1.4, 0.8, z + Math.sin(a) * 1.4, 34,
         { spread: 5, up: 12, size: 400, colors: [band.hex, 0xffffff, 0xffe066] });
     }
@@ -72511,6 +73562,21 @@ class Game {
     this.bestCombo = Math.max(this.bestCombo, this.combo);
     this.stomped++;
     this.runStomps++;
+
+    // THE LEDGER: struck off. Written through to storage on the spot rather
+    // than at level end, because the entire point of the debt is that it
+    // survives whatever happens next - including the player closing the tab
+    // on a level they were losing.
+    if (type.veteran) {
+      this.vetsOut--;
+      this.vetsKilled++;
+      this.ledger = Math.max(0, this.ledger - 1);
+      this._saveLedger();
+      if (!quiet) {
+        this.text.pop('STRUCK OFF', b.position.x, 2.3, b.position.z,
+          { color: '#c4b5fd', scale: 0.8, life: 1.1, vy: 2.2 });
+      }
+    }
     // ...and a shift going well buys trouble.
     this.karma = clamp(this.karma + KARMA_KILL, -KARMA_CLAMP, KARMA_CLAMP);
 
@@ -72567,7 +73633,7 @@ class Game {
     this.audio.boing(clamp(b.position.x / ARENA.x, -1, 1),
       voice / Math.max(0.7, type.scale));
     this.audio.comboChime(this.combo - 1);
-    if (Math.random() < 0.35) {
+    if (rng() < 0.35) {
       setTimeout(() => this.audio.giggle(b.position.x / ARENA.x, 0.6, voice), 220);
     }
 
@@ -72580,7 +73646,7 @@ class Game {
       this.text.pop(`+${points.toLocaleString()}`, b.position.x, 1.5, b.position.z,
         { color: colorHex, scale: 0.75 + Math.min(0.7, points / 2600) });
     }
-    if (!quiet && Math.random() < 0.55) {
+    if (!quiet && rng() < 0.55) {
       this.text.pop(pick(HIT_WORDS), b.position.x + rand(-0.6, 0.6), 2.4, b.position.z,
         { color: '#ffe9a8', scale: 0.6, life: 0.85, vy: 3.2 });
     }
@@ -72662,7 +73728,7 @@ class Game {
       for (const rad of [8, 13, 18]) this.rings.spawn(b.position.x, b.position.z, rad, 0xffd700, 0.65);
       this.confetti.burst(b.position.x, 1.2, b.position.z, 120,
         { spread: 8, up: 14, size: 480, colors: [0xffd700, 0xff2d6f, 0xffffff, 0xfff3b0] });
-    } else if (this.rewardPowerDrops.length && Math.random() < 0.06) {
+    } else if (this.rewardPowerDrops.length && rng() < 0.06) {
       this.dropPickup(b.position.x, b.position.z, null, this.rewardPowerDrops);
     }
 
@@ -72747,15 +73813,35 @@ class Game {
     const host = this.ui.upglist;
     if (!host) return;
     const free = this.starsFree;
-    this.ui.starsfree.textContent = free;
+    // Clamped for display only. Stars are derived from level bests against
+    // this level's thresholds, so raising a threshold - which re-running the
+    // balance bots does - can leave an existing player having spent more than
+    // they currently earn. The arithmetic stays negative so nothing can be
+    // bought; printing "-41 TO SPEND" is just the shop calling them overdrawn.
+    this.ui.starsfree.textContent = Math.max(0, free);
     // Lights the whole block up when there is anything the player can afford.
-    const open = UPGRADES.filter((u) => this.rank(u.id) < u.ranks);
+    const open = UPGRADES.filter((u) => this.owned(u.id) < u.ranks);
     const cheapest = open.length
-      ? Math.min(...open.map((u) => u.cost[this.rank(u.id)])) : Infinity;
+      ? Math.min(...open.map((u) => u.cost[this.owned(u.id)])) : Infinity;
     $('upgrades').classList.toggle('rich', free >= cheapest);
+
+    // THE RACK. How many of the ranks you own are actually on the boot, and
+    // what another slot costs.
+    if (this.ui.rackcount) {
+      this.ui.rackcount.textContent = `${this.equipped.size}/${this.rackSlots}`;
+    }
+    if (this.ui.btnslot) {
+      const maxed = this.rackBought >= RACK_SLOT_COST.length;
+      const cost = this.rackCost;
+      this.ui.btnslot.textContent = maxed ? 'FULL RACK' : `+1 SLOT  ${cost}★`;
+      this.ui.btnslot.disabled = maxed || free < cost;
+      this.ui.btnslot.classList.toggle('can', !maxed && free >= cost);
+    }
+
     host.innerHTML = '';
     for (const u of UPGRADES) {
-      const at = this.rank(u.id);
+      const at = this.owned(u.id);
+      const worn = this.equipped.has(u.id);
       const maxed = at >= u.ranks;
       const cost = maxed ? 0 : u.cost[at];
       const can = !maxed && free >= cost;
@@ -72764,8 +73850,14 @@ class Game {
       wrap.className = 'upgcard';
 
       const el = document.createElement('div');
-      el.className = 'upg ' + (maxed ? 'maxed' : can ? 'can' : 'poor');
-      el.title = u.blurb;
+      // `off` is owned-but-not-worn, which has to look different from both
+      // "cannot afford" and "equipped" - it is the one state the player can
+      // fix for free, and it is the whole point of the rack.
+      el.className = 'upg ' + (maxed ? 'maxed' : can ? 'can' : 'poor')
+        + (at > 0 ? (worn ? ' worn' : ' off') : '');
+      el.title = at > 0
+        ? (worn ? 'On the boot. Tap to take it off.' : 'Owned. Tap to put it on.')
+        : u.blurb;
       // What the NEXT rank buys. The old card showed the effect already
       // banked, which is the wrong half of the question when the player is
       // standing there with stars deciding where to put them.
@@ -72781,19 +73873,27 @@ class Game {
         + `<div class="ico">${u.icon}</div>`
         + `<div class="blurb">${u.blurb}</div>`
         + `<div class="dt">${gain}</div>`
-        + `<div class="rank"><b>${at}</b><i> / ${u.ranks}</i></div>`;
+        + `<div class="rank"><b>${at}</b><i> / ${u.ranks}</i>`
+        + (at > 0 ? `<span class="wear">${worn ? 'ON' : 'OFF'}</span>` : '')
+        + `</div>`;
       wrap.appendChild(el);
 
       const buy = document.createElement('button');
       buy.className = 'upgbuy' + (maxed ? ' max' : '');
       buy.textContent = maxed ? 'MAX' : `+  ${cost}\u2605`;
       buy.disabled = !can;
-      if (can) {
-        const go = () => this.buyUpgrade(u.id);
-        buy.addEventListener('click', go);
-        // The card buys too. It is the biggest target on screen and a player
-        // who taps the picture rather than the button has still asked for it.
-        el.addEventListener('click', go);
+      if (can) buy.addEventListener('click', () => this.buyUpgrade(u.id));
+      // The card has two jobs now, split by what the player already owns.
+      // Nothing owned: it buys, same as it always did - it is the biggest
+      // target on screen and tapping the picture is still asking for it.
+      // Something owned: it puts the thing on and takes it off, because that
+      // is the decision the rack exists to make and it should not be hiding
+      // behind a second, smaller control.
+      if (at > 0) {
+        el.addEventListener('click', () => this.toggleEquip(u.id));
+        el.style.cursor = 'pointer';
+      } else if (can) {
+        el.addEventListener('click', () => this.buyUpgrade(u.id));
         el.style.cursor = 'pointer';
       }
       wrap.appendChild(buy);
@@ -73025,7 +74125,7 @@ class Game {
     // Counted together, so a mat already carpeted in clocks does not keep
     // filling up just because the bomb ceiling has room left in it.
     if (this.dropSlotsFull) return;
-    if (canBomb && (!open.length || Math.random() < BOMB_SHARE)) this.spawnBomb();
+    if (canBomb && (!open.length || rng() < BOMB_SHARE)) this.spawnBomb();
     else this._dropAnywhere();
   }
 
@@ -73206,8 +74306,8 @@ class Game {
 
       // ...and the bomb itself judders harder as it runs out.
       const shake = p * p * 0.16;
-      r.position.x = u.gx + (Math.random() - 0.5) * shake;
-      r.position.z = u.gz + (Math.random() - 0.5) * shake;
+      r.position.x = u.gx + (rng() - 0.5) * shake;
+      r.position.z = u.gz + (rng() - 0.5) * shake;
       r.rotation.z = Math.sin(performance.now() * 0.03) * p * 0.22;
       const puff = 1 + Math.sin(p * 34) * p * 0.1;
       u.body.scale.setScalar(puff);
@@ -73242,6 +74342,10 @@ class Game {
     const u = r.userData;
     if (u.spent) return;
     u.spent = true;
+    // For the BOOT ONLY objective. Counted here rather than at spawn: the
+    // challenge is about what the player set off, and bombs the level drops
+    // and the player ignores must not spoil it.
+    this.bombsUsed++;
 
     const pan = clamp(u.gx / ARENA.x, -1, 1);
     // A raspberry, over the quake rather than instead of it: the floor really
@@ -73708,10 +74812,14 @@ class Game {
     // card names them once and is then gone, so a rule the player cannot see
     // reads as the game breaking: "level 18 has no power stomp any more" is
     // exactly TAPS ONLY working correctly and saying nothing about it.
-    for (const id of (this.level && this.level.rules) || []) {
+    for (const id of this.activeRules) {
       const r = RULES[id];
       if (!r) continue;
-      chip(host, '#ffd166', '\u26A0', r.label, null).classList.add('rule');
+      const el = chip(host, '#ffd166', '\u26A0', r.label, null);
+      el.classList.add('rule');
+      // A drafted curse is the player's own doing and is worth money, so it
+      // is marked differently from one the level imposed.
+      if (this.drafted && this.drafted.has(id)) el.classList.add('drafted');
     }
 
     // Carried, not running. The only things there is a decision to make about.
@@ -73872,8 +74980,8 @@ class Game {
   // decides which one, out of everything this level has unlocked.
   _fireEvent() {
     const wantGift = this.karma > 0
-      ? Math.random() < Math.min(0.92, 0.5 + this.karma * 0.09)
-      : Math.random() < Math.max(0.12, 0.5 + this.karma * 0.09);
+      ? rng() < Math.min(0.92, 0.5 + this.karma * 0.09)
+      : rng() < Math.max(0.12, 0.5 + this.karma * 0.09);
     const kind = wantGift ? 'gift' : 'curse';
     const eligible = (k) => EVENTS.filter((e) => (!k || e.kind === k)
       && this.levelIndex >= e.from && this._eventPossible(e.id));
@@ -73894,7 +75002,7 @@ class Game {
 
     let total = 0;
     for (const e of pool) total += e.weight;
-    let r = Math.random() * total;
+    let r = rng() * total;
     let ev = pool[pool.length - 1];
     for (const e of pool) { r -= e.weight; if (r <= 0) { ev = e; break; } }
 
@@ -74136,7 +75244,7 @@ class Game {
       total += w;
       return w;
     });
-    let r = Math.random() * total;
+    let r = rng() * total;
     for (let i = 0; i < HOT_PROFILES.length; i++) {
       r -= weights[i];
       if (r <= 0) return HOT_PROFILES[i];
@@ -74239,7 +75347,7 @@ class Game {
     if (this.state !== 'playing') return;
     const b = this.spawnBaby('peekaboo');
     if (!b) return;
-    b.userData.peekPhase = Math.random() * 6;
+    b.userData.peekPhase = rng() * 6;
   }
 
   // ROCKET BABY: shoots in from one edge and straight out the opposite one,
@@ -74252,8 +75360,8 @@ class Game {
     const b = this.spawnBaby('rocket');
     if (!b) return;
     const d = b.userData;
-    const alongX = Math.random() < 0.5;
-    const fromNeg = Math.random() < 0.5;
+    const alongX = rng() < 0.5;
+    const fromNeg = rng() < 0.5;
     const pad = 2.2;
     if (alongX) {
       b.position.set(fromNeg ? -ARENA.x - pad : ARENA.x + pad, 0,
@@ -74412,7 +75520,7 @@ class Game {
     const b = this.bossBaby;
     this.bossAttackT = BOSS_ATTACK_EVERY;
     if (!b || !b.parent || b.userData.dying) return;
-    const base = Math.random() * Math.PI * 2;
+    const base = rng() * Math.PI * 2;
     for (let i = 0; i < BOSS_AMMO_COUNT; i++) {
       const a = (base + (i / BOSS_AMMO_COUNT) * Math.PI * 2);
       const mesh = makeBossAmmo();
@@ -74746,7 +75854,7 @@ class Game {
     this.fwLeft--;
     const x = rand(-ARENA.x * 0.85, ARENA.x * 0.85);
     const z = rand(ARENA.zMin + 1, ARENA.zMax - 1);
-    const colour = FIREWORK_COLORS[(Math.random() * FIREWORK_COLORS.length) | 0];
+    const colour = FIREWORK_COLORS[(rng() * FIREWORK_COLORS.length) | 0];
     // High, wide and slow: a shell opening, not a stomp throwing dust.
     this.confetti.burst(x, rand(6, 9.5), z, 120,
       { spread: 10.5, up: 2.6, size: 720, colors: FIREWORK_COLORS });
@@ -75167,9 +76275,9 @@ class Game {
             { color: '#ffffff', scale: 0.8, life: 0.9, vy: 2.6 });
         }
       }
-      if (Math.random() < f * 0.5) {
+      if (rng() < f * 0.5) {
         // Confetti drawn inward, so the arena visibly feeds the wind-up.
-        const a = Math.random() * Math.PI * 2;
+        const a = rng() * Math.PI * 2;
         this.confetti.burst(
           this.bootPos.x + Math.cos(a) * r, 0.3, this.bootPos.z + Math.sin(a) * r,
           1, { spread: 0.4, up: 3.5, size: 300 });
@@ -75290,7 +76398,7 @@ class Game {
   // Light the gate. Nothing spawns yet: this is the window the player has to
   // get there and wind up to the right size.
   _callPod(n) {
-    const side = (Math.random() * 4) | 0;
+    const side = (rng() * 4) | 0;
     const pad = 2.2;
     let x, z;
     if (side === 0) { x = -ARENA.x - pad; z = rand(ARENA.zMin + 2, ARENA.zMax - 2); }
@@ -75314,7 +76422,7 @@ class Game {
     // The landing zone, drawn as a ring that tightens as the doors open. It is
     // deliberately the size the pod will occupy, so the player can match it.
     const k = clamp(p.t / POD_WARN, 0, 1);
-    if (Math.random() < dt * 26) {
+    if (rng() < dt * 26) {
       this.rings.spawn(p.inx, p.inz, POD_SPREAD * (1.6 + k * 2.4), 0xff9ec4, 0.35);
     }
     if (p.t > 0) return;
@@ -75360,12 +76468,12 @@ class Game {
     if (this.spawnTimer <= 0 && alive < trickleCap) {
       this.spawnTimer = rate * rand(0.72, 1.28);
       if (this.levelIndex >= SIBLING_LEVEL && alive + 1 < trickleCap
-        && Math.random() < SIBLING_CHANCE) {
+        && rng() < SIBLING_CHANCE) {
         this._spawnSiblingPair();
       } else {
         this.spawnBaby(this._pickType('bounce'));
         // Occasional double-spawn keeps the rhythm from feeling metronomic.
-        if (Math.random() < 0.22 && alive + 1 < trickleCap) {
+        if (rng() < 0.22 && alive + 1 < trickleCap) {
           this.spawnBaby(this._pickType('bounce'));
         }
       }
@@ -75403,7 +76511,7 @@ class Game {
         // Weighted toward whichever has been open longer, so a level that
         // just unlocked one is not immediately drowned out by the other.
         const wantRocket = rocketOpen
-          && (!peekabooOpen || Math.random() < 0.55);
+          && (!peekabooOpen || rng() < 0.55);
         if (wantRocket) this._sendRocketBaby();
         else if (peekabooOpen) this._sendPeekabooBaby();
       }
@@ -75552,14 +76660,14 @@ class Game {
         link.scale.x = Math.max(0.2, dist);
       }
 
-      if (d.type.golden && Math.random() < bdt * 26) {
+      if (d.type.golden && rng() < bdt * 26) {
         this.confetti.burst(b.position.x, 0.7, b.position.z, 1,
           { spread: 0.6, up: 1.6, colors: [0xffd700, 0xfff3b0], size: 240 });
       }
       // Hotter, faster, and it pulses: this one has to be findable across a
       // full mat in the two or three seconds it is worth chasing.
       if (d.type.hot) {
-        if (Math.random() < bdt * 40) {
+        if (rng() < bdt * 40) {
           this.confetti.burst(b.position.x, 0.7, b.position.z, 1,
             { spread: 0.8, up: 2.2, colors: [0xff7a1a, 0xffd166, 0xffffff], size: 280 });
         }
@@ -75857,7 +76965,7 @@ class Game {
     }
 
     // Idle burble, in this baby's own voice.
-    if (Math.random() < dt * 0.22) {
+    if (rng() < dt * 0.22) {
       this.audio.coo(clamp(b.position.x / ARENA.x, -1, 1), 0.55, d.voice || 1);
     }
 
@@ -75928,7 +77036,7 @@ class Game {
     d.lap = pick(ESCAPE_MOVES);
     // Sleepers keep their dignity: they were never running from anything.
     if (d.type.forbidden && !d.woke) d.lap = 'toddle';
-    d.lapSpin = Math.random() < 0.5 ? -1 : 1;
+    d.lapSpin = rng() < 0.5 ? -1 : 1;
     d.lapSpeed = d.speed * (d.lap === 'sprint' ? 2.4 : 0.85);
     // Faces the way it is going, and keeps that heading for the whole lap: a
     // celebration that wanders is a celebration you cannot read.
@@ -76078,6 +77186,16 @@ class Game {
     const cost = d.type.golden ? 2 : d.buff && d.buff.id === 'growth' ? 3 : 1;
     this.naps += cost;
     this.escapes++;
+
+    // THE LEDGER. This one goes on the books and will be back in a later
+    // shift as a veteran. A veteran that escapes AGAIN is not double-counted:
+    // it was already on the ledger, it simply stays there, or a player having
+    // one bad night against the debt would watch it compound out of reach.
+    if (!d.type.veteran && !this.daily) {
+      this.ledger = Math.min(this.ledger + 1, LEDGER_CAP);
+      this._saveLedger();
+    }
+    if (d.type.veteran) this.vetsOut--;
 
     // It costs the boot as well as the meter. An escape used to be a tick
     // against the Nap Meter and nothing else, which meant a player sweeping
