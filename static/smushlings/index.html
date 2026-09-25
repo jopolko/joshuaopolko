@@ -70463,7 +70463,7 @@ class Game {
     if (!host) return;
     host.innerHTML = '';
     for (let i = 0; i < LEVEL_COUNT; i++) {
-      const best = Number(store.get(`babystomp.lvl${i}`, 0)) || 0;
+      const best = Number(store.get(`babystomp.pb${i}`, 0)) || 0;
       let stars = 0;
       for (const t of (levelAt(i).stars || [])) if (best >= t) stars++;
       const el = document.createElement('i');
@@ -70541,17 +70541,62 @@ class Game {
   }
 
   // Stars are the reason to replay a level you already survived.
+  //
+  // WHAT THIS USED TO DO, AND WHY IT WAS WRONG. `score` is cumulative across a
+  // run, and this compared it against thresholds that were authored as
+  // PER-LEVEL targets. Ten points earned on level 2 therefore scored two
+  // stars, because what got measured was the 45,000 carried in from level 1.
+  //
+  // Three things say the thresholds were always meant to be per-level. Six
+  // levels (13, 18, 21, 23, 24, 27) carry a LOWER bar than the level before -
+  // level 24 drops from 328,000 to 160,000 - and a running total can never go
+  // down, so under a cumulative reading those six were unconditional three
+  // stars. The numbers themselves scale like one level's work, not thirty.
+  // And anybody averaging 33,000 a level, which is level 1's own three-star
+  // bar, cleared every remaining threshold in the game on arrival.
+  //
+  // That is what made stars worthless: the sink is 92 and the source
+  // saturated at 90 within a few minutes of play.
   _starsFor(score) {
     const t = this.level.stars || [Infinity, Infinity, Infinity];
     return t.reduce((n, threshold) => n + (score >= threshold ? 1 : 0), 0);
   }
 
+  // What this level alone paid, hazard multiplier included - taking a curse is
+  // meant to be a faster way to earn stars, which is the whole reason the
+  // draft exists.
+  get levelScore() { return this.score - this.scoreAtLevelStart; }
+
   _saveLevelBest() {
-    const stars = this._starsFor(this.score);
-    const key = `babystomp.lvl${this.levelIndex}`;
+    const earned = this.levelScore;
+    const stars = this._starsFor(earned);
+    // A new key. The old `lvl<n>` values are run totals and cannot be
+    // converted into level scores - seeding from them would lock in three
+    // stars on every late level forever, which is the bug rather than a
+    // migration of it. They are left untouched for `legacyStars` to read.
+    const key = `babystomp.pb${this.levelIndex}`;
     const prev = Number(store.get(key, 0)) || 0;
-    if (this.score > prev) store.set(key, String(Math.round(this.score)));
+    if (earned > prev) store.set(key, String(Math.round(earned)));
     return stars;
+  }
+
+  // One-time floor, so the fix above cannot take away stars a player has
+  // already spent. Their old star count is snapshotted the first time they
+  // load the corrected build and `starsEarned` never drops below it; real
+  // per-level scores overtake it as they replay. Without this, anyone who had
+  // bought upgrades would come back to a negative balance and be unable to
+  // buy anything until they had re-earned everything under the new rules.
+  get legacyStars() {
+    const saved = store.get('babystomp.legacystars', null);
+    if (saved !== null) return Number(saved) || 0;
+    let n = 0;
+    for (let i = 0; i < 60; i++) {
+      const old = Number(store.get(`babystomp.lvl${i}`, 0)) || 0;
+      if (!old) continue;
+      for (const t of levelAt(i).stars || []) if (old >= t) n++;
+    }
+    store.set('babystomp.legacystars', String(n));
+    return n;
   }
 
   // What the curses paid, as a line rather than folded silently into the
@@ -72208,11 +72253,14 @@ class Game {
   get starsEarned() {
     let n = 0;
     for (let i = 0; i < 60; i++) {
-      const best = Number(store.get(`babystomp.lvl${i}`, 0)) || 0;
+      const best = Number(store.get(`babystomp.pb${i}`, 0)) || 0;
       if (!best) continue;
       for (const t of levelAt(i).stars || []) if (best >= t) n++;
     }
-    return n;
+    // Never below what the player had before the per-level fix - see
+    // legacyStars. Once they have genuinely re-earned more than the snapshot,
+    // the snapshot stops mattering on its own.
+    return Math.max(n, this.legacyStars);
   }
 
   get starsSpent() {
@@ -77735,6 +77783,13 @@ class Game {
 
 // Exposed so levels can be jumped to from the console while tuning.
 window.GAME = new Game();
+
+// The random source, for the balance bots in tools/test/bots.mjs. A measured
+// career has to be repeatable or a threshold derived from it is noise, and
+// these live inside a module scope the bundler renames, so there is no other
+// handle on them from outside. Same reasoning as `window.GAME` above: a debug
+// hook the game itself never reads.
+window.RNG = { seedRng, unseedRng, makeRng, hashSeed };
 
 })();
 
