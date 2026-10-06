@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="/favicon.ico?v=6" rel="icon" sizes="any"/>
+<link href="/favicon-32x32.png?v=6" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-192x192.png?v=6" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/apple-touch-icon.png?v=6" rel="apple-touch-icon"/>
+<link href="/site.webmanifest?v=6" rel="manifest"/>
+<meta content="#16273f" name="theme-color"/>
+<meta content="031F717E86CB83B9DBDA9CE26F9D6824" name="msvalidate.01"/>
+<title>Enterprise AI Pricing and the Inference Infrastructure Gap | Joshua Opolko</title>
+<meta content="Enterprise AI is moving from per-seat to consumption billing. Average monthly AI spend rose 36% in 2025. Here is the infrastructure problem that shift reveals." name="description">
+<meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="article" property="og:type"/>
+<meta content="Enterprise AI Pricing and the Inference Infrastructure Gap" property="og:title">
+<meta content="Enterprise AI is moving from per-seat to consumption billing. Average monthly AI spend rose 36% in 2025. Here is the infrastructure problem that shift reveals." property="og:description">
+<meta content="https://joshuaopolko.com/ai-cost-maturity/" property="og:url">
+<meta content="Joshua Opolko" property="og:site_name">
+<meta content="AI &amp; Agentic Systems" property="article:section">
+<meta content="2026-07-16T12:00:00+00:00" property="article:published_time"/>
+<meta content="2026-07-16T12:00:00+00:00" property="article:modified_time"/>
+<meta content="2026-07-16T12:00:00+00:00" property="og:updated_time">
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Enterprise AI Pricing and the Inference Infrastructure Gap" name="twitter:title"/>
+<meta content="Enterprise AI is moving from per-seat to consumption billing. Average monthly AI spend rose 36% in 2025. Here is the infrastructure problem that shift reveals." name="twitter:description"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="7 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/ai-cost-maturity/" rel="canonical">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://joshuaopolko.com/#person","name":"Joshua Opolko","url":"https://joshuaopolko.com/","description":"Software developer and writer based in Toronto, specializing in AI tools, self-hosting, and immersive technology. Founder of NowServingTO.","sameAs":["https://github.com/jopolko","https://x.com/JoshuaOpolko","https://www.linkedin.com/in/joshua-opolko/","https://www.reddit.com/user/JoshuaOpolko/"]},{"@type":"WebSite","@id":"https://joshuaopolko.com/#website","url":"https://joshuaopolko.com/","name":"Joshua Opolko","publisher":{"@id":"https://joshuaopolko.com/#person"}},{"@type":"BreadcrumbList","@id":"https://joshuaopolko.com/ai-cost-maturity/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://joshuaopolko.com","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://joshuaopolko.com/ai-cost-maturity/","name":"Enterprise AI Pricing and the Inference Infrastructure Gap"}}]},{"@type":"WebPage","@id":"https://joshuaopolko.com/ai-cost-maturity/#webpage","url":"https://joshuaopolko.com/ai-cost-maturity/","name":"Enterprise AI Pricing and the Inference Infrastructure Gap","datePublished":"2026-07-16T12:00:00+00:00","dateModified":"2026-07-16T12:00:00+00:00","isPartOf":{"@id":"https://joshuaopolko.com/#website"},"author":{"@id":"https://joshuaopolko.com/#person"},"breadcrumb":{"@id":"https://joshuaopolko.com/ai-cost-maturity/#breadcrumb"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".article h1",".tldr",".post-body > p",".post-body h2"]}},{"@type":"BlogPosting","@id":"https://joshuaopolko.com/ai-cost-maturity/#article","headline":"Enterprise AI Pricing and the Inference Infrastructure Gap","description":"Enterprise AI is moving from per-seat to consumption billing. Average monthly AI spend rose 36% in 2025. Here is the infrastructure problem that shift reveals at agent fleet scale, and an early solution.","keywords":"enterprise AI pricing, consumption-based billing, AI agent infrastructure, inference caching, token costs, agentic AI, AI cost management, semantic caching","datePublished":"2026-07-16T12:00:00+00:00","dateModified":"2026-07-16T12:00:00+00:00","author":{"@id":"https://joshuaopolko.com/#person"},"publisher":{"@id":"https://joshuaopolko.com/#person"},"isPartOf":{"@id":"https://joshuaopolko.com/ai-cost-maturity/#webpage"},"mainEntityOfPage":{"@id":"https://joshuaopolko.com/ai-cost-maturity/#webpage"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".article h1",".tldr",".post-body > p",".post-body h2"]},"wordCount":1450}]}</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+
+/* header + nav */
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;
+  transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+
+/* article */
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .4em}
+.byline{font:400 14px/1.4 var(--sans);color:var(--muted);margin:0 0 1.6em}
+.tldr{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:16px 20px;margin:0 0 2em;font:400 16px/1.6 var(--sans)}
+.tldr strong{display:block;font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px}
+.tldr ul{margin:0;padding-left:1.2em}
+.tldr li{margin:.3em 0;color:var(--ink2)}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;
+  padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.6em 0 .6em 1.2em;border-left:3px solid var(--accent);
+  color:var(--ink2);font-style:normal}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:.5em}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.post-body th{background:var(--code-bg);font:600 14px/1.3 var(--sans)}
+.post-body td{font:400 15px/1.5 var(--sans)}
+.cite{font:400 13px/1.4 var(--sans);color:var(--muted);margin-top:-.6em;margin-bottom:1.2em}
+
+/* footer */
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);
+  color:var(--muted);font:400 14px/1.6 var(--sans)}
+
+/* related guides */
+.related-guides{margin-top:3em;padding-top:1.4em;border-top:1px solid var(--line)}
+.related-guides h2{font:600 13px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.related-guides ul{list-style:none;margin:0;padding:0}
+.related-guides li{margin:.6em 0;font:400 16px/1.5 var(--sans)}
+
+@media (max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,
+  .site-nav .has-sub:hover > ul,
+  .site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;
+    left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script defer="" src="/assets/nav.js?v=6"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+<style>.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:28px}.foot-col ul{list-style:none;margin:0;padding:0}.foot-col li{margin:6px 0}.foot-col a{color:var(--muted);text-decoration:none;font-size:13px;line-height:1.5}.foot-col a:hover{color:var(--accent-ink)}.foot-hed{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}.foot-copy{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:13px}.foot-copy a{color:var(--muted);text-decoration:none}@media(max-width:700px){.foot-cols{grid-template-columns:repeat(2,1fr);gap:24px}}@media(max-width:400px){.foot-cols{grid-template-columns:1fr}}</style><style id="nav-drop">.site-nav .has-sub > ul{display:flex;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s}.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:1;pointer-events:auto;transform:translateY(0)}@media(max-width:640px){.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:0;pointer-events:none;transform:translateY(-4px)}.site-nav .has-sub.open > ul{opacity:1;pointer-events:auto;transform:translateY(0)}}</style>
+</head>
+<body>
+<header class="site-head">
+<a class="brand" href="/">Joshua Opolko</a>
+<nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="https://nowservingto.com">NowServingTO</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-code-generation-claude-vs-gemini-a-developers-real-world-comparison/">Claude vs Gemini</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/self-hosted-ai-stack/">Self-Hosted AI Stack</a></li><li><a href="/models/">Local Models</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/vr-platform-comparison-aec/">VR Platform Comparison</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-drug-discovery/">VR Drug Discovery</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/vr-courtroom-evidence/">VR Courtroom Evidence</a></li><li><a href="/smushlings/">Smushlings</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+<h1>Enterprise AI Pricing and the Inference Infrastructure Gap</h1>
+<p class="byline">By Joshua Opolko &middot; July 16, 2026</p>
+
+<div class="tldr" role="note" aria-label="Key takeaways">
+<strong>Key takeaways</strong>
+<ul>
+<li>Enterprise AI vendors are exiting the flat per-seat subscription era. Average monthly enterprise AI spend rose 36% in 2025, from $62,964 to $85,521 (CloudZero).</li>
+<li>The shift to consumption billing forces a governance change: IT-managed agent fleets replace direct model access for most workers.</li>
+<li>Gartner forecasts 40% of enterprise applications will have task-specific AI agents by end of 2026, up from under 5% in 2025.</li>
+<li>Agent fleets create a cost problem that individual usage never surfaced: redundant computation. The same inference work is performed repeatedly across agents with no mechanism to share results.</li>
+<li>Research shows 62-69% of LLM queries can be served from a semantic cache, reducing API calls and cost by the same margin.</li>
+<li><a href="https://dontguess.ai/" rel="noopener noreferrer" target="_blank">dontguess.ai</a> is building a token-work exchange that turns cached inference into a tradeable asset, using an event-sourced architecture on Nostr with a closed scrip economy designed to prevent speculation.</li>
+</ul>
+</div>
+
+<div class="post-body">
+
+<p>Two structural shifts are happening simultaneously in enterprise AI, and most of the commentary focuses on the wrong one. The billing model change is visible and generates noise. The infrastructure gap it reveals is quieter and much more consequential.</p>
+
+<h2>Why is enterprise AI pricing changing?</h2>
+
+<p>Enterprise AI vendors built their initial pricing on a per-seat subscription model designed to maximize adoption, not recover infrastructure costs. AI gross margins run 50-60% compared to 80-90% for traditional SaaS (<a href="https://www.bvp.com/atlas/the-ai-pricing-and-monetization-playbook" rel="noopener noreferrer" target="_blank">Bessemer Venture Partners, 2025</a>). As enterprise usage has matured and the gap between flat fees and actual compute costs has widened, the economics have forced a structural shift toward consumption-based billing that meters actual token usage.</p>
+
+<p>The transition is already underway. <a href="https://www.bain.com/insights/per-seat-software-pricing-isnt-dead-but-new-models-are-gaining-steam/" rel="noopener noreferrer" target="_blank">Bain's analysis of 30+ major SaaS vendors in 2025</a> found that 65% have moved to hybrid pricing (per-seat plus a usage meter), with Anthropic, Salesforce, Adobe, and Zoom all adopting some form of consumption metering. Average enterprise monthly AI spend rose 36% in a single year, from $62,964 in 2024 to $85,521 in 2025 (<a href="https://www.cloudzero.com/state-of-ai-costs/" rel="noopener noreferrer" target="_blank">CloudZero State of AI Costs, 2025</a>). That trajectory doesn't flatten on its own.</p>
+
+<p>The AI industry's per-seat era was deliberate. Vendors needed adoption velocity and were willing to price below cost to get it. Now that usage patterns are understood, pricing is converging on what the compute actually costs, plus margin. This is predictable SaaS lifecycle behavior. What's less predictable is what enterprises have to build in response.</p>
+
+<h2>What does consumption billing mean for enterprise AI governance?</h2>
+
+<p>When pricing shifts from flat subscription to metered consumption, the governance problem shifts from budget line items to usage management in real time. Non-technical workers cannot optimize token spend. They don't understand why the same task costs different amounts depending on prompt design, model choice, and context window size. They can't be expected to. Only 22% of finance executives can currently tie AI spend to business outcomes (<a href="https://www.cloudzero.com/state-of-ai-costs/" rel="noopener noreferrer" target="_blank">CloudZero, 2025</a>), and 57% still track AI costs via spreadsheets.</p>
+
+<p>The only workable response at any real organizational scale is centralization: IT-managed agent fleets that expose AI capabilities as governed tools rather than open API access. Workers interact with purpose-built agents; the agents interact with models; IT controls the spend at the infrastructure layer. This is already the pattern for technical teams, and consumption billing is forcing it on everyone else. There is also a compliance pressure that often goes unacknowledged: the terms of service for consumer AI plans explicitly prohibit business use. Companies that reimbursed employees' personal subscriptions were already in breach. Legal teams that examined the question closely advised moving to enterprise contracts regardless of cost. Consumption billing makes the sticker shock acute and public, but the need for proper enterprise licensing was never optional.</p>
+
+<p><a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" rel="noopener noreferrer" target="_blank">Gartner forecasts that 40% of enterprise applications will feature task-specific AI agents by end of 2026</a>, up from under 5% in 2025. McKinsey found that 23% of organizations are already scaling agentic AI systems in production, with another 39% in active experimentation (<a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" rel="noopener noreferrer" target="_blank">McKinsey State of AI, November 2025</a>). The organizational shift from individual model access to agent fleets is not a future prediction. It's in progress.</p>
+
+<p>The irony is that in building the internal governance layer to control costs, every enterprise locks itself in more deeply. Internal prompt libraries, usage analytics, routing configurations, and agent definitions are organizational artifacts with real value. That value lives inside the organization, not at the vendor. The pricing cliff is inadvertently doing the AI companies' product work for them.</p>
+
+<h2>What is the real cost problem at agent fleet scale?</h2>
+
+<p>The dominant cost driver in individual AI use is prompt complexity: how much context you send, which model you use, how long the response is. In agent fleet deployments, a different cost driver emerges that individual usage never surfaces: redundant computation. When multiple agents independently research, analyze, and synthesize across a shared knowledge domain, the same underlying inference work gets performed repeatedly with no mechanism for sharing results.</p>
+
+<p>Consider a legal team running a fleet of agents for contract review, regulatory research, and precedent analysis. Agent A retrieves and summarizes the relevant case law on a particular clause Monday morning. Agent B, running a parallel task for a different lawyer on the same clause Thursday, starts from scratch. The organization pays for the same tokens twice. Scale this across dozens of agents and hundreds of overlapping tasks, and redundant computation becomes the primary cost driver, not the complexity of any individual inference.</p>
+
+<p>The research on query similarity makes this concrete. A 2024 study (Gill et al., <a href="https://arxiv.org/abs/2403.02694" rel="noopener noreferrer" target="_blank">arXiv:2403.02694</a>) found that approximately 31% of ChatGPT queries exhibit semantic similarity to previously submitted requests. A separate semantic caching implementation (<a href="https://arxiv.org/abs/2411.05276" rel="noopener noreferrer" target="_blank">arXiv:2411.05276</a>) achieved cache hit rates of 61.6-68.8% across query categories, reducing API calls by the same margin with accuracy above 97%. Anthropic's own prompt caching pricing reflects this: cached reads cost $0.30 per million tokens versus $3.00 per million for fresh inference, a 90% reduction.</p>
+
+<p>The math is clear. The infrastructure to act on it at agent-fleet scale, across an organization where agents don't share a cache, doesn't exist yet in any meaningful form.</p>
+
+<p>The problem isn't limited to API-billed inference. Enterprises running on-premise GPU clusters or self-hosted models don't pay per token, but they do pay for power, cooling, and hardware utilization. A redundant inference job on a local model consumes the same GPU cycles regardless of billing model. At fleet scale, that translates to real electricity costs, thermal load, and contention with other workloads on shared hardware. The cost unit changes from dollars-per-million-tokens to kilowatt-hours and GPU-hours, but the underlying waste is identical.</p>
+
+<h2>What is dontguess.ai building to solve this?</h2>
+
+<p><a href="https://dontguess.ai/" rel="noopener noreferrer" target="_blank">dontguess.ai</a> is an event-sourced exchange for cached AI inference results. The core premise is that agents should be able to buy pre-computed results from a shared pool rather than recomputing from scratch. Sellers submit completed inferences to the exchange and receive 70% of declared token cost in scrip immediately, plus a 10% residual on every future resale of their result. Buyers describe tasks semantically, set budgets in scrip, preview results before committing, and pay less than fresh inference when there's a match. The exchange retains 20% as an operator margin.</p>
+
+<p>Several design decisions here are worth examining closely because they reveal a builder thinking carefully about failure modes, not just happy paths.</p>
+
+<h3>Event sourcing on Nostr</h3>
+
+<p>The exchange uses <a href="https://nostr.com/" rel="noopener noreferrer" target="_blank">Nostr</a>, the open decentralized messaging protocol, as its transport and identity layer. Exchange operations (put, buy, match, settle) are agent-signed Nostr events. The entire state of the exchange is derived from a replay of a signed event log rather than from a central database. This means any participant can independently verify the state of the exchange from first principles. There is no central authority to trust, and no single point that can falsify the ledger.</p>
+
+<p>For a two-sided marketplace where sellers need assurance they'll receive their scrip and buyers need assurance they're getting what they paid for, this is a structurally sound foundation. It also means the system is auditable without a custodian.</p>
+
+<h3>The scrip economy</h3>
+
+<p>Scrip is a closed currency. It cannot be cashed out. It can only be used to purchase cached inference within the exchange. This is the most important design decision in the entire system, and it's one that most early token economies get wrong.</p>
+
+<p>A redeemable currency creates a speculative layer on top of the utility layer. Participants start optimizing for scrip appreciation rather than for cost reduction. The scrip market drifts away from the underlying product. By making scrip non-redeemable, the system ensures that the only reason to acquire it is to consume cached results, which is exactly the behavior the exchange is trying to incentivize. A 10% matching fee is burned on each sale, creating mild deflationary pressure that rewards sellers who generate high-quality, frequently-cited results.</p>
+
+<h3>Semantic matching</h3>
+
+<p>The matching engine uses <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2" rel="noopener noreferrer" target="_blank">all-MiniLM-L6-v2</a>, a 384-dimensional sentence embedding model, with TF-IDF as a fallback. This is a pragmatic choice. The MiniLM model is small enough to run cheaply at query time, well-benchmarked for semantic similarity tasks, and widely deployed in production semantic search systems. TF-IDF fallback ensures the system degrades gracefully when the embedding model is unavailable or returns low-confidence results. Dynamic pricing adjusts based on demand signals (10% per distinct buyer), temporal decay over a 60-day freshness curve, seller reputation (0.8-1.2x multiplier), and content size.</p>
+
+<h3>Two-tier architecture</h3>
+
+<p>The system has a deliberately low-friction entry path. In individual mode, agents communicate over a local IPC socket with no admission requirements and no scrip enforcement. A developer can run it locally without any account, relay, or coordination overhead. In team mode, agents sign events with per-agent secp256k1 keys and communicate with a relay, with an operator allowlist controlling admission and scrip accounting enforced across the fleet.</p>
+
+<p>This is good product design. The individual tier lets builders understand the system's value before committing to the team infrastructure. The team tier is where the enterprise use case lives: a shared pool of agents that can trade inference results internally rather than recomputing across the fleet.</p>
+
+<h3>The compliance question</h3>
+
+<p>One genuine risk deserves honest examination. Anthropic's commercial terms prohibit customers from using the API to "resell the Services." The counterargument is straightforward: Anthropic explicitly grants customers ownership of their outputs, and trading something you own is not the same as reselling API access. The complication is that dontguess.ai's entire value proposition is letting agents avoid paying for inference by substituting cached results. Anthropic could plausibly read that as monetizing their inference without paying per call, regardless of whether scrip rather than cash changes hands.</p>
+
+<p>dontguess.ai is model-agnostic, and that matters more than it might seem. On-premise and local model deployments have compute and power incentives to avoid redundant inference even without per-token billing, and for those deployments the TOS question doesn't apply at all. For teams using metered API providers, the compliance question is real for any deployment trading API-billed outputs at scale. Written clarification from the relevant provider before production is the responsible path.</p>
+
+<p>The enforcement picture is worth understanding separately from the legal question. Cache hits generate no API call, so they're invisible to providers by definition: Anthropic sees reduced volume but that's indistinguishable from efficiency gains or model switching. Local IPC installs produce no external network traffic at all. For shared or cloud-hosted relay instances, Nostr's pseudonymous key design matters: agent keys are secp256k1 keypairs generated locally with no required mapping to an API account or enterprise identity. A relay participant, including a provider running a monitoring node, can observe event content and trading patterns but cannot link an agent key to a specific API customer without an external identity anchor that isn't in the protocol. A provider could seed distinctive honeypot outputs and confirm their content is circulating in an exchange, but attributing that to a specific customer account would require correlating Nostr keys to API keys through some other means. The grey zone stays grey partly because enforcement is technically difficult even when the rule is clear.</p>
+
+<h2>Could dontguess.ai become a major platform?</h2>
+
+<p>The value of an inference exchange scales nonlinearly with agent density. Early in deployment, most queries miss the cache and get computed fresh. As inventory builds, hit rates compound. A team fleet with high internal query overlap could reach 60%+ cache hit rates relatively quickly, matching the academic benchmarks cited above. At that point, the economics are compelling: the same inference work costs 90% less on a cache hit than on a fresh call.</p>
+
+<p>The Nostr-based architecture creates a structural moat that most infrastructure plays lack. Because the state is derived from a signed event log rather than a proprietary database, the exchange is permissionless and independently verifiable. A large cloud provider building a competing product natively into their enterprise tier would, by design, build a proprietary, centralized system. dontguess.ai's decentralized approach is complementary to any vendor's stack, not dependent on any single provider's cooperation.</p>
+
+<p>The risk is the two-sided cold start: an exchange with no inventory is worthless to buyers, and sellers won't supply results without buyers. This is the standard marketplace problem, and it doesn't get solved by good engineering alone. But the team tier architecture provides a partial solution: a single organization running its own fleet generates both supply and demand internally, and can get value from the system before any cross-organization trading exists.</p>
+
+<p>As of July 2026, the project has 682 commits and is at v0.7.0, which signals sustained engineering effort rather than a prototype. The code is primarily Go (91%), a language choice that reflects a builder prioritizing performance and operational simplicity over developer experience shortcuts. Gartner projects that AI agents will displace $234 billion in traditional SaaS spend by 2030. The infrastructure layer for managing that fleet's compute costs doesn't exist yet at scale. dontguess.ai is one of the earliest coherent bets on what that layer could look like.</p>
+
+<hr/>
+
+<h2>Frequently asked questions</h2>
+
+<h3>How can enterprises reduce LLM API costs?</h3>
+<p>Three approaches have demonstrated measurable cost reductions. First, IT-managed agent fleets replace open API access, preventing ungoverned usage that inflates spend. Second, semantic caching serves 61-69% of agent queries from cache at 90% lower cost than fresh inference (Anthropic cache reads: $0.30 vs $3.00 per million tokens). Third, inference exchanges like dontguess.ai let agent fleets trade cached results internally, eliminating redundant computation across teams without paying for the same inference twice.</p>
+
+<h3>Why are enterprise AI vendors moving from per-seat to consumption pricing?</h3>
+<p>AI infrastructure carries gross margins of 50-60%, significantly below the 80-90% typical of traditional SaaS. Per-seat pricing was a deliberate subsidy to drive adoption. As enterprise usage data has matured and actual compute costs are understood, vendors are repricing toward consumption models that reflect the real cost of inference. Bain's 2025 analysis found 65% of major SaaS vendors have already adopted hybrid per-seat plus usage metering.</p>
+
+<h3>What is redundant computation in AI agent fleets?</h3>
+<p>Redundant computation occurs when multiple agents independently perform the same inference work without sharing results. In individual AI use, query overlap is low. In agent fleets where many agents work across a shared knowledge domain, the same research, summarization, or analysis gets repeated by different agents at full token cost each time. Research shows 31-69% of LLM queries exhibit semantic similarity to prior queries, meaning a large fraction of agent fleet compute is potentially cacheable.</p>
+
+<h3>What is inference caching and how much does it reduce AI costs?</h3>
+<p>Inference caching stores the results of previous AI computations and serves them to semantically similar future queries without re-running the model. Anthropic's prompt caching prices cache reads at $0.30 per million tokens versus $3.00 per million for fresh inference, a 90% reduction. Semantic caching implementations have achieved cache hit rates of 61-69% in production-scale studies, with accuracy above 97%. The cost savings at agent fleet scale are substantial.</p>
+
+<h3>How does dontguess.ai work?</h3>
+<p>dontguess.ai is a token-work exchange for AI agents. Sellers submit completed inferences and receive 70% of declared token cost in scrip immediately, plus a 10% residual on resales. Buyers describe tasks semantically, preview results before committing, and pay less than fresh inference. The exchange uses Nostr for decentralized identity and event signing, all-MiniLM-L6-v2 embeddings for semantic matching, and a closed scrip currency that can only be redeemed for cached inference, preventing speculation.</p>
+
+<h3>What makes dontguess.ai's architecture different from standard inference caching?</h3>
+<p>Standard inference caching is centralized and within a single system. dontguess.ai is a decentralized exchange where any agent can be both a supplier and consumer of cached results. The Nostr-based event log means the entire exchange state is auditable and reproducible from a signed message history, with no central database to trust. The closed scrip economy ensures participants optimize for result quality and cost reduction rather than currency speculation.</p>
+
+<hr/>
+
+<p><em>Last updated: July 16, 2026</em></p>
+
+<nav aria-label="Related guides" class="related-guides">
+<h2>Related</h2>
+<ul>
+<li><a href="/ai-infrastructure/">Site as AI Infrastructure</a>, how to structure content and systems for the agentic web.</li>
+<li><a href="/building-an-advanced-ai-workflow-josie-with-persistent-memory-and-live-data-access/">Building JOSIE</a>, a real agentic workflow with persistent memory and live data access.</li>
+<li><a href="/llm-etl-architecture/">LLM-as-ETL</a>, using language models as the transformation layer in data pipelines.</li>
+<li><a href="/agent-zero/">Agent Zero</a>, the open-source autonomous agent that treats your OS as a tool.</li>
+</ul>
+</nav>
+
+</div>
+</main>
+<footer class="site-foot"><p>&copy; Joshua Opolko</p></footer>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How can enterprises reduce LLM API costs?","acceptedAnswer":{"@type":"Answer","text":"Three approaches have demonstrated measurable cost reductions. First, IT-managed agent fleets replace open API access, preventing ungoverned usage that inflates spend. Second, semantic caching serves 61-69% of agent queries from cache at 90% lower cost than fresh inference (Anthropic cache reads: $0.30 vs $3.00 per million tokens). Third, inference exchanges like dontguess.ai let agent fleets trade cached results internally, eliminating redundant computation across teams without paying for the same inference twice."}},{"@type":"Question","name":"Why are enterprise AI vendors moving from per-seat to consumption pricing?","acceptedAnswer":{"@type":"Answer","text":"AI infrastructure carries gross margins of 50-60%, significantly below the 80-90% typical of traditional SaaS. Per-seat pricing was a deliberate subsidy to drive adoption. As enterprise usage data has matured and actual compute costs are understood, vendors are repricing toward consumption models that reflect the real cost of inference. Bain's 2025 analysis found 65% of major SaaS vendors have already adopted hybrid per-seat plus usage metering."}},{"@type":"Question","name":"What is redundant computation in AI agent fleets?","acceptedAnswer":{"@type":"Answer","text":"Redundant computation occurs when multiple agents independently perform the same inference work without sharing results. In individual AI use, query overlap is low. In agent fleets where many agents work across a shared knowledge domain, the same research, summarization, or analysis gets repeated by different agents at full token cost each time. Research shows 31-69% of LLM queries exhibit semantic similarity to prior queries, meaning a large fraction of agent fleet compute is potentially cacheable."}},{"@type":"Question","name":"What is inference caching and how much does it reduce AI costs?","acceptedAnswer":{"@type":"Answer","text":"Inference caching stores the results of previous AI computations and serves them to semantically similar future queries without re-running the model. Anthropic's prompt caching prices cache reads at $0.30 per million tokens versus $3.00 per million for fresh inference, a 90% reduction. Semantic caching implementations have achieved cache hit rates of 61-69% in production-scale studies, with accuracy above 97%."}},{"@type":"Question","name":"How does dontguess.ai work?","acceptedAnswer":{"@type":"Answer","text":"dontguess.ai is a token-work exchange for AI agents. Sellers submit completed inferences and receive 70% of declared token cost in scrip immediately, plus a 10% residual on resales. Buyers describe tasks semantically, preview results before committing, and pay less than fresh inference. The exchange uses Nostr for decentralized identity and event signing, all-MiniLM-L6-v2 embeddings for semantic matching, and a closed scrip currency redeemable only for cached inference."}},{"@type":"Question","name":"What makes dontguess.ai's architecture different from standard inference caching?","acceptedAnswer":{"@type":"Answer","text":"Standard inference caching is centralized and within a single system. dontguess.ai is a decentralized exchange where any agent can be both a supplier and consumer of cached results. The Nostr-based event log means the entire exchange state is auditable and reproducible from a signed message history, with no central database to trust. The closed scrip economy ensures participants optimize for result quality rather than currency speculation."}}]}</script>
+</body>
+</html>

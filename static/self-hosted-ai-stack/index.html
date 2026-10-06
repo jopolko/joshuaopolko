@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=6" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png?v=6" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-192x192.png?v=6" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
+<link rel="manifest" href="/site.webmanifest?v=6">
+<meta name="theme-color" content="#16273f">
+<meta name="msvalidate.01" content="031F717E86CB83B9DBDA9CE26F9D6824">
+<title>The Self-Hosted AI Stack (2026): Ollama, Open WebUI, n8n, Dify, SearXNG, LiteLLM</title>
+  <meta content="The complete self-hosted AI stack in 2026: Ollama, Open WebUI, LiteLLM, n8n, Dify, SearXNG, and Agent Zero. What each tool does and how they connect." name="description"/>
+  <meta content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" name="robots">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="The Self-Hosted AI Stack (2026): Ollama, Open WebUI, n8n, Dify, SearXNG, LiteLLM" property="og:title"/>
+<meta content="The complete self-hosted AI stack in 2026: Ollama, Open WebUI, LiteLLM, n8n, Dify, SearXNG, and Agent Zero. What each tool does and how they connect." property="og:description"/>
+<meta content="https://joshuaopolko.com/self-hosted-ai-stack/" property="og:url"/>
+<meta content="Joshua Opolko" property="og:site_name"/>
+<meta content="AI Tools / Self-Hosting" property="article:section"/>
+<meta content="https://joshuaopolko.com/assets/n8n-hero.jpg" property="og:image"/>
+<meta content="https://joshuaopolko.com/assets/n8n-hero.jpg" property="og:image:secure_url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Server rack illustration representing a self-hosted AI stack" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="2026-07-19T00:00:00+00:00" property="article:published_time"/>
+<meta content="2026-07-19T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="The Self-Hosted AI Stack (2026): Ollama, Open WebUI, n8n, Dify, SearXNG, LiteLLM" name="twitter:title"/>
+<meta content="The complete self-hosted AI stack in 2026: Ollama, Open WebUI, LiteLLM, n8n, Dify, SearXNG, and Agent Zero. What each tool does and how they connect." name="twitter:description"/>
+<meta content="https://joshuaopolko.com/assets/n8n-hero.jpg" name="twitter:image"/>
+<meta content="Written by" name="twitter:label1"/>
+<meta content="Joshua Opolko" name="twitter:data1"/>
+<meta content="Time to read" name="twitter:label2"/>
+<meta content="12 minutes" name="twitter:data2"/>
+<link href="https://joshuaopolko.com/self-hosted-ai-stack/" rel="canonical"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://joshuaopolko.com/#person",
+      "name": "Joshua Opolko",
+      "url": "https://joshuaopolko.com/",
+      "description": "Software developer and writer based in Toronto, specializing in AI tools, self-hosting, and immersive technology. Founder of NowServingTO.",
+      "sameAs": [
+        "https://github.com/jopolko",
+        "https://x.com/JoshuaOpolko",
+        "https://www.linkedin.com/in/joshua-opolko/",
+        "https://www.reddit.com/user/JoshuaOpolko/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://joshuaopolko.com/#website",
+      "url": "https://joshuaopolko.com/",
+      "name": "Joshua Opolko",
+      "publisher": {"@id": "https://joshuaopolko.com/#person"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://joshuaopolko.com/self-hosted-ai-stack/#breadcrumb",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "item": {"@id": "https://joshuaopolko.com", "name": "Home"}},
+        {"@type": "ListItem", "position": 2, "item": {"@id": "https://joshuaopolko.com/self-hosted-ai-stack/", "name": "The Self-Hosted AI Stack (2026)"}}
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joshuaopolko.com/self-hosted-ai-stack/#webpage",
+      "url": "https://joshuaopolko.com/self-hosted-ai-stack/",
+      "name": "The Self-Hosted AI Stack (2026): Ollama, Open WebUI, n8n, Dify, SearXNG, LiteLLM",
+      "isPartOf": {"@id": "https://joshuaopolko.com/#website"},
+      "author": {"@id": "https://joshuaopolko.com/#person"},
+      "breadcrumb": {"@id": "https://joshuaopolko.com/self-hosted-ai-stack/#breadcrumb"},
+      "inLanguage": "en-US",
+      "datePublished": "2026-07-19T00:00:00+00:00",
+      "dateModified": "2026-07-19T00:00:00+00:00",
+      "speakable": {"@type": "SpeakableSpecification", "cssSelector": [".post-title", ".post-body > p"]}
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://joshuaopolko.com/self-hosted-ai-stack/#article",
+      "headline": "The Self-Hosted AI Stack (2026): Ollama, Open WebUI, n8n, Dify, SearXNG, LiteLLM, and Agent Zero",
+      "description": "The complete self-hosted AI stack in 2026: Ollama, Open WebUI, LiteLLM, n8n, Dify, SearXNG, and Agent Zero. What each tool does and how they connect.",
+      "datePublished": "2026-07-19T00:00:00+00:00",
+      "dateModified": "2026-07-19T00:00:00+00:00",
+      "author": {"@id": "https://joshuaopolko.com/#person"},
+      "publisher": {"@id": "https://joshuaopolko.com/#person"},
+      "isPartOf": {"@id": "https://joshuaopolko.com/self-hosted-ai-stack/#webpage"},
+      "mainEntityOfPage": {"@id": "https://joshuaopolko.com/self-hosted-ai-stack/#webpage"},
+      "inLanguage": "en-US",
+      "keywords": "self-hosted AI stack, Ollama Open WebUI, self-host LLM 2026, n8n AI agents, Dify self-hosted, LiteLLM proxy, SearXNG AI agent, Agent Zero self-hosted, local AI stack",
+      "speakable": {"@type": "SpeakableSpecification", "cssSelector": [".post-title", ".post-body > p"]},
+      "wordCount": 2100
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://joshuaopolko.com/self-hosted-ai-stack/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What tools do you need for a complete self-hosted AI stack in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A complete self-hosted AI stack has four layers: a local model server (Ollama), a user-facing chat interface (Open WebUI), an API gateway that unifies local and cloud models (LiteLLM), and an automation or app-building layer (n8n for workflow automation, Dify for RAG and chat apps). Add SearXNG for private web search that agents can query, and Agent Zero if you want an autonomous agent with OS-level access. All run on a single machine or VPS with Docker."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you need a GPU to run a self-hosted AI stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only the model inference layer (Ollama) benefits from a GPU. Open WebUI, LiteLLM, n8n, Dify, SearXNG, and Agent Zero run on CPU with no meaningful performance difference. For Ollama: 8 GB of VRAM runs 7B models (Llama 3.1 8B, Mistral 7B, Qwen 2.5 7B) comfortably; 16 GB covers 13-14B models. CPU-only inference works but runs at roughly 3-8 tokens per second on a modern CPU versus 50-100 tokens per second on a mid-range consumer GPU."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Ollama and Dify?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ollama is a model runner: it downloads and serves LLMs locally via a REST API on port 11434. It does nothing else. Dify is an application layer: a drag-and-drop builder for RAG pipelines, chat applications, and multi-step AI workflows. Dify calls a model API (Ollama, OpenAI, Anthropic, or any OpenAI-compatible endpoint) to do inference. You typically run both: Ollama provides the local model, Dify provides the app interface and retrieval logic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between n8n and Dify for AI workflows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "n8n is a general-purpose workflow automation tool with 400+ prebuilt app integrations and a LangChain-based AI Agent node. It excels at connecting services: trigger on a Slack message, call an AI model, write the result to a spreadsheet. Dify is purpose-built for AI applications: RAG pipelines, knowledge base chat, and multi-turn conversation apps with memory. n8n is better for automation across many tools; Dify is better when the product IS a chat or retrieval application."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is LiteLLM and why does a self-hosted AI stack need it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LiteLLM is an OpenAI-compatible proxy that sits in front of all your model endpoints (local Ollama models, OpenAI, Anthropic, Gemini, Mistral, and others) and normalizes them to a single /v1/chat/completions API. Every tool in your stack points at LiteLLM instead of each model directly. Benefits: swap models by changing one config line, add rate limiting, track token costs across providers, and add API key auth for multi-user setups."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you connect Ollama to n8n or Dify?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both n8n and Dify support Ollama natively. In n8n: add a credential of type Ollama and set the base URL to http://localhost:11434 (or your server IP). Then any AI Agent node or LLM node can select that credential. In Dify: go to Settings, Model Provider, add Ollama, set the endpoint URL. If Ollama and Dify run in Docker Compose on the same host, use the service name instead of localhost: http://ollama:11434."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#fff; --ink:#1b1a17; --ink2:#3f3d38; --muted:#7a766c;
+  --line:#e7e3da; --accent:#0e7186; --accent-ink:#114e5d; --code-bg:#f4f1ea;
+  --serif:'Iowan Old Style','Charter','Palatino Linotype',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:56rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:19px/1.65 var(--serif);-webkit-font-smoothing:antialiased;}
+a{color:var(--accent-ink);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+img{max-width:100%;height:auto}
+.site-head{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  max-width:72rem;margin:0 auto;padding:18px 22px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{font:700 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav{margin-left:auto;font:600 14px/1 var(--sans)}
+.site-nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap}
+.site-nav li{position:relative}
+.site-nav a{display:block;padding:8px 13px;color:var(--ink2);text-decoration:none;border-radius:7px;
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.site-nav > ul > li > a{background:rgba(40,30,20,.04);border-color:var(--line)}
+.site-nav > ul > li > a:hover{background:var(--code-bg);color:var(--ink);border-color:var(--accent)}
+.site-nav .has-sub > a span{color:var(--accent);font-size:.7em;margin-left:3px;display:inline-block;transition:transform .15s}
+.site-nav .has-sub:hover > a span,.site-nav .has-sub:focus-within > a span{transform:rotate(180deg)}
+.site-nav .has-sub > ul{position:absolute;left:0;top:100%;min-width:240px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.08);
+  padding:6px;display:none;flex-direction:column;z-index:40;margin-top:6px}
+.site-nav .has-sub > ul::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:flex}
+.site-nav .has-sub > ul a{white-space:normal;background:transparent;border:none}
+.site-nav .has-sub > ul a:hover{background:var(--code-bg);color:var(--ink)}
+.article{max-width:var(--measure);margin:0 auto;padding:clamp(28px,5vw,56px) 22px 80px}
+.article h1{font:600 clamp(28px,5vw,42px)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 .6em}
+.post-body h2{font:600 clamp(22px,3.4vw,30px)/1.2 var(--serif);margin:1.9em 0 .5em;padding-top:.5em;border-top:1px solid var(--line)}
+.post-body h3{font:600 21px/1.3 var(--serif);margin:1.6em 0 .4em}
+.post-body p{margin:0 0 1.1em}
+.post-body ul,.post-body ol{margin:0 0 1.2em;padding-left:1.3em}
+.post-body li{margin:.35em 0}
+.post-body blockquote{margin:1.4em 0;padding:.4em 0 .4em 1.2em;border-left:3px solid var(--accent);color:var(--ink2);font-style:italic}
+.post-body img,.post-body figure{margin:1.6em 0}
+.post-body figure{text-align:center}
+.post-body figcaption{font:400 14px/1.5 var(--sans);color:var(--muted);margin-top:.5em}
+.post-body code{font:.86em var(--mono);background:var(--code-bg);padding:.12em .4em;border-radius:4px}
+.post-body pre{background:#15130f;color:#ece3d1;border-radius:8px;padding:16px 18px;overflow-x:auto;margin:0 0 1.4em}
+.post-body pre code{background:none;padding:0;color:inherit;font-size:13.5px;line-height:1.6}
+.post-body a{color:var(--accent-ink)}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body table{border-collapse:collapse;width:100%;margin:1.4em 0;font-size:.94em}
+.post-body th,.post-body td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.hero img{width:100%;border-radius:10px}
+figure.hero{margin:0 0 1.8em}
+.site-foot{max-width:72rem;margin:0 auto;padding:40px 22px;border-top:1px solid var(--line);color:var(--muted);font:400 14px/1.6 var(--sans)}
+@media(max-width:640px){
+  body{font-size:18px}
+  .site-head{flex-wrap:wrap;align-items:center;padding:14px 18px}
+  .site-nav{margin-left:0;width:100%;margin-top:8px;position:relative}
+  .site-nav > ul{flex-wrap:wrap;gap:5px;justify-content:flex-start}
+  .site-nav > ul > li > a{padding:9px 12px}
+  .site-nav .has-sub > a span{display:inline-block}
+  .site-nav .has-sub.open > a span{transform:rotate(180deg)}
+  .site-nav .has-sub{position:static}
+  .site-nav .has-sub > ul,.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{display:none}
+  .site-nav .has-sub.open > ul{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:100%;min-width:0;margin-top:6px;z-index:50}
+}
+</style>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1GZN9MX2P4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1GZN9MX2P4');</script>
+<script src="/assets/nav.js?v=6" defer></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","x5vfntq2ur");</script>
+<style id="nav-drop">.site-nav .has-sub > ul{display:flex;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s}.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:1;pointer-events:auto;transform:translateY(0)}@media(max-width:640px){.site-nav .has-sub:hover > ul,.site-nav .has-sub:focus-within > ul{opacity:0;pointer-events:none;transform:translateY(-4px)}.site-nav .has-sub.open > ul{opacity:1;pointer-events:auto;transform:translateY(0)}}</style><style>.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:28px}.foot-col ul{list-style:none;margin:0;padding:0}.foot-col li{margin:6px 0}.foot-col a{color:var(--muted);text-decoration:none;font-size:13px;line-height:1.5}.foot-col a:hover{color:var(--accent-ink)}.foot-hed{font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}.foot-copy{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:13px}.foot-copy a{color:var(--muted);text-decoration:none}@media(max-width:700px){.foot-cols{grid-template-columns:repeat(2,1fr);gap:24px}}@media(max-width:400px){.foot-cols{grid-template-columns:1fr}}</style></head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/">Joshua&nbsp;Opolko</a>
+  <nav class="site-nav" aria-label="Primary"><ul><li class="has-sub"><a href="#">Local <span aria-hidden="true">▾</span></a><ul><li><a href="/kidsevents/">Kids Events</a></li><li><a href="/hometurf/">HomeTurf</a></li><li><a href="https://nowservingto.com">NowServingTO</a></li></ul></li><li class="has-sub"><a href="#">Tools <span aria-hidden="true">▾</span></a><ul><li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a></li><li><a href="/ollama/">Ollama</a></li><li><a href="/litellm-proxy-guide/">LiteLLM</a></li><li><a href="/n8n-self-hosted-guide/">n8n</a></li><li><a href="/searxng-self-hosted-guide/">SearXNG</a></li><li><a href="/anythingllm-self-hosted-guide/">AnythingLLM</a></li><li><a href="/agent-zero/">Agent Zero</a></li><li><a href="/ai-code-generation-claude-vs-gemini-a-developers-real-world-comparison/">Claude vs Gemini</a></li><li><a href="/perplexica-self-hosted-guide/">Vane</a></li><li><a href="/self-hosted-ai-stack/">Self-Hosted AI Stack</a></li><li><a href="/models/">Local Models</a></li><li><a href="/dify-self-hosted-guide/">Dify</a></li><li><a href="/open-webui-self-hosted-guide/">Open WebUI</a></li><li><a href="/librechat-self-hosted-guide/">LibreChat</a></li><li><a href="/crewai-setup-production-guide/">CrewAI</a></li><li><a href="/qwen2-5-vl/">Qwen2.5-VL</a></li></ul></li><li class="has-sub"><a href="#">XR <span aria-hidden="true">▾</span></a><ul><li><a href="/vr-platform-comparison-aec/">VR Platform Comparison</a></li><li><a href="/vr-visualization-growing-teams/">VR for Growing Teams</a></li><li><a href="/architectural-visualization/">Architectural Viz</a></li><li><a href="/vr-walkthrough-aec/">VR Walkthroughs (AEC)</a></li><li><a href="/vr-drug-discovery/">VR Drug Discovery</a></li><li><a href="/vision-dominates-half-your-brains-processing-power/">Vision & the Brain</a></li><li><a href="/vr-courtroom-evidence/">VR Courtroom Evidence</a></li><li><a href="/smushlings/">Smushlings</a></li></ul></li><li><a href="/about/">About</a></li></ul></nav>
+</header>
+<main class="article">
+  <h1>The Self-Hosted AI Stack (2026): Ollama, Open WebUI, n8n, Dify, SearXNG, LiteLLM, and Agent Zero</h1>
+  <p style="color:var(--muted);font:400 14px/1.5 var(--sans);margin:.2em 0 1.4em">By Joshua Opolko &middot; Published July 19, 2026</p>
+  <div class="post-body">
+
+  <div style="background:var(--code-bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:18px 22px;margin:0 0 1.5em">
+    <strong>The short answer:</strong> A complete self-hosted AI stack has four layers. At the bottom, <strong>Ollama</strong> runs LLMs locally. Above it, <strong>LiteLLM</strong> acts as an OpenAI-compatible API gateway that unifies local and cloud models under one endpoint. On top of that, <strong>Open WebUI</strong> gives you a chat interface, <strong>n8n</strong> handles workflow automation with AI agents, and <strong>Dify</strong> builds RAG and chat applications. <strong>SearXNG</strong> provides private web search that agents can query. <strong>Agent Zero</strong> adds an autonomous agent with OS-level code execution. Everything connects through Docker; a machine with 16 GB RAM and a consumer GPU handles the full stack.
+  </div>
+
+  <div style="background:var(--code-bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:18px 22px;margin:0 0 1.5em">
+    <strong>Key Takeaways</strong>
+    <ul style="margin:.6em 0 0;padding-left:1.3em">
+      <li>Ollama is the model runner. Everything else is application layer. You can replace Ollama with any OpenAI-compatible endpoint (OpenAI, Anthropic via LiteLLM) without touching the rest of the stack.</li>
+      <li>LiteLLM as a central proxy means every tool in your stack points at one URL. Swap models, add rate limits, and track token costs in one place.</li>
+      <li>n8n and Dify solve different problems: n8n automates workflows across many services; Dify builds AI applications (RAG chat, knowledge bases) as the product itself.</li>
+      <li>GPU is only required for Ollama. All other tools run on CPU; a $40/month VPS runs the whole stack minus local inference.</li>
+      <li>SearXNG is what lets your AI agents search the web without leaking queries to Google or Bing.</li>
+    </ul>
+  </div>
+
+  <h2>The stack at a glance</h2>
+  <p>Seven tools, one coherent system. The table maps each to its role, its resource cost, and whether it requires a GPU.</p>
+  <table>
+    <thead><tr><th>Tool</th><th>Role</th><th>GPU required</th><th>Connects to</th></tr></thead>
+    <tbody>
+      <tr><td><a href="/ollama/">Ollama</a></td><td>Local model server (LLM runtime)</td><td>Recommended; CPU fallback works</td><td>LiteLLM, Open WebUI, n8n, Dify, Agent Zero</td></tr>
+      <tr><td><a href="/open-webui-self-hosted-guide/">Open WebUI</a></td><td>Chat interface (ChatGPT-like UI)</td><td>No</td><td>LiteLLM or Ollama directly</td></tr>
+      <tr><td><a href="/litellm-proxy-guide/">LiteLLM</a></td><td>Unified API gateway for all models</td><td>No</td><td>Everything</td></tr>
+      <tr><td><a href="/n8n-self-hosted-guide/">n8n</a></td><td>Workflow automation + AI agent node</td><td>No</td><td>LiteLLM, SearXNG, any API</td></tr>
+      <tr><td><a href="/dify-self-hosted-guide/">Dify</a></td><td>RAG pipelines + chat app builder</td><td>No</td><td>LiteLLM or Ollama, vector DBs</td></tr>
+      <tr><td><a href="/searxng-self-hosted-guide/">SearXNG</a></td><td>Private metasearch for agent web access</td><td>No</td><td>n8n, Dify, Agent Zero</td></tr>
+      <tr><td><a href="/agent-zero/">Agent Zero</a></td><td>Autonomous agent with OS access</td><td>No</td><td>LiteLLM, SearXNG, MCP tools</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote>A self-hosted AI stack in 2026 consists of a local model runner (Ollama), a unified API proxy (LiteLLM), a chat interface (Open WebUI), workflow automation (n8n), a RAG and app builder (Dify), a private search engine (SearXNG), and an autonomous agent framework (Agent Zero). All seven tools deploy via Docker and run on a single machine with 16 GB RAM. Only Ollama benefits from a GPU for inference; the rest are CPU-only services.</blockquote>
+
+  <h2>Layer 1: Ollama - the model runner</h2>
+  <p>Ollama is the foundation. It downloads models from its registry and serves them via a REST API on port 11434 that is compatible with the OpenAI API format. One command installs it; <code>ollama pull llama3.1:8b</code> downloads an 8B model. On a machine with a GPU, models run at 50-100 tokens per second. CPU-only inference works but runs at roughly 3-8 tokens per second on a modern 8-core CPU.</p>
+  <p>The models worth running in 2026:</p>
+  <ul>
+    <li><strong>Llama 3.1 8B</strong> (5 GB): the general-purpose default. Fast, capable, runs on 8 GB VRAM.</li>
+    <li><strong>Qwen 2.5 7B</strong> (4.7 GB): strong at code and structured output. Same VRAM tier.</li>
+    <li><strong>Mistral 7B</strong> (4.1 GB): fast inference, good instruction following.</li>
+    <li><strong>Llama 3.1 70B</strong> (40 GB): needs 48 GB+ VRAM or multi-GPU; use a cloud API instead for most self-hosters.</li>
+    <li><strong>Qwen2.5-VL 7B</strong>: the same model covered in the <a href="/qwen2-5-vl/">Qwen2.5-VL guide</a> - adds vision (image understanding) to the local stack.</li>
+  </ul>
+  <p>Full install guide, GPU troubleshooting, and the OpenAI-compatible API setup are in the <a href="/ollama/">Ollama setup guide</a>.</p>
+
+  <h2>Layer 2: LiteLLM - the API gateway</h2>
+  <p>LiteLLM is an OpenAI-compatible proxy that sits in front of all your model endpoints. You point it at Ollama (local), OpenAI, Anthropic, Gemini, Mistral, or any other provider. Every other tool in your stack points at LiteLLM's single <code>/v1/chat/completions</code> endpoint instead of each model directly.</p>
+  <p>Why this matters in practice: when you want to switch from a local Llama model to Claude 3.5 Sonnet for a specific workflow, you change one model name in LiteLLM's config rather than reconfiguring n8n, Dify, Open WebUI, and Agent Zero individually. LiteLLM also adds per-key rate limiting, spend tracking, and a dashboard for token costs across providers.</p>
+
+  <blockquote>LiteLLM acts as a unified OpenAI-compatible API proxy for all model providers. A self-hosted stack routes Ollama, OpenAI, Anthropic, and Gemini calls through one endpoint at <code>http://localhost:4000/v1</code>. Every application (n8n, Dify, Open WebUI, Agent Zero) uses a single API key and URL; switching models is a config change in LiteLLM, not a reconfiguration of every downstream tool. The full setup is in the <a href="/litellm-proxy-guide/">LiteLLM proxy guide</a>.</blockquote>
+
+  <h2>Layer 3: Open WebUI - the chat interface</h2>
+  <p>Open WebUI is a self-hosted chat interface that looks and behaves like ChatGPT. It connects to Ollama directly or through LiteLLM, supports multiple users with separate conversation histories, and has a built-in model management panel. If you want to use your local models with a familiar interface and nothing else, Open WebUI is the whole story: pull the Docker image, point it at Ollama, done.</p>
+  <p>Setup guide and multi-user configuration are in the <a href="/open-webui-self-hosted-guide/">Open WebUI guide</a>.</p>
+
+  <h2>Layer 4a: n8n - workflow automation with AI agents</h2>
+  <p>n8n is where your local AI stack connects to the rest of your tools. Its <a href="/n8n-langchain-self-hosting/">LangChain-based AI Agent node</a> lets you drop a model (via LiteLLM), a memory backend, and tools like SearXNG or a database onto a visual canvas. Trigger examples: a webhook that summarizes incoming emails, a scheduled flow that scrapes a website and classifies results, a Slack command that queries your knowledge base.</p>
+  <p>Where n8n beats writing code: 400+ prebuilt integrations mean you connect to Slack, Notion, GitHub, Google Sheets, and hundreds of other services without writing HTTP clients. Where code beats n8n: if the logic is complex Python, consider moving it to Windmill (see the <a href="/n8n-vs-windmill/">n8n vs Windmill comparison</a>).</p>
+  <p>Full Docker setup and queue-mode production config are in the <a href="/n8n-self-hosted-guide/">n8n self-hosted guide</a>.</p>
+
+  <h2>Layer 4b: Dify - RAG applications and chat builders</h2>
+  <p>Dify occupies a different niche than n8n. Where n8n automates processes, Dify builds AI products: knowledge base chatbots, document Q&amp;A apps, and multi-step chat pipelines with retrieval. Upload a PDF, configure a vector store (Dify ships with Weaviate and others via Docker Compose), connect an LLM via LiteLLM, and you have a document Q&amp;A interface in under an hour.</p>
+  <p>Dify also has a workflow mode for multi-step chains (query rewriting, retrieval, reranking, generation) that is more purpose-built for RAG than n8n's general automation. Use n8n when the output goes to another service; use Dify when the output IS the product.</p>
+  <p>The full Docker Compose setup and common migration issues are in the <a href="/dify-self-hosted-guide/">Dify self-hosted guide</a>.</p>
+
+  <blockquote>n8n and Dify solve different problems in a self-hosted AI stack. n8n is a workflow automation tool with 400+ prebuilt integrations and a visual AI Agent node - use it to connect AI to external services. Dify is a purpose-built RAG and chat application builder - use it when the AI application itself is the product. Both connect to Ollama or any OpenAI-compatible endpoint via LiteLLM.</blockquote>
+
+  <h2>Layer 5: SearXNG - private search for agents</h2>
+  <p>SearXNG is a self-hosted metasearch engine that aggregates results from 262 sources without logging queries or building a profile. For AI agents that need web access, SearXNG is the private alternative to plugging agent queries directly into Google (which Google logs) or Bing.</p>
+  <p>In n8n: the HTTP Request node calls <code>http://localhost:8080/search?q={query}&format=json</code> and returns structured results the AI Agent node can process. In Dify: configure SearXNG as a tool in the workflow. In Agent Zero: set SearXNG as the default search provider in the config.</p>
+  <p>Setup is a single Docker command; the <a href="/searxng-self-hosted-guide/">SearXNG guide</a> covers the config file, engine selection, and JSON API setup for programmatic use.</p>
+
+  <h2>Layer 6: Agent Zero - autonomous agent with OS access</h2>
+  <p>Agent Zero gives an LLM full control of a terminal: it writes Python, executes shell commands, uses MCP tools, and spawns sub-agents. It's the highest-privilege layer of the stack and the one that needs the most care around sandboxing. In practical terms: use Agent Zero for jobs that benefit from iterative code execution (data analysis, file processing, multi-step research) and keep it isolated from production systems.</p>
+  <p>The exact security configuration and MCP setup are in the <a href="/agent-zero/">Agent Zero guide</a>.</p>
+
+  <h2>Minimum hardware to run the full stack</h2>
+  <table>
+    <thead><tr><th>Configuration</th><th>Specs</th><th>What runs</th></tr></thead>
+    <tbody>
+      <tr><td>GPU workstation (full stack)</td><td>16 GB RAM, consumer GPU with 8 GB+ VRAM, NVMe</td><td>Everything: local inference at 50-100 tok/s, all seven services</td></tr>
+      <tr><td>CPU workstation (no GPU)</td><td>16 GB RAM, 8-core CPU</td><td>Full stack; Ollama inference at 3-8 tok/s, or route to a cloud API</td></tr>
+      <tr><td>VPS (cloud inference)</td><td>$40/month box: 4 vCPU, 16 GB RAM</td><td>Open WebUI, LiteLLM, n8n, Dify, SearXNG, Agent Zero; Ollama calls an external API</td></tr>
+      <tr><td>VPS (local inference)</td><td>GPU VPS: $60-120/month with T4 or similar</td><td>Full stack including Ollama local inference</td></tr>
+    </tbody>
+  </table>
+  <p>The Docker Compose approach: run each service in its own container on a shared network, with LiteLLM as the hub. Internal service names replace <code>localhost</code> in container-to-container URLs: Ollama is <code>http://ollama:11434</code>, SearXNG is <code>http://searxng:8080</code>, and so on.</p>
+
+  <h2>Frequently asked questions</h2>
+  <h3>What tools make up a complete self-hosted AI stack in 2026?</h3>
+  <p>At minimum: Ollama (local model server), Open WebUI (chat interface), and LiteLLM (API gateway). For automation: add n8n or Dify. For agent web access: add SearXNG. For autonomous code-executing agents: add Agent Zero. All seven together cover local inference, unified API management, chat, workflow automation, RAG applications, private search, and autonomous agents.</p>
+  <h3>Do I need a GPU to self-host AI tools?</h3>
+  <p>Only for Ollama, and even then it's optional. CPU-only inference works at roughly 3-8 tokens per second on a modern 8-core CPU versus 50-100 tokens per second on a mid-range GPU. Open WebUI, LiteLLM, n8n, Dify, SearXNG, and Agent Zero run on CPU with no performance penalty. A $40/month VPS handles the whole stack if you route inference to a cloud model via LiteLLM.</p>
+  <h3>What is the difference between n8n and Dify for AI?</h3>
+  <p>n8n automates workflows between tools: trigger on a Slack message, run an AI step, write to a database. It has 400+ prebuilt integrations and a LangChain-based AI Agent node. Dify builds AI applications as products: RAG knowledge bases, multi-turn chat with retrieval, document Q&amp;A. Use n8n when the AI output feeds another service; use Dify when the chat or retrieval app is the product itself.</p>
+  <h3>How do all these tools connect to each other?</h3>
+  <p>Through LiteLLM and Docker networking. LiteLLM exposes a single OpenAI-compatible endpoint at port 4000; every tool (Open WebUI, n8n, Dify, Agent Zero) points its model configuration at that URL. For web search, every tool that needs it calls SearXNG's JSON API at port 8080. In Docker Compose, containers find each other by service name rather than localhost.</p>
+  <h3>Can I use cloud models like Claude or GPT-4 alongside local models?</h3>
+  <p>Yes, and this is one of LiteLLM's core strengths. Add your Anthropic and OpenAI API keys to LiteLLM's config alongside the Ollama endpoint. Each downstream tool can then specify a model name (e.g. <code>claude-sonnet-4-6</code> or <code>ollama/llama3.1:8b</code>) and LiteLLM routes to the right provider. This lets you run cheap local inference for simple tasks and cloud models for complex ones from the same stack.</p>
+
+  <p style="margin-top:2em;font-size:.92em;color:var(--muted)">Written by Joshua Opolko, who self-hosts this full stack and writes about it at joshuaopolko.com. Tool versions and capabilities verified July 2026; both Ollama and n8n release frequently, so check individual guides for the latest install commands.</p>
+
+  <nav class="related-guides" aria-label="Related guides"><h2>Individual tool guides</h2><ul>
+    <li><a href="/ollama/">Ollama setup guide</a> - install, GPU troubleshooting, OpenAI-compatible API</li>
+    <li><a href="/litellm-proxy-guide/">LiteLLM proxy guide</a> - unified API gateway setup and multi-provider config</li>
+    <li><a href="/open-webui-self-hosted-guide/">Open WebUI</a> - ChatGPT-like interface for your local models</li>
+    <li><a href="/n8n-self-hosted-guide/">n8n self-hosted guide</a> - Docker setup, queue mode, production config</li>
+    <li><a href="/n8n-langchain-self-hosting/">n8n + LangChain</a> - AI Agent nodes, memory, vector stores</li>
+    <li><a href="/dify-self-hosted-guide/">Dify self-hosted guide</a> - RAG apps, Docker Compose, model connection</li>
+    <li><a href="/searxng-self-hosted-guide/">SearXNG guide</a> - private metasearch and JSON API for agents</li>
+    <li><a href="/agent-zero/">Agent Zero guide</a> - autonomous agent, MCP tools, security config</li>
+    <li><a href="/n8n-vs-windmill/">n8n vs Windmill</a> - when to graduate from canvas to code</li>
+  </ul></nav>
+  </div>
+</main>
+<footer class="site-foot"><p>&copy; Joshua Opolko</p></footer>
+</body>
+</html>
