@@ -20,7 +20,7 @@
 <meta content="Self-host SearXNG in 2026: Docker Compose setup, how 262-engine metasearch stops Google from profiling you, and why this 32k-star project still wins." property="og:description"/>
 <meta content="https://joshuaopolko.com/searxng-self-hosted-guide/" property="og:url"/>
 <meta content="Joshua Opolko" property="og:site_name"/>
-<meta content="2026-07-06T12:00:00+00:00" property="og:updated_time"/>
+<meta content="2026-10-15T12:00:00+00:00" property="og:updated_time"/>
 <meta content="https://joshuaopolko.com/assets/searxng-hero.jpg" property="og:image"/>
 <meta content="https://joshuaopolko.com/assets/searxng-hero.jpg" property="og:image:secure_url"/>
 <meta content="1200" property="og:image:width"/>
@@ -28,7 +28,7 @@
 <meta content="A single glowing lantern under a protective glass dome on a dark foggy plain with distant search-engine lights on the horizon, representing private SearXNG metasearch" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="2026-06-13T16:00:00+00:00" property="article:published_time"/>
-<meta content="2026-07-06T12:00:00+00:00" property="article:modified_time"/>
+<meta content="2026-10-15T12:00:00+00:00" property="article:modified_time"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="SearXNG Self-Hosted Setup (2026): Your Own Private Metasearch Engine" name="twitter:title"/>
 <meta content="Self-host SearXNG in 2026: Docker Compose setup, how 262-engine metasearch stops Google from profiling you, and why this 32k-star project still wins." name="twitter:description"/>
@@ -112,7 +112,7 @@
         "@id": "https://joshuaopolko.com/assets/searxng-hero.jpg"
       },
       "datePublished": "2026-06-13T16:00:00+00:00",
-      "dateModified": "2026-07-06T12:00:00+00:00",
+      "dateModified": "2026-10-15T12:00:00+00:00",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -127,7 +127,7 @@
       "headline": "SearXNG Self-Hosted Guide (2026): Run Your Own Private Metasearch Engine",
       "description": "Self-host SearXNG in 2026 with the exact Docker commands, plus how its metasearch design quietly makes you un-profilable: 262 upstream engines, no tracking, no ads, no fingerprint.",
       "datePublished": "2026-06-13T16:00:00+00:00",
-      "dateModified": "2026-07-06T12:00:00+00:00",
+      "dateModified": "2026-10-15T12:00:00+00:00",
       "author": {
         "@id": "https://joshuaopolko.com/#person"
       },
@@ -305,6 +305,24 @@ figure.hero{margin:0 0 1.8em}
   <figure class="hero"><img src="/assets/searxng-hero.jpg" alt="A single glowing lantern under a protective glass dome on a dark foggy plain with distant search-engine lights on the horizon, representing private SearXNG metasearch" width="1200" height="630" loading="eager"></figure>
   <div class="post-body">
 
+<aside style="border-left:4px solid var(--accent);background:var(--code-bg);padding:4px 20px;margin:0 0 1.8em;border-radius:0 8px 8px 0">
+<h2>Update: my SearXNG got blocked by every engine but Bing</h2>
+
+<p>I run SearXNG on a VPS as the search step in my own automations, not as a browser search box. When a workflow needs to look up a name, such as a company, a product, or a place, it sends the query to my instance and reads the merged results back. SearXNG stands in for a paid search API: no key, no per-query bill, and nothing logged by a third party.</p>
+
+<p>That setup has now degraded, and it's a real-world example of the rate-limiting caveat covered in the FAQ. SearXNG doesn't search anything itself. It asks Google, Bing, DuckDuckGo and similar engines on your behalf, and those engines can simply stop answering. A VPS sends a steady stream of automated queries from one datacenter IP, which is exactly what bot detection is built to catch. Most of my upstream engines have now blocked the instance:</p>
+
+<ul>
+<li><strong>DuckDuckGo and Startpage</strong> return CAPTCHAs instead of results.</li>
+<li><strong>Brave</strong> answers "too many requests."</li>
+<li><strong>Bing</strong> is the only engine still responding, and its results are poor. For a query about Starfish, it ignored the word "Medical" entirely, so the name lookup returned the wrong kind of match.</li>
+</ul>
+
+<p>The practical result is that the name-lookup step is now weak. It still returns something, which is the dangerous part: a single engine returning loosely relevant results looks like a working search until you check the answers. A metasearch engine is only as good as the engines willing to talk to it, and with one left it is just a worse Bing proxy.</p>
+
+<p>If you plan to use SearXNG the way I do, from a server and driven by automation, expect this. The mitigations are the ones covered in this guide: keep the limiter on, send fewer and more targeted queries, cache repeat lookups, and route outbound traffic through a residential proxy or Tor if you need the engines to keep answering. For anything where result quality really matters, treat SearXNG as one source and keep a paid search API as a fallback.</p>
+</aside>
+
 <p>Here is a thing that still feels slightly illegal the first time you do it: you spin up a $5 box, paste in one Docker command, and ten minutes later you have a search engine that answers to you and nobody else. No ad profile. No "based on your recent searches." No quiet little record of every 3 a.m. question you ever typed. That's <a href="https://github.com/searxng/searxng" target="_blank" rel="noopener">SearXNG</a>, a free, open-source metasearch engine that, as of June 2026, carries roughly 32,000 GitHub stars and over 9,500 commits, and is very much still being shipped. This is the guide to standing it up yourself, understanding why it actually works, and deciding whether to run your own or borrow someone else's.</p>
 
 <h2>Key takeaways</h2>
@@ -468,7 +486,7 @@ docker run --name searxng -d \
 <li><a href="/ollama/">Ollama</a>, run local models privately, the same own-your-stack philosophy</li>
 </ul>
 
-<p><em>Last updated: July 6, 2026.</em></p>
+<p><em>Last updated: October 15, 2026.</em></p>
 
 <p><em>Josh writes about self-hosted tooling, AI agents, and GEO, and runs <a href="https://nowservingto.com" target="_blank" rel="noopener">nowservingto.com</a>, a daily-fresh directory of Toronto's newest restaurants.</em></p>
 
