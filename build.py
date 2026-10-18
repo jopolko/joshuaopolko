@@ -68,6 +68,7 @@ NAV_ITEMS = [
         ("GEO Answers",             "/geo-answers/"),
         ("Claude SEO/GEO",          "/claude-seo/"),
         ("Claude Code Spec Workflow","/claude-code-specification-workflow-mcp/"),
+        ("CCTokenViz",             "/cctokenviz/"),
         ("Connector Creep",         "/connector-creep.html"),
         ("Reverse Terraforming",    "/reverse-terraforming/"),
     ]),
@@ -88,6 +89,7 @@ NAV_ITEMS = [
         ("VR Drug Discovery",   "/vr-drug-discovery/"),
         ("VR Courtroom Evidence","/vr-courtroom-evidence/"),
         ("Visual Tests",       "/xr-tests/"),
+        ("Smushlings",         "/smushlings/"),
     ]),
     ("About", "/about/", []),
 ]
