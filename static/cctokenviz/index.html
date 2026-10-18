@@ -55,7 +55,7 @@
 
 <h2>What problem does it solve?</h2>
 
-<p>Claude Code has a finite context window, 200k tokens or 1M on extended-context models. When it fills, Claude compacts the conversation and can drop details you wanted to keep. In the terminal a <a href="https://code.claude.com/docs/en/statusline" rel="noopener"><code>/statusline</code></a> can show context remaining, but the Claude desktop app doesn't run a status line, so those numbers aren't visible there. CCTokenViz puts them in one small window for both, so you can ask Claude to save its progress before it compacts.</p>
+<p>Claude Code has a finite context window, 200k tokens or 1M on extended-context models, and a plan limit that resets every five hours and weekly. In the terminal a <a href="https://code.claude.com/docs/en/statusline" rel="noopener"><code>/statusline</code></a> can keep context remaining on screen. The Claude desktop app has no status line; it shows context and plan usage when you click its usage ring, one session at a time. CCTokenViz keeps them in view instead: every active project's context use plus your 5-hour and weekly limits, in one small always-on-top window, for the desktop app and the terminal alike.</p>
 
 <h2>How do I see my Claude Code context usage?</h2>
 
