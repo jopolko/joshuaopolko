@@ -214,6 +214,12 @@ for (const b of touchEl.querySelectorAll('.tb')) {
 const joyBase = document.getElementById('joyBase'), joyKnob = document.getElementById('joyKnob');
 const setTouch = on => { touch.on = on; touchEl.classList.toggle('on', on); };
 if (matchMedia('(pointer: coarse)').matches) setTouch(true);
+/* on phones, Play goes fullscreen and asks for landscape (Android honours it; iOS ignores both, harmlessly) */
+document.addEventListener('click', e => {
+  if (!touch.on || !e.target || e.target.id !== 'bPlay' || document.fullscreenElement) return;
+  const el = document.documentElement;
+  try { const r = (el.requestFullscreen || el.webkitRequestFullscreen || function () { }).call(el, { navigationUI: 'hide' }); const lock = () => { try { screen.orientation.lock('landscape').catch(() => { }); } catch (err) { } }; if (r && r.then) r.then(lock, () => { }); else lock(); } catch (err) { }
+}, true);
 addEventListener('touchstart', () => { touch.last = performance.now(); if (!touch.on) setTouch(true); }, { passive: true });
 cvs.addEventListener('pointerdown', e => {
   if (e.pointerType !== 'touch') return;
@@ -226,7 +232,7 @@ cvs.addEventListener('pointerdown', e => {
 });
 addEventListener('pointermove', e => {
   if (e.pointerId === touch.jid) {
-    let dx = e.clientX - touch.ox, dy = e.clientY - touch.oy; const d = Math.hypot(dx, dy), m = 60;
+    let dx = e.clientX - touch.ox, dy = e.clientY - touch.oy; const d = Math.hypot(dx, dy), m = Math.max(44, Math.min(70, Math.min(innerWidth, innerHeight) * 0.16));
     if (d > m) { dx *= m / d; dy *= m / d; }
     touch.jx = dx / m; touch.jy = dy / m; joyKnob.style.transform = `translate(${dx}px,${dy}px)`;
   } else if (e.pointerId === touch.lid) {
@@ -267,14 +273,18 @@ function readControls(dt) {
   const c = { mx: 0, mz: 0, fire: false, aim: false, jump: false, jumpHeld: false, dash: false, sprint: false, spin: false, pound: false, use: false, horn: false, radio: false };
   if (keys.KeyA || keys.ArrowLeft) c.mx -= 1; if (keys.KeyD || keys.ArrowRight) c.mx += 1;
   if (keys.KeyW || keys.ArrowUp) c.mz -= 1; if (keys.KeyS || keys.ArrowDown) c.mz += 1;
-  if (touch.jid !== null) { c.mx += touch.jx; c.mz += touch.jy; }
+  if (touch.jid !== null) {
+    /* small dead zone so a resting thumb doesn't drift, then rescale so the rest of the travel still reaches 1 */
+    const m = Math.hypot(touch.jx, touch.jy);
+    if (m > 0.14) { const k = Math.min(1, (m - 0.14) / 0.72) / m; c.mx += touch.jx * k; c.mz += touch.jy * k; }
+  }
   if (touch.btn.gas) c.mz -= 1; if (touch.btn.brake) c.mz += 1;
   c.fire = mouse.l || keys.KeyJ || !!touch.btn.fire;
   c.aim = mouse.r;
   c.jump = !!(pressed.Space || pressed.T_jump || pressed.P_a);
   c.jumpHeld = !!(keys.Space || touch.btn.jump || touch.btn.drift || (pad && pad.a));
   c.dash = !!(pressed.ShiftLeft || pressed.ShiftRight || pressed.T_dash || pressed.P_b);
-  c.sprint = !!(keys.ShiftLeft || keys.ShiftRight || touch.btn.dash || (touch.jid !== null && Math.hypot(touch.jx, touch.jy) > 0.95) || (pad && (pad.b || pad.ls)));
+  c.sprint = !!(keys.ShiftLeft || keys.ShiftRight || touch.btn.dash || (touch.jid !== null && Math.hypot(touch.jx, touch.jy) > 0.88) || (pad && (pad.b || pad.ls)));
   c.spin = !!(pressed.KeyQ || pressed.KeyK || pressed.T_spin || pressed.P_x);
   c.pound = !!(pressed.KeyC || pressed.ControlLeft || pressed.T_pound || pressed.P_rb);
   c.use = !!(pressed.KeyF || pressed.KeyE || pressed.T_use || pressed.P_y);
@@ -468,9 +478,12 @@ function updateFoot(dt, c) {
     Snd.play('dash'); burst(P.x, P.y + 0.4, P.z, 8, 0xffffff, 3, 0.4, 0.3, 0, 0.5);
   }
   if (c.spin && P.spinCd <= 0) doSpin();
-  if (c.jump) {
-    if (P.onGround) { P.vy = 10.5; P.onGround = false; P.jumps = 1; Snd.play('dash'); burst(P.x, P.y + 0.1, P.z, 6, 0xffffff, 2, 0.3, 0.25, 2, 0.5); }
-    else if (P.jumps < st.jumps) { P.vy = 9.5; P.jumps++; Snd.play('spin'); ringBurst(P.x, P.y, P.z, 1.2, 12, 0xfde68a, 0.25); }
+  /* forgiving jump: a press a hair before landing still counts, and so does one a hair after running off a ledge */
+  P.jbuf = c.jump ? 0.13 : Math.max(0, (P.jbuf || 0) - dt);
+  P.coyote = P.onGround ? 0.11 : Math.max(0, (P.coyote || 0) - dt);
+  if (P.jbuf > 0) {
+    if (P.onGround || (P.coyote > 0 && !P.pounding)) { P.jbuf = 0; P.coyote = 0; P.vy = 10.5; P.onGround = false; P.jumps = 1; Snd.play('dash'); burst(P.x, P.y + 0.1, P.z, 6, 0xffffff, 2, 0.3, 0.25, 2, 0.5); }
+    else if (c.jump && P.jumps < st.jumps) { P.jbuf = 0; P.vy = 9.5; P.jumps++; Snd.play('spin'); ringBurst(P.x, P.y, P.z, 1.2, 12, 0xfde68a, 0.25); }
   }
   if (c.pound && !P.onGround && !P.pounding && P.poundCd <= 0) { P.pounding = true; P.vy = -26; P.dashT = 0; Snd.play('dash'); }
 

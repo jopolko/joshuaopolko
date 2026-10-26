@@ -131,6 +131,28 @@ html,body{margin:0;height:100%;overflow:hidden;background:#1a1030;font-family:va
 @media (orientation:portrait){.tb.use{bottom:calc(214px + var(--sb))}}
 @media (max-width:640px){.talk{flex-direction:column;text-align:center}.statgrid{grid-template-columns:repeat(2,1fr)}.lvls{grid-template-columns:repeat(5,1fr);gap:4px}.lv{min-height:64px;padding:5px 2px}.lv .nm{display:none}.perks{grid-template-columns:1fr}.perk{flex-direction:row;text-align:left;padding:10px}.perk .pic{font-size:34px}.sws{grid-template-columns:repeat(5,1fr)}.card{padding:18px 16px}}
 @media (max-height:520px){.card{padding:14px 18px}.logo{font-size:44px}.stars{font-size:38px}}
+/* forgiving hit areas: every touch button reacts a little outside its drawn circle */
+.tb::after{content:'';position:absolute;inset:-12px;border-radius:50%}
+.tb.mini::after{inset:-8px;border-radius:18px}
+.tb.use::after{inset:-8px;border-radius:999px}
+/* short landscape phones: shrink and tuck the thumb buttons so they leave the view clear */
+@media (max-height:380px){
+.tb{width:56px;height:56px}.tb b{font-size:19px}
+.tb.fire,.tb.gas{width:84px;height:84px;right:calc(14px + var(--sr))}.tb.fire b{font-size:26px}
+.tb.jump,.tb.brake{width:68px;height:68px;right:calc(108px + var(--sr))}
+.tb.dash,.tb.drift{right:calc(20px + var(--sr));bottom:calc(108px + var(--sb))}
+.tb.spin{right:calc(100px + var(--sr));bottom:calc(88px + var(--sb));width:52px;height:52px}
+.tb.pound{right:calc(186px + var(--sr))}
+.tb.use{bottom:calc(176px + var(--sb));right:calc(14px + var(--sr))}
+#touch[data-mode=car] .tb.fire{right:calc(100px + var(--sr));bottom:calc(92px + var(--sb));width:60px;height:60px}
+.tb.mini{width:40px;height:40px;font-size:17px}
+.tb.pz,.tb.mapb,.tb.radio,.tb.horn{bottom:calc(178px + var(--sb))}
+#joyBase{width:112px;height:112px;margin:-56px 0 0 -56px;left:calc(84px + var(--sl));top:calc(100% - 92px - var(--sb))}
+#joyKnob{left:31px;top:31px;width:50px;height:50px}
+}
+/* portrait: a nudge to turn the phone, never a blocker */
+#rot{display:none}
+@media (orientation:portrait) and (pointer:coarse){#rot.on{display:block;position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:20;background:rgba(20,10,40,.85);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:800 14px var(--font);color:var(--gold);pointer-events:none;animation:fadeHint 9s forwards}}
 </style>
 <script type="importmap">
 { "imports": { "three": "./vendor/three.module.js" } }
@@ -139,6 +161,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#1a1030;font-family:va
 <body>
 <canvas id="hud"></canvas>
 <div id="ui"></div>
+<div id="rot" class="on">↻ Turn your phone sideways for the best view</div>
 <div id="touch"></div>
 <noscript>This game needs JavaScript and WebGL.</noscript>
 <script type="module" src="game.js"></script>
